@@ -309,6 +309,18 @@
         .social-btn:hover { background:rgba(229,9,20,0.25); border-color:var(--red); }
 
         footer { text-align:center; padding:30px 20px; color:#666; font-size:0.8rem; border-top:1px solid rgba(255,255,255,0.05); }
+    
+    /* ─────────────── MINI FILMS ─────────────── */
+.mini-films-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--red);
+    background:rgba(229,9,20,0.1); border:1px solid rgba(229,9,20,0.3);
+    padding:4px 12px; border-radius:20px; margin-bottom:10px;
+}
+.mini-films-desc {
+    color:#aaa; font-size:0.9rem; margin-top:10px;
+}
     </style>
 </head>
 <body>
@@ -352,9 +364,11 @@
             <a href="#section-faq" data-nav="faq">FAQ</a>
             <a href="#contact-section" data-nav="contact">Contact</a>
             <a href="#section-intros" data-nav="intros">Intro Videos</a>
+            <a href="#section-mini-films" data-nav="mini-films">Mini Films</a>
         </div>
 
         <div id="category-bar">
+            <button class="cat-btn" data-scroll="section-mini-films">Mini Films</button>
             <button class="cat-btn active-cat" data-scroll="section-intros">Intro Videos</button>
             <button class="cat-btn" data-scroll="section-intros">Intro Videos</button>
             <button class="cat-btn active-cat" data-scroll="section-intros">Intro Videos</button>
@@ -380,6 +394,20 @@
                 <a href="#section-visualizers" class="hero-play-btn"><i class="fas fa-play"></i> Explore Services</a>
             </div>
         </section>
+        
+        <section class="content-section fade-up-section" id="section-mini-films">
+    <div class="section-header"><span class="red-accent"></span> Reinblacks Mini Films</div>
+    <p class="mini-films-badge"><i class="fas fa-film"></i> 4K Quality</p>
+    <div class="slider-container">
+        <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
+        <div class="category-row" id="row-mini-films">
+            <div class="poster-card wide" data-video="ClxdEC_5PVI"><img src="https://img.youtube.com/vi/ClxdEC_5PVI/hqdefault.jpg" alt="Mini Film I" loading="lazy" decoding="async"><div class="play-icon-center"><i class="fas fa-play-circle"></i></div><div class="poster-overlay">Mini Film I</div></div>
+            <div class="poster-card wide" data-video="0FkJsIyF0lQ"><img src="https://img.youtube.com/vi/0FkJsIyF0lQ/hqdefault.jpg" alt="Mini Film II" loading="lazy" decoding="async"><div class="play-icon-center"><i class="fas fa-play-circle"></i></div><div class="poster-overlay">Mini Film II</div></div>
+        </div>
+        <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <p class="mini-films-desc">Explore your favourite Action &amp; Romance movies — 4K quality, cinematic storytelling.</p>
+</section>
         
         <section class="content-section fade-up-section" id="section-intros">
     <div class="section-header"><span class="red-accent"></span> Intro &amp; Content Creation</div>
