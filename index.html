@@ -6,6 +6,8 @@
     <title>Reinblacks Creativz — Premium Creative Agency</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://img.youtube.com" crossorigin>
+<link rel="dns-prefetch" href="https://img.youtube.com">
     <style>
         :root {
             --bg: #000000;
@@ -321,6 +323,14 @@
 .mini-films-desc {
     color:#aaa; font-size:0.9rem; margin-top:10px;
 }
+    
+    .poster-card img {
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+.poster-card img.loaded { animation: none; background: none; }
+@keyframes shimmer { 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
     </style>
 </head>
 <body>
@@ -844,6 +854,28 @@
             onPageScroll();
             updateActiveCatBtn();
         })();
+    
+  // Early image loading — fires 300px before card enters view
+const imgObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+            img.addEventListener('load', () => img.classList.add('loaded'));
+            imgObserver.unobserve(img);
+        }
+    });
+}, { rootMargin: '300px 0px' });
+
+document.querySelectorAll('.poster-card img').forEach(img => {
+    if (img.complete) { img.classList.add('loaded'); return; }
+    img.dataset.src = img.src;
+    img.src = '';
+    imgObserver.observe(img);
+});
     </script>
 </body>
 </html>
