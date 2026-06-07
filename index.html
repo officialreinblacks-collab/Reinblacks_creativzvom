@@ -331,6 +331,14 @@
 }
 .poster-card img.loaded { animation: none; background: none; }
 @keyframes shimmer { 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
+        @keyframes letterFadeIn {
+    from { opacity:0; transform:translateY(8px); }
+    to { opacity:1; transform:translateY(0); }
+}
+#intro-brand span {
+    display:inline-block;
+    opacity:0;
+}
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9726901346687165"
      crossorigin="anonymous"></script>
@@ -675,6 +683,15 @@
     </nav>
 
     <script>
+        const introBrand = document.getElementById('intro-brand');
+if(introBrand) {
+    const text = introBrand.textContent;
+    introBrand.innerHTML = text.split('').map((char, i) =>
+        char === ' '
+        ? '<span style="display:inline-block;width:0.3em;">&nbsp;</span>'
+        : `<span style="animation:letterFadeIn 0.08s ease ${0.3 + i * 0.08}s forwards">${char}</span>`
+    ).join('');
+}
         (function() {
             // Load Tidio with the NEW script ID after intro
             function loadTidio() {
