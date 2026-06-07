@@ -930,30 +930,15 @@ document.querySelectorAll('.poster-card img').forEach(img => {
     });
 }, { rootMargin: '100px' });
 document.querySelectorAll('.count-num').forEach(el => countObserver.observe(el));
-        const introBrand = document.getElementById('intro-brand');
-if(introBrand) {
+const introBrand = document.getElementById('intro-brand');
+if(introBrand){
     const text = introBrand.textContent;
     introBrand.innerHTML = text.split('').map((char, i) =>
         char === ' '
         ? '<span style="display:inline-block;width:0.3em;">&nbsp;</span>'
         : `<span style="animation:letterFadeIn 0.08s ease ${0.3 + i * 0.08}s forwards">${char}</span>`
     ).join('');
-              }
-        /* MINI FILMS CARDS */
-.mini-films-grid{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px;}
-.mini-film-card{width:280px;background:#111;border-radius:8px;overflow:hidden;}
-.mini-film-thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;}
-.mini-film-thumb img{width:100%;height:100%;object-fit:cover;}
-.coming-soon-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
-.cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
-.cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
-.episode-meta{padding:12px;}
-.episode-title{color:#fff;font-size:0.9rem;font-weight:600;letter-spacing:0.05em;margin-bottom:8px;}
-.episode-title span{display:block;color:#aaa;font-size:0.75rem;font-weight:400;margin-top:2px;}
-.waiting-count{color:#aaa;font-size:0.8rem;display:flex;align-items:center;gap:6px;margin-bottom:10px;}
-.waiting-count i{color:var(--red);}
-.notify-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--red);color:var(--red);font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:4px;text-decoration:none;transition:all 0.3s;}
-.notify-btn:hover{background:var(--red);color:#fff;}
+                                   }
     </script>
 </body>
 </html>
