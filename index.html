@@ -44,14 +44,23 @@
             text-shadow:0 0 50px var(--accent-glow), 0 0 100px rgba(229,9,20,0.15);
         }
         #intro-subtle-line {
-            position:relative; z-index:1; width:0; height:1.2px;
-            background:var(--red); margin-top:14px; border-radius:2px;
-            animation:introLineGrow 2.2s cubic-bezier(0.22,0.05,0.18,1) forwards;
-            box-shadow:0 0 12px var(--accent-glow);
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1.8s forwards;
         }
         @keyframes introGlowPulse { 0%{ opacity:0; transform:scale(0.5); } 50%{ opacity:0.8; transform:scale(1); } 100%{ opacity:0.5; transform:scale(1); } }
         @keyframes introReveal { 0%{ filter:blur(6px); transform:scale(0.92); opacity:0; } 35%{ filter:blur(2px); opacity:0.5; } 75%{ filter:blur(0px); transform:scale(1); opacity:1; } 100%{ filter:blur(0px); transform:scale(1); opacity:1; } }
         @keyframes introLineGrow { 0%{ width:0; opacity:0; } 55%{ width:0; opacity:0; } 75%{ width:70px; opacity:0.8; } 100%{ width:90px; opacity:0.6; } }
+        @keyframes fadeInUp {
+    from { opacity:0; transform:translateY(10px); }
+    to { opacity:1; transform:translateY(0); }
+        }
+        
 
         /* ─────────────── MAIN SITE ─────────────── */
         #main-site { opacity:0; transition:opacity 0.5s; }
@@ -349,7 +358,7 @@
         <div id="intro-inner">
             <div id="intro-glow-ring"></div>
             <div id="intro-brand">Reinblacks Creativz</div>
-            <div id="intro-subtle-line"></div>
+            <div id="intro-subtle-line">Premium Creativity</div>
         </div>
     </div>
 
