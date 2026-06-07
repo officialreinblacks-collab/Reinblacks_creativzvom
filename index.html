@@ -201,7 +201,7 @@
         .addon-price { color:#ccc; font-weight:500; }
         .bottom-note { text-align:center; font-size:12.5px; color:#444; font-weight:300; margin-top:20px; }
 
-          /* ─────────────── TESTIMONIALS ─────────────── */
+        /* ─────────────── TESTIMONIALS ─────────────── */
         #section-testimonials { background:#060606; padding:60px 0 70px; position:relative; overflow:hidden; font-family:'DM Sans',sans-serif; scroll-margin-top:110px; content-visibility:auto; contain-intrinsic-size:500px; }
         #section-testimonials::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--red),transparent); }
         #section-testimonials::after { content:'"'; font-family:'Bebas Neue',sans-serif; font-size:400px; color:rgba(229,9,20,0.03); position:absolute; top:-60px; left:-30px; line-height:1; pointer-events:none; user-select:none; }
@@ -252,7 +252,7 @@
         .faq-cta-box strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:0.05em; color:#fff; margin-bottom:6px; }
         @media (max-width:600px) { .faq-question { padding:18px 20px; } .faq-a-inner { padding:0 20px 20px; } .faq-cta-box { padding:28px 22px; flex-direction:column; } }
 
-        /* ─────────────── CONTACT ─────────────── */
+  /* ─────────────── CONTACT ─────────────── */
         #contact-section { scroll-margin-top:110px; padding:40px 20px; }
         .contact-split { display:grid; grid-template-columns:1fr 1fr; gap:25px; max-width:1000px; margin:0 auto; background:rgba(18,18,18,0.75); border-radius:16px; padding:30px; border:1px solid rgba(255,255,255,0.07); box-shadow:0 15px 40px rgba(0,0,0,0.4); }
         @media (max-width:768px) { .contact-split { grid-template-columns:1fr; padding:20px; } .hero-content { padding:80px 20px 50px; } .poster-card.wide { width:220px; min-width:200px; } .poster-card.tall { width:140px; min-width:130px; } }
@@ -336,16 +336,21 @@
     display:inline-block;
     opacity:0;
 }
-        .coming-soon-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
+        .coming-soon-badge{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
 .cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
 .cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
-.episode-meta{padding:12px;}
-.episode-title{color:#fff;font-size:0.9rem;font-weight:600;letter-spacing:0.05em;margin-bottom:8px;}
-.episode-title span{display:block;color:#aaa;font-size:0.75rem;font-weight:400;margin-top:2px;}
-.waiting-count{color:#aaa;font-size:0.8rem;display:flex;align-items:center;gap:6px;margin-bottom:10px;}
-.waiting-count i{color:var(--red);}
-.notify-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--red);color:var(--red);font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:4px;text-decoration:none;transition:all 0.3s;}
-.notify-btn:hover{background:var(--red);color:#fff;}
+
+/* ─── FILM ITEMS ─── */
+.film-item{flex-shrink:0;scroll-snap-align:start;width:260px;min-width:240px;}
+.film-item .poster-card{width:100%;min-width:unset;scroll-snap-align:unset;flex-shrink:unset;}
+.film-meta{padding:10px 2px;display:flex;flex-direction:column;gap:8px;}
+.waiting-pill{display:flex;align-items:center;gap:8px;background:var(--red);border-radius:6px;padding:8px 12px;}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#22ff66;box-shadow:0 0 8px #22ff66;animation:livePulse 1.2s ease-in-out infinite;flex-shrink:0;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.6);}}
+.waiting-count-num{color:#22ff66;font-weight:800;font-size:1rem;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;}
+.waiting-label{color:#fff;font-size:0.72rem;font-weight:600;}
+.notify-btn-film{width:100%;padding:10px;background:#1877F2;border:none;color:#fff;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border-radius:6px;cursor:pointer;transition:background 0.4s;display:flex;align-items:center;justify-content:center;gap:6px;}
+.notify-btn-film.notified{background:#FF6B00;}
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9726901346687165"
      crossorigin="anonymous">
@@ -353,7 +358,7 @@
 </head>
 <body>
 
-    <div id="intro-overlay">
+  <div id="intro-overlay">
         <div id="intro-inner">
             <div id="intro-glow-ring"></div>
             <div id="intro-brand">Reinblacks Creativz</div>
@@ -425,22 +430,51 @@
     <div class="slider-container">
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
-            <div class="poster-card wide">
-                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826300/44f19ab0-6256-11f1-85e8-890799e683b2_unv1vp.png" alt="Sweet Monster Episode 01" loading="lazy" decoding="async">
-                <div class="coming-soon-badge">Coming Soon</div>
-                <div class="cs-overlay"><i class="fas fa-lock"></i></div>
-                <div class="poster-overlay">SWEET MONSTER — Ep. 01</div>
+
+            <!-- Episode 01 -->
+            <div class="film-item">
+                <div class="poster-card wide">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826300/44f19ab0-6256-11f1-85e8-890799e683b2_unv1vp.png" alt="Sweet Monster Episode 01" loading="lazy" decoding="async">
+                    <div class="coming-soon-badge">Coming Soon</div>
+                    <div class="cs-overlay"><i class="fas fa-lock"></i></div>
+                    <div class="poster-overlay">SWEET MONSTER — Ep. 01</div>
+                </div>
+                <div class="film-meta">
+                    <div class="waiting-pill">
+                        <span class="live-dot"></span>
+                        <span class="waiting-count-num" data-target="10111">0</span>
+                        <span class="waiting-label">people waiting to watch</span>
+                    </div>
+                    <button class="notify-btn-film" onclick="requestNotify(this)">
+                        <i class="fas fa-bell"></i> Get Notified
+                    </button>
+                </div>
             </div>
-            <div class="poster-card wide">
-                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826291/206087f0-6257-11f1-85e8-890799e683b2_p9blnz.webp" alt="Sweet Monster Episode 02" loading="lazy" decoding="async">
-                <div class="coming-soon-badge">Coming Soon</div>
-                <div class="cs-overlay"><i class="fas fa-lock"></i></div>
-                <div class="poster-overlay">SWEET MONSTER — Ep. 02</div>
+
+            <!-- Episode 02 -->
+            <div class="film-item">
+                <div class="poster-card wide">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826291/206087f0-6257-11f1-85e8-890799e683b2_p9blnz.webp" alt="Sweet Monster Episode 02" loading="lazy" decoding="async">
+                    <div class="coming-soon-badge">Coming Soon</div>
+                    <div class="cs-overlay"><i class="fas fa-lock"></i></div>
+                    <div class="poster-overlay">SWEET MONSTER — Ep. 02</div>
+                </div>
+                <div class="film-meta">
+                    <div class="waiting-pill">
+                        <span class="live-dot"></span>
+                        <span class="waiting-count-num" data-target="949">0</span>
+                        <span class="waiting-label">people waiting to watch</span>
+                    </div>
+                    <button class="notify-btn-film" onclick="requestNotify(this)">
+                        <i class="fas fa-bell"></i> Get Notified
+                    </button>
+                </div>
             </div>
+
         </div>
         <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;"><i class="fas fa-film" style="color:var(--red);margin-right:6px;"></i> 4K Quality — Action &amp; Romance cinematic storytelling. <span class="count-num" data-target="1101">0</span>+ people waiting. <a href="#contact-section" style="color:var(--red);">Get notified →</a></p>
+    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">4K Quality — Action &amp; Romance cinematic storytelling.</p>
         </section>
         
         <section class="content-section fade-up-section" id="section-intros">
@@ -457,7 +491,7 @@
     <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">We create cinematic intro and announcement videos for brands, channels, and creators — crafted to make powerful first impressions with professional motion, sound design, and storytelling.</p>
 </section>
 
-        <section class="content-section fade-up-section" id="section-visualizers">
+   <section class="content-section fade-up-section" id="section-visualizers">
             <div class="section-header"><span class="red-accent"></span> AI Video Music Visualizers</div>
             <div class="slider-container">
                 <button class="slider-arrow left" data-target="row-visualizers"><i class="fas fa-chevron-left"></i></button>
@@ -563,8 +597,8 @@
                 <p class="bottom-note">Final pricing depends on project complexity, number of deliverables, branding requirements, and creative direction.</p>
             </div>
         </section>
-      
-              <!-- TESTIMONIALS -->
+
+  <!-- TESTIMONIALS -->
         <section id="section-testimonials" class="fade-up-section">
             <p class="testi-label">Client Reviews</p>
             <h2 class="testi-heading">What Clients Say</h2>
@@ -622,8 +656,8 @@
                 </div>
             </div>
         </section>
-
-        <section class="content-section fade-up-section" id="find-us">
+        
+   <section class="content-section fade-up-section" id="find-us">
             <div class="section-header"><span class="red-accent"></span> Find us Via</div>
             <div class="social-links">
                 <a href="https://wa.me/254794299237" target="_blank" rel="noopener" class="social-btn" style="background:#25D366;border-color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp +254 7942 99237</a>
@@ -677,8 +711,8 @@
     </nav>
 
     <script>
-        
-        (function() {
+    
+(function() {
             // Load Tidio with the NEW script ID after intro
             function loadTidio() {
                 var s = document.createElement('script');
@@ -706,8 +740,7 @@
             function completeIntro() { introOverlay.classList.add('fade-out'); mainSite.classList.add('visible'); setTimeout(() => { if (introOverlay.parentNode) introOverlay.style.display = 'none'; }, 600); }
             setTimeout(completeIntro, 2600);
             introOverlay.addEventListener('click', completeIntro);
-
-            const topNav = document.getElementById('top-nav');
+const topNav = document.getElementById('top-nav');
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const hamburgerOverlay = document.getElementById('hamburger-overlay');
             const hamburgerPanel = document.getElementById('hamburger-panel');
@@ -734,8 +767,8 @@
             const cardPlayerClose = document.getElementById('card-player-close');
             let currentPlayerVideoId = null;
           const pricingPackageInput = document.getElementById('pricing-package');
-
-            function openHamburger() { hamburgerOverlay.classList.add('active'); hamburgerPanel.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    
+    function openHamburger() { hamburgerOverlay.classList.add('active'); hamburgerPanel.classList.add('active'); document.body.style.overflow = 'hidden'; }
             function closeHamburger() { hamburgerOverlay.classList.remove('active'); hamburgerPanel.classList.remove('active'); document.body.style.overflow = ''; }
             hamburgerBtn.addEventListener('click', openHamburger);
             hamburgerClose.addEventListener('click', closeHamburger);
@@ -806,8 +839,8 @@
                 if (videoId) openCardPlayer(videoId);
                 else if (galleryKey && galleries[galleryKey]) openGalleryModal(galleryKey);
             });
-          
-          // Search
+    
+// Search
             let searchHighlightSpans = [];
             function clearHighlights() { searchHighlightSpans.forEach(span => { const parent = span.parentNode; if (parent) { parent.replaceChild(document.createTextNode(span.textContent), span); parent.normalize(); } }); searchHighlightSpans = []; }
             function searchAndScroll(query) { clearHighlights(); if (!query || query.trim().length < 2) return; const q = query.trim().toLowerCase(); const walker = document.createTreeWalker(document.getElementById('main-site'), NodeFilter.SHOW_TEXT, null, false); const textNodes = []; while (walker.nextNode()) { const node = walker.currentNode; if (node.textContent.toLowerCase().includes(q) && node.parentElement && !['SCRIPT','STYLE','IFRAME','NOSCRIPT'].includes(node.parentElement.tagName) && node.parentElement.offsetParent) textNodes.push(node); } if (!textNodes.length) return; const firstNode = textNodes[0]; const text = firstNode.textContent; const idx = text.toLowerCase().indexOf(q); if (idx >= 0) { const span = document.createElement('span'); span.className = 'search-highlight'; span.textContent = text.slice(idx, idx+q.length); const frag = document.createDocumentFragment(); frag.appendChild(document.createTextNode(text.slice(0, idx))); frag.appendChild(span); frag.appendChild(document.createTextNode(text.slice(idx+q.length))); firstNode.parentNode.replaceChild(frag, firstNode); searchHighlightSpans.push(span); span.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(clearHighlights, 2800); } }
@@ -860,7 +893,7 @@
             updateActiveCatBtn();
         })();
     
-  // Early image loading — fires 300px before card enters view
+    // Early image loading — fires 300px before card enters view
 const imgObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -898,6 +931,27 @@ document.querySelectorAll('.poster-card img').forEach(img => {
     });
          }, { rootMargin: '100px' });
 document.querySelectorAll('.count-num').forEach(el => countObserver.observe(el));
+document.querySelectorAll('.waiting-count-num').forEach(el => countObserver.observe(el));
+
+function requestNotify(btn) {
+    if (!('Notification' in window)) {
+        btn.innerHTML = '<i class="fas fa-times"></i> Not Supported';
+        btn.classList.add('notified');
+        return;
+    }
+    Notification.requestPermission().then(permission => {
+        btn.classList.add('notified');
+        if (permission === 'granted') {
+            btn.innerHTML = '<i class="fas fa-check"></i> Notified!';
+            new Notification('Reinblacks Mini Films', {
+                body: "You'll be notified when the episode drops!",
+                icon: 'https://res.cloudinary.com/datfuxotx/image/upload/v1780826300/44f19ab0-6256-11f1-85e8-890799e683b2_unv1vp.png'
+            });
+        } else {
+            btn.innerHTML = '<i class="fas fa-bell-slash"></i> Blocked';
+        }
+    });
+}
 setTimeout(() => {
     const introBrand = document.getElementById('intro-brand');
     if(introBrand){
@@ -911,4 +965,4 @@ setTimeout(() => {
 }, 100);
     </script>
 </body>
-</html>
+</html>    
