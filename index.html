@@ -423,20 +423,37 @@
                 <a href="#section-visualizers" class="hero-play-btn"><i class="fas fa-play"></i> Explore Services</a>
             </div>
         </section>
-        
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Reinblacks Mini Films</div>
     <p class="mini-films-badge"><i class="fas fa-film"></i> 4K Quality</p>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-mini-films">
-            <div class="poster-card wide" data-video="ClxdEC_5PVI"><img src="https://img.youtube.com/vi/ClxdEC_5PVI/hqdefault.jpg" alt="Mini Film I" loading="lazy" decoding="async"><div class="play-icon-center"><i class="fas fa-play-circle"></i></div><div class="poster-overlay">Mini Film I</div></div>
-            <div class="poster-card wide" data-video="0FkJsIyF0lQ"><img src="https://img.youtube.com/vi/0FkJsIyF0lQ/hqdefault.jpg" alt="Mini Film II" loading="lazy" decoding="async"><div class="play-icon-center"><i class="fas fa-play-circle"></i></div><div class="poster-overlay">Mini Film II</div></div>
+    <div class="mini-films-grid">
+        <div class="mini-film-card">
+            <div class="mini-film-thumb">
+                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826300/44f19ab0-6256-11f1-85e8-890799e683b2_unv1vp.png" alt="Sweet Monster Episode 01" loading="lazy">
+                <div class="coming-soon-badge">Coming Soon</div>
+                <div class="cs-overlay"><i class="fas fa-lock"></i></div>
+            </div>
+            <div class="episode-meta">
+                <p class="episode-title">SWEET MONSTER <span>Episode 01</span></p>
+                <p class="waiting-count"><i class="fas fa-clock"></i> <span class="count-num" data-target="1101">0</span> people are waiting</p>
+                <a href="#contact-section" class="notify-btn"><i class="fas fa-bell"></i> Notify Me</a>
+            </div>
         </div>
-        <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
+        <div class="mini-film-card">
+            <div class="mini-film-thumb">
+                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826291/206087f0-6257-11f1-85e8-890799e683b2_p9blnz.webp" alt="Sweet Monster Episode 02" loading="lazy">
+                <div class="coming-soon-badge">Coming Soon</div>
+                <div class="cs-overlay"><i class="fas fa-lock"></i></div>
+            </div>
+            <div class="episode-meta">
+                <p class="episode-title">SWEET MONSTER <span>Episode 02</span></p>
+                <p class="waiting-count"><i class="fas fa-clock"></i> <span class="count-num" data-target="913">0</span> people are waiting</p>
+                <a href="#contact-section" class="notify-btn"><i class="fas fa-bell"></i> Notify Me</a>
+            </div>
+        </div>
     </div>
     <p class="mini-films-desc">Explore your favourite Action &amp; Romance movies — 4K quality, cinematic storytelling.</p>
-</section>
+        </section>
         
         <section class="content-section fade-up-section" id="section-intros">
     <div class="section-header"><span class="red-accent"></span> Intro &amp; Content Creation</div>
@@ -904,6 +921,38 @@ document.querySelectorAll('.poster-card img').forEach(img => {
     img.src = '';
     imgObserver.observe(img);
 });
+       /* MINI FILMS CARDS */
+.mini-films-grid{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:20px;}
+.mini-film-card{width:280px;background:#111;border-radius:8px;overflow:hidden;}
+.mini-film-thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;}
+.mini-film-thumb img{width:100%;height:100%;object-fit:cover;}
+.coming-soon-badge{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;}
+.cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
+.cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
+.episode-meta{padding:12px;}
+.episode-title{color:#fff;font-size:0.9rem;font-weight:600;letter-spacing:0.05em;margin-bottom:8px;}
+.episode-title span{display:block;color:#aaa;font-size:0.75rem;font-weight:400;margin-top:2px;}
+.waiting-count{color:#aaa;font-size:0.8rem;display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+.waiting-count i{color:var(--red);}
+.notify-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--red);color:var(--red);font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:4px;text-decoration:none;transition:all 0.3s;}
+.notify-btn:hover{background:var(--red);color:#fff;} 
+        const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            let count = 0;
+            const step = Math.ceil(target / 60);
+            const timer = setInterval(() => {
+                count += step;
+                if(count >= target){ count = target; clearInterval(timer); }
+                el.textContent = count.toLocaleString();
+            }, 20);
+            countObserver.unobserve(el);
+        }
+    });
+}, { rootMargin: '100px' });
+document.querySelectorAll('.count-num').forEach(el => countObserver.observe(el));
     </script>
 </body>
 </html>
