@@ -920,12 +920,12 @@ document.querySelectorAll('.poster-card img').forEach(img => {
             const el = entry.target;
             const target = parseInt(el.dataset.target);
             let count = 0;
-            const step = Math.ceil(target / 60);
-            const timer = setInterval(() => {
-                count += step;
-                if(count >= target){ count = target; clearInterval(timer); }
-                el.textContent = count.toLocaleString();
-            }, 20);
+            const step = Math.ceil(target / 30);
+const timer = setInterval(() => {
+    count += step;
+    if(count >= target){ count = target; clearInterval(timer); }
+    el.textContent = count.toLocaleString();
+}, 12);
             countObserver.unobserve(el);
         }
     });
@@ -939,7 +939,17 @@ function requestNotify(btn) {
         btn.classList.add('notified');
         return;
     }
-    Notification.requestPermission().then(permission => {
+    if (Notification.permission === 'granted') {
+        btn.classList.add('notified');
+        btn.innerHTML = '<i class="fas fa-check"></i> Already Notified!';
+        new Notification('Reinblacks Mini Films', {
+            body: "You'll be notified when the episode drops!",
+            icon: 'https://res.cloudinary.com/datfuxotx/image/upload/v1780826300/44f19ab0-6256-11f1-85e8-890799e683b2_unv1vp.png'
+        });
+        return;
+    }
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Requesting...';
+    Notification.requestPermission(function(permission) {
         btn.classList.add('notified');
         if (permission === 'granted') {
             btn.innerHTML = '<i class="fas fa-check"></i> Notified!';
@@ -949,6 +959,7 @@ function requestNotify(btn) {
             });
         } else {
             btn.innerHTML = '<i class="fas fa-bell-slash"></i> Blocked';
+            btn.style.background = '#555';
         }
     });
 }
