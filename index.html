@@ -747,7 +747,7 @@
             function onPageScroll() { topNav.classList.toggle('scrolled', window.scrollY > 40); updateActiveNav(); backToTopBtn.style.display = window.scrollY > 500 ? 'flex' : 'none'; }
             window.addEventListener('scroll', onPageScroll, { passive: true });
 
-            const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+            const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { rootMargin: '0px 0px -10px 0px', threshold: 0 });
             allFadeUpSections.forEach(s => observer.observe(s));
 
             document.querySelectorAll('.slider-arrow').forEach(btn => { btn.addEventListener('click', () => { const row = document.getElementById(btn.dataset.target); if (row) row.scrollBy({ left: btn.classList.contains('left') ? -300 : 300, behavior: 'smooth' }); }); });
