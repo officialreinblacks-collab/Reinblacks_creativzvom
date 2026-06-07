@@ -928,17 +928,19 @@ document.querySelectorAll('.poster-card img').forEach(img => {
             countObserver.unobserve(el);
         }
     });
-}, { rootMargin: '100px' });
+         }, { rootMargin: '100px' });
 document.querySelectorAll('.count-num').forEach(el => countObserver.observe(el));
-const introBrand = document.getElementById('intro-brand');
-if(introBrand){
-    const text = introBrand.textContent;
-    introBrand.innerHTML = text.split('').map((char, i) =>
-        char === ' '
-        ? '<span style="display:inline-block;width:0.3em;">&nbsp;</span>'
-        : `<span style="animation:letterFadeIn 0.08s ease ${0.3 + i * 0.08}s forwards">${char}</span>`
-    ).join('');
-                                   }
+setTimeout(() => {
+    const introBrand = document.getElementById('intro-brand');
+    if(introBrand){
+        const text = introBrand.textContent;
+        introBrand.innerHTML = text.split('').map((char, i) =>
+            char === ' '
+            ? '<span style="display:inline-block;width:0.3em;">&nbsp;</span>'
+            : `<span style="animation:letterFadeIn 0.08s ease ${0.3 + i * 0.08}s forwards">${char}</span>`
+        ).join('');
+    }
+}, 100);
     </script>
 </body>
 </html>
