@@ -816,9 +816,17 @@ const topNav = document.getElementById('top-nav');
             document.querySelectorAll('.faq-question').forEach(btn => { btn.addEventListener('click', function() { const item = this.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open')); if (!isOpen) item.classList.add('open'); }); });
 
             document.querySelectorAll('.pricing-cta').forEach(btn => { btn.addEventListener('click', function(e) { const packageName = this.getAttribute('data-package'); if (packageName && pricingPackageInput) { pricingPackageInput.value = packageName; } }); });
-
-            function openCardPlayer(videoId) { currentPlayerVideoId = videoId; cardPlayerContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; cardPlayerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-            function closeCardPlayer() { cardPlayerOverlay.classList.remove('active'); cardPlayerContent.innerHTML = ''; document.body.style.overflow = ''; currentPlayerVideoId = null; }
+currentPlayerVideoId = videoId; cardPlayerContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; cardPlayerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function openCardPlayer(videoId, isShort) {
+  if (isShort) {
+    window.open('https://www.youtube.com/shorts/' + videoId, '_blank');
+    return;
+  }
+  currentPlayerVideoId = videoId;
+  cardPlayerContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+  cardPlayerOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
             cardPlayerClose.addEventListener('click', closeCardPlayer);
             cardPlayerOverlay.addEventListener('click', e => { if (e.target === cardPlayerOverlay) closeCardPlayer(); });
             function openVideoModal(videoId) { videoModalContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&enablejsapi=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; videoModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
@@ -856,9 +864,7 @@ const topNav = document.getElementById('top-nav');
                 if (!card) return;
                 const videoId = card.getAttribute('data-video');
                 const galleryKey = card.getAttribute('data-gallery');
-                if (videoId) openCardPlayer(videoId);
-                else if (galleryKey && galleries[galleryKey]) openGalleryModal(galleryKey);
-            });
+                if (videoId) openCardPlayer(videoId, card.getAttribute('data-short') === 'true');
     
 // Search
             let searchHighlightSpans = [];
