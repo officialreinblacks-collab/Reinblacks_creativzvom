@@ -460,14 +460,14 @@
     <div class="film-meta">
         <div style="display:flex;gap:6px;margin:10px 0 8px;flex-wrap:wrap;">
             <div style="background:#c0392b;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
-                <div style="font-weight:700;font-size:0.85rem;">66</div>
-                <div style="font-size:0.65rem;opacity:0.85;">Likes</div>
+                <div style="font-weight:700;font-size:0.85rem;">Action</div>
+                <div style="font-size:0.65rem;opacity:0.85;">&💟love</div>
             </div>
             <div style="background:#2980b9;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;display:flex;align-items:center;gap:5px;">
                 <span class="live-dot"></span>
                 <div>
-                    <div style="font-weight:700;font-size:0.85rem;">2K</div>
-                    <div style="font-size:0.65rem;opacity:0.85;">Views</div>
+                    <div style="font-weight:700;font-size:0.85rem;">Watch</div>
+                    <div style="font-size:0.65rem;opacity:0.85;">Now</div>
                 </div>
             </div>
             <div style="background:#1e1e1e;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
@@ -482,27 +482,32 @@
 </div>
 
 <!-- Episode 02 -->
-<div class="film-item">
-    <div class="poster-card wide">
-        <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1780826291/206087f0-6257-11f1-85e8-890799e683b2_p9blnz.webp" alt="Sweet Monster Episode 02" loading="lazy" decoding="async">
-        <div class="coming-soon-badge">Coming Soon</div>
-        <div class="season-badge">Season 01</div>
-        <div class="cs-overlay"><i class="fas fa-lock"></i></div>
-        <div class="poster-overlay">SWEET MONSTER — Ep. 02</div>
+<div class="film-item" id="sweet-monster-ep2">
+    <div class="video-container" id="sm-ep2-player" style="width:100%;max-width:400px;aspect-ratio:9/16;margin:auto;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;" onclick="playSmEp2(this)">
+        <img src="https://img.youtube.com/vi/BzFdGumFfmY/hqdefault.jpg" alt="Sweet Monster Episode 2" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;background:rgba(0,0,0,0.5);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;"><i class="fas fa-play"></i></div>
     </div>
     <div class="film-meta">
-        <p class="episode-synopsis">Sandra getting herself in love with Pablo, his best friend's boyfriend.</p>
-        <p class="runtime-badge"><i class="fas fa-clock"></i> 5 min</p>
-        <p class="release-date"><i class="fas fa-calendar"></i> Coming November 5th</p>
-        <div class="waiting-pill">
-            <span class="live-dot"></span>
-            <span class="waiting-count-num" data-target="949">0</span>
-            <span class="waiting-label">people waiting to watch</span>
+        <div style="display:flex;gap:6px;margin:10px 0 8px;flex-wrap:wrap;">
+            <div style="background:#c0392b;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
+                <div style="font-weight:700;font-size:0.85rem;">Action</div>
+                <div style="font-size:0.65rem;opacity:0.85;">&💟love</div>
+            </div>
+            <div style="background:#2980b9;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;display:flex;align-items:center;gap:5px;">
+                <span class="live-dot"></span>
+                <div>
+                    <div style="font-weight:700;font-size:0.85rem;">Watch</div>
+                    <div style="font-size:0.65rem;opacity:0.85;">Now</div>
+                </div>
+            </div>
+            <div style="background:#1e1e1e;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
+                <div style="font-weight:700;font-size:0.85rem;">June 13</div>
+                <div style="font-size:0.65rem;opacity:0.85;">2026</div>
+            </div>
         </div>
-        <div class="film-buttons">
-            <button class="notify-btn-film" onclick="requestNotify(this)"><i class="fas fa-bell"></i> Get Notified</button>
-            <button class="trailer-btn" disabled><i class="fas fa-film"></i> Trailer Soon</button>
-        </div>
+        <h3 style="color:#fff;margin:10px 0 4px;">Sweet Monster — Episode #02</h3>
+        <p class="runtime-badge"><i class="fas fa-film"></i> 4K Quality</p>
+        <p class="episode-synopsis">Sandra and Pablo — Mollary's boyfriend — find themselves drawn into a deep, forbidden love. But as their connection grows, Mollary starts noticing strange coincidences... and senses something is quietly unraveling in their relationship.</p>
     </div>
 </div>
 
@@ -1034,6 +1039,12 @@ setTimeout(() => {
     el.style.cursor = 'default';
     el.onclick = null;
         }
+        function playSmEp2(el) {
+    el.innerHTML = '<iframe style="width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/BzFdGumFfmY?autoplay=1" title="Sweet Monster Episode 2" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    el.style.cursor = 'default';
+    el.onclick = null;
+        }
+        
     </script>
 </body>
 </html>    
