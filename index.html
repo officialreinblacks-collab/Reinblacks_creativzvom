@@ -273,8 +273,8 @@
         .submit-btn { padding:12px; background:var(--red); color:#fff; border:none; border-radius:24px; font-weight:700; font-size:0.95rem; cursor:pointer; letter-spacing:0.04em; transition:all 0.3s; box-shadow:0 0 18px var(--accent-glow); }
         .submit-btn:hover { background:#ff1a25; }
         .submit-btn:disabled { opacity:0.6; pointer-events:none; }
-
-        /* ─────────────── EXPANDED CARD PLAYER ─────────────── */
+  
+  /* ─────────────── EXPANDED CARD PLAYER ─────────────── */
         .card-player-overlay { position:fixed; inset:0; background:rgba(15,15,15,0.55); backdrop-filter:blur(28px) saturate(1.4); -webkit-backdrop-filter:blur(28px) saturate(1.4); z-index:9400; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.35s ease; }
         .card-player-overlay.active { opacity:1; pointer-events:all; }
         .card-player-container { position:relative; width:95vw; max-width:960px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08); animation:cardExpand 0.3s ease-out forwards; }
@@ -355,7 +355,7 @@
 .cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
 .cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
 
-        /* ─── FILM ITEMS ─── */
+/* ─── FILM ITEMS ─── */
 .film-item{flex-shrink:0;scroll-snap-align:start;width:260px;min-width:240px;}
 .film-item .poster-card{width:100%;min-width:unset;scroll-snap-align:unset;flex-shrink:unset;}
 .film-meta{padding:10px 2px;display:flex;flex-direction:column;gap:8px;}
@@ -407,8 +407,8 @@
                 </a>
             </div>
         </nav>
-
-        <div id="hamburger-overlay"></div>
+      
+      <div id="hamburger-overlay"></div>
         <div id="hamburger-panel">
             <button id="hamburger-close">✕</button>
             <div class="menu-title">Navigation</div>
@@ -455,7 +455,7 @@
     <div class="slider-container">
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
-
+          
             <!-- Episode 01 -->
 <div class="film-item">
     <div class="poster-card wide" data-video="sIcTXVVZh_o">
@@ -518,7 +518,7 @@
     </div>
 </div>
 
-           </div>
+          </div>
         <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
     </div>
     <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">4K Quality — Action &amp; Romance cinematic storytelling.</p>
@@ -587,8 +587,8 @@
                 <div class="poster-card tall" data-gallery="branding"><img src="https://res.cloudinary.com/datfuxotx/image/upload/q_auto,f_auto/v1778688667/1778656761326_dlquo0.jpg" alt="Branding" loading="lazy" decoding="async" width="170" height="255"><div class="poster-overlay">Branding</div></div>
             </div>
         </section>
-
-        <!-- PRICING -->
+        
+      <!-- PRICING -->
         <section id="section-pricing" class="fade-up-section">
             <div class="pricing-service-section">
                 <p class="service-label">AI Music Visualizers</p>
@@ -671,7 +671,7 @@
             <div class="testi-bottom">
                 <p>Have you worked with us? We'd love to feature your review.</p>
             </div>
-            </section>
+        </section>
         
       <section id="contact-section" class="fade-up-section">
             <div class="contact-split">
@@ -727,6 +727,14 @@
         <div id="about-ceo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
             <div style="background:#111;border-radius:14px;max-width:480px;max-height:85vh;overflow-y:auto;padding:28px;position:relative;border:1px solid #333;">
                 <button onclick="document.getElementById('about-ceo-modal').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;">&times;</button>
+
+                <!-- Profile photo -->
+                <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781615430/541fb640-6984-11f1-a3c3-555766e49706_i3xnxw.webp" alt="Reinblacks Baristar" style="width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid #e50914;box-shadow:0 0 18px rgba(229,9,20,0.45);">
+                    <p style="margin-top:10px;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:#888;font-weight:500;">Prompt Engineer</p>
+                    <p style="font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:0.04em;margin-top:2px;">CEO <span style="color:#e50914;">Reinblacks</span> <span style="font-style:italic;font-weight:700;color:#aaa;">Baristar</span></p>
+                </div>
+
                 <h2 style="color:#fff;margin-bottom:14px;">About Reinblacks</h2>
                 <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">Reinblacks Baristar is the founder of Reinblacks Creativz and Reinblacks Music. Based in Nairobi, he specializes in AI-powered content creation, visual storytelling, and digital media production.</p>
                 <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">His journey into artificial intelligence began in 2025, focusing on AI visualizer videos and creative prompt engineering. Through continuous experimentation and innovation, he expanded his expertise into AI filmmaking, music visualization, cinematic storytelling, and digital content creation.</p>
@@ -880,6 +888,14 @@ const topNav = document.getElementById('top-nav');
             function closeCardPlayer() { cardPlayerOverlay.classList.remove('active'); cardPlayerContent.innerHTML = ''; document.body.style.overflow = ''; currentPlayerVideoId = null; }
             cardPlayerClose.addEventListener('click', closeCardPlayer);
             cardPlayerOverlay.addEventListener('click', e => { if (e.target === cardPlayerOverlay) closeCardPlayer(); });
+
+            // Wire up all poster card clicks
+            document.querySelectorAll('.poster-card[data-video]').forEach(card => {
+                card.addEventListener('click', () => openVideoModal(card.getAttribute('data-video')));
+            });
+            document.querySelectorAll('.poster-card[data-gallery]').forEach(card => {
+                card.addEventListener('click', () => openGalleryModal(card.getAttribute('data-gallery')));
+            });
             function openShortsModal(videoId) { shortsModalContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&loop=1&playlist=${videoId}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;display:block;"></iframe>`; shortsModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
             function closeShortsModal() { shortsModal.classList.remove('active'); shortsModalContent.innerHTML = ''; document.body.style.overflow = ''; }
             shortsModalClose.addEventListener('click', closeShortsModal);
@@ -902,7 +918,7 @@ const topNav = document.getElementById('top-nav');
                 galleryGridContent.innerHTML = '';
                 document.body.style.overflow = '';
                 currentGalleryKey = null;
-
+                
                 }
         galleryModalClose.addEventListener('click', closeGalleryModal);
             galleryModal.addEventListener('click', e => { if (e.target === galleryModal) closeGalleryModal(); });
@@ -962,7 +978,7 @@ const topNav = document.getElementById('top-nav');
             onPageScroll();
             updateActiveCatBtn();
         })();
-            
+    
     // Early image loading — fires 300px before card enters view
 const imgObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1049,6 +1065,3 @@ setTimeout(() => {
 </body>
 </html>    
 
-            
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </section>
-        
