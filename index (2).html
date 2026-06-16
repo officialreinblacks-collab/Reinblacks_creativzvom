@@ -273,8 +273,8 @@
         .submit-btn { padding:12px; background:var(--red); color:#fff; border:none; border-radius:24px; font-weight:700; font-size:0.95rem; cursor:pointer; letter-spacing:0.04em; transition:all 0.3s; box-shadow:0 0 18px var(--accent-glow); }
         .submit-btn:hover { background:#ff1a25; }
         .submit-btn:disabled { opacity:0.6; pointer-events:none; }
-  
-  /* ─────────────── EXPANDED CARD PLAYER ─────────────── */
+
+        /* ─────────────── EXPANDED CARD PLAYER ─────────────── */
         .card-player-overlay { position:fixed; inset:0; background:rgba(15,15,15,0.55); backdrop-filter:blur(28px) saturate(1.4); -webkit-backdrop-filter:blur(28px) saturate(1.4); z-index:9400; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.35s ease; }
         .card-player-overlay.active { opacity:1; pointer-events:all; }
         .card-player-container { position:relative; width:95vw; max-width:960px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:14px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08); animation:cardExpand 0.3s ease-out forwards; }
@@ -355,7 +355,7 @@
 .cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
 .cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
 
-/* ─── FILM ITEMS ─── */
+        /* ─── FILM ITEMS ─── */
 .film-item{flex-shrink:0;scroll-snap-align:start;width:260px;min-width:240px;}
 .film-item .poster-card{width:100%;min-width:unset;scroll-snap-align:unset;flex-shrink:unset;}
 .film-meta{padding:10px 2px;display:flex;flex-direction:column;gap:8px;}
@@ -407,8 +407,8 @@
                 </a>
             </div>
         </nav>
-      
-      <div id="hamburger-overlay"></div>
+
+        <div id="hamburger-overlay"></div>
         <div id="hamburger-panel">
             <button id="hamburger-close">✕</button>
             <div class="menu-title">Navigation</div>
@@ -455,7 +455,7 @@
     <div class="slider-container">
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
-          
+
             <!-- Episode 01 -->
 <div class="film-item">
     <div class="poster-card wide" data-video="sIcTXVVZh_o">
@@ -518,7 +518,7 @@
     </div>
 </div>
 
-          </div>
+           </div>
         <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
     </div>
     <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">4K Quality — Action &amp; Romance cinematic storytelling.</p>
@@ -587,8 +587,8 @@
                 <div class="poster-card tall" data-gallery="branding"><img src="https://res.cloudinary.com/datfuxotx/image/upload/q_auto,f_auto/v1778688667/1778656761326_dlquo0.jpg" alt="Branding" loading="lazy" decoding="async" width="170" height="255"><div class="poster-overlay">Branding</div></div>
             </div>
         </section>
-        
-      <!-- PRICING -->
+
+        <!-- PRICING -->
         <section id="section-pricing" class="fade-up-section">
             <div class="pricing-service-section">
                 <p class="service-label">AI Music Visualizers</p>
@@ -671,7 +671,7 @@
             <div class="testi-bottom">
                 <p>Have you worked with us? We'd love to feature your review.</p>
             </div>
-        </section>
+            </section>
         
       <section id="contact-section" class="fade-up-section">
             <div class="contact-split">
@@ -902,7 +902,7 @@ const topNav = document.getElementById('top-nav');
                 galleryGridContent.innerHTML = '';
                 document.body.style.overflow = '';
                 currentGalleryKey = null;
-                
+
                 }
         galleryModalClose.addEventListener('click', closeGalleryModal);
             galleryModal.addEventListener('click', e => { if (e.target === galleryModal) closeGalleryModal(); });
@@ -962,7 +962,7 @@ const topNav = document.getElementById('top-nav');
             onPageScroll();
             updateActiveCatBtn();
         })();
-    
+            
     // Early image loading — fires 300px before card enters view
 const imgObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1049,3 +1049,6 @@ setTimeout(() => {
 </body>
 </html>    
 
+            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </section>
+        
