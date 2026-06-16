@@ -51,6 +51,7 @@
     opacity: 0;
     animation: fadeInUp 1s ease 1.8s forwards;
         }
+@keyframes ceoGlow { 0%,100%{box-shadow:0 0 12px rgba(229,9,20,0.6),0 0 12px rgba(41,128,185,0.6);} 50%{box-shadow:0 0 22px rgba(229,9,20,0.9),0 0 22px rgba(41,128,185,0.9);} }
         @keyframes introGlowPulse { 0%{ opacity:0; transform:scale(0.5); } 50%{ opacity:0.8; transform:scale(1); } 100%{ opacity:0.5; transform:scale(1); } }
         @keyframes introReveal { 0%{ filter:blur(6px); transform:scale(0.92); opacity:0; } 35%{ filter:blur(2px); opacity:0.5; } 75%{ filter:blur(0px); transform:scale(1); opacity:1; } 100%{ filter:blur(0px); transform:scale(1); opacity:1; } }
         @keyframes introLineGrow { 0%{ width:0; opacity:0; } 55%{ width:0; opacity:0; } 75%{ width:70px; opacity:0.8; } 100%{ width:90px; opacity:0.6; } }
@@ -702,6 +703,21 @@
             <div class="social-links">
                 
             </div>
+</div>
+            <button onclick="document.getElementById('about-ceo-modal').style.display='flex'" style="display:block;margin:24px auto 0;padding:12px 28px;border-radius:30px;border:none;color:#fff;font-weight:700;font-size:0.95rem;cursor:pointer;background:linear-gradient(90deg,#e50914,#2980b9);box-shadow:0 0 15px rgba(229,9,20,0.6),0 0 15px rgba(41,128,185,0.6);animation:ceoGlow 2.5s ease-in-out infinite;">About CEO Reinblacks</button>
+        </section>
+
+        <div id="about-ceo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+            <div style="background:#111;border-radius:14px;max-width:480px;max-height:85vh;overflow-y:auto;padding:28px;position:relative;border:1px solid #333;">
+                <button onclick="document.getElementById('about-ceo-modal').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;">&times;</button>
+                <h2 style="color:#fff;margin-bottom:14px;">About Reinblacks</h2>
+                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">Reinblacks Baristar is the founder of Reinblacks Creativz and Reinblacks Music. Based in Nairobi, he specializes in AI-powered content creation, visual storytelling, and digital media production.</p>
+                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">His journey into artificial intelligence began in 2025, focusing on AI visualizer videos and creative prompt engineering. Through continuous experimentation and innovation, he expanded his expertise into AI filmmaking, music visualization, cinematic storytelling, and digital content creation.</p>
+                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">In 2026, he officially launched Reinblacks Creativz, a creative platform dedicated to producing high-quality AI-generated films, visual content, promotional media, and digital experiences. The brand combines emerging AI technologies with creative direction to deliver engaging and innovative content for modern audiences.</p>
+                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:16px;">Today, Reinblacks continues to explore the future of AI-driven creativity, building projects that bridge technology, storytelling, music, and visual entertainment while helping businesses, artists, and creators bring their ideas to life.</p>
+                <p style="color:#e50914;font-size:0.85rem;font-weight:700;line-height:1.5;">Founder • AI Prompt Engineer • AI Filmmaker • Content Creator • Creative Director<br>Nairobi, Kenya 🇰🇪</p>
+            </div>
+        </div>
         </section>
 
         <footer>
