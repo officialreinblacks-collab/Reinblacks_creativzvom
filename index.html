@@ -935,6 +935,19 @@ const topNav = document.getElementById('top-nav');
                 if (e.target.tagName === 'IMG') openImageFullscreen(e.target.src);
             });
 
+            function openImageFullscreen(src) {
+                imageFullscreenImg.src = src;
+                imageFullscreen.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeImageFullscreen() {
+                imageFullscreen.classList.remove('active');
+                imageFullscreenImg.src = '';
+                document.body.style.overflow = '';
+            }
+            imageFullscreenClose.addEventListener('click', closeImageFullscreen);
+            imageFullscreen.addEventListener('click', e => { if (e.target === imageFullscreen) closeImageFullscreen(); });
+
     // Search
             let searchHighlightSpans = [];
             function clearHighlights() { searchHighlightSpans.forEach(span => { const parent = span.parentNode; if (parent) { parent.replaceChild(document.createTextNode(span.textContent), span); parent.normalize(); } }); searchHighlightSpans = []; }
