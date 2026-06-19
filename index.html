@@ -382,6 +382,31 @@
 .trailer-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:4px;cursor:pointer;margin-left:8px;transition:all 0.3s;}
 .trailer-btn:hover{background:rgba(255,255,255,0.15);}
 .film-buttons{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px;}
+
+/* ── COMING SOON LABEL ── */
+.coming-soon-label{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.82);color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.25);z-index:6;}
+
+/* ── STATUS PILL: RED GLOW ── */
+.status-pill-red{display:inline-flex;align-items:center;gap:5px;background:rgba(229,9,20,0.15);border:1px solid rgba(229,9,20,0.5);color:#ff4455;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;box-shadow:0 0 8px rgba(229,9,20,0.35);white-space:nowrap;}
+.status-pill-red .red-dot{width:7px;height:7px;border-radius:50%;background:#ff2233;box-shadow:0 0 6px #ff2233;animation:livePulse 1.2s ease-in-out infinite;flex-shrink:0;}
+
+/* ── STATUS PILL: GREEN GLOW ── */
+.status-pill-green{display:inline-flex;align-items:center;gap:5px;background:rgba(34,255,102,0.1);border:1px solid rgba(34,255,102,0.4);color:#22ff66;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;box-shadow:0 0 8px rgba(34,255,102,0.25);white-space:nowrap;}
+.status-pill-green .green-dot{width:7px;height:7px;border-radius:50%;background:#22ff66;box-shadow:0 0 6px #22ff66;animation:livePulse 1.2s ease-in-out infinite;flex-shrink:0;}
+
+/* ── READ MORE ── */
+.read-more-wrap{position:relative;}
+.read-more-text{overflow:hidden;transition:max-height 0.4s ease;}
+.read-more-text.collapsed{max-height:3.6em;}
+.read-more-text.expanded{max-height:999px;}
+.read-more-fade{position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(to bottom,transparent,#000);pointer-events:none;transition:opacity 0.3s;}
+.read-more-fade.hidden{opacity:0;}
+.read-more-btn{background:none;border:none;color:var(--red);font-size:0.75rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;padding:4px 0 0;display:block;transition:color 0.2s;}
+.read-more-btn:hover{color:#ff4455;}
+
+/* ── SECTION DESC READ MORE ── */
+.section-desc-wrap{position:relative;}
+.section-desc-wrap .read-more-text.collapsed{max-height:2.8em;}
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9726901346687165"
      crossorigin="anonymous">
@@ -467,8 +492,44 @@
     <div class="slider-container">
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
-          
-            <!-- Episode 01 -->
+
+<!-- Another Tomb Life — Episode 01 (FIRST) -->
+<div class="film-item">
+    <div class="poster-card wide" style="position:relative;">
+        <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781876848/1781876797769_tpzctx.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
+        <div class="coming-soon-label">Coming Soon</div>
+        <div class="poster-overlay">ANOTHER TOMB LIFE — Ep. 01</div>
+    </div>
+    <div class="film-meta">
+        <div style="display:flex;gap:6px;margin:10px 0 8px;flex-wrap:wrap;">
+            <div style="background:#c0392b;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
+                <div style="font-weight:700;font-size:0.85rem;">Lost in</div>
+                <div style="font-size:0.65rem;opacity:0.85;">Tomb</div>
+            </div>
+            <div style="background:#2980b9;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;display:flex;align-items:center;gap:5px;">
+                <span class="live-dot" style="background:#ff2233;box-shadow:0 0 6px #ff2233;"></span>
+                <div>
+                    <div style="font-weight:700;font-size:0.85rem;">Not Yet</div>
+                    <div style="font-size:0.65rem;opacity:0.85;">Out</div>
+                </div>
+            </div>
+            <div style="background:#1e1e1e;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
+                <div style="font-weight:700;font-size:0.85rem;">Out On</div>
+                <div style="font-size:0.65rem;opacity:0.85;">23rd June</div>
+            </div>
+        </div>
+        <h3 style="color:#fff;margin:10px 0 2px;">Another Tomb Life — Episode #01</h3>
+        <p class="runtime-badge"><i class="fas fa-film"></i> 4K Quality</p>
+        <p style="color:#aaa;font-size:0.7rem;margin-bottom:6px;font-style:italic;">Action | Adventure | Sci-Fi | Thriller | Romance</p>
+        <div class="read-more-wrap">
+          <div class="read-more-text collapsed episode-synopsis" id="synopsis-ep03">In a visually immersive world inspired by the mythos of endless temple-running games, <em>Another Tomb Life</em> reimagines survival beyond death itself.<br><br>After an unexpected death on Earth, Ruger awakens inside a mysterious, ancient dimension known only as the Tomb Realm — a shifting labyrinth of cursed ruins, traps, and relentless creatures that hunt anything alive. Disoriented and stripped of memory, he quickly realizes this is not a game… but a brutal afterlife where survival is the only rule.<br><br>While being relentlessly pursued by the realm's shadow-beasts, Ruger stumbles upon Tessy, a mysterious woman who lives hidden within a sealed underground tomb sanctuary. She rescues him and offers protection, revealing that she is part of a lineage sworn to guard forbidden passages between worlds.<br><br>As Ruger slowly adapts to this deadly environment, a deep emotional bond forms between him and Tessy. But their connection becomes dangerous when Tessy's parents — the ancient tomb wardens — reject Ruger's presence, believing outsiders bring collapse to their sacred world.<br><br>Torn between love, survival, and the secrets of the Tomb Realm, Ruger discovers a terrifying truth: his arrival was not an accident. He was chosen.<br><br>Now, with enemies closing in and the boundaries between life, death, and destiny collapsing, Ruger must decide — escape back to Earth, stay and fight for Tessy, or unlock the hidden power that could reshape both worlds forever.</div>
+          <div class="read-more-fade" id="fade-ep03"></div>
+        </div>
+        <button class="read-more-btn" onclick="toggleReadMore('ep03')">Read More</button>
+    </div>
+</div>
+
+            <!-- Episode 01 — Sweet Monster -->
 <div class="film-item">
     <div class="poster-card wide" data-video="sIcTXVVZh_o">
         <img src="https://img.youtube.com/vi/sIcTXVVZh_o/hqdefault.jpg" alt="Sweet Monster Episode 1" loading="lazy" decoding="async">
@@ -495,11 +556,15 @@
         </div>
         <h3 style="color:#fff;margin:10px 0 4px;">Sweet Monster — Episode #01</h3>
         <p class="runtime-badge"><i class="fas fa-film"></i> 4K Quality</p>
-        <p class="episode-synopsis">Mollary's boyfriend has had enough of being bossed around — in front of friends, behind closed doors, always on Mollary's terms. Tired of playing along, he starts looking elsewhere for the loyalty he isn't getting at home. A quiet decision that's about to change everything.</p>
+        <div class="read-more-wrap">
+          <div class="read-more-text collapsed episode-synopsis" id="synopsis-ep01">Mollary's boyfriend has had enough of being bossed around — in front of friends, behind closed doors, always on Mollary's terms. Tired of playing along, he starts looking elsewhere for the loyalty he isn't getting at home. A quiet decision that's about to change everything.</div>
+          <div class="read-more-fade" id="fade-ep01"></div>
+        </div>
+        <button class="read-more-btn" onclick="toggleReadMore('ep01')">Read More</button>
     </div>
 </div>
 
-<!-- Episode 02 -->
+<!-- Episode 02 — Sweet Monster -->
 <div class="film-item">
     <div class="poster-card wide" data-video="BzFdGumFfmY">
         <img src="https://img.youtube.com/vi/BzFdGumFfmY/hqdefault.jpg" alt="Sweet Monster Episode 2" loading="lazy" decoding="async">
@@ -526,14 +591,24 @@
         </div>
         <h3 style="color:#fff;margin:10px 0 4px;">Sweet Monster — Episode #02</h3>
         <p class="runtime-badge"><i class="fas fa-film"></i> 4K Quality</p>
-        <p class="episode-synopsis">Sandra and Pablo — Mollary's boyfriend — find themselves drawn into a deep, forbidden love. But as their connection grows, Mollary starts noticing strange coincidences... and senses something is quietly unraveling in their relationship.</p>
+        <div class="read-more-wrap">
+          <div class="read-more-text collapsed episode-synopsis" id="synopsis-ep02">Sandra and Pablo — Mollary's boyfriend — find themselves drawn into a deep, forbidden love. But as their connection grows, Mollary starts noticing strange coincidences... and senses something is quietly unraveling in their relationship.</div>
+          <div class="read-more-fade" id="fade-ep02"></div>
+        </div>
+        <button class="read-more-btn" onclick="toggleReadMore('ep02')">Read More</button>
     </div>
 </div>
 
           </div>
         <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">4K Quality — Action &amp; Romance cinematic storytelling.</p>
+    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">
+      <span class="read-more-wrap section-desc-wrap">
+        <span class="read-more-text collapsed" id="synopsis-minifilms">4K Quality — Action &amp; Romance cinematic storytelling. New episodes drop regularly — follow along and get notified when the next one is live.</span>
+        <span class="read-more-fade" id="fade-minifilms"></span>
+      </span>
+      <button class="read-more-btn" onclick="toggleReadMore('minifilms')">Read More</button>
+    </p>
         </section>
         
         <section class="content-section fade-up-section" id="section-intros">
@@ -548,7 +623,13 @@
         </div>
         <button class="slider-arrow right" data-target="row-intros"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">We create cinematic intro and announcement videos for brands, channels, and creators — crafted to make powerful first impressions with professional motion, sound design, and storytelling.</p>
+    <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">
+      <span class="read-more-wrap section-desc-wrap">
+        <span class="read-more-text collapsed" id="synopsis-intros">We create cinematic intro and announcement videos for brands, channels, and creators — crafted to make powerful first impressions with professional motion, sound design, and storytelling.</span>
+        <span class="read-more-fade" id="fade-intros"></span>
+      </span>
+      <button class="read-more-btn" onclick="toggleReadMore('intros')">Read More</button>
+    </p>
 </section>
 
    <section class="content-section fade-up-section" id="section-visualizers">
@@ -564,7 +645,13 @@
                 </div>
                 <button class="slider-arrow right" data-target="row-visualizers"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">We create professional cinematic visuals with ultra-realistic storytelling that feels natural, emotional, and human — never artificial. From realistic AI filmmaking to professional music video editing, every frame is crafted with industry-level detail, motion, lighting, and sound design.<br>Discover more visuals, films, and music experiences on <a href="https://youtube.com/@reinblacks_music" target="_blank" style="color:var(--red);">Reinblacks Music YouTube</a>.</p>
+            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">
+              <span class="read-more-wrap section-desc-wrap">
+                <span class="read-more-text collapsed" id="synopsis-viz">We create professional cinematic visuals with ultra-realistic storytelling that feels natural, emotional, and human — never artificial. From realistic AI filmmaking to professional music video editing, every frame is crafted with industry-level detail, motion, lighting, and sound design.<br>Discover more visuals, films, and music experiences on <a href="https://youtube.com/@reinblacks_music" target="_blank" style="color:var(--red);">Reinblacks Music YouTube</a>.</span>
+                <span class="read-more-fade" id="fade-viz"></span>
+              </span>
+              <button class="read-more-btn" onclick="toggleReadMore('viz')">Read More</button>
+            </p>
         </section>
 
         <section class="content-section fade-up-section" id="section-ads">
@@ -579,7 +666,13 @@
                 </div>
                 <button class="slider-arrow right" data-target="row-ads"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">We create high-converting professional advertising campaigns for brands, businesses, and creators — including Meta Ads, Google Ads, and cinematic promotional content designed to attract real customers and increase engagement. Every campaign is backed by strategic research, audience targeting, and creative storytelling to deliver strong visual impact and measurable results.<br>Explore more advertising visuals and campaign showcases on <a href="https://youtube.com/@reinblacks_music" target="_blank" style="color:var(--red);">Reinblacks Music YouTube</a>.</p>
+            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">
+              <span class="read-more-wrap section-desc-wrap">
+                <span class="read-more-text collapsed" id="synopsis-ads">We create high-converting professional advertising campaigns for brands, businesses, and creators — including Meta Ads, Google Ads, and cinematic promotional content designed to attract real customers and increase engagement. Every campaign is backed by strategic research, audience targeting, and creative storytelling to deliver strong visual impact and measurable results.<br>Explore more advertising visuals and campaign showcases on <a href="https://youtube.com/@reinblacks_music" target="_blank" style="color:var(--red);">Reinblacks Music YouTube</a>.</span>
+                <span class="read-more-fade" id="fade-ads"></span>
+              </span>
+              <button class="read-more-btn" onclick="toggleReadMore('ads')">Read More</button>
+            </p>
         </section>
 
         <section class="content-section fade-up-section" id="section-photos">
@@ -588,7 +681,13 @@
                 <div class="poster-card tall" data-gallery="cloning"><img src="https://res.cloudinary.com/datfuxotx/image/upload/q_auto,f_auto/v1778666613/InCollage_20260513_121924997_tp86ie.jpg" alt="Photo Cloning" loading="lazy" decoding="async" width="170" height="255"><div class="poster-overlay">Photo Cloning</div></div>
                 <div class="poster-card tall" data-gallery="editing"><img src="https://res.cloudinary.com/datfuxotx/image/upload/q_auto,f_auto/v1778666590/InCollage_20260513_124719161_ksw2kt.jpg" alt="AI Photo Editing" loading="lazy" decoding="async" width="170" height="255"><div class="poster-overlay">AI Photo Editing</div></div>
             </div>
-            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">We create professional AI photo editing and realistic AI cloning with high-end cinematic quality, natural skin texture, accurate lighting, and lifelike detail that blends seamlessly with reality. From creative transformations to ultra-realistic portrait enhancement, every edit is crafted to look authentic, polished, and visually powerful — never fake or overprocessed.</p>
+            <p style="color:#aaa;font-size:0.9rem;margin-top:10px;">
+              <span class="read-more-wrap section-desc-wrap">
+                <span class="read-more-text collapsed" id="synopsis-photos">We create professional AI photo editing and realistic AI cloning with high-end cinematic quality, natural skin texture, accurate lighting, and lifelike detail that blends seamlessly with reality. From creative transformations to ultra-realistic portrait enhancement, every edit is crafted to look authentic, polished, and visually powerful — never fake or overprocessed.</span>
+                <span class="read-more-fade" id="fade-photos"></span>
+              </span>
+              <button class="read-more-btn" onclick="toggleReadMore('photos')">Read More</button>
+            </p>
         </section>
 
         <section class="content-section fade-up-section" id="section-graphics">
@@ -1239,7 +1338,18 @@ setTimeout(() => {
         introBrand.style.opacity = '1';
     }
 }, 100);
+// ── Read More Toggle ──
+function toggleReadMore(id) {
+    const text = document.getElementById('synopsis-' + id);
+    const fade = document.getElementById('fade-' + id);
+    const btn = text ? text.closest('.read-more-wrap').nextElementSibling : null;
+    if (!text) return;
+    const isCollapsed = text.classList.contains('collapsed');
+    text.classList.toggle('collapsed', !isCollapsed);
+    text.classList.toggle('expanded', isCollapsed);
+    if (fade) fade.classList.toggle('hidden', isCollapsed);
+    if (btn) btn.textContent = isCollapsed ? 'Show Less' : 'Read More';
+}
     </script>
-</body>
 </html>    
 
