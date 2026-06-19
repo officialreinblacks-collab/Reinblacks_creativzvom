@@ -350,7 +350,16 @@
     display:inline-block;
     opacity:0;
 }
-        .coming-soon-badge{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
+        /* ─── OFFER BTN ANIMATION ─── */
+@keyframes offerTextFlip {
+  0%,45%   { opacity:1; transform:translateY(0); }
+  50%,95%  { opacity:0; transform:translateY(-6px); }
+  100%     { opacity:1; transform:translateY(0); }
+}
+.offer-anim-btn { position:relative; overflow:hidden; }
+#offerAnimText { display:inline-block; transition:opacity 0.25s, transform 0.25s; }
+#offerAnimText.fade-swap { opacity:0; transform:translateY(-6px); }
+.coming-soon-badge{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
 .cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
 .cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
 
@@ -449,148 +458,7 @@
                 <a href="#section-visualizers" class="hero-play-btn"><i class="fas fa-play"></i> Explore Services</a>
             </div>
         </section>
-        <!-- BUY READY MADE AI FILMS SECTION -->
-        <section class="content-section fade-up-section" id="section-buy-films" style="padding-bottom:10px;">
-            <div class="section-header"><span class="red-accent"></span> Buy Ready Made AI Films, Movie &amp; Content</div>
-            <p style="color:#888;font-size:0.82rem;margin:-6px 0 18px;letter-spacing:0.03em;">Instant purchase — fully produced AI films &amp; content ready to own.</p>
 
-            <!-- STORE SLIDER -->
-            <div class="slider-container">
-                <button class="slider-arrow left" data-target="row-buy-films"><i class="fas fa-chevron-left"></i></button>
-                <div class="category-row" id="row-buy-films">
-
-                    <!-- CARD 1: Another Tomb Life -->
-                    <div class="film-item" style="max-width:340px;">
-                        <div class="poster-card wide" style="position:relative;overflow:hidden;">
-                            <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781876848/1781876797769_tpzctx.png" alt="Another Tomb Life - Coming Soon" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-                            <div class="buy-cs-banner">COMING SOON</div>
-                        </div>
-
-                        <!-- PRICE & INFO BUTTONS -->
-                        <div class="atl-btn-row1" style="display:flex;gap:6px;margin-top:10px;">
-                            <span class="atl-btn atl-btn-red"><i class="fas fa-bell"></i> 20% Off Offer</span>
-                            <span class="atl-btn atl-btn-yellow"><i class="fas fa-cart-shopping"></i> Buy Now Ksh 500 / $3.86</span>
-                            <span class="atl-btn atl-btn-blue"><i class="fas fa-film"></i> 5 Episodes · 3 Min Each</span>
-                        </div>
-                        <div class="atl-btn-row2" style="display:flex;gap:6px;margin-top:6px;align-items:center;">
-                            <span class="atl-btn atl-btn-green atl-btn-sm">4K</span>
-                            <span class="atl-btn atl-btn-red"><i class="fas fa-circle-check" style="color:#2ecc71;"></i> Monetization Quality</span>
-                        </div>
-                        <div class="atl-platform-row" style="display:flex;align-items:center;gap:10px;margin-top:8px;">
-                            <span style="color:#999;font-size:0.72rem;letter-spacing:0.03em;">9:16 frame best on</span>
-                            <i class="fab fa-tiktok" style="color:#fff;font-size:1rem;" title="TikTok"></i>
-                            <i class="fab fa-facebook" style="color:#1877f2;font-size:1rem;" title="Facebook"></i>
-                            <i class="fab fa-instagram" style="color:#e1306c;font-size:1rem;" title="Instagram Reels"></i>
-                            <i class="fab fa-youtube" style="color:#ff0000;font-size:1rem;" title="YouTube Shorts"></i>
-                        </div>
-
-                        <div class="film-meta">
-                            <h3 style="color:#fff;margin:10px 0 4px;font-size:0.95rem;">Another Tomb Life</h3>
-                            <p style="color:#999;font-size:0.72rem;letter-spacing:0.03em;margin:0 0 8px;">Action | Adventure | Sci-Fi | Thriller | Romance</p>
-                            <p class="atl-synopsis" style="color:#bbb;font-size:0.8rem;line-height:1.5;margin:0;">
-                                <span class="atl-text">In a visually immersive world inspired by the mythos of endless temple-running games, Another Tomb Life reimagines survival beyond death itself.</span>
-                                <span class="atl-text-full" style="display:none;">In a visually immersive world inspired by the mythos of endless temple-running games, Another Tomb Life reimagines survival beyond death itself.
-                                    After an unexpected death on Earth, Ruger awakens inside a mysterious, ancient dimension known only as the Tomb Realm—a shifting labyrinth of cursed ruins, traps, and relentless creatures that hunt anything alive. Disoriented and stripped of memory, he quickly realizes this is not a game… but a brutal afterlife where survival is the only rule.
-                                    While being relentlessly pursued by the realm's shadow-beasts, Ruger stumbles upon Tessy, a mysterious woman who lives hidden within a sealed underground tomb sanctuary. She rescues him and offers protection, revealing that she is part of a lineage sworn to guard forbidden passages between worlds.
-                                    As Ruger slowly adapts to this deadly environment, a deep emotional bond forms between him and Tessy. But their connection becomes dangerous when Tessy's parents—the ancient tomb wardens—reject Ruger's presence, believing outsiders bring collapse to their sacred world.
-                                    Torn between love, survival, and the secrets of the Tomb Realm, Ruger discovers a terrifying truth: his arrival was not an accident. He was chosen.
-                                    Now, with enemies closing in and the boundaries between life, death, and destiny collapsing, Ruger must decide—escape back to Earth, stay and fight for Tessy, or unlock the hidden power that could reshape both worlds forever.</span>
-                            </p>
-                            <button class="atl-readmore-btn" onclick="
-                                var item=this.closest('.film-item');
-                                var s=item.querySelector('.atl-text');
-                                var f=item.querySelector('.atl-text-full');
-                                var expanded=f.style.display!=='none';
-                                f.style.display = expanded ? 'none' : 'inline';
-                                s.style.display = expanded ? 'inline' : 'none';
-                                this.textContent = expanded ? 'Read More' : 'Show Less';
-                            " style="background:none;border:none;color:var(--red);font-size:0.78rem;font-weight:700;letter-spacing:0.03em;padding:6px 0 0;cursor:pointer;">Read More</button>
-                        </div>
-                    </div>
-
-                </div>
-                <button class="slider-arrow right" data-target="row-buy-films"><i class="fas fa-chevron-right"></i></button>
-            </div>
-
-            <p style="color:#555;font-size:0.75rem;margin-top:14px;text-align:center;letter-spacing:0.05em;">More titles dropping soon</p>
-        </section>
-
-        <style>
-        .buy-store-card { display:block; text-decoration:none; }
-        .buy-cs-banner {
-            position:absolute;
-            top:50%; left:50%;
-            transform:translate(-50%,-50%);
-            background:rgba(0,0,0,0.72);
-            color:#fff;
-            font-size:0.72rem;
-            font-weight:900;
-            letter-spacing:0.22em;
-            text-transform:uppercase;
-            padding:7px 16px;
-            border-radius:4px;
-            border:1px solid rgba(229,9,20,0.5);
-            white-space:nowrap;
-            pointer-events:none;
-            text-shadow:0 0 12px rgba(229,9,20,0.6);
-        }
-        .buy-film-badge-top {
-            position:absolute;
-            top:8px; left:8px;
-            background:rgba(229,9,20,0.88);
-            color:#fff;
-            font-size:0.58rem;
-            font-weight:700;
-            letter-spacing:0.1em;
-            text-transform:uppercase;
-            padding:3px 8px;
-            border-radius:20px;
-            pointer-events:none;
-        }
-        .buy-hover-cta {
-            position:absolute;
-            bottom:0; left:0; right:0;
-            background:linear-gradient(transparent, rgba(229,9,20,0.85));
-            color:#fff;
-            font-size:0.75rem;
-            font-weight:700;
-            letter-spacing:0.08em;
-            padding:18px 12px 10px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:6px;
-            opacity:0;
-            transition:opacity 0.25s;
-            pointer-events:none;
-        }
-        .buy-store-card:hover .buy-hover-cta { opacity:1; }
-        .atl-btn {
-            display:inline-flex;
-            align-items:center;
-            gap:5px;
-            font-size:0.68rem;
-            font-weight:800;
-            letter-spacing:0.02em;
-            padding:6px 10px;
-            border-radius:6px;
-            color:#fff;
-            white-space:nowrap;
-            line-height:1.2;
-        }
-        .atl-btn-red { background:linear-gradient(135deg,#e50914,#b8070f); }
-        .atl-btn-yellow { background:linear-gradient(135deg,#f5c518,#d4a800); color:#1a1a1a; }
-        .atl-btn-blue { background:linear-gradient(135deg,#2196f3,#1565c0); }
-        .atl-btn-green { background:linear-gradient(135deg,#2ecc71,#239b56); }
-        .atl-btn-sm { font-size:0.62rem; padding:4px 9px; }
-        .atl-btn-row1 { flex-wrap:wrap; }
-        .atl-btn-row1 .atl-btn,
-        .atl-btn-row2 .atl-btn { flex:0 0 auto; }
-        @media (max-width:380px){
-            .atl-btn-row1 { flex-direction:column; }
-            .atl-btn-row1 .atl-btn { width:100%; justify-content:center; }
-        }
-        </style>
 
 
 
@@ -1358,6 +1226,7 @@ function requestNotify(btn) {
         }
     });
 }
+// ── Offer button animation removed (section deleted) ──
 setTimeout(() => {
     const introBrand = document.getElementById('intro-brand');
     if(introBrand){
