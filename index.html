@@ -481,11 +481,148 @@
                 <p class="hero-subtitle">We create AI music visualizers, cinematic AI video ads, professional photo editing, celebrity-style photo transformations, old photo restoration, photo enhancement, official portrait designs, and premium graphic design services.</p>
                 <p class="hero-subtitle" style="margin-top:-8px;color:#aaa;">Pricing varies depending on your project. Explore more on this site.</p>
                 <a href="#section-visualizers" class="hero-play-btn"><i class="fas fa-play"></i> Explore Services</a>
-            </div>
+
+
+
+
         </section>
 
+<!-- ═══════════════════════════════════════════════════════
+     LEADERBOARD AD BANNER — Full-width below hero
+═══════════════════════════════════════════════════════ -->
+<style>
+/* ── Ad Banner ── */
+#leaderboard-ad {
+    width:100%; background:#0a0a0a;
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    padding:0; overflow:hidden;
+}
+#leaderboard-ad .ad-top-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:5px 16px 3px;
+    background:#050505;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+}
+#leaderboard-ad .ad-top-bar span {
+    font-size:0.55rem; letter-spacing:0.18em; color:#555;
+    text-transform:uppercase; font-weight:700;
+}
+#leaderboard-ad .ad-top-bar a {
+    font-size:0.55rem; letter-spacing:0.18em; color:var(--red);
+    text-transform:uppercase; font-weight:700; text-decoration:none;
+    transition:opacity 0.2s;
+}
+#leaderboard-ad .ad-top-bar a:hover { opacity:0.75; }
 
+/* Image slider */
+#lb-slides-wrap {
+    position:relative; width:100%; height:clamp(110px,28vw,180px); overflow:hidden;
+}
+#lb-slides {
+    display:flex; width:400%; height:100%;
+    transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+#lb-slides img {
+    width:25%; height:100%; object-fit:cover; flex-shrink:0; display:block;
+}
 
+/* Dots */
+#lb-dots {
+    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+    display:flex; gap:5px; z-index:2;
+}
+.lb-dot {
+    width:5px; height:5px; border-radius:50%;
+    background:rgba(255,255,255,0.3); display:inline-block;
+    transition:background 0.3s, transform 0.3s;
+}
+.lb-dot.active-lb { background:#fff; transform:scale(1.3); }
+
+/* Caption row */
+#lb-caption {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:9px 16px 10px; gap:10px; flex-wrap:wrap;
+}
+#lb-caption .lb-text { flex:1; min-width:0; }
+#lb-caption .lb-text strong {
+    display:block; font-size:0.8rem; font-weight:800; color:#fff;
+    line-height:1.25; margin-bottom:2px;
+}
+#lb-caption .lb-text p {
+    font-size:0.68rem; color:#999; line-height:1.4; margin:0;
+}
+#lb-caption .lb-text p span { color:#34D399; font-weight:700; }
+#lb-signup {
+    flex-shrink:0;
+    display:inline-block; padding:8px 18px;
+    border-radius:22px; font-size:0.7rem; font-weight:800;
+    letter-spacing:0.1em; text-transform:uppercase;
+    text-decoration:none; color:#fff;
+    background:linear-gradient(135deg,#6b3800,#b86e00,#e8a020);
+    box-shadow:0 0 16px rgba(196,122,0,0.6), 0 0 32px rgba(196,122,0,0.2);
+    animation:lbGlowPulse 2.5s ease-in-out infinite;
+    transition:box-shadow 0.3s, transform 0.2s;
+    white-space:nowrap;
+}
+#lb-signup:hover {
+    box-shadow:0 0 28px rgba(232,160,32,1), 0 0 50px rgba(196,122,0,0.5);
+    transform:scale(1.03);
+}
+@keyframes lbGlowPulse {
+    0%,100%{ box-shadow:0 0 16px rgba(196,122,0,0.6),0 0 32px rgba(196,122,0,0.2); }
+    50%{ box-shadow:0 0 26px rgba(232,160,32,0.9),0 0 48px rgba(196,122,0,0.35); }
+}
+</style>
+
+<div id="leaderboard-ad">
+    <!-- Label bar -->
+    <div class="ad-top-bar">
+        <span>#Ads</span>
+        <a href="#contact-section">📩 Book This Space</a>
+    </div>
+
+    <!-- Full-width image slider -->
+    <div id="lb-slides-wrap">
+        <div id="lb-slides">
+            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781941119/Screenshot_20260620-103054_lj5pem.jpg" alt="MiniPay Ad 1" loading="lazy">
+            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781941119/Screenshot_20260620-103143_imspvq.jpg" alt="MiniPay Ad 2" loading="lazy">
+            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781941119/Screenshot_20260620-103105_xq2z3p.jpg" alt="MiniPay Ad 3" loading="lazy">
+            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781941120/Screenshot_20260620-103127_pehs7m.jpg" alt="MiniPay Ad 4" loading="lazy">
+        </div>
+        <div id="lb-dots">
+            <span class="lb-dot active-lb"></span>
+            <span class="lb-dot"></span>
+            <span class="lb-dot"></span>
+            <span class="lb-dot"></span>
+        </div>
+    </div>
+
+    <!-- Caption + CTA -->
+    <div id="lb-caption">
+        <div class="lb-text">
+            <strong>Join MiniPay Today — Send Money, Instantly.</strong>
+            <p>Transfer globally &amp; locally at the lowest cost. Powered by <span>Opera Mini</span></p>
+        </div>
+        <a id="lb-signup" href="https://link.minipay.xyz/invite?ref=6YgobmkS" target="_blank" rel="noopener sponsored">
+            Click To Sign Up &rsaquo;
+        </a>
+    </div>
+</div>
+
+<script>
+(function(){
+    var lbIdx = 0;
+    var lbSlides = document.getElementById('lb-slides');
+    var lbDots = document.querySelectorAll('.lb-dot');
+    function lbGoTo(n){
+        lbIdx = ((n % 4) + 4) % 4;
+        lbSlides.style.transform = 'translateX(-' + (lbIdx * 25) + '%)';
+        lbDots.forEach(function(d,i){ d.classList.toggle('active-lb', i === lbIdx); });
+    }
+    setInterval(function(){ lbGoTo(lbIdx + 1); }, 2600);
+})();
+</script>
 
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Reinblacks Mini Films</div>
