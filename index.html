@@ -896,6 +896,21 @@
                 </div>
             </div>
 
+            <!-- VIDEO EDITING TOOLS STRIP -->
+            <div style="margin-top:16px;">
+                <p style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#00C896;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:7px;">
+                    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00C896;box-shadow:0 0 6px #00C896;"></span>
+                    Our Best Video Tools
+                </p>
+                <div style="position:relative;border:1px solid rgba(0,200,150,0.22);border-radius:10px;background:rgba(0,200,150,0.04);padding:14px 20px;min-height:52px;display:flex;align-items:center;overflow:hidden;">
+                    <!-- Green left accent bar -->
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#00C896,transparent);border-radius:10px 0 0 10px;"></div>
+                    <div id="editing-tools-display" style="position:relative;width:100%;height:28px;">
+                        <!-- JS renders crossfade spans here -->
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <style>
@@ -948,6 +963,14 @@
                 { name:'Adobe Firefly',    sub:'Adobe Creative AI' },
                 { name:'Google Gemini',    sub:'Google Multimodal AI' }
             ];
+            var editingTools = [
+                { name:'DaVinci Resolve',    sub:'Professional Video Editing' },
+                { name:'Adobe Premiere Pro', sub:'Industry Standard NLE' },
+                { name:'Final Cut Pro',      sub:'Apple Pro Video Editor' },
+                { name:'CapCut',             sub:'Fast Creative Editing' },
+                { name:'Filmora',            sub:'Easy & Powerful Editor' },
+                { name:'VEGAS Pro',          sub:'Advanced Video Production' }
+            ];
 
             function buildStrip(containerId, tools, dotColor) {
                 var container = document.getElementById(containerId);
@@ -977,6 +1000,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 buildStrip('video-tools-display', videoTools, '#E50914');
                 buildStrip('image-tools-display', imageTools, '#6C63FF');
+                buildStrip('editing-tools-display', editingTools, '#00C896');
             });
         })();
         </script>
