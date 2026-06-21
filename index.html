@@ -359,7 +359,7 @@
 .offer-anim-btn { position:relative; overflow:hidden; }
 #offerAnimText { display:inline-block; transition:opacity 0.25s, transform 0.25s; }
 #offerAnimText.fade-swap { opacity:0; transform:translateY(-6px); }
-.coming-soon-badge{position:absolute;top:7px;left:7px;background:var(--red);color:#fff;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 7px;border-radius:3px;}
+
 .cs-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;}
 .cs-overlay i{font-size:2rem;color:rgba(255,255,255,0.25);}
 
@@ -384,7 +384,13 @@
 .film-buttons{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px;}
 
 /* ── COMING SOON LABEL ── */
-.coming-soon-label{position:absolute;top:10px;left:10px;background:rgba(0,0,0,0.82);color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.25);z-index:6;}
+.top10-badge{position:absolute;top:0;left:0;display:flex;align-items:center;z-index:6;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));}
+.top10-label{background:var(--red);color:#fff;font-size:0.6rem;font-weight:800;letter-spacing:0.06em;padding:5px 8px 5px 10px;border-radius:0 4px 4px 0;}
+.top10-number{font-family:'Anton','Bebas Neue',Impact,sans-serif;font-size:1.6rem;font-weight:900;color:#fff;background:#000;padding:0px 10px;line-height:1;display:flex;align-items:center;height:100%;}
+.hot-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(90deg,#ff3d00,#ff8a00);color:#fff;font-size:0.62rem;font-weight:800;letter-spacing:0.05em;padding:3px 8px;border-radius:20px;text-transform:uppercase;animation:hotGlow 1.4s ease-in-out infinite;}
+.hot-badge i{animation:fireFlicker 0.9s ease-in-out infinite;}
+@keyframes hotGlow{0%,100%{box-shadow:0 0 4px rgba(255,80,0,0.6),0 0 8px rgba(255,80,0,0.3);}50%{box-shadow:0 0 10px rgba(255,120,0,0.9),0 0 18px rgba(255,80,0,0.6);}}
+@keyframes fireFlicker{0%,100%{transform:scale(1) rotate(0deg);opacity:1;}25%{transform:scale(1.15) rotate(-4deg);opacity:0.85;}50%{transform:scale(0.95) rotate(3deg);opacity:1;}75%{transform:scale(1.1) rotate(-2deg);opacity:0.9;}}
 
 /* ── STATUS PILL: RED GLOW ── */
 .status-pill-red{display:inline-flex;align-items:center;gap:5px;background:rgba(229,9,20,0.15);border:1px solid rgba(229,9,20,0.5);color:#ff4455;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:20px;box-shadow:0 0 8px rgba(229,9,20,0.35);white-space:nowrap;}
@@ -632,30 +638,31 @@
 
 <!-- Another Tomb Life — Episode 01 (FIRST) -->
 <div class="film-item">
-    <div class="poster-card wide" style="position:relative;">
-        <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781876848/1781876797769_tpzctx.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
-        <div class="coming-soon-label">Coming Soon</div>
+    <div class="poster-card wide" data-video="6TNqWuYg1vM">
+        <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782025486/415fd770-6cd5-11f1-85bc-e9b037a507b7_bq6jjt.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
+        <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
+        <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
         <div class="poster-overlay">ANOTHER TOMB LIFE — Ep. 01</div>
     </div>
     <div class="film-meta">
         <div style="display:flex;gap:6px;margin:10px 0 8px;flex-wrap:wrap;">
             <div style="background:#c0392b;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
-                <div style="font-weight:700;font-size:0.85rem;">Lost in</div>
-                <div style="font-size:0.65rem;opacity:0.85;">Tomb</div>
+                <div style="font-weight:700;font-size:0.85rem;">Life After</div>
+                <div style="font-size:0.65rem;opacity:0.85;">Death</div>
             </div>
-            <div style="background:#2980b9;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;display:flex;align-items:center;gap:5px;">
-                <span class="live-dot" style="background:#ff2233;box-shadow:0 0 6px #ff2233;"></span>
+            <div style="background:#1a3d1a;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;display:flex;align-items:center;gap:5px;box-shadow:0 0 10px rgba(0,255,80,0.45),0 0 20px rgba(0,255,80,0.2);border:1px solid rgba(0,255,80,0.35);">
+                <span class="live-dot" style="background:#00ff50;box-shadow:0 0 6px #00ff50;"></span>
                 <div>
-                    <div style="font-weight:700;font-size:0.85rem;">Not Yet</div>
-                    <div style="font-size:0.65rem;opacity:0.85;">Out</div>
+                    <div style="font-weight:700;font-size:0.85rem;color:#00ff80;">Live</div>
+                    <div style="font-size:0.65rem;opacity:0.85;">Now</div>
                 </div>
             </div>
             <div style="background:#1e1e1e;color:#fff;border-radius:8px;padding:5px 10px;text-align:center;line-height:1.2;">
-                <div style="font-weight:700;font-size:0.85rem;">Out On</div>
-                <div style="font-size:0.65rem;opacity:0.85;">23rd June</div>
+                <div style="font-weight:700;font-size:0.85rem;">JUNE 21</div>
+                <div style="font-weight:700;font-size:0.65rem;color:var(--red);">2026</div>
             </div>
         </div>
-        <h3 style="color:#fff;margin:10px 0 2px;">Another Tomb Life — Episode #01</h3>
+        <h3 style="color:#fff;margin:10px 0 2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">Another Tomb Life — Episode #01 <span class="hot-badge"><i class="fas fa-fire"></i> HOT</span></h3>
         <p class="runtime-badge"><i class="fas fa-film"></i> 4K Quality</p>
         <p style="color:#aaa;font-size:0.7rem;margin-bottom:6px;font-style:italic;">Action | Adventure | Sci-Fi | Thriller | Romance</p>
         <div class="read-more-wrap">
