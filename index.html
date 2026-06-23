@@ -541,6 +541,44 @@
 }
 .poster-card img.loaded { animation: none; background: none; }
 @keyframes shimmer { 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
+/* ─── SEARCH DROPDOWN ─── */
+#search-dropdown {
+    position:absolute; top:calc(100% + 8px); left:0; right:0;
+    background:rgba(15,15,15,0.97);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:10px;
+    overflow:hidden;
+    z-index:9100;
+    max-height:320px;
+    overflow-y:auto;
+    box-shadow:0 8px 30px rgba(0,0,0,0.7);
+    display:none;
+    scrollbar-width:thin;
+    scrollbar-color:var(--red) transparent;
+}
+#search-dropdown.open { display:block; }
+.sd-item {
+    display:flex; align-items:center; gap:10px;
+    padding:10px 14px;
+    cursor:pointer;
+    transition:background 0.18s;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.sd-item:last-child { border-bottom:none; }
+.sd-item:hover, .sd-item.sd-active { background:rgba(229,9,20,0.18); }
+.sd-icon { color:var(--red); font-size:0.8rem; flex-shrink:0; width:16px; text-align:center; }
+.sd-text { flex:1; min-width:0; }
+.sd-title { color:#fff; font-size:0.82rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sd-title mark { background:none; color:var(--red); font-weight:800; }
+.sd-sub { color:#888; font-size:0.7rem; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sd-section-label {
+    padding:6px 14px 4px;
+    font-size:0.62rem; letter-spacing:0.14em;
+    color:#555; text-transform:uppercase; font-weight:700;
+    background:#0a0a0a;
+}
+.sd-no-results { padding:16px 14px; color:#666; font-size:0.82rem; text-align:center; }
+
         @keyframes letterFadeIn {
     from { opacity:0; transform:translateY(8px); }
     to { opacity:1; transform:translateY(0); }
@@ -636,8 +674,9 @@
             </div>
             <div class="nav-center">
                 <button class="search-icon-btn" id="search-icon-btn" title="Search"><i class="fas fa-search"></i></button>
-                <input type="text" class="nav-search" id="nav-search" placeholder="Search...">
+                <input type="text" class="nav-search" id="nav-search" placeholder="Search services, films..." autocomplete="off">
                 <span class="nav-search-icon"><i class="fas fa-search"></i></span>
+                <div id="search-dropdown"></div>
             </div>
             <div class="nav-right">
                 <a href="https://youtube.com/@reinblacks_music?si=6imR9nJCMDru0zrL" target="_blank" rel="noopener" class="yt-sub-btn" title="Watch on YouTube">
@@ -706,7 +745,7 @@
                     <a href="#section-visualizers" class="hero-play-btn">
                         <i class="fas fa-play"></i> Explore Services
                     </a>
-                    <button class="hero-mylist-btn" onclick="openHeroFilm()">
+                    <button class="hero-mylist-btn" onclick="document.getElementById('section-mini-films').scrollIntoView({behavior:'smooth'})">
                         <i class="fas fa-play"></i> Play Now
                     </button>
                 </div>
@@ -782,11 +821,7 @@
 }
 </style>
 
-<script>
-function openHeroFilm() {
-    openCardPlayer('sIcTXVVZh_o');
-}
-</script>
+
 
 <!-- ═══════════════════════════════════════════════════════
      LEADERBOARD AD BANNER — Full-width below hero
@@ -1743,12 +1778,128 @@ const topNav = document.getElementById('top-nav');
             imageFullscreenClose.addEventListener('click', closeImageFullscreen);
             imageFullscreen.addEventListener('click', e => { if (e.target === imageFullscreen) closeImageFullscreen(); });
 
-    // Search
-            let searchHighlightSpans = [];
-            function clearHighlights() { searchHighlightSpans.forEach(span => { const parent = span.parentNode; if (parent) { parent.replaceChild(document.createTextNode(span.textContent), span); parent.normalize(); } }); searchHighlightSpans = []; }
-            function searchAndScroll(query) { clearHighlights(); if (!query || query.trim().length < 2) return; const q = query.trim().toLowerCase(); const walker = document.createTreeWalker(document.getElementById('main-site'), NodeFilter.SHOW_TEXT, null, false); const textNodes = []; while (walker.nextNode()) { const node = walker.currentNode; if (node.textContent.toLowerCase().includes(q) && node.parentElement && !['SCRIPT','STYLE','IFRAME','NOSCRIPT'].includes(node.parentElement.tagName) && node.parentElement.offsetParent) textNodes.push(node); } if (!textNodes.length) return; const firstNode = textNodes[0]; const text = firstNode.textContent; const idx = text.toLowerCase().indexOf(q); if (idx >= 0) { const span = document.createElement('span'); span.className = 'search-highlight'; span.textContent = text.slice(idx, idx+q.length); const frag = document.createDocumentFragment(); frag.appendChild(document.createTextNode(text.slice(0, idx))); frag.appendChild(span); frag.appendChild(document.createTextNode(text.slice(idx+q.length))); firstNode.parentNode.replaceChild(frag, firstNode); searchHighlightSpans.push(span); span.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(clearHighlights, 2800); } }
-            navSearch.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); searchAndScroll(navSearch.value); } });
-            navSearch.addEventListener('input', function() { if (navSearch.value.trim().length >= 3) { clearTimeout(navSearch._debounce); navSearch._debounce = setTimeout(() => searchAndScroll(navSearch.value), 400); } else clearHighlights(); });
+    // ── PREDICTIVE SEARCH ──
+    const searchDropdown = document.getElementById('search-dropdown');
+
+    // Site content index — sections, services, films, keywords
+    const SEARCH_INDEX = [
+        // Navigation / Sections
+        { title:'Mini Films', sub:'Sweet Monster, Another Tomb Life', icon:'fa-film', section:'section-mini-films' },
+        { title:'AI Music Visualizers', sub:'Cinematic visualizers for artists & brands', icon:'fa-music', section:'section-visualizers' },
+        { title:'AI Video Ads', sub:'High-converting cinematic AI advertisements', icon:'fa-video', section:'section-ads' },
+        { title:'AI Photo Editing', sub:'Celebrity-style, restoration, portraits', icon:'fa-image', section:'section-photos' },
+        { title:'Graphics Design', sub:'Logos, posters, branding, social media', icon:'fa-palette', section:'section-graphics' },
+        { title:'Pricing', sub:'View all service pricing packages', icon:'fa-tag', section:'section-pricing' },
+        { title:'FAQ', sub:'Frequently asked questions', icon:'fa-circle-question', section:'section-faq' },
+        { title:'Contact / Apply', sub:'Start a project or send an inquiry', icon:'fa-envelope', section:'contact-section' },
+        { title:'Intro Videos', sub:'Brand intros and content creation', icon:'fa-play', section:'section-intros' },
+        // Films
+        { title:'Sweet Monster — Episode 01', sub:'Mini Film · Friendship & Betrayal', icon:'fa-clapperboard', section:'section-mini-films' },
+        { title:'Sweet Monster — Episode 02', sub:'Mini Film · Forbidden Love', icon:'fa-clapperboard', section:'section-mini-films' },
+        { title:'Another Tomb Life — Episode 01', sub:'Mini Film · Action, Sci-Fi, Romance', icon:'fa-clapperboard', section:'section-mini-films' },
+        // Services
+        { title:'AI Photo Cloning', sub:'Photo editing from $2/photo', icon:'fa-clone', section:'section-photos' },
+        { title:'Old Photo Restoration', sub:'Restore damaged or faded photos', icon:'fa-wand-magic-sparkles', section:'section-photos' },
+        { title:'Celebrity-Style Transformation', sub:'AI portrait enhancement', icon:'fa-star', section:'section-photos' },
+        { title:'Starter Visualizer — From $25', sub:'1080p, 1–3 min, AI cinematic scenes', icon:'fa-music', section:'section-pricing' },
+        { title:'Standard Visualizer — From $60', sub:'4K UHD, beat-synced, custom grade', icon:'fa-music', section:'section-pricing' },
+        { title:'Premium Visualizer — From $120', sub:'Film-level AI, story-driven, 4K', icon:'fa-music', section:'section-pricing' },
+        { title:'Starter Video Ad — From $30', sub:'10–30 sec, 1080p, social media ready', icon:'fa-video', section:'section-pricing' },
+        { title:'Professional Video Ad — From $60', sub:'4K, 60 sec, script included', icon:'fa-video', section:'section-pricing' },
+        { title:'Graphics Design — From $15', sub:'Logos, branding kits, posters', icon:'fa-palette', section:'section-pricing' },
+        // Keywords
+        { title:'4K Quality', sub:'All videos delivered in 4K Ultra HD', icon:'fa-tv', section:'section-visualizers' },
+        { title:'Beat Synchronization', sub:'Audio-synced edits for music content', icon:'fa-wave-square', section:'section-visualizers' },
+        { title:'Viral Shorts', sub:'Short-form content for TikTok, Reels, YouTube', icon:'fa-bolt', section:'section-ads' },
+        { title:'Monetization', sub:'Digital assets ready for monetization', icon:'fa-dollar-sign', section:'section-pricing' },
+        { title:'Branding', sub:'Brand identity and graphic design services', icon:'fa-palette', section:'section-graphics' },
+        { title:'Logo Design', sub:'Professional logo with 3 concepts', icon:'fa-circle-dot', section:'section-graphics' },
+        { title:'Poster Design', sub:'Event posters and promotional flyers', icon:'fa-image', section:'section-graphics' },
+        { title:'Reinblacks Mini Films', sub:'AI cinematic short film series', icon:'fa-film', section:'section-mini-films' },
+    ];
+
+    let sdActiveIdx = -1;
+
+    function highlight(text, query) {
+        if (!query) return text;
+        const idx = text.toLowerCase().indexOf(query.toLowerCase());
+        if (idx < 0) return text;
+        return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + query.length) + '</mark>' + text.slice(idx + query.length);
+    }
+
+    function renderDropdown(query) {
+        if (!query || query.trim().length < 1) { closeDropdown(); return; }
+        const q = query.trim().toLowerCase();
+        const results = SEARCH_INDEX.filter(item =>
+            item.title.toLowerCase().includes(q) ||
+            item.sub.toLowerCase().includes(q)
+        ).slice(0, 8);
+
+        sdActiveIdx = -1;
+        if (!results.length) {
+            searchDropdown.innerHTML = `<div class="sd-no-results"><i class="fas fa-magnifying-glass" style="margin-right:6px;"></i>No results for "<strong>${query}</strong>"</div>`;
+        } else {
+            searchDropdown.innerHTML = `<div class="sd-section-label"><i class="fas fa-magnifying-glass" style="margin-right:5px;"></i>Results on this site</div>` +
+                results.map((item, i) => `
+                    <div class="sd-item" data-idx="${i}" data-section="${item.section}">
+                        <span class="sd-icon"><i class="fas ${item.icon}"></i></span>
+                        <span class="sd-text">
+                            <div class="sd-title">${highlight(item.title, query)}</div>
+                            <div class="sd-sub">${item.sub}</div>
+                        </span>
+                    </div>`).join('');
+            searchDropdown.querySelectorAll('.sd-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const sec = el.getAttribute('data-section');
+                    const target = document.getElementById(sec);
+                    if (target) { target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+                    closeDropdown();
+                    navSearch.value = '';
+                    navSearch.classList.remove('expanded');
+                });
+            });
+        }
+        searchDropdown.classList.add('open');
+    }
+
+    function closeDropdown() {
+        searchDropdown.classList.remove('open');
+        sdActiveIdx = -1;
+    }
+
+    navSearch.addEventListener('input', function() {
+        renderDropdown(this.value);
+    });
+
+    navSearch.addEventListener('keydown', function(e) {
+        const items = searchDropdown.querySelectorAll('.sd-item');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            sdActiveIdx = Math.min(sdActiveIdx + 1, items.length - 1);
+            items.forEach((el, i) => el.classList.toggle('sd-active', i === sdActiveIdx));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            sdActiveIdx = Math.max(sdActiveIdx - 1, 0);
+            items.forEach((el, i) => el.classList.toggle('sd-active', i === sdActiveIdx));
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (sdActiveIdx >= 0 && items[sdActiveIdx]) {
+                items[sdActiveIdx].click();
+            } else if (items.length > 0) {
+                items[0].click();
+            }
+        } else if (e.key === 'Escape') {
+            closeDropdown();
+            navSearch.classList.remove('expanded');
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navSearch.contains(e.target) && !searchDropdown.contains(e.target)) {
+            closeDropdown();
+        }
+    });
 
             // Open Tidio chat
             function openChat() {
