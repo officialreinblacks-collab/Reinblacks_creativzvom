@@ -200,14 +200,100 @@
             font-weight:700;
         }
 
-        /* ─────────────── HERO — Netflix Card Style ─────────────── */
+        /* ─────────────── HERO — Glass Frame Style ─────────────── */
         #hero {
             position:relative; width:100%;
-            /* Full bleed on mobile, card-inset on desktop */
-            margin-top:0; overflow:hidden;
+            margin-top:0; overflow:visible;
         }
 
-        /* ── Mobile: full-bleed poster card ── */
+        /* ── Glass frame outer wrapper ── */
+        .hero-glass-frame {
+            position:relative;
+            padding:0;
+        }
+
+        /* Desktop: full glass frame with border, glow, corner accents */
+        @media (min-width:769px) {
+            .hero-glass-frame {
+                margin:90px auto 0;
+                max-width:960px;
+                padding:14px;
+                background:linear-gradient(135deg,
+                    rgba(255,255,255,0.10) 0%,
+                    rgba(255,255,255,0.04) 40%,
+                    rgba(255,255,255,0.07) 100%
+                );
+                border-radius:20px;
+                border:1px solid rgba(255,255,255,0.18);
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.06),
+                    0 4px 80px rgba(0,0,0,0.9),
+                    0 0 60px rgba(229,9,20,0.08),
+                    inset 0 1px 0 rgba(255,255,255,0.22),
+                    inset 0 -1px 0 rgba(255,255,255,0.06),
+                    inset 1px 0 0 rgba(255,255,255,0.12),
+                    inset -1px 0 0 rgba(255,255,255,0.06);
+                backdrop-filter:blur(20px);
+                -webkit-backdrop-filter:blur(20px);
+            }
+            /* Glass top-sheen shimmer bar */
+            .hero-glass-frame::before {
+                content:'';
+                position:absolute;
+                top:0; left:14px; right:14px; height:1px;
+                background:linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255,255,255,0.6) 30%,
+                    rgba(255,255,255,0.9) 50%,
+                    rgba(255,255,255,0.6) 70%,
+                    transparent 100%
+                );
+                border-radius:20px 20px 0 0;
+                pointer-events:none; z-index:10;
+            }
+            /* Glass left-edge reflection */
+            .hero-glass-frame::after {
+                content:'';
+                position:absolute;
+                top:14px; left:0; bottom:14px; width:1px;
+                background:linear-gradient(180deg,
+                    transparent 0%,
+                    rgba(255,255,255,0.4) 30%,
+                    rgba(255,255,255,0.6) 50%,
+                    rgba(255,255,255,0.3) 70%,
+                    transparent 100%
+                );
+                pointer-events:none; z-index:10;
+            }
+        }
+
+        /* Corner accent marks (desktop only) */
+        .hero-corner {
+            display:none;
+        }
+        @media (min-width:769px) {
+            .hero-corner {
+                display:block;
+                position:absolute;
+                width:22px; height:22px;
+                z-index:20; pointer-events:none;
+            }
+            .hero-corner::before,
+            .hero-corner::after {
+                content:'';
+                position:absolute;
+                background:rgba(255,255,255,0.7);
+                border-radius:2px;
+            }
+            .hero-corner::before { width:100%; height:2px; top:0; left:0; }
+            .hero-corner::after  { width:2px; height:100%; top:0; left:0; }
+            .hero-corner.tl { top:6px; left:6px; }
+            .hero-corner.tr { top:6px; right:6px; transform:scaleX(-1); }
+            .hero-corner.bl { bottom:6px; left:6px; transform:scaleY(-1); }
+            .hero-corner.br { bottom:6px; right:6px; transform:scale(-1); }
+        }
+
+        /* ── The poster card itself sits inside the glass frame ── */
         .nf-hero-card {
             position:relative;
             width:100%;
@@ -217,14 +303,195 @@
         }
         @media (min-width:769px) {
             .nf-hero-card {
-                margin:90px auto 0;
-                max-width:900px;
-                border-radius:12px;
-                box-shadow:0 8px 60px rgba(0,0,0,0.8);
+                border-radius:10px;
+                box-shadow:
+                    0 2px 30px rgba(0,0,0,0.7),
+                    inset 0 1px 0 rgba(255,255,255,0.08);
+                overflow:hidden;
             }
         }
         @media (max-width:768px) {
             .nf-hero-card { margin-top:0; border-radius:0; }
+            .hero-glass-frame { padding:0; background:none; border:none; box-shadow:none; }
+        }
+
+        /* Glass inner overlay — subtle frost on top of the image */
+        .hero-glass-inner-sheen {
+            display:none;
+        }
+        @media (min-width:769px) {
+            .hero-glass-inner-sheen {
+                display:block;
+                position:absolute;
+                inset:0;
+                border-radius:10px;
+                background:linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.04) 0%,
+                    transparent 40%,
+                    transparent 60%,
+                    rgba(255,255,255,0.03) 100%
+                );
+                pointer-events:none;
+                z-index:4;
+            }
+        }
+
+        /* ── REAL GLASS OVERLAY ── */
+        .hero-real-glass {
+            position:absolute;
+            inset:0;
+            z-index:5;
+            pointer-events:none;
+            border-radius:inherit;
+            overflow:hidden;
+        }
+
+        /* Main glass tint + frosted feel */
+        .hero-real-glass::before {
+            content:'';
+            position:absolute;
+            inset:0;
+            background:
+                linear-gradient(
+                    160deg,
+                    rgba(255,255,255,0.055) 0%,
+                    rgba(255,255,255,0.015) 30%,
+                    transparent 55%,
+                    rgba(180,210,255,0.025) 80%,
+                    rgba(255,255,255,0.04) 100%
+                );
+            border-radius:inherit;
+        }
+
+        /* Top-left bright glare streak — like sunlight catching glass */
+        .hero-real-glass::after {
+            content:'';
+            position:absolute;
+            top:-20%; left:-10%;
+            width:55%; height:120%;
+            background:linear-gradient(
+                125deg,
+                rgba(255,255,255,0.18) 0%,
+                rgba(255,255,255,0.07) 18%,
+                transparent 38%
+            );
+            transform:skewX(-8deg);
+            border-radius:0 0 60% 0;
+            pointer-events:none;
+        }
+
+        /* Glass edge highlight — thin bright line on top */
+        .hero-glass-edge-top {
+            position:absolute;
+            top:0; left:4%; right:4%; height:1.5px;
+            background:linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255,255,255,0.55) 20%,
+                rgba(255,255,255,0.85) 45%,
+                rgba(255,255,255,0.9) 50%,
+                rgba(255,255,255,0.85) 55%,
+                rgba(255,255,255,0.5) 80%,
+                transparent 100%
+            );
+            border-radius:4px;
+            z-index:6;
+            pointer-events:none;
+        }
+
+        /* Glass edge highlight — left side */
+        .hero-glass-edge-left {
+            position:absolute;
+            top:4%; left:0; bottom:4%; width:1.5px;
+            background:linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(255,255,255,0.3) 20%,
+                rgba(255,255,255,0.55) 45%,
+                rgba(255,255,255,0.55) 55%,
+                rgba(255,255,255,0.25) 80%,
+                transparent 100%
+            );
+            border-radius:4px;
+            z-index:6;
+            pointer-events:none;
+        }
+
+        /* Condensation droplets — small water beads on glass */
+        .hero-glass-drops {
+            position:absolute;
+            inset:0;
+            z-index:6;
+            pointer-events:none;
+            border-radius:inherit;
+            overflow:hidden;
+        }
+        .glass-drop {
+            position:absolute;
+            border-radius:50% 50% 52% 48% / 60% 60% 40% 40%;
+            background:radial-gradient(
+                ellipse at 35% 30%,
+                rgba(255,255,255,0.32) 0%,
+                rgba(255,255,255,0.08) 45%,
+                transparent 75%
+            );
+            box-shadow:
+                inset 0 1px 2px rgba(255,255,255,0.45),
+                inset 0 -1px 1px rgba(255,255,255,0.08);
+            backdrop-filter:blur(1.5px);
+            -webkit-backdrop-filter:blur(1.5px);
+        }
+        /* Tiny bright rim at bottom of each drop */
+        .glass-drop::after {
+            content:'';
+            position:absolute;
+            bottom:10%; left:25%; right:25%; height:12%;
+            background:rgba(255,255,255,0.18);
+            border-radius:50%;
+            filter:blur(1px);
+        }
+
+        /* Diagonal secondary glare — like ambient room light on glass */
+        .hero-glass-glare2 {
+            position:absolute;
+            bottom:10%; right:5%;
+            width:28%; height:35%;
+            background:linear-gradient(
+                220deg,
+                transparent 0%,
+                rgba(255,255,255,0.06) 50%,
+                rgba(255,255,255,0.12) 70%,
+                rgba(255,255,255,0.04) 100%
+            );
+            border-radius:50%;
+            pointer-events:none;
+            z-index:6;
+        }
+
+        /* Animated shimmer sweep — light moving across the glass */
+        @keyframes glassSweep {
+            0%   { transform:translateX(-120%) skewX(-15deg); opacity:0; }
+            8%   { opacity:1; }
+            92%  { opacity:1; }
+            100% { transform:translateX(220%) skewX(-15deg); opacity:0; }
+        }
+        .hero-glass-sweep {
+            position:absolute;
+            top:0; left:0;
+            width:18%; height:100%;
+            background:linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255,255,255,0.04) 40%,
+                rgba(255,255,255,0.09) 50%,
+                rgba(255,255,255,0.04) 60%,
+                transparent 100%
+            );
+            pointer-events:none;
+            z-index:6;
+            animation:glassSweep 9s ease-in-out infinite;
+            animation-delay:3s;
         }
 
         /* Poster image */
@@ -713,6 +980,14 @@
         </div>
 
       <section id="hero">
+        <!-- Glass frame wrapper -->
+        <div class="hero-glass-frame">
+            <!-- Corner accent marks -->
+            <span class="hero-corner tl"></span>
+            <span class="hero-corner tr"></span>
+            <span class="hero-corner bl"></span>
+            <span class="hero-corner br"></span>
+
         <div class="nf-hero-card">
             <!-- Poster image -->
             <picture>
@@ -725,6 +1000,43 @@
 
             <!-- Bottom gradient -->
             <div class="nf-hero-grad"></div>
+
+            <!-- Glass inner sheen overlay -->
+            <div class="hero-glass-inner-sheen"></div>
+
+            <!-- ── Real Glass Layer ── -->
+            <div class="hero-real-glass">
+                <!-- Edge highlights -->
+                <div class="hero-glass-edge-top"></div>
+                <div class="hero-glass-edge-left"></div>
+                <!-- Animated light sweep -->
+                <div class="hero-glass-sweep"></div>
+                <!-- Ambient bottom-right glare -->
+                <div class="hero-glass-glare2"></div>
+                <!-- Water condensation droplets -->
+                <div class="hero-glass-drops">
+                    <!-- Row 1 -->
+                    <div class="glass-drop" style="width:9px;height:11px;top:12%;left:18%;opacity:0.88;"></div>
+                    <div class="glass-drop" style="width:14px;height:17px;top:9%;left:38%;opacity:0.75;"></div>
+                    <div class="glass-drop" style="width:7px;height:9px;top:15%;left:58%;opacity:0.82;"></div>
+                    <div class="glass-drop" style="width:11px;height:13px;top:8%;left:74%;opacity:0.70;"></div>
+                    <div class="glass-drop" style="width:6px;height:8px;top:18%;left:85%;opacity:0.65;"></div>
+                    <!-- Row 2 -->
+                    <div class="glass-drop" style="width:16px;height:20px;top:26%;left:8%;opacity:0.72;"></div>
+                    <div class="glass-drop" style="width:8px;height:10px;top:30%;left:28%;opacity:0.80;"></div>
+                    <div class="glass-drop" style="width:13px;height:16px;top:24%;left:48%;opacity:0.68;"></div>
+                    <div class="glass-drop" style="width:10px;height:12px;top:29%;left:68%;opacity:0.78;"></div>
+                    <div class="glass-drop" style="width:7px;height:9px;top:22%;left:90%;opacity:0.60;"></div>
+                    <!-- Row 3 — fewer, larger -->
+                    <div class="glass-drop" style="width:18px;height:22px;top:44%;left:14%;opacity:0.60;"></div>
+                    <div class="glass-drop" style="width:9px;height:11px;top:42%;left:44%;opacity:0.55;"></div>
+                    <div class="glass-drop" style="width:12px;height:15px;top:48%;left:72%;opacity:0.58;"></div>
+                    <!-- Small scattered extras -->
+                    <div class="glass-drop" style="width:5px;height:6px;top:35%;left:22%;opacity:0.50;"></div>
+                    <div class="glass-drop" style="width:5px;height:6px;top:18%;left:52%;opacity:0.45;"></div>
+                    <div class="glass-drop" style="width:6px;height:7px;top:33%;left:82%;opacity:0.52;"></div>
+                </div>
+            </div>
 
             <!-- Bottom content -->
             <div class="hero-content fade-up-section">
@@ -751,6 +1063,7 @@
                 </div>
             </div>
         </div>
+        </div><!-- end hero-glass-frame -->
 
         <!-- Info card below hero -->
         <div class="hero-info-card">
@@ -770,17 +1083,25 @@
 .hero-info-card {
     margin:0 14px 0;
     padding:16px 18px;
-    background:rgba(255,255,255,0.06);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.1);
+    background:linear-gradient(135deg,
+        rgba(255,255,255,0.08) 0%,
+        rgba(255,255,255,0.03) 100%
+    );
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,0.12);
+    border-top:1px solid rgba(255,255,255,0.22);
     border-radius:12px;
     position:relative; z-index:2;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 4px 24px rgba(0,0,0,0.5);
 }
 @media (min-width:769px) {
     .hero-info-card {
-        max-width:900px; margin:12px auto 0;
+        max-width:960px; margin:10px auto 0;
         padding:20px 28px;
+        border-radius:16px;
     }
 }
 .hic-motto {
