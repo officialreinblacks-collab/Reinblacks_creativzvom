@@ -69,36 +69,90 @@
         #main-site { opacity:0; transition:opacity 0.5s; }
         #main-site.visible { opacity:1; }
 
-        /* ─────────────── TOP NAV ─────────────── */
+        /* ─────────────── TOP NAV — Netflix Mobile Style ─────────────── */
         #top-nav {
             position:fixed; top:0; left:0; right:0; z-index:9000;
             display:flex; align-items:center; justify-content:space-between;
-            padding:10px 20px; background:rgba(0,0,0,0.55);
-            backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-            border-bottom:1px solid rgba(255,255,255,0.06);
+            padding:10px 16px;
+            background:linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 100%);
             transition:background 0.3s, padding 0.3s; gap:12px;
         }
-        #top-nav.scrolled { background:rgba(0,0,0,0.82); padding:6px 20px; }
-        .nav-left { display:flex; align-items:center; gap:14px; flex-shrink:0; }
-        .nav-logo-stacked { display:flex; flex-direction:column; align-items:center; line-height:1; font-weight:900; font-size:1rem; letter-spacing:0.05em; color:#fff; cursor:pointer; text-shadow:0 0 15px var(--accent-glow); }
-        .nav-logo-stacked span { font-size:0.6rem; letter-spacing:0.1em; color:#ccc; }
-        .hamburger-btn { background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; padding:6px 8px; border-radius:6px; transition:color 0.3s, background 0.3s; display:flex; }
-        .hamburger-btn:hover { color:var(--red); background:rgba(255,255,255,0.05); }
-        .nav-center { flex:1; max-width:350px; position:relative; display:flex; align-items:center; }
-        .search-icon-btn { background:none; border:none; color:#fff; font-size:1.2rem; cursor:pointer; padding:8px; border-radius:50%; transition:color 0.3s; }
+        #top-nav.scrolled {
+            background:rgba(0,0,0,0.95);
+            backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+            padding:8px 16px;
+        }
+
+        /* Left: hamburger + brand wordmark */
+        .nav-left { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .hamburger-btn {
+            background:none; border:none; color:#fff;
+            font-size:1.4rem; cursor:pointer; padding:4px 6px;
+            border-radius:6px; transition:color 0.3s; display:flex;
+        }
+        .hamburger-btn:hover { color:var(--red); }
+        /* Brand as text wordmark */
+        .nav-logo-stacked {
+            font-family:'Bebas Neue', sans-serif;
+            font-size:1.5rem; letter-spacing:0.06em;
+            color:#fff; cursor:pointer;
+            line-height:1;
+            text-shadow:0 0 20px var(--accent-glow);
+        }
+        .nav-logo-stacked span { display:none; }
+
+        /* Center: search */
+        .nav-center { flex:1; max-width:340px; position:relative; display:flex; align-items:center; justify-content:center; }
+        .search-icon-btn {
+            background:none; border:none; color:#fff;
+            font-size:1.15rem; cursor:pointer; padding:8px;
+            border-radius:50%; transition:color 0.3s;
+        }
         .search-icon-btn:hover { color:var(--red); }
-        .nav-search { width:0; padding:8px 0; border-radius:20px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.5); color:#fff; font-size:0.85rem; outline:none; transition:width 0.3s, padding 0.3s, border 0.3s; margin-left:8px; }
+        .nav-search {
+            width:0; padding:8px 0;
+            border-radius:20px; border:1px solid rgba(255,255,255,0.2);
+            background:rgba(0,0,0,0.6); color:#fff; font-size:0.85rem;
+            outline:none; transition:width 0.3s, padding 0.3s, border 0.3s; margin-left:6px;
+        }
         .nav-search.expanded { width:100%; padding:8px 34px 8px 12px; border-color:var(--red); }
         .nav-search-icon { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#aaa; font-size:0.8rem; pointer-events:none; display:none; }
         .nav-search.expanded ~ .nav-search-icon { display:block; }
-        .nav-right { display:flex; align-items:center; gap:12px; flex-shrink:0; }
-        .yt-sub-btn { background:var(--red); border:none; color:#fff; font-size:0.75rem; font-weight:700; padding:8px 14px; border-radius:20px; cursor:pointer; display:flex; align-items:center; gap:6px; transition:all 0.3s; letter-spacing:0.03em; white-space:nowrap; box-shadow:0 0 15px var(--accent-glow); text-decoration:none; }
-        .yt-sub-btn:hover { background:#ff1a25; box-shadow:0 0 25px var(--accent-glow); transform:translateY(-1px); }
-        .yt-sub-btn i { font-size:0.9rem; }
-        @media (max-width:768px) {
-            #top-nav { backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(0,0,0,0.92); }
-            .yt-sub-btn { padding:6px 10px; font-size:0.7rem; }
-            .yt-sub-btn span { display:none; }
+
+        /* Right: YouTube bell-style CTA */
+        .nav-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .yt-sub-btn {
+            position:relative;
+            background:none; border:none;
+            color:#fff; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            width:38px; height:38px; border-radius:50%;
+            transition:background 0.25s; text-decoration:none;
+        }
+        .yt-sub-btn i { font-size:1.3rem; }
+        .yt-sub-btn .yt-badge {
+            position:absolute; top:2px; right:2px;
+            background:var(--red); color:#fff;
+            font-size:0.55rem; font-weight:800;
+            min-width:16px; height:16px;
+            border-radius:8px; display:flex;
+            align-items:center; justify-content:center;
+            padding:0 3px; line-height:1;
+            box-shadow:0 0 6px var(--accent-glow);
+        }
+        .yt-sub-btn:hover { background:rgba(255,255,255,0.1); }
+        .yt-sub-btn span.yt-label { display:none; }
+        /* Desktop: show text label */
+        @media (min-width:769px) {
+            .yt-sub-btn {
+                width:auto; height:auto; border-radius:20px;
+                background:var(--red);
+                padding:8px 16px; gap:6px;
+                box-shadow:0 0 15px var(--accent-glow);
+            }
+            .yt-sub-btn .yt-badge { display:none; }
+            .yt-sub-btn span.yt-label { display:inline; font-size:0.78rem; font-weight:700; letter-spacing:0.03em; }
+            .yt-sub-btn:hover { background:#ff1a25; }
         }
   
           /* ─────────────── HAMBURGER ─────────────── */
@@ -113,29 +167,174 @@
         #hamburger-close { position:absolute; top:15px; right:15px; background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer; border-radius:50%; padding:6px; }
         #hamburger-close:hover { color:var(--red); }
 
-        /* ─────────────── CATEGORY BAR ─────────────── */
-        #category-bar { position:fixed; top:52px; left:0; right:0; z-index:8990; display:flex; gap:8px; padding:8px 20px; overflow-x:auto; background:rgba(10,10,10,0.88); border-bottom:1px solid rgba(255,255,255,0.05); scrollbar-width:none; }
+        /* ─────────────── CATEGORY BAR — Netflix Pill Style ─────────────── */
+        #category-bar {
+            position:fixed; top:52px; left:0; right:0; z-index:8990;
+            display:flex; gap:8px; padding:10px 16px;
+            overflow-x:auto; background:rgba(0,0,0,0.0);
+            scrollbar-width:none;
+        }
         #category-bar::-webkit-scrollbar { display:none; }
-        .cat-btn { flex-shrink:0; padding:7px 18px; border-radius:18px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:#ddd; font-size:0.78rem; font-weight:600; cursor:pointer; transition:all 0.25s; white-space:nowrap; }
-        .cat-btn:hover, .cat-btn.active-cat { background:var(--red); border-color:var(--red); color:#fff; font-weight:700; box-shadow:0 0 15px var(--accent-glow); }
-        .cat-btn.active-cat { background:var(--red); }
+        .cat-btn {
+            flex-shrink:0;
+            padding:8px 20px;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.28);
+            background:rgba(30,30,30,0.75);
+            color:#e0e0e0;
+            font-size:0.8rem; font-weight:600;
+            cursor:pointer; transition:all 0.22s;
+            white-space:nowrap;
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+        }
+        .cat-btn:hover {
+            background:rgba(255,255,255,0.15);
+            border-color:rgba(255,255,255,0.5);
+            color:#fff;
+        }
+        .cat-btn.active-cat {
+            background:#fff;
+            border-color:#fff;
+            color:#000;
+            font-weight:700;
+        }
 
-        /* ─────────────── HERO ─────────────── */
-        #hero { position:relative; width:100%; height:100vh; overflow:hidden; }
-        .hero-video-wrap { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; }
-        .hero-bg-image { position:absolute; top:50%; left:50%; width:100vw; height:100vh; object-fit:cover; transform:translate(-50%,-50%); }
-        .hero-gradient { position:absolute; inset:0; background:linear-gradient(0deg, #000000 0%, transparent 40%, rgba(0,0,0,0.6) 85%, #000000 100%); z-index:2; }
-        .hero-smoke { position:absolute; bottom:0; left:0; width:100%; height:40%; pointer-events:none; z-index:1; overflow:hidden; }
-        .hero-smoke::before, .hero-smoke::after { content:''; position:absolute; bottom:0; width:200%; height:100%; background:radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.12) 0%, transparent 60%); animation:smokeDriftA 12s ease-in-out infinite; }
-        .hero-smoke::after { background:radial-gradient(ellipse at 30% 80%, rgba(255,255,255,0.08) 0%, transparent 50%); animation:smokeDriftB 18s ease-in-out infinite; opacity:0.7; }
-        @keyframes smokeDriftA { 0%{ transform:translateX(-10%) scaleY(1); opacity:0.4; } 25%{ transform:translateX(5%) scaleY(1.4); opacity:0.7; } 50%{ transform:translateX(15%) scaleY(1); opacity:0.3; } 75%{ transform:translateX(0%) scaleY(1.6); opacity:0.6; } 100%{ transform:translateX(-10%) scaleY(1); opacity:0.4; } }
-        @keyframes smokeDriftB { 0%{ transform:translateX(5%) scaleY(1.2); opacity:0.3; } 33%{ transform:translateX(-8%) scaleY(1.5); opacity:0.5; } 66%{ transform:translateX(10%) scaleY(1); opacity:0.2; } 100%{ transform:translateX(5%) scaleY(1.2); opacity:0.3; } }
-        .hero-content { position:relative; z-index:3; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; height:100%; padding:100px 30px 70px; max-width:850px; }
-        .hero-tag { font-size:0.8rem; letter-spacing:0.18em; color:var(--red); text-transform:uppercase; margin-bottom:8px; font-weight:700; text-shadow:0 0 10px rgba(0,0,0,0.5); }
-        .hero-title { font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.1; margin-bottom:6px; text-shadow:0 0 40px rgba(0,0,0,0.7); }
-        .hero-subtitle { font-size:clamp(0.9rem,2vw,1.1rem); color:#ccc; margin-bottom:20px; text-shadow:0 0 20px rgba(0,0,0,0.7); max-width:700px; }
-        .hero-play-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 28px; background:var(--red); color:#fff; border:none; border-radius:28px; font-size:0.95rem; font-weight:700; cursor:pointer; letter-spacing:0.04em; transition:all 0.3s; box-shadow:0 0 20px var(--accent-glow); text-decoration:none; }
-        .hero-play-btn:hover { background:#ff1a25; box-shadow:0 0 35px var(--accent-glow); transform:scale(1.03); }
+        /* ─────────────── HERO — Netflix Card Style ─────────────── */
+        #hero {
+            position:relative; width:100%;
+            /* Full bleed on mobile, card-inset on desktop */
+            margin-top:0; overflow:hidden;
+        }
+
+        /* ── Mobile: full-bleed poster card ── */
+        .nf-hero-card {
+            position:relative;
+            width:100%;
+            border-radius:0;
+            overflow:hidden;
+            background:#111;
+        }
+        @media (min-width:769px) {
+            .nf-hero-card {
+                margin:90px auto 0;
+                max-width:900px;
+                border-radius:12px;
+                box-shadow:0 8px 60px rgba(0,0,0,0.8);
+            }
+        }
+        @media (max-width:768px) {
+            .nf-hero-card { margin-top:0; border-radius:0; }
+        }
+
+        /* Poster image */
+        .nf-hero-card .hero-bg-image {
+            width:100%;
+            aspect-ratio:9/13;
+            object-fit:cover;
+            object-position:center top;
+            display:block;
+        }
+        @media (min-width:769px) {
+            .nf-hero-card .hero-bg-image { aspect-ratio:16/9; object-position:center; }
+        }
+
+        /* Gradient overlay from bottom */
+        .nf-hero-grad {
+            position:absolute; inset:0;
+            background:linear-gradient(
+                0deg,
+                #000 0%,
+                rgba(0,0,0,0.85) 22%,
+                rgba(0,0,0,0.3) 55%,
+                transparent 75%
+            );
+            pointer-events:none;
+        }
+
+        /* RC logo badge top-left */
+        .nf-hero-badge {
+            position:absolute; top:14px; left:14px;
+            background:var(--red);
+            color:#fff; font-weight:900;
+            font-size:1.1rem; line-height:1;
+            width:36px; height:36px;
+            border-radius:6px;
+            display:flex; align-items:center; justify-content:center;
+            letter-spacing:-0.02em;
+            box-shadow:0 2px 10px rgba(229,9,20,0.6);
+            z-index:4;
+        }
+
+        /* Bottom content block */
+        .hero-content {
+            position:absolute; bottom:0; left:0; right:0;
+            z-index:3;
+            padding:0 16px 20px;
+            display:flex; flex-direction:column; align-items:stretch;
+        }
+        @media (min-width:769px) {
+            .hero-content { padding:0 28px 28px; }
+        }
+
+        /* Genre pills row */
+        .hero-genre-pills {
+            display:flex; flex-wrap:wrap; gap:6px;
+            align-items:center; margin-bottom:14px;
+        }
+        .hero-genre-pill {
+            font-size:0.72rem; color:#ccc;
+            display:flex; align-items:center; gap:4px;
+        }
+        .hero-genre-pill::before {
+            content:'•'; color:#aaa; font-size:0.7rem;
+        }
+        .hero-genre-pill:first-child::before { display:none; }
+
+        /* Title */
+        .hero-title {
+            font-size:clamp(1.8rem,7vw,3.2rem);
+            font-weight:900; line-height:1.05;
+            margin:0 0 6px;
+            text-shadow:0 2px 20px rgba(0,0,0,0.8);
+            letter-spacing:-0.01em;
+        }
+        .hero-tag {
+            font-size:0.75rem; letter-spacing:0.12em;
+            color:#bbb; text-transform:uppercase;
+            margin-bottom:14px; font-weight:600;
+        }
+
+        /* Action buttons row */
+        .hero-btn-row {
+            display:flex; gap:10px; align-items:center;
+        }
+        .hero-play-btn {
+            flex:1; display:inline-flex; align-items:center;
+            justify-content:center; gap:8px;
+            padding:13px 20px; background:#fff; color:#000;
+            border:none; border-radius:6px;
+            font-size:0.9rem; font-weight:800;
+            cursor:pointer; letter-spacing:0.03em;
+            transition:all 0.25s; text-decoration:none;
+        }
+        .hero-play-btn:hover { background:#e0e0e0; }
+        .hero-mylist-btn {
+            flex:1; display:inline-flex; align-items:center;
+            justify-content:center; gap:8px;
+            padding:13px 20px;
+            background:rgba(109,109,110,0.7);
+            color:#fff; border:none; border-radius:6px;
+            font-size:0.9rem; font-weight:800;
+            cursor:pointer; letter-spacing:0.03em;
+            transition:all 0.25s; text-decoration:none;
+            backdrop-filter:blur(4px);
+        }
+        .hero-mylist-btn:hover { background:rgba(109,109,110,0.9); }
+
+        /* Legacy smoke kept but hidden in card layout */
+        .hero-smoke { display:none; }
+        .hero-video-wrap { display:none; }
 
         /* ─────────────── CONTENT SECTIONS ─────────────── */
         .content-section { padding:40px 20px 25px; scroll-margin-top:110px; content-visibility:auto; contain-intrinsic-size:800px; }
@@ -433,7 +632,7 @@
         <nav id="top-nav">
             <div class="nav-left">
                 <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">☰</button>
-                <div class="nav-logo-stacked" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">R<span>C</span></div>
+                <div class="nav-logo-stacked" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">Reinblacks<span>Creativz</span></div>
             </div>
             <div class="nav-center">
                 <button class="search-icon-btn" id="search-icon-btn" title="Search"><i class="fas fa-search"></i></button>
@@ -441,8 +640,10 @@
                 <span class="nav-search-icon"><i class="fas fa-search"></i></span>
             </div>
             <div class="nav-right">
-                <a href="https://youtube.com/@reinblacks_music?si=6imR9nJCMDru0zrL" target="_blank" rel="noopener" class="yt-sub-btn">
-                    <i class="fab fa-youtube"></i> <span>Watch more on YouTube</span>
+                <a href="https://youtube.com/@reinblacks_music?si=6imR9nJCMDru0zrL" target="_blank" rel="noopener" class="yt-sub-btn" title="Watch on YouTube">
+                    <i class="fab fa-youtube"></i>
+                    <span class="yt-badge">YT</span>
+                    <span class="yt-label">Watch on YouTube</span>
                 </a>
             </div>
         </nav>
@@ -473,25 +674,119 @@
         </div>
 
       <section id="hero">
-            <div class="hero-video-wrap">
-                <picture>
-                    <source media="(min-width: 769px)" srcset="https://res.cloudinary.com/datfuxotx/image/upload/v1781510951/2ae65200-6891-11f1-8279-6b357ebcc2c9_yddpph.png">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781324302/ab4c8e50-66de-11f1-bd24-412c1481897d_1_jcrcg0.png" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
-                </picture>
-            </div>
-            <div class="hero-smoke"></div>
-            <div class="hero-gradient"></div>
+        <div class="nf-hero-card">
+            <!-- Poster image -->
+            <picture>
+                <source media="(min-width: 769px)" srcset="https://res.cloudinary.com/datfuxotx/image/upload/v1781510951/2ae65200-6891-11f1-8279-6b357ebcc2c9_yddpph.png">
+                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781324302/ab4c8e50-66de-11f1-bd24-412c1481897d_1_jcrcg0.png" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
+            </picture>
+
+            <!-- RC badge top-left -->
+            <div class="nf-hero-badge">RC</div>
+
+            <!-- Bottom gradient -->
+            <div class="nf-hero-grad"></div>
+
+            <!-- Bottom content -->
             <div class="hero-content fade-up-section">
-                <p class="hero-tag">Pro Editing | 4K HD Quality | Realistic</p>
+                <!-- Genre tags -->
+                <div class="hero-genre-pills">
+                    <span class="hero-genre-pill">AI Video</span>
+                    <span class="hero-genre-pill">Cinematic</span>
+                    <span class="hero-genre-pill">4K Quality</span>
+                    <span class="hero-genre-pill">Photo Editing</span>
+                    <span class="hero-genre-pill">Realistic</span>
+                </div>
+                <!-- Title -->
                 <h1 class="hero-title">Reinblacks Creativz</h1>
-                <p class="hero-subtitle">We create AI music visualizers, cinematic AI video ads, professional photo editing, celebrity-style photo transformations, old photo restoration, photo enhancement, official portrait designs, and premium graphic design services.</p>
-                <p class="hero-subtitle" style="margin-top:-8px;color:#aaa;">Pricing varies depending on your project. Explore more on this site.</p>
-                <a href="#section-visualizers" class="hero-play-btn"><i class="fas fa-play"></i> Explore Services</a>
+                <!-- Tagline -->
+                <p class="hero-tag">Pro Editing · 4K HD Quality · AI-Powered</p>
+                <!-- Action buttons -->
+                <div class="hero-btn-row">
+                    <a href="#section-visualizers" class="hero-play-btn">
+                        <i class="fas fa-play"></i> Explore Services
+                    </a>
+                    <button class="hero-mylist-btn" onclick="openHeroFilm()">
+                        <i class="fas fa-play"></i> Play Now
+                    </button>
+                </div>
+            </div>
+        </div>
 
-
-
-
+        <!-- Info card below hero -->
+        <div class="hero-info-card">
+            <div class="hic-motto">
+                <span class="hic-pill">Create.</span>
+                <span class="hic-pill">Inspire.</span>
+                <span class="hic-pill">Monetize.</span>
+            </div>
+            <p class="hic-body">Premium AI-powered content and creative services designed for creators, brands, businesses, and storytellers. We sell ready-made AI content including short films, viral shorts, cinematic stories, and monetization-ready digital assets.</p>
+            <p class="hic-body">Our services include AI music visualizers, cinematic video ads, professional photo editing, celebrity-style photo transformations, old photo restoration, photo enhancement, official portrait designs, and premium graphic design. Every project is crafted to help you stand out, build your brand, and create content that gets attention.</p>
+            <p class="hic-note">Pricing varies based on your project requirements. Explore our work and discover what's possible.</p>
+        </div>
         </section>
+
+<style>
+/* ── Hero Info Card ── */
+.hero-info-card {
+    margin:0 14px 0;
+    padding:16px 18px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    position:relative; z-index:2;
+}
+@media (min-width:769px) {
+    .hero-info-card {
+        max-width:900px; margin:12px auto 0;
+        padding:20px 28px;
+    }
+}
+.hic-motto {
+    display:flex; gap:8px; flex-wrap:wrap;
+    margin-bottom:12px;
+}
+.hic-pill {
+    display:inline-block;
+    padding:5px 14px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.25);
+    background:rgba(255,255,255,0.08);
+    color:#fff;
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    backdrop-filter:blur(4px);
+    transition:all 0.22s;
+}
+.hic-pill:hover {
+    background:var(--red);
+    border-color:var(--red);
+    box-shadow:0 0 12px var(--accent-glow);
+}
+.hic-body {
+    color:#c0c0c0;
+    font-size:0.8rem;
+    line-height:1.6;
+    margin-bottom:8px;
+}
+.hic-note {
+    color:#888;
+    font-size:0.74rem;
+    font-style:italic;
+    line-height:1.5;
+    margin-top:4px;
+}
+</style>
+
+<script>
+function openHeroFilm() {
+    openCardPlayer('sIcTXVVZh_o');
+}
+</script>
 
 <!-- ═══════════════════════════════════════════════════════
      LEADERBOARD AD BANNER — Full-width below hero
