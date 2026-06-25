@@ -1064,12 +1064,12 @@
         <!-- Info card below hero -->
         <div class="hero-info-card">
             <div class="hic-motto">
-                <span class="hic-pill">Create.</span>
-                <span class="hic-pill">Inspire.</span>
-                <span class="hic-pill">Monetize.</span>
+                <span class="hic-pill hic-pill-create"><i class="fas fa-fire"></i> Create</span>
+                <span class="hic-pill hic-pill-inspire"><i class="fas fa-seedling"></i> Inspire</span>
+                <span class="hic-pill hic-pill-monetize"><i class="fas fa-dollar-sign"></i> Monetize</span>
             </div>
-            <p class="hic-body">Premium AI-powered content and creative services designed for creators, brands, businesses, and storytellers. We sell ready-made AI content including short films, viral shorts, cinematic stories, and monetization-ready digital assets.</p>
-            <p class="hic-body">Our services include AI music visualizers, cinematic video ads, professional photo editing, celebrity-style photo transformations, old photo restoration, photo enhancement, official portrait designs, and premium graphic design. Every project is crafted to help you stand out, build your brand, and create content that gets attention.</p>
+            <p class="hic-body">Premium AI content studio creating cinematic AI films, viral shorts, AI video ads, music visualizers, photo editing, graphic design, and monetization-ready digital products.</p>
+            <p class="hic-body">Shop ready-made AI content, licensed AI films, ebooks, and creator resources. We help brands, businesses, and creators create, grow, and monetize with professional AI-powered content.</p>
             <p class="hic-note">Pricing varies based on your project requirements. Explore our work and discover what's possible.</p>
         </div>
         </section>
@@ -1105,23 +1105,102 @@
     margin-bottom:12px;
 }
 .hic-pill {
-    display:inline-block;
-    padding:5px 14px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,0.25);
-    background:rgba(255,255,255,0.08);
-    color:#fff;
-    font-size:0.78rem;
-    font-weight:700;
-    letter-spacing:0.06em;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 18px;
+    border-radius:24px;
+    font-size:0.8rem;
+    font-weight:800;
+    letter-spacing:0.07em;
     text-transform:uppercase;
-    backdrop-filter:blur(4px);
-    transition:all 0.22s;
+    cursor:default;
+    position:relative;
+    overflow:hidden;
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
 }
-.hic-pill:hover {
-    background:var(--red);
-    border-color:var(--red);
-    box-shadow:0 0 12px var(--accent-glow);
+
+/* Shimmer sweep animation */
+@keyframes pillShimmer {
+    0%   { transform:translateX(-130%) skewX(-20deg); }
+    100% { transform:translateX(230%) skewX(-20deg); }
+}
+.hic-pill::before {
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:40%; height:100%;
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.28) 50%, transparent 100%);
+    animation:pillShimmer 2.4s ease-in-out infinite;
+    pointer-events:none;
+}
+
+/* Pulse glow ring */
+@keyframes pillPulse {
+    0%,100% { box-shadow: var(--pill-glow-base); }
+    50%      { box-shadow: var(--pill-glow-peak); }
+}
+
+/* Float bob */
+@keyframes pillFloat {
+    0%,100% { transform:translateY(0); }
+    50%      { transform:translateY(-3px); }
+}
+
+/* ── CREATE — Red (Creativity) ── */
+.hic-pill-create {
+    background:linear-gradient(135deg, #E50914 0%, #ff2d38 60%, #c40811 100%);
+    border:1px solid rgba(255,80,80,0.5);
+    color:#fff;
+    text-shadow:0 1px 4px rgba(0,0,0,0.4);
+    --pill-glow-base: 0 0 10px rgba(229,9,20,0.5), 0 0 22px rgba(229,9,20,0.25);
+    --pill-glow-peak: 0 0 18px rgba(229,9,20,0.85), 0 0 38px rgba(229,9,20,0.45), 0 0 55px rgba(229,9,20,0.2);
+    animation:pillPulse 2s ease-in-out infinite, pillFloat 3.2s ease-in-out infinite;
+}
+.hic-pill-create:hover {
+    transform:scale(1.06) translateY(-2px);
+    box-shadow:0 0 24px rgba(229,9,20,0.9), 0 0 50px rgba(229,9,20,0.45);
+}
+.hic-pill-create i { font-size:0.85rem; animation:fireFlicker 0.9s ease-in-out infinite; }
+
+/* ── INSPIRE — Green (Growth) ── */
+.hic-pill-inspire {
+    background:linear-gradient(135deg, #1db954 0%, #2ecc71 60%, #17a549 100%);
+    border:1px solid rgba(46,204,113,0.5);
+    color:#fff;
+    text-shadow:0 1px 4px rgba(0,0,0,0.35);
+    --pill-glow-base: 0 0 10px rgba(29,185,84,0.5), 0 0 22px rgba(29,185,84,0.22);
+    --pill-glow-peak: 0 0 18px rgba(29,185,84,0.85), 0 0 38px rgba(29,185,84,0.4), 0 0 55px rgba(29,185,84,0.18);
+    animation:pillPulse 2.4s ease-in-out infinite 0.4s, pillFloat 3.6s ease-in-out infinite 0.6s;
+}
+.hic-pill-inspire:hover {
+    transform:scale(1.06) translateY(-2px);
+    box-shadow:0 0 24px rgba(29,185,84,0.9), 0 0 50px rgba(29,185,84,0.4);
+}
+.hic-pill-inspire i { font-size:0.85rem; }
+
+/* ── MONETIZE — Pink (Money) ── */
+.hic-pill-monetize {
+    background:linear-gradient(135deg, #e91e8c 0%, #ff5fbf 60%, #c8147a 100%);
+    border:1px solid rgba(255,95,191,0.5);
+    color:#fff;
+    text-shadow:0 1px 4px rgba(0,0,0,0.35);
+    --pill-glow-base: 0 0 10px rgba(233,30,140,0.5), 0 0 22px rgba(233,30,140,0.22);
+    --pill-glow-peak: 0 0 18px rgba(233,30,140,0.85), 0 0 38px rgba(233,30,140,0.4), 0 0 55px rgba(233,30,140,0.18);
+    animation:pillPulse 2.8s ease-in-out infinite 0.8s, pillFloat 4s ease-in-out infinite 1.2s;
+}
+.hic-pill-monetize:hover {
+    transform:scale(1.06) translateY(-2px);
+    box-shadow:0 0 24px rgba(233,30,140,0.9), 0 0 50px rgba(233,30,140,0.4);
+}
+.hic-pill-monetize i { font-size:0.9rem; animation:dollarBounce 1.6s ease-in-out infinite; }
+
+@keyframes dollarBounce {
+    0%,100% { transform:scale(1) rotate(0deg); }
+    30%      { transform:scale(1.2) rotate(-8deg); }
+    60%      { transform:scale(1.1) rotate(5deg); }
 }
 .hic-body {
     color:#c0c0c0;
