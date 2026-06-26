@@ -1300,36 +1300,47 @@
 .game-play-btn i { font-size:0.8rem; position:relative; z-index:1; }
 .game-play-btn span:last-child { position:relative; z-index:1; }
 
-/* ── Game Card Dismiss X ── */
-.game-dismiss-btn {
-    position:absolute; top:7px; right:7px; z-index:10;
-    width:24px; height:24px; border-radius:50%;
-    background:rgba(0,0,0,0.72);
-    border:1px solid rgba(255,255,255,0.18);
-    color:rgba(255,255,255,0.75);
-    font-size:0.75rem; line-height:1;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-    transition:background 0.2s, color 0.2s, transform 0.2s;
+/* ── Game Modal Overlay ── */
+#game-modal {
+    position:fixed; inset:0; z-index:9800;
+    background:rgba(0,0,0,0.92);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    display:flex; align-items:center; justify-content:center;
     opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease;
 }
-.game-card:hover .game-dismiss-btn {
-    opacity:1; pointer-events:all;
+#game-modal.active { opacity:1; pointer-events:all; }
+#game-modal-inner {
+    position:relative;
+    width:min(100vw, 480px);
+    height:min(100vh, 860px);
+    background:#000;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 0 60px rgba(229,9,20,0.25), 0 20px 80px rgba(0,0,0,0.8);
+    border:1px solid rgba(255,255,255,0.1);
 }
-.game-dismiss-btn:hover {
-    background:rgba(229,9,20,0.85);
-    border-color:rgba(229,9,20,0.5);
-    color:#fff; transform:scale(1.15);
+@media (max-width:500px) {
+    #game-modal-inner { border-radius:0; width:100vw; height:100vh; }
 }
-/* Dismiss animation */
-@keyframes gameCardDismiss {
-    0%   { opacity:1; transform:scale(1); max-width:200px; }
-    60%  { opacity:0; transform:scale(0.85); }
-    100% { opacity:0; transform:scale(0.75); max-width:0; margin:0; padding:0; }
+#game-modal iframe {
+    width:100%; height:100%; border:none; display:block;
 }
-.game-card.dismissed {
-    animation:gameCardDismiss 0.35s ease forwards;
-    pointer-events:none;
+#game-modal-close {
+    position:absolute; top:12px; right:12px; z-index:10;
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(0,0,0,0.75);
+    border:1px solid rgba(255,255,255,0.25);
+    color:#fff; font-size:1rem; line-height:1;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    transition:background 0.2s, transform 0.2s;
+    box-shadow:0 2px 12px rgba(0,0,0,0.6);
+}
+#game-modal-close:hover {
+    background:rgba(229,9,20,0.9);
+    border-color:rgba(229,9,20,0.6);
+    transform:scale(1.1);
 }
 </style>
 
@@ -1484,15 +1495,14 @@
                 <div class="game-thumb-wrap">
                     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782421344/file_00000000d7c871f492a1cb06638b680e_hrumeq.png" alt="Nitro Race 1" loading="lazy" decoding="async">
                     <div class="game-badge-live">🎮 LIVE</div>
-                    <button class="game-dismiss-btn" onclick="dismissGameCard(this)" aria-label="Remove">✕</button>
                 </div>
                 <div class="game-card-info">
                     <div class="game-title">Nitro Race 1</div>
-                    <a href="game.html" class="game-play-btn">
+                    <button class="game-play-btn" onclick="openGameModal('game.html')">
                         <span class="game-btn-glow"></span>
                         <i class="fas fa-gamepad"></i>
                         <span>Play Now</span>
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -1501,15 +1511,14 @@
                 <div class="game-thumb-wrap">
                     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782457317/file_00000000cc587246a4d484f7b82d9229_tjqirs.png" alt="Puzzle Numbers" loading="lazy" decoding="async">
                     <div class="game-badge-live">🧩 LIVE</div>
-                    <button class="game-dismiss-btn" onclick="dismissGameCard(this)" aria-label="Remove">✕</button>
                 </div>
                 <div class="game-card-info">
                     <div class="game-title">Puzzle Numbers</div>
-                    <a href="game2.html" class="game-play-btn">
+                    <button class="game-play-btn" onclick="openGameModal('game2.html')">
                         <span class="game-btn-glow"></span>
                         <i class="fas fa-gamepad"></i>
                         <span>Play Now</span>
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -1903,6 +1912,14 @@
     <div class="modal-overlay" id="gallery-modal"><button class="modal-close" id="gallery-modal-close">✕</button><div class="gallery-grid" id="gallery-grid-content"></div></div>
     <div id="image-fullscreen"><button class="modal-close" id="image-fullscreen-close">✕</button><img src="" alt="Fullscreen" id="image-fullscreen-img"></div>
 
+    <!-- GAME MODAL -->
+    <div id="game-modal">
+        <div id="game-modal-inner">
+            <button id="game-modal-close" onclick="closeGameModal()" aria-label="Exit game">✕</button>
+            <iframe id="game-modal-frame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+
 
     <button id="back-to-top" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
@@ -2214,7 +2231,7 @@ const topNav = document.getElementById('top-nav');
                 } catch (error) { btnText.textContent = 'Error — Try Again'; submitBtn.disabled = false; setTimeout(() => { btnText.textContent = original; }, 2500); }
             });
 
-            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (imageFullscreen.classList.contains('active')) closeImageFullscreen(); else if (shortsModal.classList.contains('active')) closeShortsModal(); else if (galleryModal.classList.contains('active')) closeGalleryModal(); else if (videoModal.classList.contains('active')) closeVideoModal(); else if (cardPlayerOverlay.classList.contains('active')) closeCardPlayer(); else if (hamburgerPanel.classList.contains('active')) closeHamburger(); } if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement !== navSearch)) { e.preventDefault(); navSearch.focus(); } });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (imageFullscreen.classList.contains('active')) closeImageFullscreen(); else if (shortsModal.classList.contains('active')) closeShortsModal(); else if (galleryModal.classList.contains('active')) closeGalleryModal(); else if (videoModal.classList.contains('active')) closeVideoModal(); else if (cardPlayerOverlay.classList.contains('active')) closeCardPlayer(); else if (document.getElementById('game-modal').classList.contains('active')) closeGameModal(); else if (hamburgerPanel.classList.contains('active')) closeHamburger(); } if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement !== navSearch)) { e.preventDefault(); navSearch.focus(); } });
 
             backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             document.getElementById('bottom-home').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -2321,13 +2338,24 @@ function toggleReadMore(id) {
     if (fade) fade.classList.toggle('hidden', isCollapsed);
     if (btn) btn.textContent = isCollapsed ? 'Show Less' : 'Read More';
 }
-// ── Game Card Dismiss ──
-function dismissGameCard(btn) {
-    const card = btn.closest('.game-card');
-    if (!card) return;
-    card.classList.add('dismissed');
-    card.addEventListener('animationend', () => card.remove(), { once: true });
+// ── Game Modal ──
+function openGameModal(src) {
+    const modal = document.getElementById('game-modal');
+    const frame = document.getElementById('game-modal-frame');
+    frame.src = src;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
+function closeGameModal() {
+    const modal = document.getElementById('game-modal');
+    const frame = document.getElementById('game-modal-frame');
+    modal.classList.remove('active');
+    frame.src = '';
+    document.body.style.overflow = '';
+}
+document.getElementById('game-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeGameModal();
+});
     </script>
 </html>    
 
