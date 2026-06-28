@@ -1252,6 +1252,16 @@
     0%,100% { box-shadow:0 0 6px rgba(229,9,20,0.6); }
     50%      { box-shadow:0 0 16px rgba(229,9,20,1), 0 0 28px rgba(229,9,20,0.4); }
 }
+.game-badge-new {
+    position:absolute; top:8px; left:8px;
+    background:rgba(229,9,20,0.95);
+    color:#fff; font-size:0.58rem; font-weight:800;
+    letter-spacing:0.07em; padding:3px 8px; border-radius:4px;
+    backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+    text-transform:uppercase;
+    box-shadow:0 0 10px rgba(229,9,20,0.7);
+    border-left:2px solid rgba(255,255,255,0.5);
+}
 .game-card-info {
     padding:10px 10px 12px;
     display:flex; flex-direction:column; gap:10px; align-items:center;
@@ -1489,6 +1499,22 @@
     <div class="slider-container">
         <button class="slider-arrow left" data-target="row-play-games"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-play-games">
+
+            <!-- Trading Pro Game Card -->
+            <div class="game-card">
+                <div class="game-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782677949/file_00000000b7bc71f4be597d2f809b36f3_wskoro.png" alt="Trading Pro Game" loading="lazy" decoding="async">
+                    <div class="game-badge-new">Recently Added</div>
+                </div>
+                <div class="game-card-info">
+                    <div class="game-title">Trading Pro Game</div>
+                    <button class="game-play-btn" onclick="openGameModal('game3.html')">
+                        <span class="game-btn-glow"></span>
+                        <i class="fas fa-chart-line"></i>
+                        <span>Trade Now</span>
+                    </button>
+                </div>
+            </div>
 
             <!-- Nitro Race 1 Game Card -->
             <div class="game-card">
