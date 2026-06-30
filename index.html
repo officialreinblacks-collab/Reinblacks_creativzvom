@@ -1068,8 +1068,9 @@
                 <span class="hic-pill hic-pill-inspire"><i class="fas fa-seedling"></i> Inspire</span>
                 <span class="hic-pill hic-pill-monetize"><i class="fas fa-dollar-sign"></i> Monetize</span>
             </div>
-            <p class="hic-body">Premium AI content studio creating cinematic AI films, viral shorts, AI video ads, music visualizers, photo editing, graphic design, and monetization-ready digital products.</p>
-            <p class="hic-body">Shop ready-made AI content, licensed AI films, ebooks, and creator resources. We help brands, businesses, and creators create, grow, and monetize with professional AI-powered content.</p>
+            <p class="hic-body">Premium AI content studio creating cinematic AI films, viral shorts, AI video ads, music visualizers, photo editing, graphic design, custom games, and monetization-ready digital products.</p>
+            <p class="hic-body">We design and develop professional websites, offer ready-made website solutions, and create custom web experiences tailored to businesses, brands, and individuals.</p>
+            <p class="hic-body">Shop ready-made AI content, licensed AI films, ebooks, creator resources, games, and digital assets. We help brands, businesses, entrepreneurs, and creators create, grow, and monetize through professional AI-powered content, web development, game development, and digital innovation.</p>
             <p class="hic-note">Pricing varies based on your project requirements. Explore our work and discover what's possible.</p>
         </div>
         </section>
@@ -1513,6 +1514,84 @@
     setInterval(function(){ lbGoTo(lbIdx + 1); }, 2600);
 })();
 </script>
+
+        <!-- ===== RCW: READY CRAFTED WEBSITES (isolated section) ===== -->
+        <section class="rcw-section fade-up-section" id="section-rcw">
+            <div class="rcw-card">
+                <div class="rcw-thumb-wrap">
+                    <img class="rcw-thumb-img rcw-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293228301_zq9eqn.jpg" alt="Ready Crafted Website Preview 1" loading="lazy" decoding="async">
+                    <img class="rcw-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293345213_i7526h.jpg" alt="Ready Crafted Website Preview 2" loading="lazy" decoding="async">
+                    <img class="rcw-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293574071_rjy04m.jpg" alt="Ready Crafted Website Preview 3" loading="lazy" decoding="async">
+                    <div class="rcw-thumb-dots">
+                        <span class="rcw-dot rcw-dot-active"></span>
+                        <span class="rcw-dot"></span>
+                        <span class="rcw-dot"></span>
+                    </div>
+                </div>
+                <div class="rcw-info">
+                    <h2 class="rcw-title">Ready Crafted Websites</h2>
+                    <p class="rcw-desc">Explore professionally designed, ready-made websites and purchase today — fully built, easy to customize, and ready to launch with your own content and branding. Need something tailored instead? Submit your custom website request and our team will bring it to life.</p>
+                    <a class="rcw-btn" href="craft.html">
+                        <i class="fas fa-store"></i> Explore &amp; Shop Now
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <style>
+        /* ── RCW: Ready Crafted Websites (scoped, independent) ── */
+        .rcw-section{padding:28px 14px;}
+        .rcw-card{
+            display:flex;flex-wrap:wrap;gap:20px;align-items:center;
+            background:linear-gradient(135deg,#161616,#0c0c0c);
+            border:1px solid rgba(255,255,255,.08);
+            border-radius:16px;padding:18px;
+        }
+        .rcw-thumb-wrap{
+            position:relative;flex:1 1 320px;max-width:420px;
+            aspect-ratio:16/10;border-radius:12px;overflow:hidden;
+            background:#000;
+        }
+        .rcw-thumb-img{
+            position:absolute;inset:0;width:100%;height:100%;
+            object-fit:cover;opacity:0;transition:opacity .8s ease;
+        }
+        .rcw-thumb-img.rcw-active{opacity:1;}
+        .rcw-thumb-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
+        .rcw-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .3s;}
+        .rcw-dot-active{background:#e50914;}
+        .rcw-info{flex:1 1 280px;min-width:260px;}
+        .rcw-title{font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 10px;}
+        .rcw-desc{font-size:.92rem;line-height:1.5;color:#cfcfcf;margin:0 0 16px;}
+        .rcw-btn{
+            display:inline-flex;align-items:center;gap:8px;
+            background:#e50914;color:#fff;font-weight:600;
+            padding:10px 20px;border-radius:8px;text-decoration:none;
+            font-size:.92rem;transition:background .25s;
+        }
+        .rcw-btn:hover{background:#c20710;}
+        @media (max-width:560px){
+            .rcw-card{padding:14px;}
+            .rcw-title{font-size:1.15rem;}
+        }
+        </style>
+
+        <script>
+        (function(){
+            var rcwImgs = document.querySelectorAll('#section-rcw .rcw-thumb-img');
+            var rcwDots = document.querySelectorAll('#section-rcw .rcw-dot');
+            var rcwIdx = 0;
+            if(rcwImgs.length){
+                setInterval(function(){
+                    rcwImgs[rcwIdx].classList.remove('rcw-active');
+                    rcwDots[rcwIdx].classList.remove('rcw-dot-active');
+                    rcwIdx = (rcwIdx + 1) % rcwImgs.length;
+                    rcwImgs[rcwIdx].classList.add('rcw-active');
+                    rcwDots[rcwIdx].classList.add('rcw-dot-active');
+                }, 4000);
+            }
+        })();
+        </script>
 
         <!-- ===== PLAY GAMES ===== -->
         <section class="content-section fade-up-section" id="section-play-games">
