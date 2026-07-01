@@ -1515,81 +1515,189 @@
 })();
 </script>
 
-        <!-- ===== RCW: READY CRAFTED WEBSITES (isolated section) ===== -->
-        <section class="rcw-section fade-up-section" id="section-rcw">
-            <div class="rcw-card">
-                <div class="rcw-thumb-wrap">
-                    <img class="rcw-thumb-img rcw-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293228301_zq9eqn.jpg" alt="Ready Crafted Website Preview 1" loading="lazy" decoding="async">
-                    <img class="rcw-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293345213_i7526h.jpg" alt="Ready Crafted Website Preview 2" loading="lazy" decoding="async">
-                    <img class="rcw-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293574071_rjy04m.jpg" alt="Ready Crafted Website Preview 3" loading="lazy" decoding="async">
-                    <div class="rcw-thumb-dots">
-                        <span class="rcw-dot rcw-dot-active"></span>
-                        <span class="rcw-dot"></span>
-                        <span class="rcw-dot"></span>
-                    </div>
+        <!-- ===== BUY READY MADE WEBSITES ===== -->
+        <section class="content-section fade-up-section" id="section-buy-websites">
+    <div class="section-header"><span class="red-accent"></span> Buy Ready Made Websites</div>
+    <div class="slider-container">
+        <button class="slider-arrow left" data-target="row-buy-websites"><i class="fas fa-chevron-left"></i></button>
+        <div class="category-row" id="row-buy-websites">
+
+            <!-- Netflix Style Website Card -->
+            <div class="game-card buy-card">
+                <div class="game-thumb-wrap buy-thumb-wrap">
+                    <img class="buy-thumb-img buy-thumb-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_00000000b29471f49ffabcdb1188ecbd_tvegbg.png" alt="Netflix Style Website Preview 1" loading="lazy" decoding="async">
+                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_00000000964871f4a66c1ff1c4a3cf5e_gwsulw.png" alt="Netflix Style Website Preview 2" loading="lazy" decoding="async">
+                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_000000001ab471f4ab018f6882d20421_fzjdz0.png" alt="Netflix Style Website Preview 3" loading="lazy" decoding="async">
                 </div>
-                <div class="rcw-info">
-                    <h2 class="rcw-title">Ready Crafted Websites</h2>
-                    <p class="rcw-desc">Explore professionally designed, ready-made websites and purchase today — fully built, easy to customize, and ready to launch with your own content and branding. Need something tailored instead? Submit your custom website request and our team will bring it to life.</p>
-                    <a class="rcw-btn" href="craft.html" onclick="openGameModal('craft.html'); return false;">
-                        <i class="fas fa-store"></i> Explore &amp; Shop Now
-                    </a>
+                <div class="game-card-info">
+                    <div class="game-title">Netflix Style Website</div>
+                    <button class="buy-cart-btn" onclick="rcwApp.openFormModal()">
+                        <i class="fas fa-cart-shopping"></i> $150
+                    </button>
+                    <button class="buy-preview-btn" onclick="openGameModal('netflix01.html')">
+                        <span class="buy-live-dot"></span> Live Preview
+                    </button>
+                    <button class="buy-submit-btn" onclick="rcwApp.openFormModal()">
+                        <i class="fas fa-paper-plane"></i> Submit
+                    </button>
                 </div>
             </div>
+
+        </div>
+        <button class="slider-arrow right" data-target="row-buy-websites"><i class="fas fa-chevron-right"></i></button>
+    </div>
         </section>
+        <!-- ===== END BUY READY MADE WEBSITES ===== -->
 
         <style>
-        /* ── RCW: Ready Crafted Websites (scoped, independent) ── */
-        .rcw-section{padding:28px 14px;}
-        .rcw-card{
-            display:flex;flex-wrap:wrap;gap:20px;align-items:center;
-            background:linear-gradient(135deg,#161616,#0c0c0c);
-            border:1px solid rgba(255,255,255,.08);
-            border-radius:16px;padding:18px;
+        /* ── Buy Ready Made Websites (scoped, independent, compressed like game-card) ── */
+        .buy-card{ width:160px; cursor:default; }
+        .buy-thumb-wrap{ position:relative; }
+        .buy-thumb-img{
+            position:absolute; inset:0; width:100%; height:100%;
+            object-fit:cover; opacity:0; transition:opacity .8s ease;
         }
-        .rcw-thumb-wrap{
-            position:relative;flex:1 1 320px;max-width:420px;
-            aspect-ratio:16/10;border-radius:12px;overflow:hidden;
-            background:#000;
+        .buy-thumb-img.buy-thumb-active{ opacity:1; }
+        .game-card-info:has(.buy-cart-btn){ gap:6px; }
+        .buy-cart-btn, .buy-preview-btn, .buy-submit-btn{
+            display:inline-flex; align-items:center; justify-content:center; gap:6px;
+            width:100%; padding:7px 0; border:none; cursor:pointer;
+            border-radius:18px; font-size:.68rem; font-weight:800;
+            letter-spacing:.06em; text-transform:uppercase; color:#fff;
+            transition:transform .2s, box-shadow .2s;
         }
-        .rcw-thumb-img{
-            position:absolute;inset:0;width:100%;height:100%;
-            object-fit:cover;opacity:0;transition:opacity .8s ease;
+        .buy-cart-btn:hover, .buy-preview-btn:hover, .buy-submit-btn:hover{ transform:scale(1.05); }
+        .buy-cart-btn{
+            background:linear-gradient(135deg,#ffcf3f,#f5a623);
+            color:#1a1200; box-shadow:0 0 12px rgba(245,166,35,.5);
         }
-        .rcw-thumb-img.rcw-active{opacity:1;}
-        .rcw-thumb-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;}
-        .rcw-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .3s;}
-        .rcw-dot-active{background:#e50914;}
-        .rcw-info{flex:1 1 280px;min-width:260px;}
-        .rcw-title{font-size:1.4rem;font-weight:700;color:#fff;margin:0 0 10px;}
-        .rcw-desc{font-size:.92rem;line-height:1.5;color:#cfcfcf;margin:0 0 16px;}
-        .rcw-btn{
-            display:inline-flex;align-items:center;gap:8px;
-            background:#e50914;color:#fff;font-weight:600;
-            padding:10px 20px;border-radius:8px;text-decoration:none;
-            font-size:.92rem;transition:background .25s;
+        .buy-preview-btn{
+            background:#2a2a2a; border:1px solid rgba(255,255,255,.1);
+            color:#eaffea;
         }
-        .rcw-btn:hover{background:#c20710;}
+        .buy-live-dot{
+            width:7px; height:7px; border-radius:50%; background:#2ee65a;
+            box-shadow:0 0 6px #2ee65a, 0 0 14px #2ee65a;
+            animation:buyLivePulse 1.4s ease-in-out infinite;
+        }
+        @keyframes buyLivePulse{
+            0%,100%{ box-shadow:0 0 6px #2ee65a, 0 0 10px #2ee65a; }
+            50%{ box-shadow:0 0 10px #2ee65a, 0 0 22px #2ee65a; }
+        }
+        .buy-submit-btn{
+            background:linear-gradient(135deg,#E50914,#c40811);
+            box-shadow:0 0 12px rgba(229,9,20,.5);
+        }
+
+        /* ── Submit Interest Form Modal (shared, reusable across cards) ── */
+        .rcw-form-overlay{ position:fixed; inset:0; z-index:9700; background:rgba(0,0,0,.7); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+        .rcw-form-overlay.rcw-active{ opacity:1; pointer-events:all; }
+        .rcw-modal-box{ background:#1a1a1a; border-radius:16px; border:1px solid rgba(255,255,255,.1); max-width:420px; width:92%; max-height:90vh; overflow-y:auto; padding:26px 22px; position:relative; transform:translateY(20px); transition:transform .4s; }
+        .rcw-form-overlay.rcw-active .rcw-modal-box{ transform:translateY(0); }
+        .rcw-modal-close{ position:absolute; top:12px; right:14px; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; width:32px; height:32px; border-radius:50%; transition:background .2s, transform .2s; }
+        .rcw-modal-close:hover{ background:#E50914; transform:rotate(90deg); }
+        .rcw-form-title{ font-size:1.3rem; font-weight:700; text-align:center; color:#fff; margin:0 0 18px; }
+        .rcw-form-group{ margin-bottom:14px; }
+        .rcw-form-group label{ display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:6px; }
+        .rcw-form-group input, .rcw-form-group textarea{
+            width:100%; padding:11px; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.12);
+            border-radius:6px; color:#fff; font-family:inherit; font-size:.85rem; outline:none; transition:border-color .2s; box-sizing:border-box;
+        }
+        .rcw-form-group input:focus, .rcw-form-group textarea:focus{ border-color:#E50914; }
+        .rcw-submit-btn{
+            width:100%; padding:12px; border:none; border-radius:8px; cursor:pointer;
+            background:linear-gradient(135deg,#E50914,#c40811); color:#fff;
+            font-size:.9rem; font-weight:700; letter-spacing:.03em; transition:transform .2s;
+        }
+        .rcw-submit-btn:hover{ transform:scale(1.02); }
+        .rcw-toast{ position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:#1a1a1a; border:1px solid rgba(255,255,255,.1); padding:12px 24px; border-radius:50px; z-index:9800; display:flex; align-items:center; gap:10px; opacity:0; transition:transform .4s, opacity .4s; box-shadow:0 10px 30px rgba(0,0,0,.8); color:#fff; font-size:.85rem; }
+        .rcw-toast.rcw-show{ transform:translateX(-50%) translateY(0); opacity:1; }
+        body.rcw-modal-open{ overflow:hidden; }
+
         @media (max-width:560px){
-            .rcw-card{padding:14px;}
-            .rcw-title{font-size:1.15rem;}
+            .buy-card{ width:150px; }
         }
         </style>
 
+        <div class="rcw-form-overlay" id="rcwFormModal">
+            <div class="rcw-modal-box">
+                <button class="rcw-modal-close" onclick="rcwApp.closeFormModal()">&times;</button>
+                <h2 class="rcw-form-title">Submit Interest</h2>
+                <form id="rcwInterestForm" onsubmit="return rcwApp.handleFormSubmit(event)">
+                    <div class="rcw-form-group"><label>Full Name *</label><input type="text" id="rcwFormName" required placeholder="John Doe"></div>
+                    <div class="rcw-form-group"><label>Business Name *</label><input type="text" id="rcwFormBiz" required placeholder="Your Brand LLC"></div>
+                    <div class="rcw-form-group"><label>Email Address *</label><input type="email" id="rcwFormEmail" required placeholder="john@example.com"></div>
+                    <div class="rcw-form-group"><label>WhatsApp Number</label><input type="tel" id="rcwFormPhone" placeholder="0711691608"></div>
+                    <div class="rcw-form-group"><label>Additional Requests</label><textarea id="rcwFormNotes" rows="3" placeholder="Tell us about your business..."></textarea></div>
+                    <button type="submit" class="rcw-submit-btn">🚀 Start My Website</button>
+                </form>
+            </div>
+        </div>
+        <div class="rcw-toast" id="rcwToast"><span>✅</span> <span id="rcwToastMsg">Request submitted successfully!</span></div>
+
         <script>
         (function(){
-            var rcwImgs = document.querySelectorAll('#section-rcw .rcw-thumb-img');
-            var rcwDots = document.querySelectorAll('#section-rcw .rcw-dot');
-            var rcwIdx = 0;
-            if(rcwImgs.length){
+            /* Crossfade the 3 buy-thumb images every 4s */
+            var buyImgs = document.querySelectorAll('#section-buy-websites .buy-thumb-img');
+            var buyIdx = 0;
+            if(buyImgs.length){
                 setInterval(function(){
-                    rcwImgs[rcwIdx].classList.remove('rcw-active');
-                    rcwDots[rcwIdx].classList.remove('rcw-dot-active');
-                    rcwIdx = (rcwIdx + 1) % rcwImgs.length;
-                    rcwImgs[rcwIdx].classList.add('rcw-active');
-                    rcwDots[rcwIdx].classList.add('rcw-dot-active');
+                    buyImgs[buyIdx].classList.remove('buy-thumb-active');
+                    buyIdx = (buyIdx + 1) % buyImgs.length;
+                    buyImgs[buyIdx].classList.add('buy-thumb-active');
                 }, 4000);
             }
+
+            /* Shared Submit Interest form logic */
+            var formModal = document.getElementById('rcwFormModal');
+            var interestForm = document.getElementById('rcwInterestForm');
+
+            function openFormModal(){
+                formModal.classList.add('rcw-active');
+                document.body.classList.add('rcw-modal-open');
+            }
+            function closeFormModal(){
+                formModal.classList.remove('rcw-active');
+                document.body.classList.remove('rcw-modal-open');
+            }
+            function showToast(){
+                var toast = document.getElementById('rcwToast');
+                toast.classList.add('rcw-show');
+                setTimeout(function(){ toast.classList.remove('rcw-show'); }, 3000);
+            }
+            function handleFormSubmit(e){
+                e.preventDefault();
+                var fd = {
+                    full_name: document.getElementById('rcwFormName').value.trim(),
+                    business_name: document.getElementById('rcwFormBiz').value.trim(),
+                    email: document.getElementById('rcwFormEmail').value.trim(),
+                    whatsapp: document.getElementById('rcwFormPhone').value.trim(),
+                    additional_requests: document.getElementById('rcwFormNotes').value.trim()
+                };
+                if(!fd.full_name || !fd.business_name || !fd.email){
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+                fetch('https://formspree.io/f/mzdweann', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(fd)
+                })
+                .then(function(r){
+                    if(r.ok){ showToast(); interestForm.reset(); setTimeout(closeFormModal, 1500); }
+                    else { alert('Error sending. Please try again.'); }
+                })
+                .catch(function(){ alert('Error sending. Please try again.'); });
+                return false;
+            }
+
+            formModal.addEventListener('click', function(e){ if(e.target === formModal) closeFormModal(); });
+
+            window.rcwApp = {
+                openFormModal: openFormModal,
+                closeFormModal: closeFormModal,
+                handleFormSubmit: handleFormSubmit
+            };
         })();
         </script>
 
