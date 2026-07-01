@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STREAMR — Demo Streaming Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#e50914;
+    --accent-glow: rgba(229,9,20,0.55);
+    --bg:#0a0a0a;
+    --bg-elev:#141414;
+    --text:#f5f5f5;
+    --text-dim:#b3b3b3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;
+    transition:background .35s ease, box-shadow .35s ease;
+  }
+  header.scrolled{background:rgba(10,10,10,0.92);box-shadow:0 4px 20px rgba(0,0,0,0.6);}
+  .logo{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;letter-spacing:2px;color:var(--red);
+    text-shadow:0 0 14px var(--accent-glow);
+  }
+  nav.links{display:flex;gap:22px;margin-left:36px;}
+  nav.links a{font-size:14px;color:var(--text-dim);font-weight:500;transition:color .2s;}
+  nav.links a:hover, nav.links a.active{color:var(--text);}
+  .nav-left{display:flex;align-items:center;}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .search-wrap{position:relative;display:flex;align-items:center;}
+  .search-wrap input{
+    background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.25);
+    color:var(--text);padding:8px 14px 8px 34px;border-radius:4px;
+    font-size:13px;width:0;opacity:0;transition:width .3s ease, opacity .3s ease, padding .3s ease;
+  }
+  .search-wrap input.open{width:200px;opacity:1;}
+  .search-icon{position:absolute;left:10px;font-size:14px;cursor:pointer;z-index:2;color:var(--text);}
+  .avatar{
+    width:32px;height:32px;border-radius:6px;
+    background:linear-gradient(135deg,var(--red),#7a0509);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bebas Neue',sans-serif;font-size:15px;cursor:pointer;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;height:88vh;width:100%;
+    display:flex;align-items:flex-end;
+    background:
+      linear-gradient(to top, var(--bg) 2%, rgba(10,10,10,0.2) 45%, rgba(10,10,10,0.65) 100%),
+      linear-gradient(to right, rgba(10,10,10,0.85) 0%, transparent 60%),
+      url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+  }
+  .hero-content{padding:0 40px 60px;max-width:640px;}
+  .hero-badge{
+    display:inline-block;font-size:12px;letter-spacing:1.5px;color:var(--red);
+    font-weight:700;text-transform:uppercase;margin-bottom:14px;
+    border:1px solid var(--red);padding:4px 10px;border-radius:3px;
+  }
+  .hero-title{
+    font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:1px;
+    line-height:1.05;margin-bottom:16px;text-shadow:0 4px 20px rgba(0,0,0,0.6);
+  }
+  .hero-meta{display:flex;gap:12px;align-items:center;color:var(--text-dim);font-size:14px;margin-bottom:16px;}
+  .hero-meta .match{color:#46d369;font-weight:700;}
+  .hero-desc{color:var(--text-dim);font-size:15px;line-height:1.5;margin-bottom:22px;}
+  .hero-actions{display:flex;gap:12px;}
+  .btn{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 24px;border-radius:4px;font-size:15px;font-weight:700;
+    border:none;cursor:pointer;transition:transform .15s ease, background .2s ease;
+  }
+  .btn:hover{transform:scale(1.03);}
+  .btn-play{background:var(--text);color:#000;}
+  .btn-play:hover{background:rgba(255,255,255,0.85);}
+  .btn-info{background:rgba(109,109,110,0.5);color:var(--text);}
+  .btn-info:hover{background:rgba(109,109,110,0.7);}
+
+  /* ---------- ROWS ---------- */
+  .rows{position:relative;z-index:5;margin-top:-70px;padding-bottom:60px;}
+  .row{padding:26px 0 6px;}
+  .row-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 40px;margin-bottom:10px;}
+  .row-title{font-size:19px;font-weight:700;}
+  .row-title span{color:var(--text-dim);font-size:13px;font-weight:500;margin-left:8px;}
+  .row-track-wrap{position:relative;}
+  .row-track{
+    display:flex;gap:8px;padding:0 40px;overflow-x:auto;scroll-behavior:smooth;
+    scrollbar-width:none;
+  }
+  .row-track::-webkit-scrollbar{display:none;}
+  .scroll-btn{
+    position:absolute;top:0;bottom:0;width:48px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(to right, rgba(10,10,10,0.85), transparent);
+    border:none;color:var(--text);font-size:22px;cursor:pointer;z-index:6;
+    opacity:0;transition:opacity .2s;
+  }
+  .row-track-wrap:hover .scroll-btn{opacity:1;}
+  .scroll-btn.right{right:0;background:linear-gradient(to left, rgba(10,10,10,0.85), transparent);}
+
+  .card{
+    position:relative;flex:0 0 auto;width:230px;height:130px;border-radius:5px;overflow:hidden;
+    cursor:pointer;background:var(--bg-elev);transition:transform .25s ease, z-index 0s;
+  }
+  .card:hover{transform:scale(1.12) translateY(-8px);z-index:20;box-shadow:0 14px 30px rgba(0,0,0,0.7);}
+  .card-badge{
+    position:absolute;top:8px;left:8px;background:var(--red);
+    font-size:10px;font-weight:700;letter-spacing:0.5px;padding:3px 7px;border-radius:3px;z-index:2;
+  }
+  .card-overlay{
+    position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 55%);
+    opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;
+  }
+  .card:hover .card-overlay{opacity:1;}
+  .card-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .card-sub{font-size:11px;color:var(--text-dim);display:flex;gap:6px;align-items:center;}
+  .card-sub .m{color:#46d369;font-weight:700;}
+  .card-play-icon{
+    width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.9);
+    display:flex;align-items:center;justify-content:center;font-size:11px;color:#000;margin-bottom:6px;
+  }
+
+  /* ---------- CATEGORY FILTER BAR ---------- */
+  .filter-bar{
+    display:flex;gap:10px;padding:0 40px;margin:14px 0 4px;flex-wrap:wrap;
+  }
+  .filter-chip{
+    padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+    cursor:pointer;transition:all .2s;color:var(--text-dim);
+  }
+  .filter-chip:hover{background:rgba(255,255,255,0.16);color:var(--text);}
+  .filter-chip.active{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 14px var(--accent-glow);}
+
+  /* ---------- MODAL PLAYER ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    width:100%;max-width:900px;background:var(--bg-elev);border-radius:8px;overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.8);animation:modalIn .25s ease;
+  }
+  @keyframes modalIn{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
+  .modal-media{
+    position:relative;width:100%;aspect-ratio:16/9;background:#000;
+    display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:14px;
+  }
+  .modal-close{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    background:rgba(20,20,20,0.85);border:1px solid rgba(255,255,255,0.2);
+    color:var(--text);font-size:16px;cursor:pointer;z-index:2;
+  }
+  .modal-body{padding:24px 28px 30px;}
+  .modal-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;margin-bottom:10px;}
+  .modal-meta{display:flex;gap:12px;color:var(--text-dim);font-size:13px;margin-bottom:14px;}
+  .modal-desc{color:var(--text-dim);font-size:14px;line-height:1.6;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:40px;color:var(--text-dim);font-size:12px;border-top:1px solid rgba(255,255,255,0.08);margin-top:20px;}
+  footer .brand{color:var(--red);font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-size:15px;margin-bottom:8px;display:block;}
+
+  @media(max-width:768px){
+    header{padding:14px 18px;}
+    nav.links{display:none;}
+    .hero-content{padding:0 18px 40px;}
+    .hero-title{font-size:38px;}
+    .row-head,.row-track,.filter-bar{padding-left:18px;padding-right:18px;}
+    .card{width:180px;height:104px;}
+    footer{padding:24px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav-left">
+    <div class="logo">STREAMR</div>
+    <nav class="links">
+      <a href="#" class="active">Home</a>
+      <a href="#">Series</a>
+      <a href="#">Films</a>
+      <a href="#">Music Visuals</a>
+      <a href="#">Gaming</a>
+      <a href="#">New &amp; Popular</a>
+    </nav>
+  </div>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <span class="search-icon" onclick="toggleSearch()">🔍</span>
+      <input type="text" id="searchInput" placeholder="Titles, people, genres">
+    </div>
+    <div class="avatar">S</div>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Original Series</div>
+    <div class="hero-title">Midnight Frequency</div>
+    <div class="hero-meta">
+      <span class="match">98% Match</span>
+      <span>2026</span>
+      <span>3 Seasons</span>
+      <span>16+</span>
+    </div>
+    <p class="hero-desc">A late-night radio host uncovers a signal that shouldn't exist — and the deeper she chases it, the more her own city starts to change. Placeholder synopsis text for demo purposes.</p>
+    <div class="hero-actions">
+      <button class="btn btn-play" onclick="openModal('Midnight Frequency','Original Series · 2026 · 16+','A late-night radio host uncovers a signal that shouldn\'t exist — and the deeper she chases it, the more her own city starts to change.')">▶ Play</button>
+      <button class="btn btn-info" onclick="openModal('Midnight Frequency','Original Series · 2026 · 16+','A late-night radio host uncovers a signal that shouldn\'t exist — and the deeper she chases it, the more her own city starts to change.')">ⓘ More Info</button>
+    </div>
+  </div>
+</section>
+
+<div class="rows">
+
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-chip active" data-filter="all">All</div>
+    <div class="filter-chip" data-filter="film">Films</div>
+    <div class="filter-chip" data-filter="series">Series</div>
+    <div class="filter-chip" data-filter="music">Music Visuals</div>
+    <div class="filter-chip" data-filter="gaming">Gaming</div>
+    <div class="filter-chip" data-filter="commercial">Commercials</div>
+  </div>
+
+  <!-- Rows are generated by JS below -->
+  <div id="rowsContainer"></div>
+
+</div>
+
+<footer>
+  <span class="brand">STREAMR</span>
+  Demo streaming platform template · Placeholder content only · Built for prototyping a Netflix-style catalog UI.
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-media">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span>▶ Preview placeholder</span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-title" id="modalTitle">Title</div>
+      <div class="modal-meta" id="modalMeta">Meta</div>
+      <div class="modal-desc" id="modalDesc">Description</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- Demo data ----------
+  const categories = [
+    {
+      title: "Trending Now",
+      type: "row",
+      items: gen(10, "film", "Trending")
+    },
+    {
+      title: "Original Films",
+      type: "row",
+      items: gen(9, "film", "Original Film")
+    },
+    {
+      title: "Drama Series",
+      type: "row",
+      items: gen(9, "series", "Series")
+    },
+    {
+      title: "Music Visualizers",
+      type: "row",
+      items: gen(8, "music", "Visualizer")
+    },
+    {
+      title: "Gaming Highlights",
+      type: "row",
+      items: gen(8, "gaming", "Gaming")
+    },
+    {
+      title: "Commercial Reels",
+      type: "row",
+      items: gen(7, "commercial", "Commercial")
+    }
+  ];
+
+  function gen(n, cat, label){
+    const arr = [];
+    const palette = ["1440,900","1518998053901","1526178613658","1478720568477","1493711662062","1500462918059","1517602302552","1550745165"];
+    for(let i=1;i<=n;i++){
+      arr.push({
+        title: `${label} Title ${i}`,
+        cat: cat,
+        badge: i % 3 === 0 ? "New" : (i % 4 === 0 ? "Top 10" : null),
+        match: 80 + (i * 3) % 19,
+        year: 2023 + (i % 3),
+        img: `https://picsum.photos/seed/${cat}${i}/460/260`,
+        desc: "Placeholder description for demo card content. Swap this with your real title, synopsis, and thumbnail when wiring up the platform."
+      });
+    }
+    return arr;
+  }
+
+  const rowsContainer = document.getElementById('rowsContainer');
+
+  function renderRows(filter){
+    rowsContainer.innerHTML = "";
+    categories.forEach((cat, idx) => {
+      const items = filter === "all" ? cat.items : cat.items.filter(i => i.cat === filter);
+      if(items.length === 0) return;
+
+      const rowEl = document.createElement('div');
+      rowEl.className = "row";
+      rowEl.innerHTML = `
+        <div class="row-head">
+          <div class="row-title">${cat.title} <span>${items.length} titles</span></div>
+        </div>
+        <div class="row-track-wrap">
+          <button class="scroll-btn left" onclick="scrollRow(this,-1)">‹</button>
+          <div class="row-track">
+            ${items.map(item => cardHtml(item)).join("")}
+          </div>
+          <button class="scroll-btn right" onclick="scrollRow(this,1)">›</button>
+        </div>
+      `;
+      rowsContainer.appendChild(rowEl);
+    });
+  }
+
+  function cardHtml(item){
+    return `
+      <div class="card" onclick="openModal('${escAttr(item.title)}','${item.cat.toUpperCase()} · ${item.year} · <span class=\\'m\\'>${item.match}% Match</span>','${escAttr(item.desc)}')">
+        ${item.badge ? `<div class="card-badge">${item.badge}</div>` : ""}
+        <img src="${item.img}" alt="${escAttr(item.title)}" loading="lazy">
+        <div class="card-overlay">
+          <div class="card-play-icon">▶</div>
+          <div class="card-name">${item.title}</div>
+          <div class="card-sub"><span class="m">${item.match}% Match</span> · ${item.year}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function escAttr(str){
+    return str.replace(/'/g, "\\'");
+  }
+
+  function scrollRow(btn, dir){
+    const track = btn.parentElement.querySelector('.row-track');
+    track.scrollBy({ left: dir * 500, behavior: 'smooth' });
+  }
+
+  // ---------- Filter bar ----------
+  document.getElementById('filterBar').addEventListener('click', (e) => {
+    const chip = e.target.closest('.filter-chip');
+    if(!chip) return;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderRows(chip.dataset.filter);
+  });
+
+  // ---------- Search toggle ----------
+  function toggleSearch(){
+    const input = document.getElementById('searchInput');
+    input.classList.toggle('open');
+    if(input.classList.contains('open')) input.focus();
+  }
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+      const name = card.querySelector('.card-name')?.textContent.toLowerCase() || "";
+      card.style.display = name.includes(q) ? "" : (q === "" ? "" : "none");
+    });
+  });
+
+  // ---------- Header scroll effect ----------
+  window.addEventListener('scroll', () => {
+    document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ---------- Modal ----------
+  function openModal(title, meta, desc){
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalMeta').innerHTML = meta;
+    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+  function closeModal(){
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+  function closeModalOnOverlay(e){
+    if(e.target.id === 'modalOverlay') closeModal();
+  }
+
+  renderRows("all");
+</script>
+
+</body>
+</html>
