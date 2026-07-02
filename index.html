@@ -1525,20 +1525,22 @@
             <!-- Netflix Style Website Card -->
             <div class="game-card buy-card">
                 <div class="game-thumb-wrap buy-thumb-wrap">
-                    <img class="buy-thumb-img buy-thumb-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_00000000b29471f49ffabcdb1188ecbd_tvegbg.png" alt="Netflix Style Website Preview 1" loading="lazy" decoding="async">
-                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_00000000964871f4a66c1ff1c4a3cf5e_gwsulw.png" alt="Netflix Style Website Preview 2" loading="lazy" decoding="async">
-                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1782941169/file_000000001ab471f4ab018f6882d20421_fzjdz0.png" alt="Netflix Style Website Preview 3" loading="lazy" decoding="async">
+                    <img class="buy-thumb-img buy-thumb-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293228301_zq9eqn.jpg" alt="Netflix Style Website Preview 1" loading="lazy" decoding="async">
+                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293345213_i7526h.jpg" alt="Netflix Style Website Preview 2" loading="lazy" decoding="async">
+                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293574071_rjy04m.jpg" alt="Netflix Style Website Preview 3" loading="lazy" decoding="async">
                 </div>
-                <div class="game-card-info">
+                <div class="game-card-info buy-info">
                     <div class="game-title">Netflix Style Website</div>
-                    <button class="buy-cart-btn" onclick="rcwApp.openFormModal()">
-                        <i class="fas fa-cart-shopping"></i> $150
-                    </button>
-                    <button class="buy-preview-btn" onclick="openGameModal('netflix01.html')">
-                        <span class="buy-live-dot"></span> Live Preview
-                    </button>
+                    <div class="buy-btn-row">
+                        <button class="buy-cart-btn" onclick="rcwApp.openFormModal()">
+                            <i class="fas fa-cart-shopping"></i> $150
+                        </button>
+                        <button class="buy-preview-btn" onclick="openGameModal('netflix01.html')">
+                            <span class="buy-live-dot"></span> Live Preview
+                        </button>
+                    </div>
                     <button class="buy-submit-btn" onclick="rcwApp.openFormModal()">
-                        <i class="fas fa-paper-plane"></i> Submit
+                        <i class="fas fa-paper-plane"></i> Submit File
                     </button>
                 </div>
             </div>
@@ -1551,32 +1553,42 @@
 
         <style>
         /* ── Buy Ready Made Websites (scoped, independent, compressed like game-card) ── */
+        #section-buy-websites .section-header{ margin-bottom:18px; }
+        #section-buy-websites .slider-container{ padding-top:4px; }
         .buy-card{ width:240px; cursor:default; }
-        .buy-thumb-wrap{ position:relative; aspect-ratio:16/10 !important; }
+        .buy-thumb-wrap{
+            position:relative; aspect-ratio:16/10 !important;
+            background:#000; overflow:hidden; flex-shrink:0;
+            border-bottom:1px solid rgba(255,255,255,.08);
+        }
         .buy-thumb-img{
             position:absolute; inset:0; width:100%; height:100%;
-            object-fit:cover; opacity:0; transition:opacity .8s ease;
+            object-fit:contain !important; object-position:center;
+            opacity:0; transition:opacity .8s ease; background:#000;
         }
         .buy-thumb-img.buy-thumb-active{ opacity:1; }
-        .game-card-info:has(.buy-cart-btn){ gap:6px; }
+        .buy-info{ padding:10px 10px 12px; gap:8px; }
+        .buy-btn-row{ display:flex; width:100%; gap:6px; }
         .buy-cart-btn, .buy-preview-btn, .buy-submit-btn{
-            display:inline-flex; align-items:center; justify-content:center; gap:6px;
-            width:100%; padding:7px 0; border:none; cursor:pointer;
-            border-radius:18px; font-size:.68rem; font-weight:800;
-            letter-spacing:.06em; text-transform:uppercase; color:#fff;
+            display:inline-flex; align-items:center; justify-content:center; gap:5px;
+            padding:6px 0; border:none; cursor:pointer;
+            border-radius:16px; font-size:.62rem; font-weight:800;
+            letter-spacing:.05em; text-transform:uppercase; color:#fff;
             transition:transform .2s, box-shadow .2s;
         }
         .buy-cart-btn:hover, .buy-preview-btn:hover, .buy-submit-btn:hover{ transform:scale(1.05); }
         .buy-cart-btn{
+            flex:0 0 auto; width:44%;
             background:linear-gradient(135deg,#ffcf3f,#f5a623);
             color:#1a1200; box-shadow:0 0 12px rgba(245,166,35,.5);
         }
         .buy-preview-btn{
+            flex:1 1 auto; min-width:0;
             background:#2a2a2a; border:1px solid rgba(255,255,255,.1);
             color:#eaffea;
         }
         .buy-live-dot{
-            width:7px; height:7px; border-radius:50%; background:#2ee65a;
+            width:6px; height:6px; border-radius:50%; background:#2ee65a; flex-shrink:0;
             box-shadow:0 0 6px #2ee65a, 0 0 14px #2ee65a;
             animation:buyLivePulse 1.4s ease-in-out infinite;
         }
@@ -1585,6 +1597,7 @@
             50%{ box-shadow:0 0 10px #2ee65a, 0 0 22px #2ee65a; }
         }
         .buy-submit-btn{
+            width:100%; padding:7px 0; font-size:.66rem;
             background:linear-gradient(135deg,#E50914,#c40811);
             box-shadow:0 0 12px rgba(229,9,20,.5);
         }
@@ -1615,7 +1628,12 @@
         body.rcw-modal-open{ overflow:hidden; }
 
         @media (max-width:560px){
-            .buy-card{ width:200px; }
+            .buy-card{ width:min(80vw, 320px); }
+            .buy-cart-btn, .buy-preview-btn, .buy-submit-btn{ font-size:.72rem; padding:9px 0; }
+            #section-buy-websites .game-title{ font-size:0.88rem; }
+        }
+        @media (max-width:360px){
+            .buy-card{ width:82vw; }
         }
         </style>
 
