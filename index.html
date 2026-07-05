@@ -1515,432 +1515,6 @@
 })();
 </script>
 
-        <!-- ===== BUY READY MADE WEBSITES ===== -->
-        <section class="content-section fade-up-section" id="section-buy-websites">
-    <div class="section-header"><span class="red-accent"></span> Buy Ready Made Websites</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-buy-websites"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-buy-websites">
-
-            <!-- Netflix Style Website Card -->
-            <div class="game-card buy-card">
-                <div class="game-thumb-wrap buy-thumb-wrap">
-                    <img class="buy-thumb-img buy-thumb-active" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293228301_zq9eqn.jpg" alt="Netflix Style Website Preview 1" loading="lazy" decoding="async">
-                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293345213_i7526h.jpg" alt="Netflix Style Website Preview 2" loading="lazy" decoding="async">
-                    <img class="buy-thumb-img" src="https://res.cloudinary.com/datfuxotx/image/upload/v1779294292/1779293574071_rjy04m.jpg" alt="Netflix Style Website Preview 3" loading="lazy" decoding="async">
-                </div>
-                <div class="game-card-info buy-info">
-                    <div class="game-title">Netflix Style Website</div>
-                    <div class="buy-btn-row">
-                        <button class="buy-cart-btn" onclick="rcwApp.openFormModal()">
-                            <i class="fas fa-cart-shopping"></i> $150
-                        </button>
-                        <button class="buy-preview-btn" onclick="openGameModal('netflix01.html')">
-                            <span class="buy-live-dot"></span> Live Preview
-                        </button>
-                    </div>
-                    <button class="buy-submit-btn" onclick="rcwApp.openFormModal()">
-                        <i class="fas fa-paper-plane"></i> Submit File
-                    </button>
-                </div>
-            </div>
-
-        </div>
-        <button class="slider-arrow right" data-target="row-buy-websites"><i class="fas fa-chevron-right"></i></button>
-    </div>
-        </section>
-        <!-- ===== END BUY READY MADE WEBSITES ===== -->
-
-        <style>
-        /* ── Buy Ready Made Websites (scoped, independent, compressed like game-card) ── */
-        #section-buy-websites .section-header{ margin-bottom:18px; }
-        #section-buy-websites .slider-container{ padding-top:4px; }
-        .buy-card{ width:240px; cursor:default; }
-        .buy-thumb-wrap{
-            position:relative; aspect-ratio:16/10 !important;
-            background:#000; overflow:hidden; flex-shrink:0;
-            border-bottom:1px solid rgba(255,255,255,.08);
-        }
-        .buy-thumb-img{
-            position:absolute; inset:0; width:100%; height:100%;
-            object-fit:contain !important; object-position:center;
-            opacity:0; transition:opacity .8s ease; background:#000;
-        }
-        .buy-thumb-img.buy-thumb-active{ opacity:1; }
-        .buy-info{ padding:10px 10px 12px; gap:8px; }
-        .buy-btn-row{ display:flex; width:100%; gap:6px; }
-        .buy-cart-btn, .buy-preview-btn, .buy-submit-btn{
-            display:inline-flex; align-items:center; justify-content:center; gap:5px;
-            padding:6px 0; border:none; cursor:pointer;
-            border-radius:16px; font-size:.62rem; font-weight:800;
-            letter-spacing:.05em; text-transform:uppercase; color:#fff;
-            transition:transform .2s, box-shadow .2s;
-        }
-        .buy-cart-btn:hover, .buy-preview-btn:hover, .buy-submit-btn:hover{ transform:scale(1.05); }
-        .buy-cart-btn{
-            flex:0 0 auto; width:44%;
-            background:linear-gradient(135deg,#ffcf3f,#f5a623);
-            color:#1a1200; box-shadow:0 0 12px rgba(245,166,35,.5);
-        }
-        .buy-preview-btn{
-            flex:1 1 auto; min-width:0;
-            background:#2a2a2a; border:1px solid rgba(255,255,255,.1);
-            color:#eaffea;
-        }
-        .buy-live-dot{
-            width:6px; height:6px; border-radius:50%; background:#2ee65a; flex-shrink:0;
-            box-shadow:0 0 6px #2ee65a, 0 0 14px #2ee65a;
-            animation:buyLivePulse 1.4s ease-in-out infinite;
-        }
-        @keyframes buyLivePulse{
-            0%,100%{ box-shadow:0 0 6px #2ee65a, 0 0 10px #2ee65a; }
-            50%{ box-shadow:0 0 10px #2ee65a, 0 0 22px #2ee65a; }
-        }
-        .buy-submit-btn{
-            width:100%; padding:7px 0; font-size:.66rem;
-            background:linear-gradient(135deg,#E50914,#c40811);
-            box-shadow:0 0 12px rgba(229,9,20,.5);
-        }
-
-        /* ── Submit Interest Form Modal (shared, reusable across cards) ── */
-        .rcw-form-overlay{ position:fixed; inset:0; z-index:9700; background:rgba(0,0,0,.7); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
-        .rcw-form-overlay.rcw-active{ opacity:1; pointer-events:all; }
-        .rcw-modal-box{ background:#1a1a1a; border-radius:16px; border:1px solid rgba(255,255,255,.1); max-width:420px; width:92%; max-height:90vh; overflow-y:auto; padding:26px 22px; position:relative; transform:translateY(20px); transition:transform .4s; }
-        .rcw-form-overlay.rcw-active .rcw-modal-box{ transform:translateY(0); }
-        .rcw-modal-close{ position:absolute; top:12px; right:14px; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; width:32px; height:32px; border-radius:50%; transition:background .2s, transform .2s; }
-        .rcw-modal-close:hover{ background:#E50914; transform:rotate(90deg); }
-        .rcw-form-title{ font-size:1.3rem; font-weight:700; text-align:center; color:#fff; margin:0 0 18px; }
-        .rcw-form-group{ margin-bottom:14px; }
-        .rcw-form-group label{ display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:1px; color:#999; margin-bottom:6px; }
-        .rcw-form-group input, .rcw-form-group textarea{
-            width:100%; padding:11px; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.12);
-            border-radius:6px; color:#fff; font-family:inherit; font-size:.85rem; outline:none; transition:border-color .2s; box-sizing:border-box;
-        }
-        .rcw-form-group input:focus, .rcw-form-group textarea:focus{ border-color:#E50914; }
-        .rcw-submit-btn{
-            width:100%; padding:12px; border:none; border-radius:8px; cursor:pointer;
-            background:linear-gradient(135deg,#E50914,#c40811); color:#fff;
-            font-size:.9rem; font-weight:700; letter-spacing:.03em; transition:transform .2s;
-        }
-        .rcw-submit-btn:hover{ transform:scale(1.02); }
-        .rcw-toast{ position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:#1a1a1a; border:1px solid rgba(255,255,255,.1); padding:12px 24px; border-radius:50px; z-index:9800; display:flex; align-items:center; gap:10px; opacity:0; transition:transform .4s, opacity .4s; box-shadow:0 10px 30px rgba(0,0,0,.8); color:#fff; font-size:.85rem; }
-        .rcw-toast.rcw-show{ transform:translateX(-50%) translateY(0); opacity:1; }
-        body.rcw-modal-open{ overflow:hidden; }
-
-        @media (max-width:560px){
-            .buy-card{ width:min(80vw, 320px); }
-            .buy-cart-btn, .buy-preview-btn, .buy-submit-btn{ font-size:.72rem; padding:9px 0; }
-            #section-buy-websites .game-title{ font-size:0.88rem; }
-        }
-        @media (max-width:360px){
-            .buy-card{ width:82vw; }
-        }
-        </style>
-
-        <div class="rcw-form-overlay" id="rcwFormModal">
-            <div class="rcw-modal-box">
-                <button class="rcw-modal-close" onclick="rcwApp.closeFormModal()">&times;</button>
-                <h2 class="rcw-form-title">Submit Interest</h2>
-                <form id="rcwInterestForm" onsubmit="return rcwApp.handleFormSubmit(event)">
-                    <div class="rcw-form-group"><label>Full Name *</label><input type="text" id="rcwFormName" required placeholder="John Doe"></div>
-                    <div class="rcw-form-group"><label>Business Name *</label><input type="text" id="rcwFormBiz" required placeholder="Your Brand LLC"></div>
-                    <div class="rcw-form-group"><label>Email Address *</label><input type="email" id="rcwFormEmail" required placeholder="john@example.com"></div>
-                    <div class="rcw-form-group"><label>WhatsApp Number</label><input type="tel" id="rcwFormPhone" placeholder="0711691608"></div>
-                    <div class="rcw-form-group"><label>Additional Requests</label><textarea id="rcwFormNotes" rows="3" placeholder="Tell us about your business..."></textarea></div>
-                    <button type="submit" class="rcw-submit-btn">🚀 Start My Website</button>
-                </form>
-            </div>
-        </div>
-        <div class="rcw-toast" id="rcwToast"><span>✅</span> <span id="rcwToastMsg">Request submitted successfully!</span></div>
-
-        <script>
-        (function(){
-            /* Crossfade the 3 buy-thumb images every 4s */
-            var buyImgs = document.querySelectorAll('#section-buy-websites .buy-thumb-img');
-            var buyIdx = 0;
-            if(buyImgs.length){
-                setInterval(function(){
-                    buyImgs[buyIdx].classList.remove('buy-thumb-active');
-                    buyIdx = (buyIdx + 1) % buyImgs.length;
-                    buyImgs[buyIdx].classList.add('buy-thumb-active');
-                }, 4000);
-            }
-
-            /* Shared Submit Interest form logic */
-            var formModal = document.getElementById('rcwFormModal');
-            var interestForm = document.getElementById('rcwInterestForm');
-
-            function openFormModal(){
-                formModal.classList.add('rcw-active');
-                document.body.classList.add('rcw-modal-open');
-            }
-            function closeFormModal(){
-                formModal.classList.remove('rcw-active');
-                document.body.classList.remove('rcw-modal-open');
-            }
-            function showToast(){
-                var toast = document.getElementById('rcwToast');
-                toast.classList.add('rcw-show');
-                setTimeout(function(){ toast.classList.remove('rcw-show'); }, 3000);
-            }
-            function handleFormSubmit(e){
-                e.preventDefault();
-                var fd = {
-                    full_name: document.getElementById('rcwFormName').value.trim(),
-                    business_name: document.getElementById('rcwFormBiz').value.trim(),
-                    email: document.getElementById('rcwFormEmail').value.trim(),
-                    whatsapp: document.getElementById('rcwFormPhone').value.trim(),
-                    additional_requests: document.getElementById('rcwFormNotes').value.trim()
-                };
-                if(!fd.full_name || !fd.business_name || !fd.email){
-                    alert('Please fill in all required fields.');
-                    return false;
-                }
-                fetch('https://formspree.io/f/mzdweann', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(fd)
-                })
-                .then(function(r){
-                    if(r.ok){ showToast(); interestForm.reset(); setTimeout(closeFormModal, 1500); }
-                    else { alert('Error sending. Please try again.'); }
-                })
-                .catch(function(){ alert('Error sending. Please try again.'); });
-                return false;
-            }
-
-            formModal.addEventListener('click', function(e){ if(e.target === formModal) closeFormModal(); });
-
-            window.rcwApp = {
-                openFormModal: openFormModal,
-                closeFormModal: closeFormModal,
-                handleFormSubmit: handleFormSubmit
-            };
-        })();
-        </script>
-
-        <!-- ===== PLAY GAMES ===== -->
-        <section class="content-section fade-up-section" id="section-play-games">
-    <div class="section-header"><span class="red-accent"></span> Play Games</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-play-games"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-play-games">
-
-            <!-- Binary Blitz Game Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782710489/file_000000006b2c7243ac3d162ba63592bd_fghmvu.png" alt="Binary Blitz Game" loading="lazy" decoding="async">
-                </div>
-                <div class="game-card-info">
-                    <div class="game-title">Binary Blitz</div>
-                    <button class="game-play-btn" onclick="openGameModal('game4.html')">
-                        <span class="game-btn-glow"></span>
-                        <i class="fas fa-gamepad"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Trading Pro Game Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782677949/file_00000000b7bc71f4be597d2f809b36f3_wskoro.png" alt="Trading Pro Game" loading="lazy" decoding="async">
-                </div>
-                <div class="game-card-info">
-                    <div class="game-title">Trading Pro Game</div>
-                    <button class="game-play-btn" onclick="openGameModal('game3.html')">
-                        <span class="game-btn-glow"></span>
-                        <i class="fas fa-chart-line"></i>
-                        <span>Trade Now</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Nitro Race 1 Game Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782421344/file_00000000d7c871f492a1cb06638b680e_hrumeq.png" alt="Nitro Race 1" loading="lazy" decoding="async">
-                    <div class="game-badge-live">🎮 LIVE</div>
-                </div>
-                <div class="game-card-info">
-                    <div class="game-title">Nitro Race 1</div>
-                    <button class="game-play-btn" onclick="openGameModal('game.html')">
-                        <span class="game-btn-glow"></span>
-                        <i class="fas fa-gamepad"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Puzzle Numbers Game Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782457317/file_00000000cc587246a4d484f7b82d9229_tjqirs.png" alt="Puzzle Numbers" loading="lazy" decoding="async">
-                    <div class="game-badge-live">🧩 LIVE</div>
-                </div>
-                <div class="game-card-info">
-                    <div class="game-title">Puzzle Numbers</div>
-                    <button class="game-play-btn" onclick="openGameModal('game2.html')">
-                        <span class="game-btn-glow"></span>
-                        <i class="fas fa-gamepad"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-        <button class="slider-arrow right" data-target="row-play-games"><i class="fas fa-chevron-right"></i></button>
-    </div>
-        </section>
-        <!-- ===== END PLAY GAMES ===== -->
-
-        <!-- ═══════════════════════════════════════════════════════
-             MUSIC INSTRUMENTALS — fully isolated component.
-             Unique "mi-*" classes only. Does not read from or affect
-             .game-card / #row-play-games or any other section.
-        ═══════════════════════════════════════════════════════ -->
-        <style>
-        #section-music-instrumentals .slider-container{ padding-top:4px; }
-
-        .mi-card{
-            flex-shrink:0;
-            width:160px;
-            background:rgba(15,15,15,0.95);
-            border-radius:12px;
-            overflow:hidden;
-            border:1px solid rgba(255,255,255,0.08);
-            transition:transform 0.25s, box-shadow 0.25s;
-            cursor:default;
-        }
-        .mi-card:hover{
-            transform:translateY(-4px) scale(1.02);
-            box-shadow:0 12px 40px rgba(229,9,20,0.3), 0 0 0 1px rgba(229,9,20,0.25);
-        }
-        .mi-thumb-wrap{
-            position:relative; width:100%;
-            aspect-ratio:9/12; overflow:hidden;
-        }
-        .mi-thumb-wrap img{
-            width:100%; height:100%; object-fit:cover; display:block;
-            transition:transform 0.4s ease;
-        }
-        .mi-card:hover .mi-thumb-wrap img{ transform:scale(1.06); }
-        .mi-card-info{
-            padding:10px 10px 12px;
-            display:flex; flex-direction:column; gap:10px; align-items:center;
-        }
-        .mi-title{
-            font-size:0.78rem; font-weight:800; color:#fff;
-            letter-spacing:0.04em; text-align:center; line-height:1.2;
-        }
-        .mi-play-btn{
-            position:relative; display:inline-flex;
-            align-items:center; justify-content:center; gap:7px;
-            width:100%; padding:9px 0;
-            border-radius:22px; text-decoration:none; color:#fff;
-            font-size:0.72rem; font-weight:800; letter-spacing:0.08em;
-            text-transform:uppercase; overflow:hidden;
-            background:linear-gradient(135deg, #E50914 0%, #ff3a3a 50%, #c40811 100%);
-            box-shadow:0 0 14px rgba(229,9,20,0.55), 0 0 28px rgba(229,9,20,0.2);
-            animation:miBtnPulse 2.2s ease-in-out infinite;
-            transition:transform 0.2s, box-shadow 0.2s;
-            border:none; cursor:pointer; font-family:inherit;
-        }
-        .mi-play-btn:hover{
-            transform:scale(1.05);
-            box-shadow:0 0 24px rgba(229,9,20,0.9), 0 0 50px rgba(229,9,20,0.4);
-        }
-        @keyframes miBtnPulse{
-            0%,100%{ box-shadow:0 0 14px rgba(229,9,20,0.55),0 0 28px rgba(229,9,20,0.2); }
-            50%{ box-shadow:0 0 22px rgba(255,60,60,0.9),0 0 45px rgba(229,9,20,0.4); }
-        }
-        .mi-btn-glow{
-            position:absolute; top:0; left:-60%;
-            width:45%; height:100%;
-            background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
-            transform:skewX(-15deg);
-            animation:miBtnSweep 2.4s ease-in-out infinite;
-            pointer-events:none;
-        }
-        @keyframes miBtnSweep{
-            0%{ left:-60%; opacity:0; }
-            10%{ opacity:1; }
-            90%{ opacity:1; }
-            100%{ left:130%; opacity:0; }
-        }
-        .mi-play-btn i{ font-size:0.8rem; position:relative; z-index:1; }
-        .mi-play-btn span:last-child{ position:relative; z-index:1; }
-
-        /* ── Desktop tier: larger cards, more breathing room ── */
-        @media (min-width:1025px){
-            .mi-card{ width:210px; }
-            .mi-card-info{ padding:14px 14px 16px; gap:12px; }
-            .mi-title{ font-size:0.92rem; }
-            .mi-play-btn{ font-size:0.78rem; padding:11px 0; }
-            .mi-play-btn i{ font-size:0.9rem; }
-        }
-        /* ── Tablet tier ── */
-        @media (max-width:1024px) and (min-width:769px){
-            .mi-card{ width:180px; }
-        }
-        </style>
-
-        <section class="content-section fade-up-section" id="section-music-instrumentals">
-    <div class="section-header"><span class="red-accent"></span> Music Instrumentals</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-music-instrumentals"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-music-instrumentals">
-
-            <!-- Guitar Simulator Card -->
-            <div class="mi-card">
-                <div class="mi-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271667/file_00000000676871f48c3bd91e9a9c34ac_qx9w7b.png" alt="Guitar Simulator" loading="lazy" decoding="async">
-                </div>
-                <div class="mi-card-info">
-                    <div class="mi-title">Guitar Simulator</div>
-                    <button class="mi-play-btn" onclick="openGameModal('guitar.html')">
-                        <span class="mi-btn-glow"></span>
-                        <i class="fas fa-guitar"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Piano Simulator Card -->
-            <div class="mi-card">
-                <div class="mi-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271664/file_000000003aa471f4a934699daf6870f1_hj3nif.png" alt="Piano Simulator" loading="lazy" decoding="async">
-                </div>
-                <div class="mi-card-info">
-                    <div class="mi-title">Piano Simulator</div>
-                    <button class="mi-play-btn" onclick="openGameModal('piano.html')">
-                        <span class="mi-btn-glow"></span>
-                        <i class="fas fa-music"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Beat Maker / DJ Card -->
-            <div class="mi-card">
-                <div class="mi-thumb-wrap">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271666/file_00000000533871f49bbecf6e055ceecc_vo6o0n.png" alt="Beat Maker" loading="lazy" decoding="async">
-                </div>
-                <div class="mi-card-info">
-                    <div class="mi-title">Beat Maker</div>
-                    <button class="mi-play-btn" onclick="openGameModal('beat.html')">
-                        <span class="mi-btn-glow"></span>
-                        <i class="fas fa-drum"></i>
-                        <span>Play Now</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-        <button class="slider-arrow right" data-target="row-music-instrumentals"><i class="fas fa-chevron-right"></i></button>
-    </div>
-        </section>
-        <!-- ===== END MUSIC INSTRUMENTALS ===== -->
 
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Reinblacks Mini Films</div>
@@ -2220,6 +1794,229 @@
                 </style>
 
         </section>
+
+        <!-- ═══════════════════════════════════════════════════════
+             MUSIC INSTRUMENTALS — fully isolated component.
+             Unique "mi-*" classes only. Does not read from or affect
+             .game-card / #row-play-games or any other section.
+        ═══════════════════════════════════════════════════════ -->
+        <style>
+        #section-music-instrumentals .slider-container{ padding-top:4px; }
+
+        .mi-card{
+            flex-shrink:0;
+            width:160px;
+            background:rgba(15,15,15,0.95);
+            border-radius:12px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.08);
+            transition:transform 0.25s, box-shadow 0.25s;
+            cursor:default;
+        }
+        .mi-card:hover{
+            transform:translateY(-4px) scale(1.02);
+            box-shadow:0 12px 40px rgba(229,9,20,0.3), 0 0 0 1px rgba(229,9,20,0.25);
+        }
+        .mi-thumb-wrap{
+            position:relative; width:100%;
+            aspect-ratio:9/12; overflow:hidden;
+        }
+        .mi-thumb-wrap img{
+            width:100%; height:100%; object-fit:cover; display:block;
+            transition:transform 0.4s ease;
+        }
+        .mi-card:hover .mi-thumb-wrap img{ transform:scale(1.06); }
+        .mi-card-info{
+            padding:10px 10px 12px;
+            display:flex; flex-direction:column; gap:10px; align-items:center;
+        }
+        .mi-title{
+            font-size:0.78rem; font-weight:800; color:#fff;
+            letter-spacing:0.04em; text-align:center; line-height:1.2;
+        }
+        .mi-play-btn{
+            position:relative; display:inline-flex;
+            align-items:center; justify-content:center; gap:7px;
+            width:100%; padding:9px 0;
+            border-radius:22px; text-decoration:none; color:#fff;
+            font-size:0.72rem; font-weight:800; letter-spacing:0.08em;
+            text-transform:uppercase; overflow:hidden;
+            background:linear-gradient(135deg, #E50914 0%, #ff3a3a 50%, #c40811 100%);
+            box-shadow:0 0 14px rgba(229,9,20,0.55), 0 0 28px rgba(229,9,20,0.2);
+            animation:miBtnPulse 2.2s ease-in-out infinite;
+            transition:transform 0.2s, box-shadow 0.2s;
+            border:none; cursor:pointer; font-family:inherit;
+        }
+        .mi-play-btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 0 24px rgba(229,9,20,0.9), 0 0 50px rgba(229,9,20,0.4);
+        }
+        @keyframes miBtnPulse{
+            0%,100%{ box-shadow:0 0 14px rgba(229,9,20,0.55),0 0 28px rgba(229,9,20,0.2); }
+            50%{ box-shadow:0 0 22px rgba(255,60,60,0.9),0 0 45px rgba(229,9,20,0.4); }
+        }
+        .mi-btn-glow{
+            position:absolute; top:0; left:-60%;
+            width:45%; height:100%;
+            background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+            transform:skewX(-15deg);
+            animation:miBtnSweep 2.4s ease-in-out infinite;
+            pointer-events:none;
+        }
+        @keyframes miBtnSweep{
+            0%{ left:-60%; opacity:0; }
+            10%{ opacity:1; }
+            90%{ opacity:1; }
+            100%{ left:130%; opacity:0; }
+        }
+        .mi-play-btn i{ font-size:0.8rem; position:relative; z-index:1; }
+        .mi-play-btn span:last-child{ position:relative; z-index:1; }
+
+        /* ── Desktop tier: larger cards, more breathing room ── */
+        @media (min-width:1025px){
+            .mi-card{ width:210px; }
+            .mi-card-info{ padding:14px 14px 16px; gap:12px; }
+            .mi-title{ font-size:0.92rem; }
+            .mi-play-btn{ font-size:0.78rem; padding:11px 0; }
+            .mi-play-btn i{ font-size:0.9rem; }
+        }
+        /* ── Tablet tier ── */
+        @media (max-width:1024px) and (min-width:769px){
+            .mi-card{ width:180px; }
+        }
+        </style>
+
+        <section class="content-section fade-up-section" id="section-music-instrumentals">
+    <div class="section-header"><span class="red-accent"></span> Music Instrumentals</div>
+    <div class="slider-container">
+        <button class="slider-arrow left" data-target="row-music-instrumentals"><i class="fas fa-chevron-left"></i></button>
+        <div class="category-row" id="row-music-instrumentals">
+
+            <!-- Guitar Simulator Card -->
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271667/file_00000000676871f48c3bd91e9a9c34ac_qx9w7b.png" alt="Guitar Simulator" loading="lazy" decoding="async">
+                </div>
+                <div class="mi-card-info">
+                    <div class="mi-title">Guitar Simulator</div>
+                    <button class="mi-play-btn" onclick="openGameModal('guitar.html')">
+                        <span class="mi-btn-glow"></span>
+                        <i class="fas fa-guitar"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Piano Simulator Card -->
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271664/file_000000003aa471f4a934699daf6870f1_hj3nif.png" alt="Piano Simulator" loading="lazy" decoding="async">
+                </div>
+                <div class="mi-card-info">
+                    <div class="mi-title">Piano Simulator</div>
+                    <button class="mi-play-btn" onclick="openGameModal('piano.html')">
+                        <span class="mi-btn-glow"></span>
+                        <i class="fas fa-music"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Beat Maker / DJ Card -->
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271666/file_00000000533871f49bbecf6e055ceecc_vo6o0n.png" alt="Beat Maker" loading="lazy" decoding="async">
+                </div>
+                <div class="mi-card-info">
+                    <div class="mi-title">Beat Maker</div>
+                    <button class="mi-play-btn" onclick="openGameModal('beat.html')">
+                        <span class="mi-btn-glow"></span>
+                        <i class="fas fa-drum"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <button class="slider-arrow right" data-target="row-music-instrumentals"><i class="fas fa-chevron-right"></i></button>
+    </div>
+        </section>
+        <!-- ===== END MUSIC INSTRUMENTALS ===== -->
+
+        <!-- ===== PLAY GAMES ===== -->
+        <section class="content-section fade-up-section" id="section-play-games">
+    <div class="section-header"><span class="red-accent"></span> Play Games</div>
+    <div class="slider-container">
+        <button class="slider-arrow left" data-target="row-play-games"><i class="fas fa-chevron-left"></i></button>
+        <div class="category-row" id="row-play-games">
+
+            <!-- Binary Blitz Game Card -->
+            <div class="game-card">
+                <div class="game-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782710489/file_000000006b2c7243ac3d162ba63592bd_fghmvu.png" alt="Binary Blitz Game" loading="lazy" decoding="async">
+                </div>
+                <div class="game-card-info">
+                    <div class="game-title">Binary Blitz</div>
+                    <button class="game-play-btn" onclick="openGameModal('game4.html')">
+                        <span class="game-btn-glow"></span>
+                        <i class="fas fa-gamepad"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Trading Pro Game Card -->
+            <div class="game-card">
+                <div class="game-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782677949/file_00000000b7bc71f4be597d2f809b36f3_wskoro.png" alt="Trading Pro Game" loading="lazy" decoding="async">
+                </div>
+                <div class="game-card-info">
+                    <div class="game-title">Trading Pro Game</div>
+                    <button class="game-play-btn" onclick="openGameModal('game3.html')">
+                        <span class="game-btn-glow"></span>
+                        <i class="fas fa-chart-line"></i>
+                        <span>Trade Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Nitro Race 1 Game Card -->
+            <div class="game-card">
+                <div class="game-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782421344/file_00000000d7c871f492a1cb06638b680e_hrumeq.png" alt="Nitro Race 1" loading="lazy" decoding="async">
+                    <div class="game-badge-live">🎮 LIVE</div>
+                </div>
+                <div class="game-card-info">
+                    <div class="game-title">Nitro Race 1</div>
+                    <button class="game-play-btn" onclick="openGameModal('game.html')">
+                        <span class="game-btn-glow"></span>
+                        <i class="fas fa-gamepad"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Puzzle Numbers Game Card -->
+            <div class="game-card">
+                <div class="game-thumb-wrap">
+                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782457317/file_00000000cc587246a4d484f7b82d9229_tjqirs.png" alt="Puzzle Numbers" loading="lazy" decoding="async">
+                    <div class="game-badge-live">🧩 LIVE</div>
+                </div>
+                <div class="game-card-info">
+                    <div class="game-title">Puzzle Numbers</div>
+                    <button class="game-play-btn" onclick="openGameModal('game2.html')">
+                        <span class="game-btn-glow"></span>
+                        <i class="fas fa-gamepad"></i>
+                        <span>Play Now</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <button class="slider-arrow right" data-target="row-play-games"><i class="fas fa-chevron-right"></i></button>
+    </div>
+        </section>
+        <!-- ===== END PLAY GAMES ===== -->
         
    <!-- ABOUT REINBLACKS — expandable text trigger -->
         <section class="content-section fade-up-section" id="section-about-trigger" style="padding-bottom:0;">
