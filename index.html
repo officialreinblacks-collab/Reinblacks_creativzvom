@@ -988,7 +988,7 @@
             <!-- Poster image -->
             <picture>
                 <source media="(min-width: 769px)" srcset="https://res.cloudinary.com/datfuxotx/image/upload/v1783269648/file_00000000e5ac71f4b65a12c4d5633534_hczqfk.png">
-                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783269648/file_00000000ff5071f48bbbefa7f0e4bb84_gbuxz0.png" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
+                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783272804/file_00000000ff5071f48bbbefa7f0e4bb84_cxtasd.jpg" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
             </picture>
 
             <!-- RC badge top-left -->
@@ -1794,7 +1794,97 @@
         </section>
         <!-- ===== END PLAY GAMES ===== -->
 
-        <!-- ===== MUSIC INSTRUMENTALS ===== -->
+        <!-- ═══════════════════════════════════════════════════════
+             MUSIC INSTRUMENTALS — fully isolated component.
+             Unique "mi-*" classes only. Does not read from or affect
+             .game-card / #row-play-games or any other section.
+        ═══════════════════════════════════════════════════════ -->
+        <style>
+        #section-music-instrumentals .slider-container{ padding-top:4px; }
+
+        .mi-card{
+            flex-shrink:0;
+            width:160px;
+            background:rgba(15,15,15,0.95);
+            border-radius:12px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.08);
+            transition:transform 0.25s, box-shadow 0.25s;
+            cursor:default;
+        }
+        .mi-card:hover{
+            transform:translateY(-4px) scale(1.02);
+            box-shadow:0 12px 40px rgba(229,9,20,0.3), 0 0 0 1px rgba(229,9,20,0.25);
+        }
+        .mi-thumb-wrap{
+            position:relative; width:100%;
+            aspect-ratio:9/12; overflow:hidden;
+        }
+        .mi-thumb-wrap img{
+            width:100%; height:100%; object-fit:cover; display:block;
+            transition:transform 0.4s ease;
+        }
+        .mi-card:hover .mi-thumb-wrap img{ transform:scale(1.06); }
+        .mi-card-info{
+            padding:10px 10px 12px;
+            display:flex; flex-direction:column; gap:10px; align-items:center;
+        }
+        .mi-title{
+            font-size:0.78rem; font-weight:800; color:#fff;
+            letter-spacing:0.04em; text-align:center; line-height:1.2;
+        }
+        .mi-play-btn{
+            position:relative; display:inline-flex;
+            align-items:center; justify-content:center; gap:7px;
+            width:100%; padding:9px 0;
+            border-radius:22px; text-decoration:none; color:#fff;
+            font-size:0.72rem; font-weight:800; letter-spacing:0.08em;
+            text-transform:uppercase; overflow:hidden;
+            background:linear-gradient(135deg, #E50914 0%, #ff3a3a 50%, #c40811 100%);
+            box-shadow:0 0 14px rgba(229,9,20,0.55), 0 0 28px rgba(229,9,20,0.2);
+            animation:miBtnPulse 2.2s ease-in-out infinite;
+            transition:transform 0.2s, box-shadow 0.2s;
+            border:none; cursor:pointer; font-family:inherit;
+        }
+        .mi-play-btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 0 24px rgba(229,9,20,0.9), 0 0 50px rgba(229,9,20,0.4);
+        }
+        @keyframes miBtnPulse{
+            0%,100%{ box-shadow:0 0 14px rgba(229,9,20,0.55),0 0 28px rgba(229,9,20,0.2); }
+            50%{ box-shadow:0 0 22px rgba(255,60,60,0.9),0 0 45px rgba(229,9,20,0.4); }
+        }
+        .mi-btn-glow{
+            position:absolute; top:0; left:-60%;
+            width:45%; height:100%;
+            background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+            transform:skewX(-15deg);
+            animation:miBtnSweep 2.4s ease-in-out infinite;
+            pointer-events:none;
+        }
+        @keyframes miBtnSweep{
+            0%{ left:-60%; opacity:0; }
+            10%{ opacity:1; }
+            90%{ opacity:1; }
+            100%{ left:130%; opacity:0; }
+        }
+        .mi-play-btn i{ font-size:0.8rem; position:relative; z-index:1; }
+        .mi-play-btn span:last-child{ position:relative; z-index:1; }
+
+        /* ── Desktop tier: larger cards, more breathing room ── */
+        @media (min-width:1025px){
+            .mi-card{ width:210px; }
+            .mi-card-info{ padding:14px 14px 16px; gap:12px; }
+            .mi-title{ font-size:0.92rem; }
+            .mi-play-btn{ font-size:0.78rem; padding:11px 0; }
+            .mi-play-btn i{ font-size:0.9rem; }
+        }
+        /* ── Tablet tier ── */
+        @media (max-width:1024px) and (min-width:769px){
+            .mi-card{ width:180px; }
+        }
+        </style>
+
         <section class="content-section fade-up-section" id="section-music-instrumentals">
     <div class="section-header"><span class="red-accent"></span> Music Instrumentals</div>
     <div class="slider-container">
@@ -1802,14 +1892,14 @@
         <div class="category-row" id="row-music-instrumentals">
 
             <!-- Guitar Simulator Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
                     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271667/file_00000000676871f48c3bd91e9a9c34ac_qx9w7b.png" alt="Guitar Simulator" loading="lazy" decoding="async">
                 </div>
-                <div class="game-card-info">
-                    <div class="game-title">Guitar Simulator</div>
-                    <button class="game-play-btn" onclick="openGameModal('guitar.html')">
-                        <span class="game-btn-glow"></span>
+                <div class="mi-card-info">
+                    <div class="mi-title">Guitar Simulator</div>
+                    <button class="mi-play-btn" onclick="openGameModal('guitar.html')">
+                        <span class="mi-btn-glow"></span>
                         <i class="fas fa-guitar"></i>
                         <span>Play Now</span>
                     </button>
@@ -1817,14 +1907,14 @@
             </div>
 
             <!-- Piano Simulator Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
                     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271664/file_000000003aa471f4a934699daf6870f1_hj3nif.png" alt="Piano Simulator" loading="lazy" decoding="async">
                 </div>
-                <div class="game-card-info">
-                    <div class="game-title">Piano Simulator</div>
-                    <button class="game-play-btn" onclick="openGameModal('piano.html')">
-                        <span class="game-btn-glow"></span>
+                <div class="mi-card-info">
+                    <div class="mi-title">Piano Simulator</div>
+                    <button class="mi-play-btn" onclick="openGameModal('piano.html')">
+                        <span class="mi-btn-glow"></span>
                         <i class="fas fa-music"></i>
                         <span>Play Now</span>
                     </button>
@@ -1832,14 +1922,14 @@
             </div>
 
             <!-- Beat Maker / DJ Card -->
-            <div class="game-card">
-                <div class="game-thumb-wrap">
+            <div class="mi-card">
+                <div class="mi-thumb-wrap">
                     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783271666/file_00000000533871f49bbecf6e055ceecc_vo6o0n.png" alt="Beat Maker" loading="lazy" decoding="async">
                 </div>
-                <div class="game-card-info">
-                    <div class="game-title">Beat Maker</div>
-                    <button class="game-play-btn" onclick="openGameModal('beat.html')">
-                        <span class="game-btn-glow"></span>
+                <div class="mi-card-info">
+                    <div class="mi-title">Beat Maker</div>
+                    <button class="mi-play-btn" onclick="openGameModal('beat.html')">
+                        <span class="mi-btn-glow"></span>
                         <i class="fas fa-drum"></i>
                         <span>Play Now</span>
                     </button>
