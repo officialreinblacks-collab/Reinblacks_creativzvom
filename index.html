@@ -854,6 +854,38 @@
         .modal-close { position:absolute; top:60px; right:24px; background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1.2rem; cursor:pointer; z-index:10; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
         #video-modal .video-full-wrap { width:100vw; height:100vh; background:#000; }
         #video-modal .video-full-wrap iframe { width:100%; height:100%; border:none; }
+
+        /* ─────────────── DETAIL PAGE (Netflix-style) ─────────────── */
+        #detail-modal { position:fixed; inset:0; background:#000; z-index:9600; opacity:0; pointer-events:none; transform:translateY(14px); transition:opacity 0.3s ease, transform 0.3s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+        #detail-modal.active { opacity:1; pointer-events:all; transform:translateY(0); }
+        .detail-hero { position:relative; width:100%; aspect-ratio:16/10; max-height:56vh; background:#050505; overflow:hidden; }
+        .detail-hero iframe { position:absolute; inset:0; width:100%; height:100%; border:none; pointer-events:none; }
+        .detail-hero-bar { position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,var(--red) 0%, var(--red) 32%, rgba(255,255,255,0.18) 32%); }
+        .detail-back-btn, .detail-mute-btn, .detail-fs-btn { position:absolute; width:38px; height:38px; border-radius:50%; background:rgba(20,20,20,0.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; z-index:5; transition:background 0.25s; }
+        .detail-back-btn:hover, .detail-mute-btn:hover, .detail-fs-btn:hover { background:var(--red); border-color:var(--red); }
+        .detail-back-btn { top:16px; left:16px; }
+        .detail-mute-btn { bottom:16px; right:16px; }
+        .detail-fs-btn { bottom:16px; right:64px; }
+        .detail-body { max-width:760px; margin:0 auto; padding:22px 20px 70px; }
+        .detail-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,7vw,42px); letter-spacing:0.02em; color:#fff; line-height:1.05; margin-bottom:10px; }
+        .detail-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; color:#9a9a9a; font-size:0.85rem; font-weight:500; margin-bottom:22px; }
+        .detail-meta .rating-badge { border:1px solid #666; padding:1px 7px; border-radius:3px; font-size:0.75rem; color:#ddd; }
+        .detail-meta .hd-badge { border:1px solid #666; padding:1px 6px; border-radius:3px; font-size:0.7rem; color:#ddd; }
+        .detail-btn { width:100%; display:flex; align-items:center; justify-content:center; gap:10px; padding:13px; border-radius:6px; font-size:1rem; font-weight:700; letter-spacing:0.01em; cursor:pointer; border:none; margin-bottom:12px; transition:opacity 0.25s, background 0.25s; }
+        .detail-btn-play { background:#fff; color:#000; }
+        .detail-btn-play:hover { opacity:0.85; }
+        .detail-btn-yt { background:#2a2a2a; color:#fff; text-decoration:none; }
+        .detail-btn-yt:hover { background:#383838; }
+        .detail-episode-row { display:flex; align-items:baseline; justify-content:space-between; margin:26px 0 8px; gap:12px; }
+        .detail-episode-label { font-weight:700; font-size:0.95rem; color:#fff; }
+        .detail-desc { color:#c9c9c9; font-size:0.92rem; font-weight:300; line-height:1.6; margin-bottom:6px; }
+        .detail-credit { color:#777; font-size:0.8rem; font-style:italic; margin-bottom:26px; }
+        .detail-actions { display:flex; justify-content:space-around; border-top:1px solid #1c1c1c; padding-top:18px; }
+        .detail-action { display:flex; flex-direction:column; align-items:center; gap:6px; background:none; border:none; color:#ccc; font-size:0.7rem; cursor:pointer; transition:color 0.25s; }
+        .detail-action i { font-size:1.15rem; }
+        .detail-action:hover, .detail-action.active { color:var(--red); }
+        .detail-toast { position:fixed; left:50%; bottom:30px; transform:translateX(-50%) translateY(20px); background:rgba(25,25,25,0.95); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:10px 18px; border-radius:24px; font-size:0.82rem; opacity:0; pointer-events:none; transition:opacity 0.25s, transform 0.25s; z-index:9700; }
+        .detail-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
         #gallery-modal .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:12px; padding:30px; max-width:1100px; width:100%; max-height:85vh; overflow-y:auto; background:rgba(255,255,255,0.06); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:14px; border:1px solid rgba(255,255,255,0.12); }
         #gallery-modal .gallery-grid img { width:100%; border-radius:6px; cursor:pointer; transition:transform 0.25s; object-fit:cover; aspect-ratio:1/1; }
 
@@ -1616,13 +1648,13 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card wide" data-video="asaUW8weEkM">
+<div class="poster-card wide" data-video="asaUW8weEkM" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 1" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/asaUW8weEkM/hqdefault.jpg" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">Devil's Call</div>
 </div>
-<div class="poster-card wide" data-video="6TNqWuYg1vM">
+<div class="poster-card wide" data-video="6TNqWuYg1vM" data-title="Another Tomb Life" data-meta="2026 · Horror Series · HD" data-episode="Episode 1" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1782025486/415fd770-6cd5-11f1-85bc-e9b037a507b7_bq6jjt.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">ANOTHER TOMB LIFE — Ep. 01</div>
@@ -1641,12 +1673,12 @@
         <button class="slider-arrow left" data-target="row-sweet-monster"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-sweet-monster">
 
-<div class="poster-card wide" data-video="sIcTXVVZh_o">
+<div class="poster-card wide" data-video="sIcTXVVZh_o" data-title="Sweet Monster" data-meta="2026 · Crime Drama · HD" data-episode="Episode 1" data-desc="A diamond-smuggling operation draws two worlds together — and a secret affair threatens to unravel everything before the deal is done." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/sIcTXVVZh_o/hqdefault.jpg" alt="Sweet Monster Episode 1" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">SWEET MONSTER — Ep. 01</div>
 </div>
-<div class="poster-card wide" data-video="BzFdGumFfmY">
+<div class="poster-card wide" data-video="BzFdGumFfmY" data-title="Sweet Monster" data-meta="2026 · Crime Drama · HD" data-episode="Episode 2" data-desc="The lies catch up fast. As suspicion closes in, one betrayal sets the stage for a cliffhanger that changes everything." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/BzFdGumFfmY/hqdefault.jpg" alt="Sweet Monster Episode 2" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">SWEET MONSTER — Ep. 02</div>
@@ -1889,8 +1921,37 @@
         </div>
     </div>
 
-      <!-- FULL SCREEN MODAL -->
+      <!-- FULL SCREEN MODAL (legacy, kept for non-episodic videos) -->
     <div class="modal-overlay" id="video-modal"><button class="modal-close" id="video-modal-close">✕</button><div class="video-full-wrap" id="video-modal-content"></div></div>
+
+    <!-- DETAIL PAGE (Netflix-style) -->
+    <div id="detail-modal">
+        <div class="detail-hero" id="detail-hero">
+            <div id="detail-hero-frame"></div>
+            <div class="detail-hero-bar"></div>
+            <button class="detail-back-btn" id="detail-back-btn" aria-label="Back"><i class="fas fa-arrow-left"></i></button>
+            <button class="detail-fs-btn" id="detail-fs-btn" aria-label="Fullscreen"><i class="fas fa-expand"></i></button>
+            <button class="detail-mute-btn" id="detail-mute-btn" aria-label="Toggle sound"><i class="fas fa-volume-mute"></i></button>
+        </div>
+        <div class="detail-body">
+            <div class="detail-title" id="detail-title"></div>
+            <div class="detail-meta" id="detail-meta"></div>
+            <button class="detail-btn detail-btn-play" id="detail-play-btn"><i class="fas fa-play"></i> Play</button>
+            <a class="detail-btn detail-btn-yt" id="detail-yt-btn" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+            <div class="detail-episode-row">
+                <div class="detail-episode-label" id="detail-episode-label"></div>
+            </div>
+            <div class="detail-desc" id="detail-desc"></div>
+            <div class="detail-credit" id="detail-credit"></div>
+            <div class="detail-actions">
+                <button class="detail-action" id="detail-mylist-btn"><i class="fas fa-plus"></i><span>My List</span></button>
+                <button class="detail-action" id="detail-like-btn"><i class="fas fa-thumbs-up"></i><span>Like</span></button>
+                <button class="detail-action" id="detail-share-btn"><i class="fas fa-share"></i><span>Share</span></button>
+                <button class="detail-action" id="detail-fs-btn-2"><i class="fas fa-expand"></i><span>Fullscreen</span></button>
+            </div>
+        </div>
+    </div>
+    <div class="detail-toast" id="detail-toast"></div>
 
     <!-- SHORTS MODAL -->
     <div id="shorts-modal">
@@ -2085,7 +2146,10 @@ const topNav = document.getElementById('top-nav');
 
             // Wire up all poster card clicks
             document.querySelectorAll('.poster-card[data-video]').forEach(card => {
-                card.addEventListener('click', () => openVideoModal(card.getAttribute('data-video')));
+                card.addEventListener('click', () => {
+                    if (card.hasAttribute('data-title')) openDetailModal(card);
+                    else openVideoModal(card.getAttribute('data-video'));
+                });
             });
             document.querySelectorAll('.poster-card.coming-soon').forEach(card => {
                 card.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); }, true);
@@ -2101,6 +2165,135 @@ const topNav = document.getElementById('top-nav');
             function closeVideoModal() { videoModal.classList.remove('active'); videoModalContent.innerHTML = ''; document.body.style.overflow = ''; }
             videoModalClose.addEventListener('click', closeVideoModal);
             videoModal.addEventListener('click', e => { if (e.target === videoModal) closeVideoModal(); });
+
+            /* ─────────────── DETAIL PAGE (Netflix-style) ─────────────── */
+            const detailModal = document.getElementById('detail-modal');
+            const detailHero = document.getElementById('detail-hero');
+            const detailHeroFrame = document.getElementById('detail-hero-frame');
+            const detailBackBtn = document.getElementById('detail-back-btn');
+            const detailMuteBtn = document.getElementById('detail-mute-btn');
+            const detailFsBtn = document.getElementById('detail-fs-btn');
+            const detailFsBtn2 = document.getElementById('detail-fs-btn-2');
+            const detailPlayBtn = document.getElementById('detail-play-btn');
+            const detailYtBtn = document.getElementById('detail-yt-btn');
+            const detailTitle = document.getElementById('detail-title');
+            const detailMeta = document.getElementById('detail-meta');
+            const detailEpisodeLabel = document.getElementById('detail-episode-label');
+            const detailDesc = document.getElementById('detail-desc');
+            const detailCredit = document.getElementById('detail-credit');
+            const detailMyListBtn = document.getElementById('detail-mylist-btn');
+            const detailLikeBtn = document.getElementById('detail-like-btn');
+            const detailShareBtn = document.getElementById('detail-share-btn');
+            const detailToast = document.getElementById('detail-toast');
+            let detailVideoId = null;
+            let detailMuted = true;
+
+            function detailHeroSrc(videoId, muted, withControls) {
+                return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=${videoId}` +
+                    `&mute=${muted ? 1 : 0}&controls=${withControls ? 1 : 0}`;
+            }
+
+            function showToast(msg) {
+                detailToast.textContent = msg;
+                detailToast.classList.add('show');
+                clearTimeout(showToast._t);
+                showToast._t = setTimeout(() => detailToast.classList.remove('show'), 1800);
+            }
+
+            function getMyList() { try { return JSON.parse(localStorage.getItem('rc_mylist') || '[]'); } catch(e) { return []; } }
+            function getLikes() { try { return JSON.parse(localStorage.getItem('rc_likes') || '[]'); } catch(e) { return []; } }
+
+            function openDetailModal(card) {
+                const videoId = card.getAttribute('data-video');
+                detailVideoId = videoId;
+                detailMuted = true;
+
+                detailTitle.textContent = card.getAttribute('data-title') || '';
+                detailMeta.innerHTML = (card.getAttribute('data-meta') || '').split('·').map(s => s.trim()).filter(Boolean).map((s,i) => i===0 ? `<span>${s}</span>` : `<span class="hd-badge">${s}</span>`).join('<span>·</span>');
+                detailEpisodeLabel.textContent = card.getAttribute('data-episode') || '';
+                detailDesc.textContent = card.getAttribute('data-desc') || '';
+                detailCredit.textContent = card.getAttribute('data-credit') || '';
+                detailYtBtn.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                detailMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+
+                const inList = getMyList().includes(videoId);
+                detailMyListBtn.classList.toggle('active', inList);
+                detailMyListBtn.innerHTML = inList ? '<i class="fas fa-check"></i><span>My List</span>' : '<i class="fas fa-plus"></i><span>My List</span>';
+                const liked = getLikes().includes(videoId);
+                detailLikeBtn.classList.toggle('active', liked);
+
+                detailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                detailModal.scrollTop = 0;
+            }
+
+            function closeDetailModal() {
+                detailModal.classList.remove('active');
+                detailHeroFrame.innerHTML = '';
+                document.body.style.overflow = '';
+                detailVideoId = null;
+                if (document.fullscreenElement) document.exitFullscreen?.();
+            }
+
+            detailBackBtn.addEventListener('click', closeDetailModal);
+
+            detailMuteBtn.addEventListener('click', () => {
+                if (!detailVideoId) return;
+                detailMuted = !detailMuted;
+                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(detailVideoId, detailMuted, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                detailMuteBtn.innerHTML = detailMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            });
+
+            function goDetailFullscreen() {
+                if (!detailVideoId) return;
+                detailMuted = false;
+                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(detailVideoId, false, true)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                detailMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                (detailHero.requestFullscreen?.() || detailHero.webkitRequestFullscreen?.call(detailHero));
+            }
+            detailFsBtn.addEventListener('click', goDetailFullscreen);
+            detailFsBtn2.addEventListener('click', goDetailFullscreen);
+
+            detailPlayBtn.addEventListener('click', () => {
+                if (!detailVideoId) return;
+                detailMuted = false;
+                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(detailVideoId, false, true)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                detailMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                detailHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            detailMyListBtn.addEventListener('click', () => {
+                if (!detailVideoId) return;
+                let list = getMyList();
+                const inList = list.includes(detailVideoId);
+                list = inList ? list.filter(id => id !== detailVideoId) : [...list, detailVideoId];
+                localStorage.setItem('rc_mylist', JSON.stringify(list));
+                detailMyListBtn.classList.toggle('active', !inList);
+                detailMyListBtn.innerHTML = !inList ? '<i class="fas fa-check"></i><span>My List</span>' : '<i class="fas fa-plus"></i><span>My List</span>';
+                showToast(!inList ? 'Added to My List' : 'Removed from My List');
+            });
+
+            detailLikeBtn.addEventListener('click', () => {
+                if (!detailVideoId) return;
+                let likes = getLikes();
+                const liked = likes.includes(detailVideoId);
+                likes = liked ? likes.filter(id => id !== detailVideoId) : [...likes, detailVideoId];
+                localStorage.setItem('rc_likes', JSON.stringify(likes));
+                detailLikeBtn.classList.toggle('active', !liked);
+            });
+
+            detailShareBtn.addEventListener('click', async () => {
+                if (!detailVideoId) return;
+                const url = `https://www.youtube.com/watch?v=${detailVideoId}`;
+                const title = detailTitle.textContent || 'Reinblacks Creativz';
+                if (navigator.share) {
+                    try { await navigator.share({ title, url }); } catch(e) {}
+                } else {
+                    try { await navigator.clipboard.writeText(url); showToast('Link copied'); } catch(e) { showToast(url); }
+                }
+            });
 
             let currentGalleryKey = null;
             function openGalleryModal(key) {
