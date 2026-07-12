@@ -888,6 +888,32 @@
         .detail-action { display:flex; flex-direction:column; align-items:center; gap:6px; background:none; border:none; color:#ccc; font-size:0.7rem; cursor:pointer; transition:color 0.25s; }
         .detail-action i { font-size:1.15rem; }
         .detail-action:hover, .detail-action.active { color:var(--red); }
+
+        /* ─────────────── DETAIL PAGE — EPISODES SECTION (Netflix-style) ─────────────── */
+        .detail-tabs { display:flex; gap:28px; margin-top:30px; border-bottom:1px solid #2a2a2a; overflow-x:auto; scrollbar-width:none; }
+        .detail-tabs::-webkit-scrollbar { display:none; }
+        .detail-tab { background:none; border:none; color:#888; font-size:0.95rem; font-weight:700; padding:0 2px 14px; cursor:pointer; white-space:nowrap; position:relative; transition:color 0.2s; }
+        .detail-tab.active { color:#fff; }
+        .detail-tab.active::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--red); border-radius:2px; }
+        .detail-tab-panel { padding-top:22px; }
+        .detail-season-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+        .detail-season-title { font-size:1.1rem; font-weight:700; color:#fff; }
+        .detail-season-info { width:26px; height:26px; border-radius:50%; background:#2a2a2a; color:#ccc; display:flex; align-items:center; justify-content:center; font-size:0.75rem; }
+        .detail-empty-tab { color:#888; font-size:0.9rem; padding:14px 0 30px; }
+        .episode-row { display:flex; align-items:flex-start; gap:14px; padding:16px 0; border-bottom:1px solid #1c1c1c; cursor:pointer; }
+        .episode-row:last-child { border-bottom:none; }
+        .episode-thumb-wrap { position:relative; flex:0 0 128px; width:128px; aspect-ratio:16/9; border-radius:5px; overflow:hidden; background:#111; }
+        .episode-thumb-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+        .episode-play-btn { position:absolute; inset:0; margin:auto; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(2px); border:1.5px solid rgba(255,255,255,0.85); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.85rem; pointer-events:none; transition:background 0.2s, transform 0.2s; }
+        .episode-row:hover .episode-play-btn { background:rgba(0,0,0,0.65); transform:scale(1.06); }
+        .episode-info { flex:1; min-width:0; padding-top:2px; }
+        .episode-title-row { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:5px; }
+        .episode-title { color:#fff; font-size:0.95rem; font-weight:600; }
+        .episode-duration { color:#999; font-size:0.82rem; white-space:nowrap; flex:0 0 auto; }
+        .episode-desc { color:#9a9a9a; font-size:0.82rem; line-height:1.5; font-weight:300; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .episode-action-btn { flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:none; border:1.5px solid #4a4a4a; color:#eee; display:flex; align-items:center; justify-content:center; font-size:0.75rem; cursor:pointer; margin-top:4px; transition:border-color 0.2s, color 0.2s; }
+        .episode-row:hover .episode-action-btn { border-color:#fff; color:#fff; }
+
         .detail-toast { position:fixed; left:50%; bottom:30px; transform:translateX(-50%) translateY(20px); background:rgba(25,25,25,0.95); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:10px 18px; border-radius:24px; font-size:0.82rem; opacity:0; pointer-events:none; transition:opacity 0.25s, transform 0.25s; z-index:9700; }
         .detail-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
@@ -911,6 +937,12 @@
             .detail-episode-row, .detail-desc, .detail-credit { max-width:800px; }
             .detail-episode-row { margin-top:32px; }
             .detail-actions { justify-content:flex-start; gap:36px; max-width:800px; }
+            .detail-tabs, .detail-tab-panel, .detail-empty-tab { max-width:1000px; }
+            .detail-tabs { gap:36px; margin-top:44px; }
+            .detail-tab { font-size:1.05rem; }
+            .episode-thumb-wrap { flex:0 0 220px; width:220px; }
+            .episode-title { font-size:1.05rem; }
+            .episode-desc { -webkit-line-clamp:2; font-size:0.88rem; }
         }
         @media (min-width:1400px) { .detail-body { max-width:1600px; } }
 
@@ -2017,6 +2049,25 @@
                 <button class="detail-action" id="detail-share-btn"><i class="fas fa-share"></i><span>Share</span></button>
                 <button class="detail-action" id="detail-fs-btn-2"><i class="fas fa-expand"></i><span>Fullscreen</span></button>
             </div>
+
+            <div class="detail-tabs" id="detail-tabs" style="display:none;">
+                <button class="detail-tab active" data-tab="episodes">Episodes</button>
+                <button class="detail-tab" data-tab="trailers">Trailers &amp; More</button>
+                <button class="detail-tab" data-tab="more">More Like This</button>
+            </div>
+            <div class="detail-tab-panel" id="detail-panel-episodes">
+                <div class="detail-season-row">
+                    <div class="detail-season-title" id="detail-season-title">Season 1</div>
+                    <div class="detail-season-info" title="About this season"><i class="fas fa-info"></i></div>
+                </div>
+                <div class="detail-episode-list" id="detail-episode-list"></div>
+            </div>
+            <div class="detail-tab-panel" id="detail-panel-trailers" style="display:none;">
+                <div class="detail-empty-tab">More trailers &amp; extras coming soon.</div>
+            </div>
+            <div class="detail-tab-panel" id="detail-panel-more" style="display:none;">
+                <div class="detail-empty-tab">More titles like this coming soon.</div>
+            </div>
         </div>
     </div>
     <div class="detail-toast" id="detail-toast"></div>
@@ -2477,6 +2528,28 @@ const topNav = document.getElementById('top-nav');
             let detailMuted = true;
             let detailPlayerInstance = null;
 
+            /* Per-title episode lists. Key = the data-video id on the poster card that opens the title.
+               Add more titles here later — each entry is an array of { id, num, title, duration, desc }. */
+            const seriesEpisodes = {
+                'asaUW8weEkM': [
+                    {
+                        id: 'asaUW8weEkM',
+                        num: 1,
+                        title: 'Episode 1',
+                        duration: '',
+                        desc: "A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price."
+                    }
+                ]
+            };
+
+            function enterHeroFullscreen() {
+                const req = (detailHero.requestFullscreen && detailHero.requestFullscreen()) ||
+                            (detailHero.webkitRequestFullscreen && detailHero.webkitRequestFullscreen());
+                const lockLandscape = () => { try { screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape').catch(() => {}); } catch (e) {} };
+                if (req && req.then) req.then(lockLandscape).catch(() => {});
+                else lockLandscape();
+            }
+
             function playDetailWithControls() {
                 if (!detailVideoId) return;
                 detailMuted = false;
@@ -2488,6 +2561,64 @@ const topNav = document.getElementById('top-nav');
                     onBack: closeDetailModal
                 });
             }
+
+            function renderEpisodes(seriesKey) {
+                const eps = seriesEpisodes[seriesKey];
+                const tabsEl = document.getElementById('detail-tabs');
+                const listEl = document.getElementById('detail-episode-list');
+                document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('.detail-tab[data-tab="episodes"]').classList.add('active');
+                document.getElementById('detail-panel-episodes').style.display = '';
+                document.getElementById('detail-panel-trailers').style.display = 'none';
+                document.getElementById('detail-panel-more').style.display = 'none';
+
+                if (!eps || !eps.length) {
+                    tabsEl.style.display = 'none';
+                    listEl.innerHTML = '';
+                    return;
+                }
+                tabsEl.style.display = '';
+                listEl.innerHTML = eps.map(ep => `
+                    <div class="episode-row" data-episode-id="${ep.id}">
+                        <div class="episode-thumb-wrap">
+                            <img src="https://img.youtube.com/vi/${ep.id}/hqdefault.jpg" alt="${ep.title}" loading="lazy">
+                            <div class="episode-play-btn"><i class="fas fa-play"></i></div>
+                        </div>
+                        <div class="episode-info">
+                            <div class="episode-title-row">
+                                <span class="episode-title">${ep.num}. ${ep.title}</span>
+                                ${ep.duration ? `<span class="episode-duration">${ep.duration}</span>` : ''}
+                            </div>
+                            ${ep.desc ? `<div class="episode-desc">${ep.desc}</div>` : ''}
+                        </div>
+                        <button class="episode-action-btn" aria-label="Play ${ep.title}"><i class="fas fa-play"></i></button>
+                    </div>
+                `).join('');
+
+                listEl.querySelectorAll('.episode-row').forEach(row => {
+                    row.addEventListener('click', () => {
+                        const ep = eps.find(e => e.id === row.getAttribute('data-episode-id'));
+                        if (!ep) return;
+                        detailVideoId = ep.id;
+                        detailEpisodeLabel.textContent = `Episode ${ep.num} "${ep.title}"`;
+                        detailYtBtn.href = `https://www.youtube.com/watch?v=${ep.id}`;
+                        playDetailWithControls();
+                        enterHeroFullscreen();
+                        detailHero.scrollIntoView({ block: 'start' });
+                    });
+                });
+            }
+
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const key = tab.getAttribute('data-tab');
+                    document.getElementById('detail-panel-episodes').style.display = key === 'episodes' ? '' : 'none';
+                    document.getElementById('detail-panel-trailers').style.display = key === 'trailers' ? '' : 'none';
+                    document.getElementById('detail-panel-more').style.display = key === 'more' ? '' : 'none';
+                });
+            });
 
             function detailHeroSrc(videoId, muted, withControls) {
                 return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=${videoId}` +
@@ -2528,6 +2659,8 @@ const topNav = document.getElementById('top-nav');
                 const liked = getLikes().includes(videoId);
                 detailLikeBtn.classList.toggle('active', liked);
 
+                renderEpisodes(videoId);
+
                 detailModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 detailModal.scrollTop = 0;
@@ -2555,7 +2688,7 @@ const topNav = document.getElementById('top-nav');
             function goDetailFullscreen() {
                 if (!detailVideoId) return;
                 playDetailWithControls();
-                (detailHero.requestFullscreen?.() || detailHero.webkitRequestFullscreen?.call(detailHero));
+                enterHeroFullscreen();
             }
             detailFsBtn.addEventListener('click', goDetailFullscreen);
             detailFsBtn2.addEventListener('click', goDetailFullscreen);
