@@ -869,6 +869,7 @@
         .detail-back-btn { top:16px; left:16px; }
         .detail-mute-btn { bottom:16px; right:16px; }
         .detail-fs-btn { bottom:16px; right:64px; }
+        .detail-hero.cplayer-active .detail-mute-btn, .detail-hero.cplayer-active .detail-fs-btn { display:none; }
         .detail-body { max-width:760px; margin:0 auto; padding:22px 20px 70px; }
         .detail-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,7vw,42px); letter-spacing:0.02em; color:#fff; line-height:1.05; margin-bottom:10px; }
         .detail-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; color:#9a9a9a; font-size:0.85rem; font-weight:500; margin-bottom:22px; }
@@ -889,6 +890,47 @@
         .detail-action:hover, .detail-action.active { color:var(--red); }
         .detail-toast { position:fixed; left:50%; bottom:30px; transform:translateX(-50%) translateY(20px); background:rgba(25,25,25,0.95); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:10px 18px; border-radius:24px; font-size:0.82rem; opacity:0; pointer-events:none; transition:opacity 0.25s, transform 0.25s; z-index:9700; }
         .detail-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+        /* ─────────────── CUSTOM PLAYER CONTROLS ─────────────── */
+        .cplayer { position:absolute; inset:0; width:100%; height:100%; background:#000; overflow:hidden; }
+        .cplayer-yt { position:absolute; inset:0; width:100%; height:100%; transition:filter 0.15s linear; }
+        .cplayer-yt iframe { width:100%; height:100%; border:none; pointer-events:none; }
+        .cplayer-tap-catch { position:absolute; inset:0; z-index:2; }
+        .cplayer-overlay { position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 68%, rgba(0,0,0,0.6) 100%); opacity:0; pointer-events:none; transition:opacity 0.25s ease; }
+        .cplayer-overlay.show { opacity:1; pointer-events:all; }
+        .cplayer-top { display:flex; align-items:center; gap:12px; padding:14px 16px; }
+        .cplayer-title { flex:1; text-align:center; color:#fff; font-size:0.95rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .cplayer-title-ep { font-weight:400; color:#ddd; }
+        .cplayer-btn { background:none; border:none; color:#fff; font-size:1.15rem; cursor:pointer; width:36px; height:36px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .cplayer-brightness-wrap { position:absolute; left:18px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:#fff; font-size:0.9rem; }
+        .cplayer-brightness { -webkit-appearance:none; appearance:none; width:96px; height:3px; background:rgba(255,255,255,0.35); border-radius:3px; transform:rotate(-90deg); cursor:pointer; }
+        .cplayer-brightness::-webkit-slider-thumb { -webkit-appearance:none; width:13px; height:13px; border-radius:50%; background:#fff; box-shadow:0 0 4px rgba(0,0,0,0.6); }
+        .cplayer-brightness::-moz-range-thumb { width:13px; height:13px; border-radius:50%; background:#fff; border:none; }
+        .cplayer-center { display:flex; align-items:center; justify-content:center; gap:64px; }
+        .cplayer-skip { position:relative; background:none; border:none; color:#fff; font-size:1.9rem; cursor:pointer; width:52px; height:52px; display:flex; align-items:center; justify-content:center; }
+        .cplayer-skip span { position:absolute; font-size:0.68rem; font-weight:700; top:50%; left:50%; transform:translate(-50%,-42%); }
+        .cplayer-playpause { background:none; border:none; color:#fff; font-size:2.3rem; cursor:pointer; width:64px; height:64px; display:flex; align-items:center; justify-content:center; }
+        .cplayer-bottom { padding:6px 16px 14px; }
+        .cplayer-progress-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+        .cplayer-progress-track { position:relative; flex:1; height:14px; display:flex; align-items:center; cursor:pointer; }
+        .cplayer-progress-track::before { content:''; position:absolute; left:0; right:0; height:3px; background:rgba(255,255,255,0.3); border-radius:2px; }
+        .cplayer-progress-fill { position:absolute; left:0; height:3px; background:var(--red); border-radius:2px; width:0%; pointer-events:none; }
+        .cplayer-progress-handle { position:absolute; left:0%; width:13px; height:13px; margin-left:-6.5px; border-radius:50%; background:var(--red); pointer-events:none; }
+        .cplayer-time { color:#fff; font-size:0.8rem; font-variant-numeric:tabular-nums; flex-shrink:0; }
+        .cplayer-actions-row { display:flex; align-items:center; justify-content:space-between; }
+        .cplayer-speed, .cplayer-cc { background:none; border:none; color:#fff; font-size:0.78rem; font-weight:500; display:flex; align-items:center; gap:7px; cursor:pointer; padding:4px 2px; }
+        .cplayer-speed i, .cplayer-cc i { font-size:0.95rem; }
+        .cplayer-speed-menu, .cplayer-cc-menu { position:absolute; z-index:4; bottom:52px; background:rgba(20,20,20,0.92); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:6px 0; min-width:150px; display:none; }
+        .cplayer-speed-menu.show, .cplayer-cc-menu.show { display:block; }
+        .cplayer-speed-menu { left:16px; }
+        .cplayer-cc-menu { right:16px; }
+        .cplayer-menu-item { display:flex; align-items:center; justify-content:space-between; padding:9px 14px; color:#eee; font-size:0.82rem; cursor:pointer; white-space:nowrap; }
+        .cplayer-menu-item:hover { background:rgba(255,255,255,0.08); }
+        .cplayer-menu-item.active { color:var(--red); font-weight:600; }
+        .cplayer-lockscreen { position:absolute; inset:0; z-index:5; display:none; align-items:flex-end; justify-content:flex-start; padding:20px; }
+        .cplayer-lockscreen.show { display:flex; }
+        .cplayer-unlock { width:42px; height:42px; border-radius:50%; background:rgba(20,20,20,0.6); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1rem; cursor:pointer; }
+
         #gallery-modal .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:12px; padding:30px; max-width:1100px; width:100%; max-height:85vh; overflow-y:auto; background:rgba(255,255,255,0.06); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-radius:14px; border:1px solid rgba(255,255,255,0.12); }
         #gallery-modal .gallery-grid img { width:100%; border-radius:6px; cursor:pointer; transition:transform 0.25s; object-fit:cover; aspect-ratio:1/1; }
 
@@ -2142,6 +2184,215 @@ const topNav = document.getElementById('top-nav');
 
             document.querySelectorAll('.pricing-cta').forEach(btn => { btn.addEventListener('click', function(e) { const packageName = this.getAttribute('data-package'); if (packageName && pricingPackageInput) { pricingPackageInput.value = packageName; } }); });
 
+            /* ─────────────── CUSTOM PLAYER (branded controls, auto-hide, lock, speed, captions) ─────────────── */
+            const ytApiReady = new Promise(resolve => {
+                if (window.YT && window.YT.Player) { resolve(); return; }
+                const prevCb = window.onYouTubeIframeAPIReady;
+                window.onYouTubeIframeAPIReady = function() { if (typeof prevCb === 'function') prevCb(); resolve(); };
+                if (!document.getElementById('yt-iframe-api')) {
+                    const tag = document.createElement('script');
+                    tag.id = 'yt-iframe-api';
+                    tag.src = 'https://www.youtube.com/iframe_api';
+                    document.head.appendChild(tag);
+                }
+            });
+
+            function cplayerFormatTime(sec) {
+                sec = Math.max(0, Math.floor(sec || 0));
+                const h = Math.floor(sec / 3600);
+                const m = Math.floor((sec % 3600) / 60);
+                const s = sec % 60;
+                if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+                return `${m}:${String(s).padStart(2,'0')}`;
+            }
+
+            function createCustomPlayer(container, videoId, opts) {
+                opts = opts || {};
+                const uid = 'cp' + Math.random().toString(36).slice(2, 9);
+                container.innerHTML = `
+                    <div class="cplayer">
+                        <div class="cplayer-yt" id="${uid}"></div>
+                        <div class="cplayer-tap-catch"></div>
+                        <div class="cplayer-overlay show">
+                            <div class="cplayer-top">
+                                <button class="cplayer-btn cplayer-back" aria-label="Back"><i class="fas fa-arrow-left"></i></button>
+                                <div class="cplayer-title">${opts.title ? `${opts.title}${opts.episode ? ` <span class="cplayer-title-ep">&quot;${opts.episode}&quot;</span>` : ''}` : ''}</div>
+                                <button class="cplayer-btn cplayer-lock" aria-label="Lock controls"><i class="fas fa-lock-open"></i></button>
+                            </div>
+                            <div class="cplayer-brightness-wrap">
+                                <i class="fas fa-sun"></i>
+                                <input type="range" class="cplayer-brightness" min="40" max="150" value="100" aria-label="Brightness">
+                            </div>
+                            <div class="cplayer-center">
+                                <button class="cplayer-skip cplayer-back10" aria-label="Rewind 10 seconds"><i class="fas fa-rotate-left"></i><span>10</span></button>
+                                <button class="cplayer-playpause" aria-label="Play or pause"><i class="fas fa-pause"></i></button>
+                                <button class="cplayer-skip cplayer-fwd10" aria-label="Forward 10 seconds"><i class="fas fa-rotate-right"></i><span>10</span></button>
+                            </div>
+                            <div class="cplayer-bottom">
+                                <div class="cplayer-progress-row">
+                                    <div class="cplayer-progress-track"><div class="cplayer-progress-fill"></div><div class="cplayer-progress-handle"></div></div>
+                                    <span class="cplayer-time">0:00</span>
+                                </div>
+                                <div class="cplayer-actions-row">
+                                    <button class="cplayer-speed"><i class="fas fa-tachometer-alt"></i><span>Speed (1x)</span></button>
+                                    <button class="cplayer-cc"><i class="fas fa-closed-captioning"></i><span>Audio &amp; Subtitles</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cplayer-lockscreen"><button class="cplayer-unlock" aria-label="Unlock controls"><i class="fas fa-lock"></i></button></div>
+                        <div class="cplayer-speed-menu"></div>
+                        <div class="cplayer-cc-menu"></div>
+                    </div>`;
+
+                const root = container.querySelector('.cplayer');
+                const overlay = root.querySelector('.cplayer-overlay');
+                const tapCatch = root.querySelector('.cplayer-tap-catch');
+                const backBtn = root.querySelector('.cplayer-back');
+                const lockBtn = root.querySelector('.cplayer-lock');
+                const lockScreen = root.querySelector('.cplayer-lockscreen');
+                const unlockBtn = root.querySelector('.cplayer-unlock');
+                const brightnessSlider = root.querySelector('.cplayer-brightness');
+                const ytWrap = root.querySelector('.cplayer-yt');
+                const back10 = root.querySelector('.cplayer-back10');
+                const fwd10 = root.querySelector('.cplayer-fwd10');
+                const playPauseBtn = root.querySelector('.cplayer-playpause');
+                const playPauseIcon = playPauseBtn.querySelector('i');
+                const progressTrack = root.querySelector('.cplayer-progress-track');
+                const progressFill = root.querySelector('.cplayer-progress-fill');
+                const progressHandle = root.querySelector('.cplayer-progress-handle');
+                const timeLabel = root.querySelector('.cplayer-time');
+                const speedBtn = root.querySelector('.cplayer-speed');
+                const speedLabel = speedBtn.querySelector('span');
+                const speedMenu = root.querySelector('.cplayer-speed-menu');
+                const ccBtn = root.querySelector('.cplayer-cc');
+                const ccMenu = root.querySelector('.cplayer-cc-menu');
+
+                let player = null, isLocked = false, isPlaying = false, isScrubbing = false;
+                let hideTimer = null, progressTimer = null, captionsOn = false, destroyed = false;
+
+                function safeCall(fn) { try { return fn(); } catch (e) { return null; } }
+                function closeMenus() { speedMenu.classList.remove('show'); ccMenu.classList.remove('show'); }
+                function resetHideTimer() {
+                    clearTimeout(hideTimer);
+                    if (isPlaying && !isScrubbing) hideTimer = setTimeout(() => { overlay.classList.remove('show'); closeMenus(); }, 3000);
+                }
+                function showOverlay() { if (isLocked) return; overlay.classList.add('show'); resetHideTimer(); }
+
+                tapCatch.addEventListener('click', () => {
+                    if (isLocked) return;
+                    if (overlay.classList.contains('show')) { overlay.classList.remove('show'); closeMenus(); clearTimeout(hideTimer); }
+                    else showOverlay();
+                });
+
+                backBtn.addEventListener('click', e => { e.stopPropagation(); if (typeof opts.onBack === 'function') opts.onBack(); });
+
+                lockBtn.addEventListener('click', e => {
+                    e.stopPropagation(); isLocked = true; overlay.classList.remove('show'); closeMenus();
+                    clearTimeout(hideTimer); lockScreen.classList.add('show');
+                });
+                unlockBtn.addEventListener('click', e => { e.stopPropagation(); isLocked = false; lockScreen.classList.remove('show'); showOverlay(); });
+
+                brightnessSlider.addEventListener('input', () => { ytWrap.style.filter = `brightness(${brightnessSlider.value / 100})`; });
+
+                playPauseBtn.addEventListener('click', e => {
+                    e.stopPropagation(); if (!player) return;
+                    if (isPlaying) safeCall(() => player.pauseVideo()); else safeCall(() => player.playVideo());
+                });
+                back10.addEventListener('click', e => {
+                    e.stopPropagation(); if (!player) return;
+                    const t = safeCall(() => player.getCurrentTime()) || 0;
+                    safeCall(() => player.seekTo(Math.max(0, t - 10), true));
+                    showOverlay();
+                });
+                fwd10.addEventListener('click', e => {
+                    e.stopPropagation(); if (!player) return;
+                    const t = safeCall(() => player.getCurrentTime()) || 0;
+                    const d = safeCall(() => player.getDuration()) || (t + 10);
+                    safeCall(() => player.seekTo(Math.min(d, t + 10), true));
+                    showOverlay();
+                });
+
+                function updateProgressUI(current, duration) {
+                    const pct = duration > 0 ? (current / duration) * 100 : 0;
+                    progressFill.style.width = pct + '%';
+                    progressHandle.style.left = pct + '%';
+                    timeLabel.textContent = cplayerFormatTime(Math.max(0, duration - current));
+                }
+                function seekToClientX(clientX) {
+                    if (!player) return;
+                    const rect = progressTrack.getBoundingClientRect();
+                    const frac = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+                    const d = safeCall(() => player.getDuration()) || 0;
+                    safeCall(() => player.seekTo(frac * d, true));
+                    updateProgressUI(frac * d, d);
+                }
+                progressTrack.addEventListener('click', e => { e.stopPropagation(); seekToClientX(e.clientX); showOverlay(); });
+                progressTrack.addEventListener('pointerdown', e => {
+                    e.stopPropagation(); isScrubbing = true; clearTimeout(hideTimer); seekToClientX(e.clientX);
+                    const move = ev => seekToClientX(ev.clientX);
+                    const up = () => { isScrubbing = false; resetHideTimer(); window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+                    window.addEventListener('pointermove', move);
+                    window.addEventListener('pointerup', up);
+                });
+
+                const speedOptions = [0.5, 0.75, 1, 1.25, 1.5, 2];
+                function renderSpeedMenu(current) {
+                    speedMenu.innerHTML = speedOptions.map(r => `<div class="cplayer-menu-item${r === current ? ' active' : ''}" data-rate="${r}">${r}x</div>`).join('');
+                    speedMenu.querySelectorAll('.cplayer-menu-item').forEach(item => {
+                        item.addEventListener('click', e => {
+                            e.stopPropagation();
+                            const rate = parseFloat(item.getAttribute('data-rate'));
+                            safeCall(() => player.setPlaybackRate(rate));
+                            speedLabel.textContent = `Speed (${rate}x)`;
+                            renderSpeedMenu(rate);
+                            speedMenu.classList.remove('show');
+                        });
+                    });
+                }
+                speedBtn.addEventListener('click', e => { e.stopPropagation(); ccMenu.classList.remove('show'); speedMenu.classList.toggle('show'); showOverlay(); });
+
+                function renderCcMenu() {
+                    ccMenu.innerHTML = `<div class="cplayer-menu-item${!captionsOn ? ' active' : ''}" data-cc="off">Subtitles Off</div>
+                        <div class="cplayer-menu-item${captionsOn ? ' active' : ''}" data-cc="on">Subtitles On</div>`;
+                    ccMenu.querySelectorAll('.cplayer-menu-item').forEach(item => {
+                        item.addEventListener('click', e => {
+                            e.stopPropagation();
+                            captionsOn = item.getAttribute('data-cc') === 'on';
+                            safeCall(() => player.setOption('captions', 'track', captionsOn ? { languageCode: 'en' } : {}));
+                            renderCcMenu();
+                            ccMenu.classList.remove('show');
+                        });
+                    });
+                }
+                ccBtn.addEventListener('click', e => { e.stopPropagation(); speedMenu.classList.remove('show'); ccMenu.classList.toggle('show'); showOverlay(); });
+                renderSpeedMenu(1);
+                renderCcMenu();
+
+                ytApiReady.then(() => {
+                    if (destroyed) return;
+                    player = new YT.Player(uid, {
+                        videoId: videoId,
+                        playerVars: { autoplay:1, controls:0, rel:0, modestbranding:1, playsinline:1, iv_load_policy:3, cc_load_policy:0, fs:0, disablekb:1, origin: window.location.origin },
+                        events: {
+                            onReady: () => {
+                                safeCall(() => player.playVideo());
+                                progressTimer = setInterval(() => {
+                                    if (!player || isScrubbing) return;
+                                    updateProgressUI(safeCall(() => player.getCurrentTime()) || 0, safeCall(() => player.getDuration()) || 0);
+                                }, 500);
+                                showOverlay();
+                            },
+                            onStateChange: e => {
+                                if (e.data === YT.PlayerState.PLAYING) { isPlaying = true; playPauseIcon.className = 'fas fa-pause'; resetHideTimer(); }
+                                else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) { isPlaying = false; playPauseIcon.className = 'fas fa-play'; clearTimeout(hideTimer); overlay.classList.add('show'); }
+                            }
+                        }
+                    });
+                });
+
+                return { destroy() { destroyed = true; clearInterval(progressTimer); clearTimeout(hideTimer); safeCall(() => player && player.destroy()); container.innerHTML = ''; } };
+            }
+
             function openCardPlayer(videoId) { currentPlayerVideoId = videoId; cardPlayerContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; cardPlayerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
             function closeCardPlayer() { cardPlayerOverlay.classList.remove('active'); cardPlayerContent.innerHTML = ''; document.body.style.overflow = ''; currentPlayerVideoId = null; }
             cardPlayerClose.addEventListener('click', closeCardPlayer);
@@ -2151,7 +2402,7 @@ const topNav = document.getElementById('top-nav');
             document.querySelectorAll('.poster-card[data-video]').forEach(card => {
                 card.addEventListener('click', () => {
                     if (card.hasAttribute('data-title')) openDetailModal(card);
-                    else openVideoModal(card.getAttribute('data-video'));
+                    else openVideoModal(card.getAttribute('data-video'), card.getAttribute('data-title'));
                 });
             });
             document.querySelectorAll('.poster-card.coming-soon').forEach(card => {
@@ -2164,8 +2415,19 @@ const topNav = document.getElementById('top-nav');
             function closeShortsModal() { shortsModal.classList.remove('active'); shortsModalContent.innerHTML = ''; document.body.style.overflow = ''; }
             shortsModalClose.addEventListener('click', closeShortsModal);
             shortsModal.addEventListener('click', e => { if (e.target === shortsModal) closeShortsModal(); });
-            function openVideoModal(videoId) { videoModalContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&enablejsapi=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; videoModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-            function closeVideoModal() { videoModal.classList.remove('active'); videoModalContent.innerHTML = ''; document.body.style.overflow = ''; }
+            let currentVideoPlayerInstance = null;
+            function openVideoModal(videoId, title) {
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                videoModalClose.style.display = 'none';
+                currentVideoPlayerInstance = createCustomPlayer(videoModalContent, videoId, { title: title || '', onBack: closeVideoModal });
+            }
+            function closeVideoModal() {
+                videoModal.classList.remove('active');
+                if (currentVideoPlayerInstance) { currentVideoPlayerInstance.destroy(); currentVideoPlayerInstance = null; }
+                videoModalClose.style.display = '';
+                document.body.style.overflow = '';
+            }
             videoModalClose.addEventListener('click', closeVideoModal);
             videoModal.addEventListener('click', e => { if (e.target === videoModal) closeVideoModal(); });
 
@@ -2190,6 +2452,19 @@ const topNav = document.getElementById('top-nav');
             const detailToast = document.getElementById('detail-toast');
             let detailVideoId = null;
             let detailMuted = true;
+            let detailPlayerInstance = null;
+
+            function playDetailWithControls() {
+                if (!detailVideoId) return;
+                detailMuted = false;
+                detailHero.classList.add('cplayer-active');
+                if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
+                detailPlayerInstance = createCustomPlayer(detailHeroFrame, detailVideoId, {
+                    title: detailTitle.textContent,
+                    episode: detailEpisodeLabel.textContent,
+                    onBack: closeDetailModal
+                });
+            }
 
             function detailHeroSrc(videoId, muted, withControls) {
                 return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&loop=1&playlist=${videoId}` +
@@ -2210,6 +2485,8 @@ const topNav = document.getElementById('top-nav');
                 const videoId = card.getAttribute('data-video');
                 detailVideoId = videoId;
                 detailMuted = true;
+                detailHero.classList.remove('cplayer-active');
+                if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
 
                 detailTitle.textContent = card.getAttribute('data-title') || '';
                 detailMeta.innerHTML = (card.getAttribute('data-meta') || '').split('·').map(s => s.trim()).filter(Boolean).map((s,i) => i===0 ? `<span>${s}</span>` : `<span class="hd-badge">${s}</span>`).join('<span>·</span>');
@@ -2235,6 +2512,8 @@ const topNav = document.getElementById('top-nav');
 
             function closeDetailModal() {
                 detailModal.classList.remove('active');
+                if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
+                detailHero.classList.remove('cplayer-active');
                 detailHeroFrame.innerHTML = '';
                 document.body.style.overflow = '';
                 detailVideoId = null;
@@ -2252,9 +2531,7 @@ const topNav = document.getElementById('top-nav');
 
             function goDetailFullscreen() {
                 if (!detailVideoId) return;
-                detailMuted = false;
-                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(detailVideoId, false, true)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
-                detailMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playDetailWithControls();
                 (detailHero.requestFullscreen?.() || detailHero.webkitRequestFullscreen?.call(detailHero));
             }
             detailFsBtn.addEventListener('click', goDetailFullscreen);
@@ -2262,9 +2539,7 @@ const topNav = document.getElementById('top-nav');
 
             detailPlayBtn.addEventListener('click', () => {
                 if (!detailVideoId) return;
-                detailMuted = false;
-                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(detailVideoId, false, true)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
-                detailMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playDetailWithControls();
                 detailHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
