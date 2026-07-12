@@ -904,8 +904,6 @@
         .episode-row:last-child { border-bottom:none; }
         .episode-thumb-wrap { position:relative; flex:0 0 128px; width:128px; aspect-ratio:16/9; border-radius:5px; overflow:hidden; background:#111; }
         .episode-thumb-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
-        .episode-play-btn { position:absolute; inset:0; margin:auto; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(2px); border:1.5px solid rgba(255,255,255,0.85); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.85rem; pointer-events:none; transition:background 0.2s, transform 0.2s; }
-        .episode-row:hover .episode-play-btn { background:rgba(0,0,0,0.65); transform:scale(1.06); }
         .episode-info { flex:1; min-width:0; padding-top:2px; }
         .episode-title-row { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:5px; }
         .episode-title { color:#fff; font-size:0.95rem; font-weight:600; }
@@ -1748,7 +1746,7 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="asaUW8weEkM" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 1" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz">
+<div class="poster-card tall" data-video="BdZfHPgh4Fg" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 1" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
@@ -2036,7 +2034,7 @@
         <div class="detail-body">
             <div class="detail-title" id="detail-title"></div>
             <div class="detail-meta" id="detail-meta"></div>
-            <button class="detail-btn detail-btn-play" id="detail-play-btn"><i class="fas fa-play"></i> Play</button>
+            <button class="detail-btn detail-btn-play" id="detail-play-btn"><i class="fas fa-play"></i> Preview</button>
             <a class="detail-btn detail-btn-yt" id="detail-yt-btn" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> Watch on YouTube</a>
             <div class="detail-episode-row">
                 <div class="detail-episode-label" id="detail-episode-label"></div>
@@ -2531,7 +2529,7 @@ const topNav = document.getElementById('top-nav');
             /* Per-title episode lists. Key = the data-video id on the poster card that opens the title.
                Add more titles here later — each entry is an array of { id, num, title, duration, desc }. */
             const seriesEpisodes = {
-                'asaUW8weEkM': [
+                'BdZfHPgh4Fg': [
                     {
                         id: 'asaUW8weEkM',
                         num: 1,
@@ -2582,7 +2580,6 @@ const topNav = document.getElementById('top-nav');
                     <div class="episode-row" data-episode-id="${ep.id}">
                         <div class="episode-thumb-wrap">
                             <img src="https://img.youtube.com/vi/${ep.id}/hqdefault.jpg" alt="${ep.title}" loading="lazy">
-                            <div class="episode-play-btn"><i class="fas fa-play"></i></div>
                         </div>
                         <div class="episode-info">
                             <div class="episode-title-row">
