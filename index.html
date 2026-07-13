@@ -872,7 +872,8 @@
         .detail-mute-btn { bottom:16px; right:16px; }
         .detail-fs-btn { bottom:16px; right:64px; }
         .detail-hero.cplayer-active .detail-mute-btn, .detail-hero.cplayer-active .detail-fs-btn { display:none; }
-        .detail-body { max-width:760px; margin:0 auto; padding:22px 20px 70px; }
+        .detail-body { width:100%; margin:0; padding:22px 20px 70px; }
+        @media (min-width:1400px) { .detail-body { max-width:1400px; margin:0 auto; } }
         .detail-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,7vw,42px); letter-spacing:0.02em; color:#fff; line-height:1.05; margin-bottom:10px; }
         .detail-meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; color:#9a9a9a; font-size:0.85rem; font-weight:500; margin-bottom:22px; }
         .detail-meta .rating-badge { border:1px solid #666; padding:1px 7px; border-radius:3px; font-size:0.75rem; color:#ddd; }
@@ -1708,7 +1709,7 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="asaUW8weEkM" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
+<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
@@ -2524,7 +2525,7 @@ const topNav = document.getElementById('top-nav');
                 detailCredit.textContent = card.getAttribute('data-credit') || '';
                 detailYtBtn.href = `https://www.youtube.com/watch?v=${videoId}`;
 
-                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(card.getAttribute('data-preview-video') || videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
                 detailAspectMode = card.getAttribute('data-aspect');
                 detailHero.classList.remove('vertical-frame', 'crop-vertical');
                 if (detailAspectMode === '9:16') detailHero.classList.add('vertical-frame');
