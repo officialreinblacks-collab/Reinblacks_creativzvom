@@ -859,6 +859,12 @@
         /* ─────────────── DETAIL PAGE (Netflix-style) ─────────────── */
         #detail-modal { position:fixed; inset:0; background:#000; z-index:9600; opacity:0; pointer-events:none; transform:translateY(14px); transition:opacity 0.3s ease, transform 0.3s ease; overflow-y:auto; -webkit-overflow-scrolling:touch; }
         #detail-modal.active { opacity:1; pointer-events:all; transform:translateY(0); }
+        @media (min-width:769px) {
+            #detail-modal { display:flex; align-items:flex-start; justify-content:center; background:rgba(0,0,0,0.8); padding:60px 24px; overflow-y:auto; }
+            .detail-card { width:100%; max-width:820px; background:#141414; border-radius:10px; overflow:hidden; box-shadow:0 25px 70px rgba(0,0,0,0.65); margin:auto; }
+            .detail-hero { border-radius:10px 10px 0 0; }
+            .detail-hero.vertical-frame, .detail-hero.crop-vertical { border-radius:10px 10px 0 0; }
+        }
         .detail-hero { position:relative; width:100%; aspect-ratio:16/10; max-height:56vh; background:#050505; overflow:hidden; }
         .detail-hero.vertical-frame { margin:0 auto; height:82vh; max-height:760px; aspect-ratio:9/16; width:auto; max-width:100%; }
         @media (max-aspect-ratio:9/16) { .detail-hero.vertical-frame { height:auto; width:100%; aspect-ratio:9/16; max-height:none; } }
@@ -1980,6 +1986,7 @@
 
     <!-- DETAIL PAGE (Netflix-style) -->
     <div id="detail-modal">
+      <div class="detail-card" id="detail-card">
         <div class="detail-hero" id="detail-hero">
             <div id="detail-hero-frame"></div>
             <div class="detail-hero-bar"></div>
@@ -2005,6 +2012,7 @@
                 <button class="detail-action" id="detail-fs-btn-2"><i class="fas fa-expand"></i><span>Fullscreen</span></button>
             </div>
         </div>
+      </div>
     </div>
     <div class="detail-toast" id="detail-toast"></div>
 
@@ -2543,6 +2551,7 @@ const topNav = document.getElementById('top-nav');
             }
 
             detailBackBtn.addEventListener('click', closeDetailModal);
+            detailModal.addEventListener('click', e => { if (e.target === detailModal) closeDetailModal(); });
 
             detailMuteBtn.addEventListener('click', () => {
                 if (!detailVideoId) return;
