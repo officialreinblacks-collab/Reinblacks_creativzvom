@@ -2528,8 +2528,7 @@ const topNav = document.getElementById('top-nav');
                 detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(card.getAttribute('data-preview-video') || videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
                 detailAspectMode = card.getAttribute('data-aspect');
                 detailHero.classList.remove('vertical-frame', 'crop-vertical');
-                if (detailAspectMode === '9:16') detailHero.classList.add('vertical-frame');
-                else if (detailAspectMode === '9:16-crop') detailHero.classList.add('crop-vertical');
+                if (detailAspectMode === '9:16' || detailAspectMode === '9:16-crop') detailHero.classList.add('crop-vertical');
                 detailMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
 
                 let episodes = [];
