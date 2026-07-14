@@ -863,7 +863,7 @@
         .detail-hero.vertical-frame { margin:0 auto; height:82vh; max-height:760px; aspect-ratio:9/16; width:auto; max-width:100%; }
         @media (max-aspect-ratio:9/16) { .detail-hero.vertical-frame { height:auto; width:100%; aspect-ratio:9/16; max-height:none; } }
         .detail-hero:fullscreen, .detail-hero:-webkit-full-screen { width:100vw; height:100vh; max-height:none; max-width:none; aspect-ratio:auto; margin:0; }
-        .detail-hero iframe { position:absolute; inset:0; width:100%; height:100%; border:none; pointer-events:none; }
+        .detail-hero iframe { position:absolute; width:100%; height:130%; top:50%; left:0; bottom:auto; right:auto; transform:translateY(-50%); border:none; pointer-events:none; }
         .detail-hero.crop-vertical iframe { width:100%; height:285%; top:50%; bottom:auto; left:0; right:auto; transform:translateY(-50%); }
         .detail-hero-bar { position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,var(--red) 0%, var(--red) 32%, rgba(255,255,255,0.18) 32%); }
         .detail-back-btn, .detail-mute-btn, .detail-fs-btn { position:absolute; width:38px; height:38px; border-radius:50%; background:rgba(20,20,20,0.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; z-index:5; transition:background 0.25s; }
@@ -1119,8 +1119,6 @@
             </div>
             <div id="intro-url">reinblackscreativz.com</div>
         </div>
-        <audio id="intro-audio" preload="auto" playsinline
-            src="https://res.cloudinary.com/datfuxotx/video/upload/v1783507179/gemini_generated_video_e693c733_k0afeq.m4a"></audio>
     </div>
 
     <div id="main-site">
@@ -1709,7 +1707,7 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
+<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
@@ -2071,50 +2069,8 @@
     
     const introOverlay = document.getElementById('intro-overlay');
             const mainSite = document.getElementById('main-site');
-            const introAudio = document.getElementById('intro-audio');
             const soundPrompt = document.getElementById('intro-sound-prompt');
-            let audioUnlocked = false;
-            function stopIntroAudio() {
-                if (!introAudio || introAudio.paused) return;
-                let vol = introAudio.volume;
-                const fade = setInterval(() => {
-                    vol = Math.max(0, vol - 0.12);
-                    introAudio.volume = vol;
-                    if (vol <= 0.02) {
-                        clearInterval(fade);
-                        introAudio.pause();
-                        introAudio.currentTime = 0;
-                    }
-                }, 30);
-            }
-            function unlockIntroAudio() {
-                if (audioUnlocked || !introAudio) return;
-                audioUnlocked = true;
-                introAudio.currentTime = 0;
-                introAudio.volume = 1;
-                introAudio.play().catch(() => {});
-                if (soundPrompt) soundPrompt.classList.remove('show');
-            }
-            function startIntroAudio() {
-                if (!introAudio) return;
-                introAudio.currentTime = 0;
-                introAudio.volume = 1;
-                const playPromise = introAudio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => { audioUnlocked = true; }).catch(() => {
-                        // Autoplay blocked — show a visible prompt and arm any tap/click to unlock it
-                        if (soundPrompt) soundPrompt.classList.add('show');
-                        document.addEventListener('click', unlockIntroAudio, { once: true });
-                        document.addEventListener('touchstart', unlockIntroAudio, { once: true });
-                        document.addEventListener('keydown', unlockIntroAudio, { once: true });
-                    });
-                }
-            }
-            startIntroAudio();
-            if (soundPrompt) {
-                soundPrompt.addEventListener('click', (e) => { e.stopPropagation(); unlockIntroAudio(); });
-            }
-            function completeIntro() { introOverlay.classList.add('fade-out'); mainSite.classList.add('visible'); stopIntroAudio(); if (soundPrompt) soundPrompt.classList.remove('show'); setTimeout(() => { if (introOverlay.parentNode) introOverlay.style.display = 'none'; }, 700); }
+            function completeIntro() { introOverlay.classList.add('fade-out'); mainSite.classList.add('visible'); if (soundPrompt) soundPrompt.classList.remove('show'); setTimeout(() => { if (introOverlay.parentNode) introOverlay.style.display = 'none'; }, 700); }
             setTimeout(completeIntro, 4300);
             introOverlay.addEventListener('click', completeIntro);
             // Floating ember particles behind the intro logo
@@ -2528,7 +2484,7 @@ const topNav = document.getElementById('top-nav');
                 detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(card.getAttribute('data-preview-video') || videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
                 detailAspectMode = card.getAttribute('data-aspect');
                 detailHero.classList.remove('vertical-frame', 'crop-vertical');
-                if (detailAspectMode === '9:16' || detailAspectMode === '9:16-crop') detailHero.classList.add('crop-vertical');
+                if (detailAspectMode === '9:16' || detailAspectMode === '9:16-crop' || card.hasAttribute('data-preview-crop')) detailHero.classList.add('crop-vertical');
                 detailMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
 
                 let episodes = [];
