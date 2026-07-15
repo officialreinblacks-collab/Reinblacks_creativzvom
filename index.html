@@ -3020,7 +3020,29 @@ document.getElementById('game-modal').addEventListener('click', function(e) {
 // ── Supabase Auth ──
 const SUPABASE_URL = 'https://wjbfrtcfmxfgzafatqbm.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Ii1EyhcaIVeDgiBHV7wQ7A_QJ5mRCB7';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb = null;
+try {
+    if (typeof supabase !== 'undefined') {
+        sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+} catch (e) {
+    console.error('Supabase failed to initialize:', e);
+}
+
+// Safety net: if the login gate hasn't resolved within 7s (e.g. Supabase script
+// blocked or network failure), fail OPEN — reveal the site instead of trapping
+// the visitor on a frozen screen forever.
+let gateResolved = false;
+setTimeout(function() {
+    if (gateResolved) return;
+    console.warn('Auth gate timed out — revealing site without login.');
+    const io = document.getElementById('intro-overlay');
+    if (io) io.classList.remove('gate-hold');
+    const am = document.getElementById('auth-modal');
+    if (am) am.classList.remove('active');
+    document.body.style.overflow = '';
+    if (typeof window.__startIntroSequence === 'function') window.__startIntroSequence();
+}, 7000);
 
 let authMode = 'signin'; // 'signin' | 'signup' | 'forgot' | 'reset'
 let gateActive = true; // true until the person is logged in on first load
@@ -3071,6 +3093,7 @@ function showAuthMsg(text, isError) {
 }
 
 async function handleAuthSubmit() {
+    if (!sb) { showAuthMsg('Connection issue — please refresh and try again.', true); return; }
     const email = document.getElementById('auth-email').value.trim();
     const password = document.getElementById('auth-password').value;
     const btn = document.getElementById('auth-submit-btn');
@@ -3106,6 +3129,7 @@ async function handleAuthSubmit() {
 }
 
 async function handleForgotPassword() {
+    if (!sb) { document.getElementById('auth-forgot-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
     const email = document.getElementById('auth-forgot-email').value.trim();
     const msgEl = document.getElementById('auth-forgot-msg');
     const btn = document.getElementById('auth-forgot-btn');
@@ -3132,6 +3156,7 @@ async function handleForgotPassword() {
 }
 
 async function handleResetPassword() {
+    if (!sb) { document.getElementById('auth-reset-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
     const newPassword = document.getElementById('auth-reset-password').value;
     const msgEl = document.getElementById('auth-reset-msg');
     const btn = document.getElementById('auth-reset-btn');
@@ -3156,7 +3181,7 @@ async function handleResetPassword() {
 }
 
 async function handleLogout() {
-    await sb.auth.signOut();
+    if (sb) await sb.auth.signOut();
     gateActive = true;
     updateAuthUI();
     openAuthModal();
@@ -3177,6 +3202,7 @@ function onLoginSuccess() {
 }
 
 async function updateAuthUI() {
+    if (!sb) return;
     const { data: { session } } = await sb.auth.getSession();
     const navLabel = document.getElementById('auth-nav-label');
 
@@ -3194,30 +3220,39 @@ async function updateAuthUI() {
 }
 
 // Handle password-recovery links (person clicked "reset password" email)
-sb.auth.onAuthStateChange((event, session) => {
-    if (event === 'PASSWORD_RECOVERY') {
-        openAuthModal();
-        document.getElementById('auth-close-btn').style.display = 'none';
-        setAuthMode('reset');
-    }
-    updateAuthUI();
-});
+if (sb) {
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'PASSWORD_RECOVERY') {
+            openAuthModal();
+            document.getElementById('auth-close-btn').style.display = 'none';
+            setAuthMode('reset');
+        }
+        updateAuthUI();
+    });
+}
 
 // ── Login gate: block the intro + site until signed in ──
 async function checkAuthGate() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session && session.user) {
-        gateActive = false;
-        document.getElementById('auth-close-btn').style.display = '';
-        document.getElementById('intro-overlay').classList.remove('gate-hold');
-        if (typeof window.__startIntroSequence === 'function') window.__startIntroSequence();
-    } else {
-        gateActive = true;
-        document.getElementById('auth-close-btn').style.display = 'none';
-        openAuthModal();
-        setAuthMode('signin');
+    if (!sb) { gateResolved = true; return; }
+    try {
+        const { data: { session } } = await sb.auth.getSession();
+        gateResolved = true;
+        if (session && session.user) {
+            gateActive = false;
+            document.getElementById('auth-close-btn').style.display = '';
+            document.getElementById('intro-overlay').classList.remove('gate-hold');
+            if (typeof window.__startIntroSequence === 'function') window.__startIntroSequence();
+        } else {
+            gateActive = true;
+            document.getElementById('auth-close-btn').style.display = 'none';
+            openAuthModal();
+            setAuthMode('signin');
+        }
+        updateAuthUI();
+    } catch (e) {
+        console.error('checkAuthGate failed:', e);
+        gateResolved = true;
     }
-    updateAuthUI();
 }
 checkAuthGate();
     </script>
