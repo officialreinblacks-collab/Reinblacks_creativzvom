@@ -117,9 +117,35 @@
         }
         .unlock-submit-btn:hover { opacity:0.88; }
         .unlock-submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
-        .unlock-buy-note { margin-top:18px; font-size:0.8rem; color:#999; font-family:'DM Sans',sans-serif; }
+        .unlock-buy-note { margin-top:14px; font-size:0.8rem; color:#999; font-family:'DM Sans',sans-serif; }
         .unlock-buy-note a { color:var(--red); font-weight:600; text-decoration:none; }
         .unlock-buy-note a:hover { text-decoration:underline; }
+        .unlock-payment-section { margin-top:22px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); text-align:left; }
+        .unlock-payment-label { font-size:0.72rem; font-weight:800; letter-spacing:0.08em; color:#999; text-transform:uppercase; margin-bottom:12px; text-align:center; font-family:'DM Sans',sans-serif; }
+        .unlock-payment-row {
+            display:flex; align-items:center; justify-content:space-between; gap:10px; background:#141414;
+            border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:10px 12px; margin-bottom:10px;
+        }
+        .unlock-payment-info { display:flex; align-items:center; gap:10px; min-width:0; }
+        .unlock-payment-info i { color:var(--red); font-size:1.1rem; flex-shrink:0; }
+        .unlock-payment-info i.fa-whatsapp { color:#25D366; }
+        .unlock-payment-text { display:flex; flex-direction:column; min-width:0; }
+        .unlock-payment-name { font-size:0.82rem; font-weight:700; color:#fff; font-family:'DM Sans',sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .unlock-payment-detail { font-size:0.78rem; color:#bbb; font-family:'DM Sans',sans-serif; letter-spacing:0.03em; }
+        .unlock-payment-actions { display:flex; gap:6px; flex-shrink:0; }
+        .unlock-copy-btn {
+            background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.15); padding:6px 12px;
+            border-radius:4px; font-size:0.72rem; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer;
+            transition:background 0.2s; white-space:nowrap; text-decoration:none; display:inline-flex; align-items:center;
+        }
+        .unlock-copy-btn:hover { background:rgba(255,255,255,0.18); }
+        .unlock-copy-btn.copied { background:#25D366; border-color:#25D366; color:#000; }
+        .unlock-payment-btn {
+            width:100%; display:flex; align-items:center; justify-content:center; gap:8px; background:#141414;
+            border:1px solid rgba(255,255,255,0.1); color:#666; padding:11px; border-radius:6px; font-family:'DM Sans',sans-serif;
+            font-weight:700; font-size:0.85rem; margin-bottom:10px; cursor:not-allowed;
+        }
+        .unlock-payment-btn .soon-tag { font-size:0.62rem; font-weight:800; letter-spacing:0.04em; background:rgba(255,255,255,0.1); color:#999; padding:2px 7px; border-radius:20px; text-transform:uppercase; }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; background:#000; }
         body {
@@ -1815,7 +1841,6 @@
 
 <div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-premium data-premium-id="devils-call" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
-    <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">Devil's Call</div>
 </div>
@@ -2083,8 +2108,46 @@
             <div class="unlock-msg" id="unlock-msg"></div>
             <input type="text" id="unlock-code-input" placeholder="XXXX-XXXX" autocapitalize="characters" autocomplete="off">
             <button class="unlock-submit-btn" id="unlock-submit-btn" onclick="handleRedeemCode()">Unlock</button>
-            <div class="unlock-buy-note">
-                Don't have a code? <a href="https://wa.me/254794299237" target="_blank" rel="noopener">Message us on WhatsApp</a> to purchase access.
+
+            <div class="unlock-payment-section">
+                <div class="unlock-payment-label">Don't have a code? Pay to purchase access</div>
+
+                <div class="unlock-payment-row">
+                    <div class="unlock-payment-info">
+                        <i class="fas fa-mobile-screen-button"></i>
+                        <div class="unlock-payment-text">
+                            <span class="unlock-payment-name">M-Pesa — Pochi la Biashara</span>
+                            <span class="unlock-payment-detail">0794299237</span>
+                        </div>
+                    </div>
+                    <button class="unlock-copy-btn" id="mpesa-copy-btn" onclick="copyPaymentDetail('0794299237', 'mpesa-copy-btn')">Copy</button>
+                </div>
+
+                <button class="unlock-payment-btn" disabled>
+                    <i class="fab fa-paypal"></i> PayPal <span class="soon-tag">Coming Soon</span>
+                </button>
+
+                <button class="unlock-payment-btn" disabled>
+                    <i class="fab fa-cc-visa"></i> Visa Pay <span class="soon-tag">Coming Soon</span>
+                </button>
+
+                <div class="unlock-payment-row">
+                    <div class="unlock-payment-info">
+                        <i class="fab fa-whatsapp"></i>
+                        <div class="unlock-payment-text">
+                            <span class="unlock-payment-name">WhatsApp</span>
+                            <span class="unlock-payment-detail">0794299237</span>
+                        </div>
+                    </div>
+                    <div class="unlock-payment-actions">
+                        <a href="https://wa.me/254794299237" target="_blank" rel="noopener" class="unlock-copy-btn"><i class="fab fa-whatsapp" style="margin-right:5px;"></i>Chat</a>
+                        <button class="unlock-copy-btn" id="whatsapp-copy-btn" onclick="copyPaymentDetail('0794299237', 'whatsapp-copy-btn')">Copy</button>
+                    </div>
+                </div>
+
+                <div class="unlock-buy-note">
+                    Pay via M-Pesa or WhatsApp, then send your receipt — we'll reply with your access code.
+                </div>
             </div>
         </div>
     </div>
@@ -3152,6 +3215,33 @@ async function handleRedeemCode() {
     }
 }
 window.handleRedeemCode = handleRedeemCode;
+
+function copyPaymentDetail(value, btnId) {
+    const btn = document.getElementById(btnId);
+    const originalText = btn.textContent;
+    const showCopied = () => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = originalText; btn.classList.remove('copied'); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(showCopied).catch(() => fallbackCopy(value, showCopied));
+    } else {
+        fallbackCopy(value, showCopied);
+    }
+}
+function fallbackCopy(value, onDone) {
+    const temp = document.createElement('textarea');
+    temp.value = value;
+    temp.style.position = 'fixed';
+    temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    try { document.execCommand('copy'); onDone(); } catch (e) {}
+    document.body.removeChild(temp);
+}
+window.copyPaymentDetail = copyPaymentDetail;
 
 async function loadUnlockedContent() {
     if (!sb) return;
