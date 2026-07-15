@@ -38,7 +38,7 @@
             .auth-nav-btn span#auth-nav-label { display:inline; font-size:0.82rem; }
         }
         #auth-modal {
-            display:none; position:fixed; inset:0; z-index:100000; background:rgba(0,0,0,0.88);
+            display:none; position:fixed; inset:0; z-index:110000; background:rgba(0,0,0,0.88);
             align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);
         }
         #auth-modal.active { display:flex; }
@@ -81,6 +81,45 @@
             font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.88rem; cursor:pointer; transition:all 0.2s;
         }
         .auth-logout-btn:hover { border-color:var(--red); color:var(--red); }
+        .premium-badge {
+            position:absolute; top:8px; right:8px; z-index:3; background:linear-gradient(135deg,#E50914,#a3050d);
+            color:#fff; font-size:0.62rem; font-weight:700; padding:3px 8px; border-radius:4px; letter-spacing:0.05em;
+            text-transform:uppercase; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,0,0,0.5);
+            font-family:'DM Sans',sans-serif;
+        }
+        #unlock-modal {
+            display:none; position:fixed; inset:0; z-index:120000; background:rgba(0,0,0,0.9);
+            align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);
+        }
+        #unlock-modal.active { display:flex; }
+        .unlock-box {
+            width:100%; max-width:380px; background:linear-gradient(160deg,#0d0d0d,#000); border:1px solid rgba(229,9,20,0.35);
+            border-radius:10px; padding:34px 28px 28px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.08);
+            text-align:center;
+        }
+        .unlock-close-btn { position:absolute; top:14px; right:16px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer; }
+        .unlock-close-btn:hover { color:var(--red); }
+        .unlock-lock-icon { font-size:2rem; color:var(--red); margin-bottom:10px; }
+        .unlock-title { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:0.03em; color:#fff; margin-bottom:4px; }
+        .unlock-subtitle { color:#999; font-size:0.85rem; margin-bottom:20px; font-family:'DM Sans',sans-serif; }
+        .unlock-msg { text-align:center; font-size:0.8rem; margin-bottom:12px; font-family:'DM Sans',sans-serif; min-height:1em; }
+        .unlock-msg.error { color:#ff5c5c; }
+        .unlock-msg.success { color:#4ade80; }
+        #unlock-code-input {
+            width:100%; background:#141414; border:1px solid rgba(255,255,255,0.15); color:#fff; padding:12px 13px;
+            border-radius:5px; font-family:'DM Sans',sans-serif; font-size:1rem; text-align:center; letter-spacing:0.08em;
+            text-transform:uppercase; outline:none; margin-bottom:14px; transition:border-color 0.2s;
+        }
+        #unlock-code-input:focus { border-color:var(--red); }
+        .unlock-submit-btn {
+            width:100%; background:var(--red); color:#fff; border:none; padding:12px; border-radius:5px; font-family:'DM Sans',sans-serif;
+            font-weight:700; font-size:0.92rem; cursor:pointer; transition:opacity 0.2s;
+        }
+        .unlock-submit-btn:hover { opacity:0.88; }
+        .unlock-submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+        .unlock-buy-note { margin-top:18px; font-size:0.8rem; color:#999; font-family:'DM Sans',sans-serif; }
+        .unlock-buy-note a { color:var(--red); font-weight:600; text-decoration:none; }
+        .unlock-buy-note a:hover { text-decoration:underline; }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; background:#000; }
         body {
@@ -1774,7 +1813,7 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
+<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-premium data-premium-id="devils-call" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="top10-badge"><span class="top10-label">TOP 10</span><span class="top10-number">1</span></div>
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
@@ -2035,9 +2074,24 @@
         </footer>
 
         <!-- EXPANDED CARD PLAYER -->
+    <div id="unlock-modal">
+        <div class="unlock-box">
+            <button class="unlock-close-btn" onclick="closeUnlockModal()">✕</button>
+            <div class="unlock-lock-icon"><i class="fas fa-lock"></i></div>
+            <div class="unlock-title">Premium Title</div>
+            <div class="unlock-subtitle" id="unlock-video-title">Enter your access code to watch</div>
+            <div class="unlock-msg" id="unlock-msg"></div>
+            <input type="text" id="unlock-code-input" placeholder="XXXX-XXXX" autocapitalize="characters" autocomplete="off">
+            <button class="unlock-submit-btn" id="unlock-submit-btn" onclick="handleRedeemCode()">Unlock</button>
+            <div class="unlock-buy-note">
+                Don't have a code? <a href="https://wa.me/254794299237" target="_blank" rel="noopener">Message us on WhatsApp</a> to purchase access.
+            </div>
+        </div>
+    </div>
+
     <div id="auth-modal">
         <div class="auth-box">
-            <button class="auth-close-btn" onclick="closeAuthModal()">✕</button>
+            <button class="auth-close-btn" id="auth-close-btn" onclick="closeAuthModal()">✕</button>
 
             <div id="auth-forms-view">
                 <div class="auth-title">Rein<span>blacks</span></div>
@@ -2052,9 +2106,37 @@
                     <input type="password" id="auth-password" autocomplete="current-password" placeholder="••••••••">
                 </div>
                 <button class="auth-submit-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Sign In</button>
+                <div class="auth-switch" id="auth-forgot-link-wrap">
+                    <a onclick="setAuthMode('forgot')">Forgot password?</a>
+                </div>
                 <div class="auth-switch" id="auth-switch-text">
                     New here? <a onclick="setAuthMode('signup')">Create an account</a>
                 </div>
+            </div>
+
+            <div id="auth-forgot-view" style="display:none;">
+                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-subtitle">Reset your password</div>
+                <div class="auth-msg" id="auth-forgot-msg"></div>
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="auth-forgot-email" autocomplete="email" placeholder="you@example.com">
+                </div>
+                <button class="auth-submit-btn" id="auth-forgot-btn" onclick="handleForgotPassword()">Send Reset Link</button>
+                <div class="auth-switch">
+                    <a onclick="setAuthMode('signin')">Back to Sign In</a>
+                </div>
+            </div>
+
+            <div id="auth-reset-view" style="display:none;">
+                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-subtitle">Set a new password</div>
+                <div class="auth-msg" id="auth-reset-msg"></div>
+                <div class="auth-field">
+                    <label>New Password</label>
+                    <input type="password" id="auth-reset-password" autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <button class="auth-submit-btn" id="auth-reset-btn" onclick="handleResetPassword()">Update Password</button>
             </div>
 
             <div class="auth-account-panel" id="auth-account-view" style="display:none;">
@@ -2467,8 +2549,24 @@ const topNav = document.getElementById('top-nav');
             cardPlayerOverlay.addEventListener('click', e => { if (e.target === cardPlayerOverlay) closeCardPlayer(); });
 
             // Wire up all poster card clicks
+            document.querySelectorAll('.poster-card[data-premium]').forEach(card => {
+                if (card.querySelector('.premium-badge')) return;
+                const badge = document.createElement('span');
+                badge.className = 'premium-badge';
+                badge.innerHTML = '<i class="fas fa-lock"></i> Premium';
+                card.appendChild(badge);
+            });
             document.querySelectorAll('.poster-card[data-video]').forEach(card => {
                 card.addEventListener('click', () => {
+                    if (card.hasAttribute('data-premium')) {
+                        const premiumId = card.getAttribute('data-premium-id');
+                        const titleText = card.getAttribute('data-title') || '';
+                        const hasAccess = window.__unlockedPremiumIds && window.__unlockedPremiumIds.has(premiumId);
+                        if (!hasAccess) {
+                            if (typeof window.handlePremiumCardClick === 'function') window.handlePremiumCardClick(premiumId, titleText);
+                            return;
+                        }
+                    }
                     if (card.hasAttribute('data-title')) openDetailModal(card);
                     else openVideoModal(card.getAttribute('data-video'), card.getAttribute('data-title'));
                 });
@@ -2524,9 +2622,16 @@ const topNav = document.getElementById('top-nav');
             let detailPlayerInstance = null;
             let detailAspectMode = null;
             let detailEpisodesData = [];
+            let detailIsPremium = false;
+            let detailPremiumId = null;
+            window.__unlockedPremiumIds = new Set();
 
             function playDetailWithControls() {
                 if (!detailVideoId) return;
+                if (detailIsPremium && !window.__unlockedPremiumIds.has(detailPremiumId)) {
+                    if (typeof window.openUnlockModal === 'function') window.openUnlockModal(detailPremiumId, detailTitle.textContent);
+                    return;
+                }
                 detailMuted = false;
                 const isVertical = (detailAspectMode === '9:16-crop' || detailAspectMode === '9:16');
                 if (isVertical) {
@@ -2570,6 +2675,8 @@ const topNav = document.getElementById('top-nav');
             function openDetailModal(card) {
                 const videoId = card.getAttribute('data-video');
                 detailVideoId = videoId;
+                detailIsPremium = card.hasAttribute('data-premium');
+                detailPremiumId = card.getAttribute('data-premium-id') || null;
                 detailMuted = true;
                 detailHero.classList.remove('cplayer-active');
                 if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
@@ -2984,17 +3091,104 @@ document.getElementById('game-modal').addEventListener('click', function(e) {
     if (e.target === this) closeGameModal();
 });
 
-// ── Supabase Auth ──
+// ── Premium unlock codes ──
+function openUnlockModal(premiumId, titleText) {
+    document.getElementById('unlock-video-title').textContent = titleText ? `Enter your code to watch "${titleText}"` : 'Enter your access code to watch';
+    document.getElementById('unlock-modal').setAttribute('data-target-id', premiumId || '');
+    document.getElementById('unlock-code-input').value = '';
+    document.getElementById('unlock-msg').textContent = '';
+    document.getElementById('unlock-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+window.openUnlockModal = openUnlockModal;
+
+function closeUnlockModal() {
+    document.getElementById('unlock-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+window.closeUnlockModal = closeUnlockModal;
+document.getElementById('unlock-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeUnlockModal();
+});
+
+async function handleRedeemCode() {
+    const codeInput = document.getElementById('unlock-code-input');
+    const code = codeInput.value.trim();
+    const msgEl = document.getElementById('unlock-msg');
+    const btn = document.getElementById('unlock-submit-btn');
+    if (!code) { msgEl.textContent = 'Please enter a code.'; msgEl.className = 'unlock-msg error'; return; }
+    if (!sb) { msgEl.textContent = 'Connection issue — please refresh and try again.'; msgEl.className = 'unlock-msg error'; return; }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Checking...';
+
+    try {
+        const { data, error } = await sb.rpc('redeem_code', { code_input: code });
+        if (error) throw error;
+        if (data && data.success) {
+            window.__unlockedPremiumIds.add(data.video_id);
+            msgEl.textContent = 'Unlocked! Opening...';
+            msgEl.className = 'unlock-msg success';
+            setTimeout(() => {
+                closeUnlockModal();
+                const card = document.querySelector(`.poster-card[data-premium-id="${CSS.escape(data.video_id)}"]`);
+                if (card && typeof openDetailModal === 'function') {
+                    openDetailModal(card);
+                } else if (typeof playDetailWithControls === 'function') {
+                    playDetailWithControls();
+                }
+            }, 700);
+        } else {
+            msgEl.textContent = (data && data.message) || 'Invalid or already-used code.';
+            msgEl.className = 'unlock-msg error';
+        }
+    } catch (err) {
+        msgEl.textContent = err.message || 'Something went wrong.';
+        msgEl.className = 'unlock-msg error';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+window.handleRedeemCode = handleRedeemCode;
+
+async function loadUnlockedContent() {
+    if (!sb) return;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session || !session.user) return;
+    const { data, error } = await sb.from('unlocked_content').select('video_id').eq('user_id', session.user.id);
+    if (error) { console.error('loadUnlockedContent failed:', error); return; }
+    window.__unlockedPremiumIds = new Set((data || []).map(r => r.video_id));
+}
+
+// ── Supabase Auth (no forced gate — sign-in only required for premium content) ──
 const SUPABASE_URL = 'https://wjbfrtcfmxfgzafatqbm.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Ii1EyhcaIVeDgiBHV7wQ7A_QJ5mRCB7';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb = null;
+try {
+    if (typeof supabase !== 'undefined') {
+        sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    }
+} catch (e) {
+    console.error('Supabase failed to initialize:', e);
+}
 
-let authMode = 'signin'; // 'signin' | 'signup'
+let authMode = 'signin'; // 'signin' | 'signup' | 'forgot' | 'reset'
+// If someone clicked a locked thumbnail while signed out, remember what to
+// unlock so we can jump straight to the code screen right after they sign in.
+let pendingPremiumUnlock = null; // { premiumId, titleText }
+
+function showAuthView(mode) {
+    document.getElementById('auth-forms-view').style.display = (mode === 'signin' || mode === 'signup') ? 'block' : 'none';
+    document.getElementById('auth-forgot-view').style.display = (mode === 'forgot') ? 'block' : 'none';
+    document.getElementById('auth-reset-view').style.display = (mode === 'reset') ? 'block' : 'none';
+    document.getElementById('auth-account-view').style.display = 'none';
+}
 
 function openAuthModal() {
     document.getElementById('auth-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    document.getElementById('auth-msg').textContent = '';
 }
 function closeAuthModal() {
     document.getElementById('auth-modal').classList.remove('active');
@@ -3006,10 +3200,12 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
 
 function setAuthMode(mode) {
     authMode = mode;
+    document.getElementById('auth-msg').textContent = '';
+    if (mode === 'forgot') { showAuthView('forgot'); return; }
+    showAuthView(mode);
     const submitBtn = document.getElementById('auth-submit-btn');
     const subtitle = document.getElementById('auth-mode-subtitle');
     const switchText = document.getElementById('auth-switch-text');
-    document.getElementById('auth-msg').textContent = '';
     if (mode === 'signup') {
         submitBtn.textContent = 'Create Account';
         subtitle.textContent = 'Create your free account';
@@ -3028,6 +3224,7 @@ function showAuthMsg(text, isError) {
 }
 
 async function handleAuthSubmit() {
+    if (!sb) { showAuthMsg('Connection issue — please refresh and try again.', true); return; }
     const email = document.getElementById('auth-email').value.trim();
     const password = document.getElementById('auth-password').value;
     const btn = document.getElementById('auth-submit-btn');
@@ -3044,7 +3241,7 @@ async function handleAuthSubmit() {
             if (error) throw error;
             if (data.session) {
                 showAuthMsg('Account created! You\'re signed in.', false);
-                setTimeout(() => { updateAuthUI(); closeAuthModal(); }, 900);
+                setTimeout(() => { onLoginSuccess(); }, 900);
             } else {
                 showAuthMsg('Check your email to confirm your account.', false);
             }
@@ -3052,7 +3249,7 @@ async function handleAuthSubmit() {
             const { data, error } = await sb.auth.signInWithPassword({ email, password });
             if (error) throw error;
             showAuthMsg('Signed in!', false);
-            setTimeout(() => { updateAuthUI(); closeAuthModal(); }, 500);
+            setTimeout(() => { onLoginSuccess(); }, 500);
         }
     } catch (err) {
         showAuthMsg(err.message || 'Something went wrong.', true);
@@ -3062,35 +3259,119 @@ async function handleAuthSubmit() {
     }
 }
 
+async function handleForgotPassword() {
+    if (!sb) { document.getElementById('auth-forgot-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
+    const email = document.getElementById('auth-forgot-email').value.trim();
+    const msgEl = document.getElementById('auth-forgot-msg');
+    const btn = document.getElementById('auth-forgot-btn');
+    if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'auth-msg error'; return; }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+
+    try {
+        const { error } = await sb.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + window.location.pathname
+        });
+        if (error) throw error;
+        msgEl.textContent = 'Reset link sent — check your email.';
+        msgEl.className = 'auth-msg success';
+    } catch (err) {
+        msgEl.textContent = err.message || 'Something went wrong.';
+        msgEl.className = 'auth-msg error';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+
+async function handleResetPassword() {
+    if (!sb) { document.getElementById('auth-reset-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
+    const newPassword = document.getElementById('auth-reset-password').value;
+    const msgEl = document.getElementById('auth-reset-msg');
+    const btn = document.getElementById('auth-reset-btn');
+    if (!newPassword || newPassword.length < 6) { msgEl.textContent = 'Password must be at least 6 characters.'; msgEl.className = 'auth-msg error'; return; }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Updating...';
+
+    try {
+        const { error } = await sb.auth.updateUser({ password: newPassword });
+        if (error) throw error;
+        msgEl.textContent = 'Password updated! Signing you in...';
+        msgEl.className = 'auth-msg success';
+        setTimeout(() => { onLoginSuccess(); }, 900);
+    } catch (err) {
+        msgEl.textContent = err.message || 'Something went wrong.';
+        msgEl.className = 'auth-msg error';
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+
 async function handleLogout() {
-    await sb.auth.signOut();
+    if (sb) await sb.auth.signOut();
     updateAuthUI();
     closeAuthModal();
 }
 
+function onLoginSuccess() {
+    updateAuthUI();
+    closeAuthModal();
+    // If they were trying to unlock a premium title before signing in, continue that flow now.
+    if (pendingPremiumUnlock) {
+        const { premiumId, titleText } = pendingPremiumUnlock;
+        pendingPremiumUnlock = null;
+        setTimeout(() => { openUnlockModal(premiumId, titleText); }, 250);
+    }
+}
+
 async function updateAuthUI() {
+    if (!sb) return;
     const { data: { session } } = await sb.auth.getSession();
     const navLabel = document.getElementById('auth-nav-label');
-    const formsView = document.getElementById('auth-forms-view');
-    const accountView = document.getElementById('auth-account-view');
 
     if (session && session.user) {
         navLabel.textContent = session.user.email.split('@')[0];
-        formsView.style.display = 'none';
-        accountView.style.display = 'block';
+        showAuthView('account');
+        document.getElementById('auth-account-view').style.display = 'block';
         document.getElementById('auth-account-email').textContent = session.user.email;
+        loadUnlockedContent();
     } else {
         navLabel.textContent = 'Sign In';
-        formsView.style.display = 'block';
-        accountView.style.display = 'none';
         document.getElementById('auth-email').value = '';
         document.getElementById('auth-password').value = '';
         setAuthMode('signin');
     }
 }
 
-sb.auth.onAuthStateChange((_event, _session) => { updateAuthUI(); });
-document.addEventListener('DOMContentLoaded', updateAuthUI);
+// Handle password-recovery links (person clicked "reset password" email)
+if (sb) {
+    sb.auth.onAuthStateChange((event, session) => {
+        if (event === 'PASSWORD_RECOVERY') {
+            openAuthModal();
+            setAuthMode('reset');
+        }
+        updateAuthUI();
+    });
+}
+
+// ── Premium thumbnail click: sign-in-or-code, only for locked titles ──
+async function handlePremiumCardClick(premiumId, titleText) {
+    if (!sb) { openAuthModal(); setAuthMode('signin'); return; }
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session || !session.user) {
+        pendingPremiumUnlock = { premiumId, titleText };
+        openAuthModal();
+        setAuthMode('signin');
+        return;
+    }
+    openUnlockModal(premiumId, titleText);
+}
+window.handlePremiumCardClick = handlePremiumCardClick;
+
 updateAuthUI();
     </script>
 </html>    
