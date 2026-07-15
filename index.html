@@ -38,7 +38,7 @@
             .auth-nav-btn span#auth-nav-label { display:inline; font-size:0.82rem; }
         }
         #auth-modal {
-            display:none; position:fixed; inset:0; z-index:100000; background:rgba(0,0,0,0.88);
+            display:none; position:fixed; inset:0; z-index:110000; background:rgba(0,0,0,0.88);
             align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);
         }
         #auth-modal.active { display:flex; }
@@ -97,6 +97,11 @@
             overflow:hidden;
         }
         #intro-overlay.fade-out { opacity:0; pointer-events:none; }
+        #intro-overlay.gate-hold #intro-inner,
+        #intro-overlay.gate-hold #intro-embers,
+        #intro-overlay.gate-hold #intro-inner * {
+            animation-play-state: paused !important;
+        }
         #intro-inner {
             position:relative; display:flex; flex-direction:column; align-items:center;
             z-index:2; animation: finalGlitchOut 0.3s steps(4,end) 3.75s;
@@ -1171,7 +1176,7 @@
 </head>
 <body>
 
-  <div id="intro-overlay">
+  <div id="intro-overlay" class="gate-hold">
         <div id="intro-embers"></div>
         <div id="intro-inner">
             <div id="intro-glow-ring"></div>
@@ -2037,7 +2042,7 @@
         <!-- EXPANDED CARD PLAYER -->
     <div id="auth-modal">
         <div class="auth-box">
-            <button class="auth-close-btn" onclick="closeAuthModal()">✕</button>
+            <button class="auth-close-btn" id="auth-close-btn" onclick="closeAuthModal()">✕</button>
 
             <div id="auth-forms-view">
                 <div class="auth-title">Rein<span>blacks</span></div>
@@ -2052,9 +2057,37 @@
                     <input type="password" id="auth-password" autocomplete="current-password" placeholder="••••••••">
                 </div>
                 <button class="auth-submit-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Sign In</button>
+                <div class="auth-switch" id="auth-forgot-link-wrap">
+                    <a onclick="setAuthMode('forgot')">Forgot password?</a>
+                </div>
                 <div class="auth-switch" id="auth-switch-text">
                     New here? <a onclick="setAuthMode('signup')">Create an account</a>
                 </div>
+            </div>
+
+            <div id="auth-forgot-view" style="display:none;">
+                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-subtitle">Reset your password</div>
+                <div class="auth-msg" id="auth-forgot-msg"></div>
+                <div class="auth-field">
+                    <label>Email</label>
+                    <input type="email" id="auth-forgot-email" autocomplete="email" placeholder="you@example.com">
+                </div>
+                <button class="auth-submit-btn" id="auth-forgot-btn" onclick="handleForgotPassword()">Send Reset Link</button>
+                <div class="auth-switch">
+                    <a onclick="setAuthMode('signin')">Back to Sign In</a>
+                </div>
+            </div>
+
+            <div id="auth-reset-view" style="display:none;">
+                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-subtitle">Set a new password</div>
+                <div class="auth-msg" id="auth-reset-msg"></div>
+                <div class="auth-field">
+                    <label>New Password</label>
+                    <input type="password" id="auth-reset-password" autocomplete="new-password" placeholder="••••••••">
+                </div>
+                <button class="auth-submit-btn" id="auth-reset-btn" onclick="handleResetPassword()">Update Password</button>
             </div>
 
             <div class="auth-account-panel" id="auth-account-view" style="display:none;">
@@ -2171,8 +2204,8 @@
             const mainSite = document.getElementById('main-site');
             const soundPrompt = document.getElementById('intro-sound-prompt');
             function completeIntro() { introOverlay.classList.add('fade-out'); mainSite.classList.add('visible'); if (soundPrompt) soundPrompt.classList.remove('show'); setTimeout(() => { if (introOverlay.parentNode) introOverlay.style.display = 'none'; }, 700); }
-            setTimeout(completeIntro, 4300);
-            introOverlay.addEventListener('click', completeIntro);
+            function startIntroSequence() { setTimeout(completeIntro, 4300); introOverlay.addEventListener('click', completeIntro); }
+            window.__startIntroSequence = startIntroSequence;
             // Floating ember particles behind the intro logo
             (function spawnEmbers(){
                 const emberField = document.getElementById('intro-embers');
@@ -2989,14 +3022,22 @@ const SUPABASE_URL = 'https://wjbfrtcfmxfgzafatqbm.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Ii1EyhcaIVeDgiBHV7wQ7A_QJ5mRCB7';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let authMode = 'signin'; // 'signin' | 'signup'
+let authMode = 'signin'; // 'signin' | 'signup' | 'forgot' | 'reset'
+let gateActive = true; // true until the person is logged in on first load
+
+function showAuthView(mode) {
+    document.getElementById('auth-forms-view').style.display = (mode === 'signin' || mode === 'signup') ? 'block' : 'none';
+    document.getElementById('auth-forgot-view').style.display = (mode === 'forgot') ? 'block' : 'none';
+    document.getElementById('auth-reset-view').style.display = (mode === 'reset') ? 'block' : 'none';
+    document.getElementById('auth-account-view').style.display = 'none';
+}
 
 function openAuthModal() {
     document.getElementById('auth-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
-    document.getElementById('auth-msg').textContent = '';
 }
 function closeAuthModal() {
+    if (gateActive) return; // can't dismiss the login gate
     document.getElementById('auth-modal').classList.remove('active');
     document.body.style.overflow = '';
 }
@@ -3006,10 +3047,12 @@ document.getElementById('auth-modal').addEventListener('click', function(e) {
 
 function setAuthMode(mode) {
     authMode = mode;
+    document.getElementById('auth-msg').textContent = '';
+    if (mode === 'forgot') { showAuthView('forgot'); return; }
+    showAuthView(mode);
     const submitBtn = document.getElementById('auth-submit-btn');
     const subtitle = document.getElementById('auth-mode-subtitle');
     const switchText = document.getElementById('auth-switch-text');
-    document.getElementById('auth-msg').textContent = '';
     if (mode === 'signup') {
         submitBtn.textContent = 'Create Account';
         subtitle.textContent = 'Create your free account';
@@ -3044,7 +3087,7 @@ async function handleAuthSubmit() {
             if (error) throw error;
             if (data.session) {
                 showAuthMsg('Account created! You\'re signed in.', false);
-                setTimeout(() => { updateAuthUI(); closeAuthModal(); }, 900);
+                setTimeout(() => { onLoginSuccess(); }, 900);
             } else {
                 showAuthMsg('Check your email to confirm your account.', false);
             }
@@ -3052,7 +3095,7 @@ async function handleAuthSubmit() {
             const { data, error } = await sb.auth.signInWithPassword({ email, password });
             if (error) throw error;
             showAuthMsg('Signed in!', false);
-            setTimeout(() => { updateAuthUI(); closeAuthModal(); }, 500);
+            setTimeout(() => { onLoginSuccess(); }, 500);
         }
     } catch (err) {
         showAuthMsg(err.message || 'Something went wrong.', true);
@@ -3062,36 +3105,121 @@ async function handleAuthSubmit() {
     }
 }
 
+async function handleForgotPassword() {
+    const email = document.getElementById('auth-forgot-email').value.trim();
+    const msgEl = document.getElementById('auth-forgot-msg');
+    const btn = document.getElementById('auth-forgot-btn');
+    if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'auth-msg error'; return; }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+
+    try {
+        const { error } = await sb.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + window.location.pathname
+        });
+        if (error) throw error;
+        msgEl.textContent = 'Reset link sent — check your email.';
+        msgEl.className = 'auth-msg success';
+    } catch (err) {
+        msgEl.textContent = err.message || 'Something went wrong.';
+        msgEl.className = 'auth-msg error';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+
+async function handleResetPassword() {
+    const newPassword = document.getElementById('auth-reset-password').value;
+    const msgEl = document.getElementById('auth-reset-msg');
+    const btn = document.getElementById('auth-reset-btn');
+    if (!newPassword || newPassword.length < 6) { msgEl.textContent = 'Password must be at least 6 characters.'; msgEl.className = 'auth-msg error'; return; }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Updating...';
+
+    try {
+        const { error } = await sb.auth.updateUser({ password: newPassword });
+        if (error) throw error;
+        msgEl.textContent = 'Password updated! Signing you in...';
+        msgEl.className = 'auth-msg success';
+        setTimeout(() => { onLoginSuccess(); }, 900);
+    } catch (err) {
+        msgEl.textContent = err.message || 'Something went wrong.';
+        msgEl.className = 'auth-msg error';
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+
 async function handleLogout() {
     await sb.auth.signOut();
+    gateActive = true;
+    updateAuthUI();
+    openAuthModal();
+    document.getElementById('auth-close-btn').style.display = 'none';
+    setAuthMode('signin');
+}
+
+function onLoginSuccess() {
+    gateActive = false;
+    document.getElementById('auth-close-btn').style.display = '';
     updateAuthUI();
     closeAuthModal();
+    const introOverlay = document.getElementById('intro-overlay');
+    if (introOverlay && introOverlay.classList.contains('gate-hold')) {
+        introOverlay.classList.remove('gate-hold');
+        if (typeof window.__startIntroSequence === 'function') window.__startIntroSequence();
+    }
 }
 
 async function updateAuthUI() {
     const { data: { session } } = await sb.auth.getSession();
     const navLabel = document.getElementById('auth-nav-label');
-    const formsView = document.getElementById('auth-forms-view');
-    const accountView = document.getElementById('auth-account-view');
 
     if (session && session.user) {
         navLabel.textContent = session.user.email.split('@')[0];
-        formsView.style.display = 'none';
-        accountView.style.display = 'block';
+        showAuthView('account');
+        document.getElementById('auth-account-view').style.display = 'block';
         document.getElementById('auth-account-email').textContent = session.user.email;
     } else {
         navLabel.textContent = 'Sign In';
-        formsView.style.display = 'block';
-        accountView.style.display = 'none';
         document.getElementById('auth-email').value = '';
         document.getElementById('auth-password').value = '';
         setAuthMode('signin');
     }
 }
 
-sb.auth.onAuthStateChange((_event, _session) => { updateAuthUI(); });
-document.addEventListener('DOMContentLoaded', updateAuthUI);
-updateAuthUI();
+// Handle password-recovery links (person clicked "reset password" email)
+sb.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') {
+        openAuthModal();
+        document.getElementById('auth-close-btn').style.display = 'none';
+        setAuthMode('reset');
+    }
+    updateAuthUI();
+});
+
+// ── Login gate: block the intro + site until signed in ──
+async function checkAuthGate() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session && session.user) {
+        gateActive = false;
+        document.getElementById('auth-close-btn').style.display = '';
+        document.getElementById('intro-overlay').classList.remove('gate-hold');
+        if (typeof window.__startIntroSequence === 'function') window.__startIntroSequence();
+    } else {
+        gateActive = true;
+        document.getElementById('auth-close-btn').style.display = 'none';
+        openAuthModal();
+        setAuthMode('signin');
+    }
+    updateAuthUI();
+}
+checkAuthGate();
     </script>
 </html>    
 
