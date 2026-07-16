@@ -50,6 +50,12 @@
             position:absolute; top:14px; right:16px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer;
         }
         .auth-close-btn:hover { color:var(--red); }
+        .auth-support-note {
+            margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);
+            font-size:0.75rem; color:#999; text-align:center; font-family:'DM Sans',sans-serif; line-height:1.6;
+        }
+        .auth-support-note a { color:var(--red); font-weight:600; text-decoration:none; }
+        .auth-support-note a:hover { text-decoration:underline; }
         .auth-title {
             font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:0.04em; color:#fff; text-align:center; margin-bottom:4px;
         }
@@ -2239,6 +2245,12 @@
                 <div class="auth-subtitle">You're signed in</div>
                 <div class="auth-account-email" id="auth-account-email"></div>
                 <button class="auth-logout-btn" onclick="handleLogout()">Log Out</button>
+            </div>
+
+            <div class="auth-support-note">
+                Trouble logging in? Contact us —
+                <a href="https://wa.me/254794299237" target="_blank" rel="noopener">WhatsApp +254 7942 99 237</a>
+                or <a href="mailto:officialreinblacks@gmail.com">officialreinblacks@gmail.com</a>
             </div>
         </div>
     </div>
