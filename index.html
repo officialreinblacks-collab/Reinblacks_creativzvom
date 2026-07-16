@@ -53,7 +53,8 @@
         .auth-title {
             font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:0.04em; color:#fff; text-align:center; margin-bottom:4px;
         }
-        .auth-title span { color:var(--red); }
+        .auth-title-red { color:var(--red); font-weight:800; }
+        .auth-title-white { color:#fff; font-weight:400; }
         .auth-subtitle { text-align:center; color:#999; font-size:0.82rem; margin-bottom:22px; font-family:'DM Sans',sans-serif; }
         .auth-field { margin-bottom:14px; }
         .auth-field label { display:block; font-size:0.72rem; color:#ccc; letter-spacing:0.05em; margin-bottom:6px; font-family:'DM Sans',sans-serif; text-transform:uppercase; }
@@ -295,12 +296,13 @@
         /* Brand as text wordmark */
         .nav-logo-stacked {
             font-family:'Bebas Neue', sans-serif;
-            font-size:1.5rem; letter-spacing:0.06em;
-            color:#fff; cursor:pointer;
+            font-size:1.35rem; letter-spacing:0.04em;
+            cursor:pointer;
             line-height:1;
-            text-shadow:0 0 20px var(--accent-glow);
+            white-space:nowrap;
         }
-        .nav-logo-stacked span { display:none; }
+        .nav-logo-red { color:var(--red); font-weight:800; text-shadow:0 0 20px var(--accent-glow); }
+        .nav-logo-white { color:#fff; font-weight:400; margin-left:2px; }
 
         /* Center: search */
         .nav-center { flex:1; max-width:340px; position:relative; display:flex; align-items:center; justify-content:center; }
@@ -828,7 +830,8 @@
         .poster-card.wide { width:260px; min-width:240px; aspect-ratio:16/9; }
         .poster-card.tall { width:170px; min-width:150px; aspect-ratio:2/3; }
         .poster-card img { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; }
-        .poster-card .poster-overlay { position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 45%, transparent 65%); display:flex; align-items:flex-end; padding:12px 10px; font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.15rem; line-height:1.05; letter-spacing:0.03em; text-transform:uppercase; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,0.9), 0 0 18px rgba(0,0,0,0.6); pointer-events:none; }
+        .poster-card .poster-overlay { position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 45%, transparent 65%); display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end; padding:12px 10px; font-family:'Bebas Neue',sans-serif; font-weight:400; font-size:1.15rem; line-height:1.05; letter-spacing:0.03em; text-transform:uppercase; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,0.9), 0 0 18px rgba(0,0,0,0.6); pointer-events:none; }
+        .poster-episode-count { font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:0.04em; text-transform:none; color:#e5e5e5; margin-top:4px; background:rgba(229,9,20,0.85); padding:2px 8px; border-radius:3px; }
         .poster-card .play-icon-center { position:absolute; bottom:10px; right:10px; font-size:1.05rem; width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(0,0,0,0.45); backdrop-filter:blur(3px); border:1px solid rgba(255,255,255,0.25); color:rgba(255,255,255,0.92); text-shadow:none; pointer-events:none; transition:color 0.25s, transform 0.25s, background 0.25s; opacity:0; transform:scale(0.85); }
         .poster-card:hover .play-icon-center { color:#fff; background:var(--red); border-color:var(--red); opacity:1; transform:scale(1); }
         @media (hover:none) { .poster-card .play-icon-center { opacity:1; transform:scale(1); } }
@@ -1254,7 +1257,7 @@
         <nav id="top-nav">
             <div class="nav-left">
                 <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu">☰</button>
-                <div class="nav-logo-stacked" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">Reinblacks<span>Creativz</span></div>
+                <div class="nav-logo-stacked" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})"><span class="nav-logo-red">Reinblacks</span><span class="nav-logo-white">Creativz</span></div>
             </div>
             <div class="nav-center">
                 <button class="search-icon-btn" id="search-icon-btn" title="Search"><i class="fas fa-search"></i></button>
@@ -1839,15 +1842,18 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-premium data-premium-id="devils-call" data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
+<div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">Devil's Call</div>
 </div>
-<div class="poster-card tall" data-video="6TNqWuYg1vM" data-title="Another Tomb Life" data-aspect="9:16" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
+<div class="poster-card tall" data-video="6TNqWuYg1vM" data-premium data-premium-id="another-tomb-life" data-title="Another Tomb Life" data-aspect="9:16" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_00000000c7987243a24af92b385bedaa_zjmhbz.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">ANOTHER TOMB LIFE — Ep. 01</div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">ANOTHER TOMB LIFE — Ep. 01</div>
+        <div class="poster-episode-count">6 Episodes</div>
+    </div>
 </div>
 
           </div>
@@ -2157,7 +2163,7 @@
             <button class="auth-close-btn" id="auth-close-btn" onclick="closeAuthModal()">✕</button>
 
             <div id="auth-forms-view">
-                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
                 <div class="auth-subtitle" id="auth-mode-subtitle">Sign in to your account</div>
                 <div class="auth-msg" id="auth-msg"></div>
                 <div class="auth-field">
@@ -2178,7 +2184,7 @@
             </div>
 
             <div id="auth-forgot-view" style="display:none;">
-                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
                 <div class="auth-subtitle">Reset your password</div>
                 <div class="auth-msg" id="auth-forgot-msg"></div>
                 <div class="auth-field">
@@ -2192,7 +2198,7 @@
             </div>
 
             <div id="auth-reset-view" style="display:none;">
-                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
                 <div class="auth-subtitle">Set a new password</div>
                 <div class="auth-msg" id="auth-reset-msg"></div>
                 <div class="auth-field">
@@ -2203,7 +2209,7 @@
             </div>
 
             <div class="auth-account-panel" id="auth-account-view" style="display:none;">
-                <div class="auth-title">Rein<span>blacks</span></div>
+                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
                 <div class="auth-subtitle">You're signed in</div>
                 <div class="auth-account-email" id="auth-account-email"></div>
                 <button class="auth-logout-btn" onclick="handleLogout()">Log Out</button>
