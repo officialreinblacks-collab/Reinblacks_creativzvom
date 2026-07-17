@@ -397,6 +397,15 @@
             scrollbar-width:none;
         }
         #category-bar::-webkit-scrollbar { display:none; }
+        #premium-notice-banner {
+            margin-top:96px; background:linear-gradient(90deg, rgba(229,9,20,0.95), rgba(150,6,13,0.95));
+            color:#fff; text-align:center; padding:10px 16px; font-family:'DM Sans',sans-serif;
+            font-size:0.8rem; font-weight:600; line-height:1.5; display:flex; align-items:center;
+            justify-content:center; gap:8px; flex-wrap:wrap; box-shadow:0 2px 10px rgba(0,0,0,0.4); z-index:500; position:relative;
+        }
+        #premium-notice-banner strong { font-weight:800; }
+        #premium-notice-banner i { flex-shrink:0; }
+        @media (max-width:480px) { #premium-notice-banner { font-size:0.72rem; padding:9px 12px; } }
         .cat-btn {
             flex-shrink:0;
             padding:8px 20px;
@@ -1315,6 +1324,11 @@
             <button class="cat-btn" data-scroll="contact-section">Share Your Story</button>
         </div>
 
+        <div id="premium-notice-banner">
+            <i class="fas fa-circle-info"></i>
+            <span><strong>Premium Users:</strong> Use your monthly code to unlock each premium video's episodes. <strong>Remember to renew your subscription monthly.</strong></span>
+        </div>
+
       <section id="hero">
         <!-- Glass frame wrapper -->
         <div class="hero-glass-frame">
@@ -1861,10 +1875,21 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="n2oL64ZiYNo" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"n2oL64ZiYNo","label":"Episode 01","desc":"A story of ambition and consequence, following a journey abroad where the past has a way of catching up.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png"}]'>
+<div class="poster-card tall" data-video="n2oL64ZiYNo" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png" alt="Abroad Karma" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">Abroad Karma</div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">Abroad Karma</div>
+        <div class="poster-episode-count">1 Episode</div>
+    </div>
+</div>
+<div class="poster-card tall" data-video="n2oL64ZiYNo" data-premium data-premium-id="abroad-karma" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"n2oL64ZiYNo","label":"Episode 01","desc":"A story of ambition and consequence, following a journey abroad where the past has a way of catching up.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png"}]'>
+    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png" alt="Abroad Karma" loading="lazy" decoding="async">
+    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">Abroad Karma</div>
+        <div class="poster-episode-count">3 Episodes</div>
+    </div>
 </div>
 <div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
@@ -1872,6 +1897,14 @@
     <div class="poster-overlay">Devil's Call</div>
 </div>
 <div class="poster-card tall" data-video="6TNqWuYg1vM" data-title="Another Tomb Life" data-aspect="9:16" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
+    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_00000000c7987243a24af92b385bedaa_zjmhbz.png" alt="Another Tomb Life" loading="lazy" decoding="async">
+    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">Another Tomb Life</div>
+        <div class="poster-episode-count">1 Episode</div>
+    </div>
+</div>
+<div class="poster-card tall" data-video="6TNqWuYg1vM" data-premium data-premium-id="another-tomb-life" data-title="Another Tomb Life" data-aspect="9:16" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_00000000c7987243a24af92b385bedaa_zjmhbz.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">
@@ -3205,11 +3238,10 @@ document.getElementById('game-modal').addEventListener('click', function(e) {
 
 // ── Premium unlock codes ──
 function openUnlockModal(premiumId, titleText) {
-    document.getElementById('unlock-video-title').textContent = siteGateMode ? 'Enter your code to unlock Reinblacks Creativz' : (titleText ? `Enter your code to watch "${titleText}" — unlocks ALL premium titles for 30 days` : 'Enter your code to unlock all premium titles for 30 days');
+    document.getElementById('unlock-video-title').textContent = titleText ? `Enter your code to watch "${titleText}" — unlocks ALL premium titles for 30 days` : 'Enter your code to unlock all premium titles for 30 days';
     document.getElementById('unlock-modal').setAttribute('data-target-id', premiumId || '');
     document.getElementById('unlock-modal').setAttribute('data-target-title', titleText || '');
     document.getElementById('unlock-modal').classList.add('active');
-    document.querySelector('.unlock-close-btn').style.display = siteGateMode ? 'none' : '';
     document.getElementById('unlock-code-input').value = '';
     document.getElementById('unlock-msg').textContent = '';
     document.body.style.overflow = 'hidden';
@@ -3225,10 +3257,9 @@ function buyNowWhatsApp() {
 }
 window.buyNowWhatsApp = buyNowWhatsApp;
 
-function closeUnlockModal(force) {
-    if (siteGateMode && !force) return;
+function closeUnlockModal() {
     document.getElementById('unlock-modal').classList.remove('active');
-    if (!siteGateMode) document.body.style.overflow = '';
+    document.body.style.overflow = '';
 }
 window.closeUnlockModal = closeUnlockModal;
 document.getElementById('unlock-modal').addEventListener('click', function(e) {
@@ -3253,9 +3284,16 @@ async function handleRedeemCode() {
         if (data && data.success) {
             window.__subscriptionExpiresAt = data.expires_at;
             applySubscriptionAccess();
-            msgEl.textContent = "You're in! Unlocking the site...";
+            msgEl.textContent = 'Subscription active! Opening...';
             msgEl.className = 'unlock-msg success';
-            setTimeout(() => { checkSiteAccess(); }, 700);
+            const targetId = document.getElementById('unlock-modal').getAttribute('data-target-id');
+            setTimeout(() => {
+                closeUnlockModal();
+                const card = document.querySelector(`.poster-card[data-premium-id="${CSS.escape(targetId || '')}"]`);
+                if (card && typeof openDetailModal === 'function') {
+                    openDetailModal(card);
+                }
+            }, 700);
         } else {
             msgEl.textContent = (data && data.message) || 'Invalid or already-used code.';
             msgEl.className = 'unlock-msg error';
@@ -3297,17 +3335,6 @@ function fallbackCopy(value, onDone) {
 }
 window.copyPaymentDetail = copyPaymentDetail;
 
-async function loadUnlockedContent() {
-    if (!sb) return;
-    const { data: { session } } = await sb.auth.getSession();
-    window.__unlockedPremiumIds = new Set();
-    if (!session || !session.user) { window.__subscriptionExpiresAt = null; return; }
-    const { data, error } = await sb.from('subscriptions').select('expires_at').eq('user_id', session.user.id).maybeSingle();
-    if (error) { console.error('loadUnlockedContent failed:', error); return; }
-    window.__subscriptionExpiresAt = data ? data.expires_at : null;
-    applySubscriptionAccess();
-}
-
 function applySubscriptionAccess() {
     const active = window.__subscriptionExpiresAt && new Date(window.__subscriptionExpiresAt) > new Date();
     window.__unlockedPremiumIds = new Set();
@@ -3343,16 +3370,13 @@ function showAuthView(mode) {
     document.getElementById('auth-account-view').style.display = 'none';
 }
 
-let siteGateMode = null; // 'auth' | 'subscribe' | null — while set, modals cannot be closed
 function openAuthModal() {
     document.getElementById('auth-modal').classList.add('active');
-    document.getElementById('auth-close-btn').style.display = siteGateMode ? 'none' : '';
     document.body.style.overflow = 'hidden';
 }
-function closeAuthModal(force) {
-    if (siteGateMode && !force) return;
+function closeAuthModal() {
     document.getElementById('auth-modal').classList.remove('active');
-    if (!siteGateMode) document.body.style.overflow = '';
+    document.body.style.overflow = '';
 }
 document.getElementById('auth-modal').addEventListener('click', function(e) {
     if (e.target === this) closeAuthModal();
@@ -3473,13 +3497,20 @@ async function handleResetPassword() {
 
 async function handleLogout() {
     if (sb) await sb.auth.signOut();
+    window.__unlockedPremiumIds = new Set();
     updateAuthUI();
-    checkSiteAccess();
+    closeAuthModal();
 }
 
 function onLoginSuccess() {
     updateAuthUI();
-    checkSiteAccess();
+    closeAuthModal();
+    // If they were trying to unlock a premium title before signing in, continue that flow now.
+    if (pendingPremiumUnlock) {
+        const { premiumId, titleText } = pendingPremiumUnlock;
+        pendingPremiumUnlock = null;
+        setTimeout(() => { openUnlockModal(premiumId, titleText); }, 250);
+    }
 }
 
 async function updateAuthUI() {
@@ -3498,6 +3529,7 @@ async function updateAuthUI() {
         document.getElementById('auth-email').value = '';
         document.getElementById('auth-password').value = '';
         setAuthMode('signin');
+        window.__unlockedPremiumIds = new Set();
     }
 }
 
@@ -3507,44 +3539,36 @@ if (sb) {
         if (event === 'PASSWORD_RECOVERY') {
             openAuthModal();
             setAuthMode('reset');
-            updateAuthUI();
-            return;
         }
         updateAuthUI();
-        checkSiteAccess();
     });
 }
 
-// ── Site-wide gate: must be signed in AND have an active subscription to see anything ──
-async function checkSiteAccess() {
-    if (!sb) { siteGateMode = null; return; }
+// ── Premium thumbnail click: sign-in-or-code, only for locked titles. Everything else on the site is open to browse. ──
+async function handlePremiumCardClick(premiumId, titleText) {
+    if (!sb) { openAuthModal(); setAuthMode('signin'); return; }
     const { data: { session } } = await sb.auth.getSession();
     if (!session || !session.user) {
-        siteGateMode = 'auth';
-        closeUnlockModal(true);
-        setAuthMode('signin');
+        pendingPremiumUnlock = { premiumId, titleText };
         openAuthModal();
+        setAuthMode('signin');
         return;
     }
-    const { data } = await sb.from('subscriptions').select('expires_at').eq('user_id', session.user.id).maybeSingle();
-    const expiresAt = data ? data.expires_at : null;
-    window.__subscriptionExpiresAt = expiresAt;
-    const active = expiresAt && new Date(expiresAt) > new Date();
-    if (!active) {
-        siteGateMode = 'subscribe';
-        closeAuthModal(true);
-        openUnlockModal(null, null);
-    } else {
-        siteGateMode = null;
-        closeAuthModal(true);
-        closeUnlockModal(true);
-        document.body.style.overflow = '';
-    }
+    openUnlockModal(premiumId, titleText);
 }
-window.checkSiteAccess = checkSiteAccess;
+window.handlePremiumCardClick = handlePremiumCardClick;
+
+// Check subscription status quietly in the background (no forced gate) so returning subscribers see unlocked titles immediately.
+async function loadUnlockedContent() {
+    if (!sb) return;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session || !session.user) { window.__subscriptionExpiresAt = null; window.__unlockedPremiumIds = new Set(); return; }
+    const { data } = await sb.from('subscriptions').select('expires_at').eq('user_id', session.user.id).maybeSingle();
+    window.__subscriptionExpiresAt = data ? data.expires_at : null;
+    applySubscriptionAccess();
+}
 
 updateAuthUI();
-checkSiteAccess();
     </script>
 </html>    
 
