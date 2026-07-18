@@ -398,14 +398,14 @@
         }
         #category-bar::-webkit-scrollbar { display:none; }
         #premium-notice-banner {
-            margin-top:96px; background:linear-gradient(90deg, rgba(229,9,20,0.95), rgba(150,6,13,0.95));
+            margin-top:132px; background:linear-gradient(90deg, rgba(229,9,20,0.95), rgba(150,6,13,0.95));
             color:#fff; text-align:center; padding:10px 16px; font-family:'DM Sans',sans-serif;
             font-size:0.8rem; font-weight:600; line-height:1.5; display:flex; align-items:center;
             justify-content:center; gap:8px; flex-wrap:wrap; box-shadow:0 2px 10px rgba(0,0,0,0.4); z-index:500; position:relative;
         }
         #premium-notice-banner strong { font-weight:800; }
         #premium-notice-banner i { flex-shrink:0; }
-        @media (max-width:480px) { #premium-notice-banner { font-size:0.72rem; padding:9px 12px; } }
+        @media (max-width:480px) { #premium-notice-banner { font-size:0.72rem; padding:9px 12px; margin-top:150px; } }
         .cat-btn {
             flex-shrink:0;
             padding:8px 20px;
@@ -530,7 +530,7 @@
             width:100%;
             border-radius:0;
             overflow:hidden;
-            background:#111;
+            background:transparent;
         }
         @media (min-width:769px) {
             .nf-hero-card {
@@ -542,8 +542,15 @@
             }
         }
         @media (max-width:768px) {
-            .nf-hero-card { margin-top:0; border-radius:0; }
-            .hero-glass-frame { padding:0; background:none; border:none; box-shadow:none; }
+            .hero-glass-frame {
+                margin:16px 10px 0;
+                padding:0;
+                border-radius:14px;
+                overflow:hidden;
+                border:1px solid rgba(255,255,255,0.14);
+                box-shadow:0 4px 24px rgba(0,0,0,0.5);
+            }
+            .nf-hero-card { margin-top:0; border-radius:14px; }
         }
 
         /* Glass inner overlay — subtle frost on top of the image */
@@ -728,13 +735,15 @@
         /* Poster image */
         .nf-hero-card .hero-bg-image {
             width:100%;
-            aspect-ratio:9/13;
-            object-fit:cover;
+            aspect-ratio:3/4;
+            max-height:72vh;
+            object-fit:contain;
             object-position:center top;
             display:block;
+            background:#000;
         }
         @media (min-width:769px) {
-            .nf-hero-card .hero-bg-image { aspect-ratio:16/9; object-position:center; }
+            .nf-hero-card .hero-bg-image { aspect-ratio:16/9; max-height:none; object-fit:cover; object-position:center; }
         }
 
         /* Gradient overlay from bottom */
@@ -742,10 +751,10 @@
             position:absolute; inset:0;
             background:linear-gradient(
                 0deg,
-                #000 0%,
-                rgba(0,0,0,0.85) 22%,
-                rgba(0,0,0,0.3) 55%,
-                transparent 75%
+                rgba(0,0,0,0.92) 0%,
+                rgba(0,0,0,0.6) 18%,
+                rgba(0,0,0,0.15) 32%,
+                transparent 42%
             );
             pointer-events:none;
         }
@@ -781,11 +790,12 @@
             align-items:center; margin-bottom:14px;
         }
         .hero-genre-pill {
-            font-size:0.72rem; color:#ccc;
+            font-size:0.72rem; color:#eee;
             display:flex; align-items:center; gap:4px;
+            text-shadow:0 2px 8px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.8);
         }
         .hero-genre-pill::before {
-            content:'•'; color:#aaa; font-size:0.7rem;
+            content:'•'; color:#ccc; font-size:0.7rem;
         }
         .hero-genre-pill:first-child::before { display:none; }
 
@@ -794,13 +804,14 @@
             font-size:clamp(1.8rem,7vw,3.2rem);
             font-weight:900; line-height:1.05;
             margin:0 0 6px;
-            text-shadow:0 2px 20px rgba(0,0,0,0.8);
+            text-shadow:0 2px 12px rgba(0,0,0,0.95), 0 4px 30px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.8);
             letter-spacing:-0.01em;
         }
         .hero-tag {
             font-size:0.75rem; letter-spacing:0.12em;
-            color:#bbb; text-transform:uppercase;
+            color:#ddd; text-transform:uppercase;
             margin-bottom:14px; font-weight:600;
+            text-shadow:0 2px 8px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.8);
         }
 
         /* Action buttons row */
@@ -977,7 +988,11 @@
   /* ─────────────── CONTACT ─────────────── */
         #contact-section { scroll-margin-top:110px; padding:40px 20px; }
         .contact-split { display:grid; grid-template-columns:1fr 1fr; gap:25px; max-width:1000px; margin:0 auto; background:rgba(18,18,18,0.75); border-radius:16px; padding:30px; border:1px solid rgba(255,255,255,0.07); box-shadow:0 15px 40px rgba(0,0,0,0.4); }
-        @media (max-width:768px) { .contact-split { grid-template-columns:1fr; padding:20px; } .hero-content { padding:80px 20px 50px; } .poster-card.wide { width:220px; min-width:200px; } .poster-card.tall { width:140px; min-width:130px; } }
+        @media (max-width:768px) {
+            .contact-split { grid-template-columns:1fr; padding:20px; }
+            .poster-card.wide { width:220px; min-width:200px; }
+            .poster-card.tall { width:140px; min-width:130px; }
+        }
         .agent-card { display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px; }
         .agent-avatar { width:90px; height:90px; border-radius:50%; border:3px solid var(--red); box-shadow:0 0 20px var(--accent-glow); object-fit:cover; }
         .agent-name { font-weight:800; font-size:1.1rem; }
@@ -1311,6 +1326,7 @@
             <button id="hamburger-close">✕</button>
             <div class="menu-title">Navigation</div>
             <a href="#section-mini-films" data-nav="mini-films">Horror Movies</a>
+            <a href="#section-lifestyle-reality" data-nav="lifestyle-reality">Lifestyle & Reality</a>
             <a href="#section-sweet-monster" data-nav="sweet-monster">Love & Romance</a>
             <a href="#section-about-trigger" data-nav="about">About Reinblacks</a>
             <a href="#find-us" data-nav="find-us">Find Us</a>
@@ -1318,6 +1334,7 @@
         </div>
 <div id="category-bar">
             <button class="cat-btn active-cat" data-scroll="section-mini-films">Horror Movies</button>
+            <button class="cat-btn" data-scroll="section-lifestyle-reality">Lifestyle & Reality</button>
             <button class="cat-btn" data-scroll="section-sweet-monster">Love & Romance</button>
             <button class="cat-btn" data-scroll="section-about-trigger">About</button>
             <button class="cat-btn" data-scroll="find-us">Find Us</button>
@@ -1341,8 +1358,8 @@
         <div class="nf-hero-card">
             <!-- Poster image -->
             <picture>
-                <source media="(min-width: 769px)" srcset="https://res.cloudinary.com/datfuxotx/image/upload/v1783269648/file_00000000e5ac71f4b65a12c4d5633534_hczqfk.png">
-                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783272804/file_00000000ff5071f48bbbefa7f0e4bb84_cxtasd.jpg" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
+                <source media="(min-width: 769px)" srcset="https://res.cloudinary.com/datfuxotx/image/upload/v1784354583/e2dff410-826d-11f1-a71b-5beb7237fbec_vpt3sl.png">
+                <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png" alt="Reinblacks Hero" class="hero-bg-image" decoding="async">
             </picture>
 
             <!-- RC badge top-left -->
@@ -1398,8 +1415,6 @@
                     <span class="hero-genre-pill">Horror</span>
                     <span class="hero-genre-pill">Original Stories</span>
                 </div>
-                <!-- Title -->
-                <h1 class="hero-title">Reinblacks Creativz</h1>
                 <!-- Tagline -->
                 <p class="hero-tag">AI Films · Original Stories · 4K Quality</p>
                 <!-- Action buttons -->
@@ -1876,22 +1891,6 @@
         <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
         <div class="category-row" id="row-mini-films">
 
-<div class="poster-card tall" data-video="n2oL64ZiYNo" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz">
-    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png" alt="Abroad Karma" loading="lazy" decoding="async">
-    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">
-        <div class="poster-overlay-title">Abroad Karma</div>
-        <div class="poster-episode-count">1 Episode</div>
-    </div>
-</div>
-<div class="poster-card tall" data-video="n2oL64ZiYNo" data-premium data-premium-id="abroad-karma" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"n2oL64ZiYNo","label":"Episode 01","desc":"A story of ambition and consequence, following a journey abroad where the past has a way of catching up.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png"}]'>
-    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784210495/file_00000000411471f4a200656c6ec07890_rohhkw.png" alt="Abroad Karma" loading="lazy" decoding="async">
-    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">
-        <div class="poster-overlay-title">Abroad Karma</div>
-        <div class="poster-episode-count">3 Episodes</div>
-    </div>
-</div>
 <div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
@@ -1916,6 +1915,36 @@
 
           </div>
         <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+
+        </section>
+
+        <section class="content-section fade-up-section" id="section-lifestyle-reality">
+    <div class="section-header"><span class="red-accent"></span> Lifestyle & Reality</div>
+    <div class="slider-container">
+        <button class="slider-arrow left" data-target="row-lifestyle-reality"><i class="fas fa-chevron-left"></i></button>
+        <div class="category-row" id="row-lifestyle-reality">
+
+<div class="poster-card tall" data-video="n2oL64ZiYNo" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz">
+    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png" alt="Abroad Karma" loading="lazy" decoding="async">
+    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">Abroad Karma</div>
+        <div class="poster-episode-count">1 Episode</div>
+    </div>
+</div>
+<div class="poster-card tall" data-video="n2oL64ZiYNo" data-premium data-premium-id="abroad-karma" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"n2oL64ZiYNo","label":"Episode 01","desc":"A story of ambition and consequence, following a journey abroad where the past has a way of catching up.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png"}]'>
+    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png" alt="Abroad Karma" loading="lazy" decoding="async">
+    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
+    <div class="poster-overlay">
+        <div class="poster-overlay-title">Abroad Karma</div>
+        <div class="poster-episode-count">3 Episodes</div>
+    </div>
+</div>
+
+          </div>
+        <button class="slider-arrow right" data-target="row-lifestyle-reality"><i class="fas fa-chevron-right"></i></button>
     </div>
 
 
@@ -2456,8 +2485,8 @@ const topNav = document.getElementById('top-nav');
 
             searchIconBtn.addEventListener('click', () => { navSearch.classList.toggle('expanded'); if (navSearch.classList.contains('expanded')) navSearch.focus(); });
 
-            const navSectionIds = ['section-mini-films','section-sweet-monster','section-about-trigger','find-us','contact-section']; 
-            const navLinkMap = { 'section-mini-films':'mini-films','section-sweet-monster':'sweet-monster','section-about-trigger':'about','find-us':'find-us','contact-section':'contact' };
+            const navSectionIds = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','section-about-trigger','find-us','contact-section']; 
+            const navLinkMap = { 'section-mini-films':'mini-films','section-lifestyle-reality':'lifestyle-reality','section-sweet-monster':'sweet-monster','section-about-trigger':'about','find-us':'find-us','contact-section':'contact' };
             function updateActiveNav() { let currentId = null; const scrollPos = window.scrollY + 150; navSectionIds.forEach(id => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) currentId = id; }); allHamburgerLinks.forEach(link => { link.classList.remove('active-nav'); if (currentId && navLinkMap[currentId] === link.getAttribute('data-nav')) link.classList.add('active-nav'); }); }
             function onPageScroll() { topNav.classList.toggle('scrolled', window.scrollY > 40); updateActiveNav(); backToTopBtn.style.display = window.scrollY > 500 ? 'flex' : 'none'; }
             window.addEventListener('scroll', onPageScroll, { passive: true });
@@ -2469,7 +2498,7 @@ const topNav = document.getElementById('top-nav');
             document.querySelectorAll('.slider-container').forEach(container => { const row = container.querySelector('.category-row'); if (!row) return; const hint = document.createElement('div'); hint.className = 'swipe-hint'; hint.innerHTML = '<i class="fas fa-chevron-right"></i>'; container.appendChild(hint); function hideHint() { hint.classList.add('hidden'); } row.addEventListener('scroll', function() { const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 10; if (atEnd) hint.classList.add('hidden'); else hint.classList.remove('hidden'); }, { passive: true }); row.addEventListener('touchstart', hideHint, { once: true }); row.addEventListener('wheel', hideHint, { once: true }); });
           
                       allCatBtns.forEach(btn => { btn.addEventListener('click', function() { const target = document.getElementById(this.getAttribute('data-scroll')); if (target) target.scrollIntoView({ behavior: 'smooth' }); allCatBtns.forEach(b => b.classList.remove('active-cat')); this.classList.add('active-cat'); }); });
-            function updateActiveCatBtn() { let activeIdx = null; const scrollPos = window.scrollY + 160; const map = ['section-mini-films','section-sweet-monster','section-about-trigger','find-us','contact-section']; map.forEach((id, i) => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) activeIdx = i; }); if (activeIdx !== null) allCatBtns.forEach((b,i) => b.classList.toggle('active-cat', i === activeIdx)); }
+            function updateActiveCatBtn() { let activeIdx = null; const scrollPos = window.scrollY + 160; const map = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','section-about-trigger','find-us','contact-section']; map.forEach((id, i) => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) activeIdx = i; }); if (activeIdx !== null) allCatBtns.forEach((b,i) => b.classList.toggle('active-cat', i === activeIdx)); }
             window.addEventListener('scroll', updateActiveCatBtn, { passive: true });
 
             document.querySelectorAll('.faq-question').forEach(btn => { btn.addEventListener('click', function() { const item = this.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open')); if (!isOpen) item.classList.add('open'); }); });
