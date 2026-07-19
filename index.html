@@ -391,9 +391,11 @@
 
         /* ─────────────── CATEGORY BAR — Netflix Pill Style ─────────────── */
         #category-bar {
-            position:fixed; top:52px; left:0; right:0; z-index:8990;
+            position:sticky; top:52px; z-index:8990;
+            margin-top:52px;
             display:flex; gap:8px; padding:10px 16px;
-            overflow-x:auto; background:rgba(0,0,0,0.0);
+            overflow-x:auto; background:rgba(0,0,0,0.55);
+            backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
             scrollbar-width:none;
         }
         #category-bar::-webkit-scrollbar { display:none; }
@@ -1328,7 +1330,6 @@
             <a href="#section-mini-films" data-nav="mini-films">Horror Movies</a>
             <a href="#section-lifestyle-reality" data-nav="lifestyle-reality">Lifestyle & Reality</a>
             <a href="#section-sweet-monster" data-nav="sweet-monster">Love & Romance</a>
-            <a href="#section-about-trigger" data-nav="about">About Reinblacks</a>
             <a href="#find-us" data-nav="find-us">Find Us</a>
             <a href="#contact-section" data-nav="contact">Share Your Story</a>
         </div>
@@ -1336,14 +1337,8 @@
             <button class="cat-btn active-cat" data-scroll="section-mini-films">Horror Movies</button>
             <button class="cat-btn" data-scroll="section-lifestyle-reality">Lifestyle & Reality</button>
             <button class="cat-btn" data-scroll="section-sweet-monster">Love & Romance</button>
-            <button class="cat-btn" data-scroll="section-about-trigger">About</button>
             <button class="cat-btn" data-scroll="find-us">Find Us</button>
             <button class="cat-btn" data-scroll="contact-section">Share Your Story</button>
-        </div>
-
-        <div id="premium-notice-banner">
-            <i class="fas fa-circle-info"></i>
-            <span><strong>Premium Members:</strong> Your access code is valid for 30 days. <strong>Renew on time to keep enjoying every premium title, uninterrupted.</strong></span>
         </div>
 
       <section id="hero">
@@ -1432,17 +1427,6 @@
 
         </section>
 
-        <!-- Studio intro / story invite -->
-        <div class="hero-info-card">
-            <h2 style="font-family:'Bebas Neue',sans-serif; letter-spacing:0.04em; color:#fff; font-size:1.4rem; margin:0 0 10px;">Reinblacks Creativz — We Make AI High-Quality Films</h2>
-            <p class="hic-body">Watch our latest AI-crafted films right here, first — before they release anywhere else. Have a story worth telling? Share it below and let's bring it to life together. We're also open to partnerships and collaborations with brands, artists, and storytellers who believe, like we do, that AI is the future of filmmaking.</p>
-            <p style="text-align:center;color:#888;font-size:0.78rem;margin-top:10px;letter-spacing:0.03em;">📍 Africa · Kenya · Nairobi</p>
-            <div style="text-align:center; margin-top:14px;">
-                <a href="#contact-section" class="hero-play-btn" style="display:inline-flex;">
-                    <i class="fas fa-feather"></i> Share Your Story
-                </a>
-            </div>
-        </div>
 
 <style>
 /* ── Hero Info Card ── */
@@ -1747,143 +1731,6 @@
 
 
 
-<!-- ═══════════════════════════════════════════════════════
-     LEADERBOARD AD BANNER — Full-width below hero
-═══════════════════════════════════════════════════════ -->
-<style>
-/* ── Ad Banner ── */
-#leaderboard-ad {
-    width:100%; background:#0a0a0a;
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
-    padding:0; overflow:hidden;
-}
-#leaderboard-ad .ad-top-bar {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:5px 16px 3px;
-    background:#050505;
-    border-bottom:1px solid rgba(255,255,255,0.04);
-}
-#leaderboard-ad .ad-top-bar span {
-    font-size:0.55rem; letter-spacing:0.18em; color:#555;
-    text-transform:uppercase; font-weight:700;
-}
-#leaderboard-ad .ad-top-bar a {
-    font-size:0.55rem; letter-spacing:0.18em; color:var(--red);
-    text-transform:uppercase; font-weight:700; text-decoration:none;
-    transition:opacity 0.2s;
-}
-#leaderboard-ad .ad-top-bar a:hover { opacity:0.75; }
-
-/* Image slider */
-#lb-slides-wrap {
-    position:relative; width:100%; height:clamp(110px,28vw,180px); overflow:hidden;
-}
-#lb-slides {
-    display:flex; width:400%; height:100%;
-    transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
-}
-#lb-slides img {
-    width:25%; height:100%; object-fit:cover; flex-shrink:0; display:block;
-}
-
-/* Dots */
-#lb-dots {
-    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
-    display:flex; gap:5px; z-index:2;
-}
-.lb-dot {
-    width:5px; height:5px; border-radius:50%;
-    background:rgba(255,255,255,0.3); display:inline-block;
-    transition:background 0.3s, transform 0.3s;
-}
-.lb-dot.active-lb { background:#fff; transform:scale(1.3); }
-
-/* Caption row */
-#lb-caption {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:9px 16px 10px; gap:10px; flex-wrap:wrap;
-}
-#lb-caption .lb-text { flex:1; min-width:0; }
-#lb-caption .lb-text strong {
-    display:block; font-size:0.8rem; font-weight:800; color:#fff;
-    line-height:1.25; margin-bottom:2px;
-}
-#lb-caption .lb-text p {
-    font-size:0.68rem; color:#999; line-height:1.4; margin:0;
-}
-#lb-caption .lb-text p span { color:#34D399; font-weight:700; }
-#lb-signup {
-    flex-shrink:0;
-    display:inline-block; padding:8px 18px;
-    border-radius:22px; font-size:0.7rem; font-weight:800;
-    letter-spacing:0.1em; text-transform:uppercase;
-    text-decoration:none; color:#fff;
-    background:linear-gradient(135deg,#6b3800,#b86e00,#e8a020);
-    box-shadow:0 0 16px rgba(196,122,0,0.6), 0 0 32px rgba(196,122,0,0.2);
-    animation:lbGlowPulse 2.5s ease-in-out infinite;
-    transition:box-shadow 0.3s, transform 0.2s;
-    white-space:nowrap;
-}
-#lb-signup:hover {
-    box-shadow:0 0 28px rgba(232,160,32,1), 0 0 50px rgba(196,122,0,0.5);
-    transform:scale(1.03);
-}
-@keyframes lbGlowPulse {
-    0%,100%{ box-shadow:0 0 16px rgba(196,122,0,0.6),0 0 32px rgba(196,122,0,0.2); }
-    50%{ box-shadow:0 0 26px rgba(232,160,32,0.9),0 0 48px rgba(196,122,0,0.35); }
-}
-</style>
-
-<div id="leaderboard-ad">
-    <!-- Label bar -->
-    <div class="ad-top-bar">
-        <span>#Ads</span>
-        <a href="#contact-section">📩 Book This Space</a>
-    </div>
-
-    <!-- Full-width image slider -->
-    <div id="lb-slides-wrap">
-        <div id="lb-slides">
-            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781947844/1781947632757_kwkr5y.png" alt="MiniPay Ad 1" loading="lazy">
-            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781947845/1781947579508_uqjpib.png" alt="MiniPay Ad 2" loading="lazy">
-            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781947845/1781947765500_l0fs0f.png" alt="MiniPay Ad 3" loading="lazy">
-            <img src="https://res.cloudinary.com/datfuxotx/image/upload/c_fill,w_1200,h_360,q_auto,f_auto,g_center/v1781947845/1781947700538_oswfxg.png" alt="MiniPay Ad 4" loading="lazy">
-        </div>
-        <div id="lb-dots">
-            <span class="lb-dot active-lb"></span>
-            <span class="lb-dot"></span>
-            <span class="lb-dot"></span>
-            <span class="lb-dot"></span>
-        </div>
-    </div>
-
-    <!-- Caption + CTA -->
-    <div id="lb-caption">
-        <div class="lb-text">
-            <strong>Join MiniPay Today — Send Money, Instantly.</strong>
-            <p>Transfer globally &amp; locally at the lowest cost. Powered by <span>Opera Mini</span></p>
-        </div>
-        <a id="lb-signup" href="https://link.minipay.xyz/invite?ref=6YgobmkS" target="_blank" rel="noopener sponsored">
-            Click To Sign Up &rsaquo;
-        </a>
-    </div>
-</div>
-
-<script>
-(function(){
-    var lbIdx = 0;
-    var lbSlides = document.getElementById('lb-slides');
-    var lbDots = document.querySelectorAll('.lb-dot');
-    function lbGoTo(n){
-        lbIdx = ((n % 4) + 4) % 4;
-        lbSlides.style.transform = 'translateX(-' + (lbIdx * 25) + '%)';
-        lbDots.forEach(function(d,i){ d.classList.toggle('active-lb', i === lbIdx); });
-    }
-    setInterval(function(){ lbGoTo(lbIdx + 1); }, 2600);
-})();
-</script>
-
 
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Horror Movies</div>
@@ -1971,15 +1818,8 @@
 
       <section id="contact-section" class="fade-up-section">
             <div class="contact-split">
-                <div class="agent-card">
-                    <img src="https://res.cloudinary.com/dmnwlnpr5/image/upload/w_200,h_200,c_fill,g_auto,q_auto,f_auto/v1779377239/1779377042276_wm4vey.png" alt="Live Support" class="agent-avatar" loading="lazy" decoding="async">
-                    <div class="agent-name">Live Support Chat</div>
-                    <p class="agent-bio">Need help? Chat with us live. We're here to answer your questions and bring your creative vision to life.</p>
-                    <button class="agent-chat-btn" id="agent-chat-btn"><i class="fas fa-comment-dots"></i> Chat Now</button>
-                </div>
                 <div class="contact-form-wrapper" style="display:flex; flex-direction:column; gap:12px;">
                     <h3 style="color:var(--red); text-align:center; font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:0.05em;">Share Your Story</h3>
-                    <p style="text-align:center; color:#999; font-size:0.82rem; line-height:1.5; margin:-4px 0 6px; padding:0 6px;">Sharing your story is 100% free. If we choose to bring it to the screen, you'll be credited as the original author and we'll work out fair partnership terms with you before production starts.</p>
                     <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form" style="border:2px solid var(--red); border-radius:8px; padding:16px; background:rgba(0,0,0,0.3);">
                         <input type="hidden" name="access_key" value="5dc1b1ae-2315-45f5-853f-2ccd8d270b56">
                         <input type="hidden" name="subject" value="New Story Submission from Reinblacks Creativz">
@@ -2098,17 +1938,6 @@
         </style>
 
    <!-- ABOUT REINBLACKS — expandable text trigger -->
-        <section class="content-section fade-up-section" id="section-about-trigger" style="padding-bottom:0;">
-            <div onclick="document.getElementById('about-ceo-modal').style.display='flex'" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;border:1px solid rgba(229,9,20,0.25);border-radius:10px;padding:16px 22px;background:rgba(229,9,20,0.04);transition:background 0.25s,border-color 0.25s;" onmouseover="this.style.background='rgba(229,9,20,0.09)';this.style.borderColor='rgba(229,9,20,0.5)'" onmouseout="this.style.background='rgba(229,9,20,0.04)';this.style.borderColor='rgba(229,9,20,0.25)'">
-                <div>
-                    <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:4px;font-weight:600;">The Founder</p>
-                    <p style="color:#fff;font-size:0.95rem;font-weight:700;letter-spacing:0.02em;">About Reinblacks</p>
-                    <p style="color:#888;font-size:0.78rem;margin-top:3px;">Nairobi, Kenya &nbsp;·&nbsp; AI Filmmaker &nbsp;·&nbsp; Creative Director</p>
-                </div>
-                <span style="background:#1a6fd4;color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:20px;white-space:nowrap;">Read More</span>
-            </div>
-        </section>
-
         <style>
         .tool-label {
             position:absolute;
@@ -2149,37 +1978,15 @@
             </div>
         </section>
 
-        <div id="about-ceo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
-            <div style="background:#111;border-radius:14px;max-width:480px;max-height:85vh;overflow-y:auto;padding:28px;position:relative;border:1px solid #333;">
-                <button onclick="document.getElementById('about-ceo-modal').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;">&times;</button>
-
-                <!-- Profile photo -->
-                <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
-                    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1781616060/1781616004271_m39nud.jpg" alt="Reinblacks Baristar" style="width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid #e50914;box-shadow:0 0 18px rgba(229,9,20,0.45);">
-                    <p style="margin-top:10px;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:#888;font-weight:500;">Prompt Engineer</p>
-                    <p style="font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:0.04em;margin-top:2px;">CEO <span style="color:#e50914;">Reinblacks</span> <span style="font-style:italic;font-weight:700;color:#aaa;">Baristar</span></p>
-                </div>
-
-                <h2 style="color:#fff;margin-bottom:14px;">About Reinblacks</h2>
-                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">Reinblacks Baristar is the founder of Reinblacks Creativz and Reinblacks Music. Based in Nairobi, he specializes in AI-powered content creation, visual storytelling, and digital media production.</p>
-                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">His journey into artificial intelligence began in 2025, focusing on AI visualizer videos and creative prompt engineering. Through continuous experimentation and innovation, he expanded his expertise into AI filmmaking, music visualization, cinematic storytelling, and digital content creation.</p>
-                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:12px;">In 2026, he officially launched Reinblacks Creativz, a creative platform dedicated to producing high-quality AI-generated films, visual content, promotional media, and digital experiences. The brand combines emerging AI technologies with creative direction to deliver engaging and innovative content for modern audiences.</p>
-                <p style="color:#ccc;font-size:0.92rem;line-height:1.6;margin-bottom:16px;">Today, Reinblacks continues to explore the future of AI-driven creativity, building projects that bridge technology, storytelling, music, and visual entertainment while helping businesses, artists, and creators bring their ideas to life.</p>
-                <p style="color:#e50914;font-size:0.85rem;font-weight:700;line-height:1.5;">Founder • AI Prompt Engineer • AI Filmmaker • Content Creator • Creative Director<br>Nairobi, Kenya 🇰🇪</p>
-            </div>
-        </div>
 
         <footer>
             <div style="margin:0 0 14px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:0.8rem;">
                 <a href="#section-mini-films" style="color:#aaa;text-decoration:none;">Horror Movies</a>
                 <a href="#section-sweet-monster" style="color:#aaa;text-decoration:none;">Love & Romance</a>
-                <a href="#section-about-trigger" style="color:#aaa;text-decoration:none;">About</a>
                 <a href="#contact-section" style="color:#aaa;text-decoration:none;">Share Your Story</a>
             </div>
             <p style="color:#e5e5e5;font-weight:700;letter-spacing:0.02em;">Find Us</p>
             <p style="margin:10px 0;">
-                <i class="fab fa-whatsapp" style="color:#25D366;"></i> <a href="https://wa.me/254794299237" target="_blank" style="color:#aaa;">WhatsApp +254 7942 99 237</a> |
-                📞 <a href="tel:+254711691608" style="color:#aaa;">Tel +254 711 691 608</a> |
                 📧 <a href="mailto:officialreinblacks@gmail.com" style="color:#aaa;">officialreinblacks@gmail.com</a>
             </p>
             <p style="max-width:520px;margin:14px auto 0;color:#999;font-size:0.82rem;line-height:1.7;">We're open to partnerships and collaborations. We believe AI is the future — let's bring every imagination and memory to life, together.</p>
@@ -2485,8 +2292,8 @@ const topNav = document.getElementById('top-nav');
 
             searchIconBtn.addEventListener('click', () => { navSearch.classList.toggle('expanded'); if (navSearch.classList.contains('expanded')) navSearch.focus(); });
 
-            const navSectionIds = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','section-about-trigger','find-us','contact-section']; 
-            const navLinkMap = { 'section-mini-films':'mini-films','section-lifestyle-reality':'lifestyle-reality','section-sweet-monster':'sweet-monster','section-about-trigger':'about','find-us':'find-us','contact-section':'contact' };
+            const navSectionIds = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','find-us','contact-section']; 
+            const navLinkMap = { 'section-mini-films':'mini-films','section-lifestyle-reality':'lifestyle-reality','section-sweet-monster':'sweet-monster','find-us':'find-us','contact-section':'contact' };
             function updateActiveNav() { let currentId = null; const scrollPos = window.scrollY + 150; navSectionIds.forEach(id => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) currentId = id; }); allHamburgerLinks.forEach(link => { link.classList.remove('active-nav'); if (currentId && navLinkMap[currentId] === link.getAttribute('data-nav')) link.classList.add('active-nav'); }); }
             function onPageScroll() { topNav.classList.toggle('scrolled', window.scrollY > 40); updateActiveNav(); backToTopBtn.style.display = window.scrollY > 500 ? 'flex' : 'none'; }
             window.addEventListener('scroll', onPageScroll, { passive: true });
@@ -2498,7 +2305,7 @@ const topNav = document.getElementById('top-nav');
             document.querySelectorAll('.slider-container').forEach(container => { const row = container.querySelector('.category-row'); if (!row) return; const hint = document.createElement('div'); hint.className = 'swipe-hint'; hint.innerHTML = '<i class="fas fa-chevron-right"></i>'; container.appendChild(hint); function hideHint() { hint.classList.add('hidden'); } row.addEventListener('scroll', function() { const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 10; if (atEnd) hint.classList.add('hidden'); else hint.classList.remove('hidden'); }, { passive: true }); row.addEventListener('touchstart', hideHint, { once: true }); row.addEventListener('wheel', hideHint, { once: true }); });
           
                       allCatBtns.forEach(btn => { btn.addEventListener('click', function() { const target = document.getElementById(this.getAttribute('data-scroll')); if (target) target.scrollIntoView({ behavior: 'smooth' }); allCatBtns.forEach(b => b.classList.remove('active-cat')); this.classList.add('active-cat'); }); });
-            function updateActiveCatBtn() { let activeIdx = null; const scrollPos = window.scrollY + 160; const map = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','section-about-trigger','find-us','contact-section']; map.forEach((id, i) => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) activeIdx = i; }); if (activeIdx !== null) allCatBtns.forEach((b,i) => b.classList.toggle('active-cat', i === activeIdx)); }
+            function updateActiveCatBtn() { let activeIdx = null; const scrollPos = window.scrollY + 160; const map = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','find-us','contact-section']; map.forEach((id, i) => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) activeIdx = i; }); if (activeIdx !== null) allCatBtns.forEach((b,i) => b.classList.toggle('active-cat', i === activeIdx)); }
             window.addEventListener('scroll', updateActiveCatBtn, { passive: true });
 
             document.querySelectorAll('.faq-question').forEach(btn => { btn.addEventListener('click', function() { const item = this.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open')); if (!isOpen) item.classList.add('open'); }); });
@@ -3016,7 +2823,6 @@ const topNav = document.getElementById('top-nav');
         { title:'Horror Movies', sub:"Devil's Call, Another Tomb Life", icon:'fa-film', section:'section-mini-films' },
         { title:'Love & Romance', sub:'Sweet Monster — Episode 01 & 02', icon:'fa-film', section:'section-sweet-monster' },
         { title:'Share Your Story', sub:'Send us your story to bring to life', icon:'fa-feather', section:'contact-section' },
-        { title:'About Reinblacks', sub:'Learn more about the studio', icon:'fa-circle-info', section:'section-about-trigger' },
         { title:'Find Us', sub:'Where to find Reinblacks Creativz', icon:'fa-location-dot', section:'find-us' },
         // Films
         { title:'Sweet Monster — Episode 01', sub:'Mini Film · Friendship & Betrayal', icon:'fa-clapperboard', section:'section-sweet-monster' },
