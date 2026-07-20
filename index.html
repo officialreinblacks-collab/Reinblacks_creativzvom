@@ -1035,11 +1035,12 @@
             .detail-hero { border-radius:10px 10px 0 0; }
             .detail-hero.vertical-frame, .detail-hero.crop-vertical { border-radius:10px 10px 0 0; }
         }
-        .detail-hero { position:relative; width:100%; aspect-ratio:16/10; max-height:56vh; background:#050505; overflow:hidden; }
+        .detail-hero { position:relative; width:100%; aspect-ratio:16/9; max-height:56vh; background:#050505; overflow:hidden; }
         .detail-hero.vertical-frame { margin:0 auto; height:82vh; max-height:760px; aspect-ratio:9/16; width:auto; max-width:100%; }
         @media (max-aspect-ratio:9/16) { .detail-hero.vertical-frame { height:auto; width:100%; aspect-ratio:9/16; max-height:none; } }
         .detail-hero:fullscreen, .detail-hero:-webkit-full-screen { width:100vw; height:100vh; max-height:none; max-width:none; aspect-ratio:auto; margin:0; }
-        .detail-hero iframe { position:absolute; width:100%; height:130%; top:50%; left:0; bottom:auto; right:auto; transform:translateY(-50%); border:none; pointer-events:none; }
+        .detail-hero iframe { position:absolute; width:100%; height:100%; top:0; left:0; bottom:auto; right:auto; transform:none; border:none; pointer-events:none; }
+        .detail-hero.vertical-frame iframe { width:100%; height:100%; top:0; left:0; transform:none; }
         .detail-hero.crop-vertical iframe { width:100%; height:285%; top:50%; bottom:auto; left:0; right:auto; transform:translateY(-50%); }
         .detail-hero-bar { position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,var(--red) 0%, var(--red) 32%, rgba(255,255,255,0.18) 32%); }
         .detail-back-btn, .detail-mute-btn, .detail-fs-btn { position:absolute; width:38px; height:38px; border-radius:50%; background:rgba(20,20,20,0.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; z-index:5; transition:background 0.25s; }
@@ -1085,8 +1086,8 @@
 
         /* ─────────────── CUSTOM PLAYER CONTROLS ─────────────── */
         .cplayer { position:absolute; inset:0; width:100%; height:100%; background:#000; overflow:hidden; }
-        .cplayer-yt { position:absolute; inset:0; width:100%; height:100%; transition:filter 0.15s linear; }
-        .cplayer-yt iframe { width:100%; height:100%; border:none; pointer-events:none; }
+        .cplayer-yt { position:absolute; inset:0; width:100%; height:100%; transition:filter 0.15s linear; overflow:hidden; }
+        .cplayer-yt iframe { position:absolute; border:none; pointer-events:none; }
         .cplayer-tap-catch { position:absolute; inset:0; z-index:2; }
         .cplayer-overlay { position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 68%, rgba(0,0,0,0.6) 100%); opacity:0; pointer-events:none; transition:opacity 0.25s ease; }
         .cplayer-overlay.show { opacity:1; pointer-events:all; }
@@ -2658,6 +2659,24 @@ const topNav = document.getElementById('top-nav');
                 let hideTimer = null, progressTimer = null, captionsOn = false, destroyed = false;
 
                 function safeCall(fn) { try { return fn(); } catch (e) { return null; } }
+                // Letterbox-fit the YouTube iframe inside ytWrap so the full video frame is always
+                // visible (corner to corner) instead of YouTube's default crop-to-fill behavior.
+                function fitFrame() {
+                    const iframe = ytWrap.querySelector('iframe');
+                    if (!iframe) return;
+                    const cw = ytWrap.clientWidth, ch = ytWrap.clientHeight;
+                    if (!cw || !ch) return;
+                    const ratio = 16 / 9;
+                    let w, h;
+                    if (cw / ch > ratio) { h = ch; w = h * ratio; }
+                    else { w = cw; h = w / ratio; }
+                    iframe.style.width = w + 'px';
+                    iframe.style.height = h + 'px';
+                    iframe.style.left = ((cw - w) / 2) + 'px';
+                    iframe.style.top = ((ch - h) / 2) + 'px';
+                }
+                window.addEventListener('resize', fitFrame);
+                window.addEventListener('orientationchange', fitFrame);
                 function closeMenus() { speedMenu.classList.remove('show'); ccMenu.classList.remove('show'); }
                 function resetHideTimer() {
                     clearTimeout(hideTimer);
@@ -2755,14 +2774,33 @@ const topNav = document.getElementById('top-nav');
                 renderSpeedMenu(1);
                 renderCcMenu();
 
+                function targetQuality() {
+                    return window.innerWidth <= 768 ? 'hd1080' : 'highres';
+                }
+                function enforceQuality() {
+                    if (!player) return;
+                    safeCall(() => {
+                        const levels = player.getAvailableQualityLevels ? player.getAvailableQualityLevels() : [];
+                        const want = targetQuality();
+                        if (want === 'highres') {
+                            player.setPlaybackQuality(levels && levels.length ? levels[0] : 'hd1080');
+                        } else if (levels && levels.indexOf(want) !== -1) {
+                            player.setPlaybackQuality(want);
+                        } else {
+                            player.setPlaybackQuality('hd1080');
+                        }
+                    });
+                }
                 ytApiReady.then(() => {
                     if (destroyed) return;
                     player = new YT.Player(uid, {
                         videoId: videoId,
-                        playerVars: { autoplay:1, controls:0, rel:0, modestbranding:1, playsinline:1, iv_load_policy:3, cc_load_policy:0, fs:0, disablekb:1, origin: window.location.origin },
+                        playerVars: { autoplay:1, controls:0, rel:0, modestbranding:1, playsinline:1, iv_load_policy:3, cc_load_policy:0, fs:0, disablekb:1, origin: window.location.origin, vq: targetQuality() },
                         events: {
                             onReady: () => {
                                 safeCall(() => player.playVideo());
+                                fitFrame();
+                                enforceQuality();
                                 progressTimer = setInterval(() => {
                                     if (!player || isScrubbing) return;
                                     updateProgressUI(safeCall(() => player.getCurrentTime()) || 0, safeCall(() => player.getDuration()) || 0);
@@ -2770,14 +2808,20 @@ const topNav = document.getElementById('top-nav');
                                 showOverlay();
                             },
                             onStateChange: e => {
-                                if (e.data === YT.PlayerState.PLAYING) { isPlaying = true; playPauseIcon.className = 'fas fa-pause'; resetHideTimer(); }
+                                if (e.data === YT.PlayerState.PLAYING) { isPlaying = true; playPauseIcon.className = 'fas fa-pause'; resetHideTimer(); enforceQuality(); }
                                 else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) { isPlaying = false; playPauseIcon.className = 'fas fa-play'; clearTimeout(hideTimer); overlay.classList.add('show'); }
-                            }
+                            },
+                            onPlaybackQualityChange: () => enforceQuality()
                         }
                     });
                 });
 
-                return { destroy() { destroyed = true; clearInterval(progressTimer); clearTimeout(hideTimer); safeCall(() => player && player.destroy()); container.innerHTML = ''; } };
+                return { destroy() {
+                    destroyed = true; clearInterval(progressTimer); clearTimeout(hideTimer);
+                    window.removeEventListener('resize', fitFrame);
+                    window.removeEventListener('orientationchange', fitFrame);
+                    safeCall(() => player && player.destroy()); container.innerHTML = '';
+                } };
             }
 
             function openCardPlayer(videoId) { currentPlayerVideoId = videoId; cardPlayerContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1&showinfo=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`; cardPlayerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
@@ -2928,7 +2972,8 @@ const topNav = document.getElementById('top-nav');
                 detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(card.getAttribute('data-preview-video') || videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
                 detailAspectMode = card.getAttribute('data-aspect');
                 detailHero.classList.remove('vertical-frame', 'crop-vertical');
-                if (detailAspectMode === '9:16' || detailAspectMode === '9:16-crop' || card.hasAttribute('data-preview-crop')) detailHero.classList.add('crop-vertical');
+                if (detailAspectMode === '9:16-crop' || card.hasAttribute('data-preview-crop')) detailHero.classList.add('crop-vertical');
+                else if (detailAspectMode === '9:16') detailHero.classList.add('vertical-frame');
                 detailMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
 
                 let episodes = [];
