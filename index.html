@@ -2915,8 +2915,9 @@ const topNav = document.getElementById('top-nav');
                 }
                 detailMuted = false;
                 const isVertical = (detailAspectMode === '9:16-crop' || detailAspectMode === '9:16');
+                // crop-vertical is a preview-only framing trick; it must never persist into real playback.
+                detailHero.classList.remove('crop-vertical');
                 if (isVertical) {
-                    detailHero.classList.remove('crop-vertical');
                     detailHero.classList.add('vertical-frame');
                 }
                 detailHero.classList.add('cplayer-active');
