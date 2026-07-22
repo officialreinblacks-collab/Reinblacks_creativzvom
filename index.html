@@ -413,13 +413,13 @@
             padding:8px 20px;
             border-radius:20px;
             border:1px solid rgba(255,255,255,0.28);
-            background:rgba(30,30,30,0.75);
+            background:rgba(255,255,255,0.06);
             color:#e0e0e0;
             font-size:0.8rem; font-weight:600;
             cursor:pointer; transition:all 0.22s;
             white-space:nowrap;
-            backdrop-filter:blur(6px);
-            -webkit-backdrop-filter:blur(6px);
+            backdrop-filter:blur(10px);
+            -webkit-backdrop-filter:blur(10px);
         }
         .cat-btn:hover {
             background:rgba(255,255,255,0.15);
@@ -427,10 +427,12 @@
             color:#fff;
         }
         .cat-btn.active-cat {
-            background:#fff;
-            border-color:#fff;
-            color:#000;
+            background:rgba(255,255,255,0.18);
+            border-color:rgba(255,255,255,0.65);
+            color:#fff;
             font-weight:700;
+            backdrop-filter:blur(10px);
+            -webkit-backdrop-filter:blur(10px);
         }
 
         /* ─────────────── HERO — Glass Frame Style ─────────────── */
@@ -823,25 +825,26 @@
         .hero-play-btn {
             flex:1; display:inline-flex; align-items:center;
             justify-content:center; gap:8px;
-            padding:13px 20px; background:#fff; color:#000;
-            border:none; border-radius:6px;
+            padding:13px 20px; background:rgba(255,255,255,0.12); color:#fff;
+            border:1px solid rgba(255,255,255,0.35); border-radius:6px;
             font-size:0.9rem; font-weight:800;
             cursor:pointer; letter-spacing:0.03em;
             transition:all 0.25s; text-decoration:none;
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
         }
-        .hero-play-btn:hover { background:#e0e0e0; }
+        .hero-play-btn:hover { background:rgba(255,255,255,0.22); border-color:rgba(255,255,255,0.5); }
         .hero-mylist-btn {
             flex:1; display:inline-flex; align-items:center;
             justify-content:center; gap:8px;
             padding:13px 20px;
-            background:rgba(109,109,110,0.7);
-            color:#fff; border:none; border-radius:6px;
+            background:rgba(255,255,255,0.08);
+            color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:6px;
             font-size:0.9rem; font-weight:800;
             cursor:pointer; letter-spacing:0.03em;
             transition:all 0.25s; text-decoration:none;
-            backdrop-filter:blur(4px);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
         }
-        .hero-mylist-btn:hover { background:rgba(109,109,110,0.9); }
+        .hero-mylist-btn:hover { background:rgba(255,255,255,0.16); border-color:rgba(255,255,255,0.4); }
 
         /* Legacy smoke kept but hidden in card layout */
         .hero-smoke { display:none; }
@@ -857,14 +860,13 @@
         .category-row:active { cursor:grabbing; }
         .category-row::-webkit-scrollbar { height:4px; }
         .category-row::-webkit-scrollbar-thumb { background:var(--red); border-radius:10px; }
-        .slider-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.7); border:none; color:#fff; font-size:1.5rem; cursor:pointer; padding:10px; border-radius:50%; z-index:5; transition:background 0.3s; }
+        .slider-arrow { display:none !important; }
         .slider-arrow.left { left:5px; }
         .slider-arrow.right { right:5px; }
         .slider-arrow:hover { background:var(--red); }
         @media (max-width:768px) { .slider-arrow { display:none; } }
-        .swipe-hint { position:absolute; top:50%; right:15px; transform:translateY(-50%); color:rgba(255,255,255,0.7); font-size:1.8rem; z-index:6; pointer-events:none; animation:swipePulse 1.8s ease-in-out infinite; transition:opacity 0.5s; }
-        .swipe-hint.hidden { opacity:0; }
-        @keyframes swipePulse { 0%,100%{ transform:translateY(-50%) translateX(0); opacity:0.6; } 50%{ transform:translateY(-50%) translateX(8px); opacity:1; } }
+
+
 
         .poster-card { flex-shrink:0; scroll-snap-align:start; border-radius:8px; overflow:hidden; cursor:pointer; transition:transform 0.3s ease, opacity 0.3s ease; border:2px solid transparent; position:relative; background:#111; will-change:transform; transform:translateZ(0); }
         .poster-card:hover { transform:scale(1.06); border-color:var(--red); box-shadow:0 0 15px var(--accent-glow), 0 4px 10px rgba(0,0,0,0.5); z-index:5; }
@@ -1154,7 +1156,7 @@
         @media (max-width:768px) { #bottom-mobile-nav { display:block; } #floating-chat-btn { bottom:70px; } }
   
           /* ─────────────── BACK TO TOP ─────────────── */
-        #back-to-top { position:fixed; bottom:80px; left:22px; z-index:9400; width:44px; height:44px; border-radius:50%; background:var(--red); border:none; color:#fff; font-size:1.2rem; cursor:pointer; box-shadow:0 4px 15px var(--accent-glow); display:none; align-items:center; justify-content:center; transition:transform 0.3s; }
+        #back-to-top { display:none !important; }
         #back-to-top:hover { transform:scale(1.1); }
         @media (max-width:768px) { #back-to-top { bottom:90px; } }
 
@@ -1741,9 +1743,7 @@
 
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Horror Movies</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-mini-films"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-mini-films">
+    <div class="slider-container">        <div class="category-row" id="row-mini-films">
 
 <div class="poster-card tall" data-video="asaUW8weEkM" data-preview-video="BdZfHPgh4Fg" data-preview-crop data-title="Devil's Call" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"asaUW8weEkM","label":"Episode 01","desc":"A fateful pact made under the cover of night pulls an unsuspecting soul into a spiral of dread — where every voice on the other end of the line demands a price.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783835281/f41de060-7db4-11f1-845d-d9abe38b0298_dboxw4.webp" alt="Devil's Call" loading="lazy" decoding="async">
@@ -1767,18 +1767,14 @@
     </div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-mini-films"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
 
         </section>
 
         <section class="content-section fade-up-section" id="section-lifestyle-reality">
     <div class="section-header"><span class="red-accent"></span> Lifestyle & Reality</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-lifestyle-reality"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-lifestyle-reality">
+    <div class="slider-container">        <div class="category-row" id="row-lifestyle-reality">
 
 <div class="poster-card tall" data-video="n2oL64ZiYNo" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png" alt="Abroad Karma" loading="lazy" decoding="async">
@@ -1797,18 +1793,14 @@
     </div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-lifestyle-reality"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
 
         </section>
 
         <section class="content-section fade-up-section" id="section-sweet-monster">
     <div class="section-header"><span class="red-accent"></span> Love & Romance</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-sweet-monster"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-sweet-monster">
+    <div class="slider-container">        <div class="category-row" id="row-sweet-monster">
 
 <div class="poster-card tall" data-video="sIcTXVVZh_o" data-title="Sweet Monster" data-aspect="9:16-crop" data-meta="2026 · Crime Drama · HD" data-episode="Episode 01" data-desc="A diamond-smuggling operation draws two worlds together — and a secret affair threatens to unravel everything before the deal is done." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"sIcTXVVZh_o","label":"Episode 01","desc":"A diamond-smuggling operation draws two worlds together — and a secret affair threatens to unravel everything before the deal is done.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_000000009df87243bfc3447f0bdafc4e_paaopc.png"},{"video":"BzFdGumFfmY","label":"Episode 02","desc":"The lies catch up fast. As suspicion closes in, one betrayal sets the stage for a cliffhanger that changes everything.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_0000000060fc71f4b382cbfe51f894e6_hto9dx.png"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_000000009df87243bfc3447f0bdafc4e_paaopc.png" alt="Sweet Monster" loading="lazy" decoding="async">
@@ -1828,18 +1820,14 @@
     <div class="poster-overlay">Whispers at Dusk</div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-sweet-monster"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
 
         </section>
 
         <section class="content-section fade-up-section" id="section-shorts-trends">
     <div class="section-header"><span class="red-accent"></span> Shorts Trends</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-shorts-trends"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-shorts-trends">
+    <div class="slider-container">        <div class="category-row" id="row-shorts-trends">
 
 <div class="poster-card tall" data-video="h4IGltPCCOY" data-aspect="9:16" data-title="Midnight Pulse" data-meta="2026 · Shorts · HD" data-episode="" data-desc="" data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/h4IGltPCCOY/hqdefault.jpg" alt="Midnight Pulse" loading="lazy" decoding="async">
@@ -1901,13 +1889,9 @@
     <div class="poster-overlay">Shadow Current</div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-shorts-trends"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
-    <div class="slider-container" style="margin-top:16px;">
-        <button class="slider-arrow left" data-target="row-shorts-trends-2"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-shorts-trends-2">
+    <div class="slider-container" style="margin-top:16px;">        <div class="category-row" id="row-shorts-trends-2">
 
 <div class="poster-card tall" data-video="b95baQMRC_U" data-aspect="9:16" data-title="Fractured Dawn" data-meta="2026 · Shorts · HD" data-episode="" data-desc="" data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/b95baQMRC_U/hqdefault.jpg" alt="Fractured Dawn" loading="lazy" decoding="async">
@@ -1921,17 +1905,13 @@
     <div class="poster-overlay">Static Bloom</div>
 </div>
 
-        </div>
-        <button class="slider-arrow right" data-target="row-shorts-trends-2"><i class="fas fa-chevron-right"></i></button>
-    </div>
+        </div>    </div>
 
         </section>
 
         <section class="content-section fade-up-section" id="section-music-visualizer">
     <div class="section-header"><span class="red-accent"></span> Music and Visualizer</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-music-visualizer"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-music-visualizer">
+    <div class="slider-container">        <div class="category-row" id="row-music-visualizer">
 
 <div class="poster-card tall" data-video="iIeq-ZlzLZA" data-title="Pulse Frequency" data-meta="2026 · Music Visualizer · HD" data-episode="" data-desc="" data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/iIeq-ZlzLZA/hqdefault.jpg" alt="Pulse Frequency" loading="lazy" decoding="async">
@@ -1957,18 +1937,14 @@
     <div class="poster-overlay">Rhythm Drift</div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-music-visualizer"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
 
         </section>
 
         <section class="content-section fade-up-section" id="section-podcast-real-talks">
     <div class="section-header"><span class="red-accent"></span> Podcast and Real Talks</div>
-    <div class="slider-container">
-        <button class="slider-arrow left" data-target="row-podcast-real-talks"><i class="fas fa-chevron-left"></i></button>
-        <div class="category-row" id="row-podcast-real-talks">
+    <div class="slider-container">        <div class="category-row" id="row-podcast-real-talks">
 
 <div class="poster-card tall" data-video="L4TyqKQEVV4" data-title="Unfiltered Conversations" data-meta="2026 · Podcast · HD" data-episode="" data-desc="" data-credit="An AI Film by Reinblacks Creativz">
     <img src="https://img.youtube.com/vi/L4TyqKQEVV4/hqdefault.jpg" alt="Unfiltered Conversations" loading="lazy" decoding="async">
@@ -1988,9 +1964,7 @@
     <div class="poster-overlay">Real Talk Sessions</div>
 </div>
 
-          </div>
-        <button class="slider-arrow right" data-target="row-podcast-real-talks"><i class="fas fa-chevron-right"></i></button>
-    </div>
+          </div>    </div>
 
 
         </section>
@@ -2029,9 +2003,7 @@
             <div class="service-heading" style="font-size:clamp(28px,5vw,42px);">Pricing Plans</div>
             <p class="service-sub">Here is the three-tier pricing structure designed to clearly separate the value of standard features from your high-end realistic generation capabilities:</p>
 
-            <div class="slider-container">
-                <button class="slider-arrow left" data-target="row-pricing"><i class="fas fa-chevron-left"></i></button>
-            <div class="pricing-grid three-cols" id="row-pricing">
+            <div class="slider-container">            <div class="pricing-grid three-cols" id="row-pricing">
                 <div class="pricing-card">
                     <div class="card-service">Silver Card</div>
                     <div class="card-tier">Silver</div>
@@ -2092,9 +2064,7 @@
                         <li>Best For: Promotional clips, B-roll, intros/outros, or testing a specific scene before committing to a full episode</li>
                     </ul>
                 </div>
-            </div>
-                <button class="slider-arrow right" data-target="row-pricing"><i class="fas fa-chevron-right"></i></button>
-            </div>
+            </div>            </div>
 
             <p class="payment-terms-note"><strong>Note:</strong> All projects commence with a 50% upfront deposit.</p>
         </section>
@@ -2486,7 +2456,7 @@
             // Load Tidio with the NEW script ID after intro
             function loadTidio() {
                 var s = document.createElement('script');
-                s.src = '//code.tidio.co/er4urnhbi8vtprctunsfhckvt6ltgibw.js';
+                s.src = '//code.tidio.co/ofvk35xp5wty8fu8uzvqslysomrvq1yw.js';
                 s.async = true;
                 s.onload = function() {
                     // Tidio default bubble is kept — no custom button needed
@@ -2581,7 +2551,7 @@ const topNav = document.getElementById('top-nav');
             allFadeUpSections.forEach(s => observer.observe(s));
 
             document.querySelectorAll('.slider-arrow').forEach(btn => { btn.addEventListener('click', () => { const row = document.getElementById(btn.dataset.target); if (row) row.scrollBy({ left: btn.classList.contains('left') ? -300 : 300, behavior: 'smooth' }); }); });
-            document.querySelectorAll('.slider-container').forEach(container => { const row = container.querySelector('.category-row'); if (!row) return; const hint = document.createElement('div'); hint.className = 'swipe-hint'; hint.innerHTML = '<i class="fas fa-chevron-right"></i>'; container.appendChild(hint); function hideHint() { hint.classList.add('hidden'); } row.addEventListener('scroll', function() { const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 10; if (atEnd) hint.classList.add('hidden'); else hint.classList.remove('hidden'); }, { passive: true }); row.addEventListener('touchstart', hideHint, { once: true }); row.addEventListener('wheel', hideHint, { once: true }); });
+            
           
                       allCatBtns.forEach(btn => { btn.addEventListener('click', function() { const target = document.getElementById(this.getAttribute('data-scroll')); if (target) target.scrollIntoView({ behavior: 'smooth' }); allCatBtns.forEach(b => b.classList.remove('active-cat')); this.classList.add('active-cat'); }); });
             function updateActiveCatBtn() { let activeIdx = null; const scrollPos = window.scrollY + 160; const map = ['section-mini-films','section-lifestyle-reality','section-sweet-monster','section-shorts-trends','section-music-visualizer','section-podcast-real-talks','find-us','contact-section']; map.forEach((id, i) => { const el = document.getElementById(id); if (el && el.offsetTop <= scrollPos) activeIdx = i; }); if (activeIdx !== null) allCatBtns.forEach((b,i) => b.classList.toggle('active-cat', i === activeIdx)); }
