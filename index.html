@@ -1010,7 +1010,6 @@
         .detail-hero iframe { position:absolute; width:100%; height:100%; top:0; left:0; bottom:auto; right:auto; transform:none; border:none; pointer-events:none; }
         .detail-hero.vertical-frame iframe { width:100%; height:100%; top:0; left:0; transform:none; }
         .detail-hero.crop-vertical iframe { width:100%; height:285%; top:50%; bottom:auto; left:0; right:auto; transform:translateY(-50%); }
-        .detail-hero-bar { position:absolute; left:0; bottom:0; width:100%; height:3px; background:linear-gradient(90deg,var(--red) 0%, var(--red) 32%, rgba(255,255,255,0.18) 32%); }
         .detail-back-btn, .detail-mute-btn, .detail-fs-btn { position:absolute; width:38px; height:38px; border-radius:50%; background:rgba(20,20,20,0.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1rem; z-index:5; transition:background 0.25s; }
         .detail-back-btn:hover, .detail-mute-btn:hover, .detail-fs-btn:hover { background:var(--red); border-color:var(--red); }
         .detail-back-btn { top:16px; left:16px; }
@@ -2348,7 +2347,6 @@
       <div class="detail-card" id="detail-card">
         <div class="detail-hero" id="detail-hero">
             <div id="detail-hero-frame"></div>
-            <div class="detail-hero-bar"></div>
             <button class="detail-back-btn" id="detail-back-btn" aria-label="Back"><i class="fas fa-arrow-left"></i></button>
             <button class="detail-fs-btn" id="detail-fs-btn" aria-label="Fullscreen"><i class="fas fa-expand"></i></button>
             <button class="detail-mute-btn" id="detail-mute-btn" aria-label="Toggle sound"><i class="fas fa-volume-mute"></i></button>
