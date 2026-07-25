@@ -341,41 +341,7 @@
         .nav-search-icon { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#aaa; font-size:0.8rem; pointer-events:none; display:none; }
         .nav-search.expanded ~ .nav-search-icon { display:block; }
 
-        /* Right: YouTube bell-style CTA */
         .nav-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
-        .yt-sub-btn {
-            position:relative;
-            background:none; border:none;
-            color:#fff; cursor:pointer;
-            display:flex; align-items:center; justify-content:center;
-            width:38px; height:38px; border-radius:50%;
-            transition:background 0.25s; text-decoration:none;
-        }
-        .yt-sub-btn i { font-size:1.3rem; }
-        .yt-sub-btn .yt-badge {
-            position:absolute; top:2px; right:2px;
-            background:var(--red); color:#fff;
-            font-size:0.55rem; font-weight:800;
-            min-width:16px; height:16px;
-            border-radius:8px; display:flex;
-            align-items:center; justify-content:center;
-            padding:0 3px; line-height:1;
-            box-shadow:0 0 6px var(--accent-glow);
-        }
-        .yt-sub-btn:hover { background:rgba(255,255,255,0.1); }
-        .yt-sub-btn span.yt-label { display:none; }
-        /* Desktop: show text label */
-        @media (min-width:769px) {
-            .yt-sub-btn {
-                width:auto; height:auto; border-radius:20px;
-                background:var(--red);
-                padding:8px 16px; gap:6px;
-                box-shadow:0 0 15px var(--accent-glow);
-            }
-            .yt-sub-btn .yt-badge { display:none; }
-            .yt-sub-btn span.yt-label { display:inline; font-size:0.78rem; font-weight:700; letter-spacing:0.03em; }
-            .yt-sub-btn:hover { background:#ff1a25; }
-        }
   
           /* ─────────────── HAMBURGER ─────────────── */
         #hamburger-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:9050; opacity:0; pointer-events:none; transition:opacity 0.3s; }
@@ -1060,8 +1026,6 @@
         .detail-btn { width:100%; display:flex; align-items:center; justify-content:center; gap:10px; padding:13px; border-radius:6px; font-size:1rem; font-weight:700; letter-spacing:0.01em; cursor:pointer; border:none; margin-bottom:12px; transition:opacity 0.25s, background 0.25s; }
         .detail-btn-play { background:#fff; color:#000; }
         .detail-btn-play:hover { opacity:0.85; }
-        .detail-btn-yt { background:#2a2a2a; color:#fff; text-decoration:none; }
-        .detail-btn-yt:hover { background:#383838; }
         .detail-episode-row { display:flex; align-items:baseline; justify-content:space-between; margin:26px 0 8px; gap:12px; }
         .detail-episode-label { font-weight:700; font-size:0.95rem; color:#fff; }
         .detail-desc { color:#c9c9c9; font-size:0.92rem; font-weight:300; line-height:1.6; margin-bottom:6px; }
@@ -1139,7 +1103,6 @@
         @keyframes shortsPopIn { 0%{ transform:scale(0.92); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
         .shorts-phone-frame iframe { width:100%; height:100%; border:none; display:block; }
         .shorts-label { position:absolute; top:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.5); backdrop-filter:blur(6px); color:#fff; font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:4px 12px; border-radius:10px; pointer-events:none; white-space:nowrap; display:flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,0.1); }
-        .shorts-label i { color:var(--red); font-size:0.7rem; }
         #gallery-modal .gallery-grid img:hover { transform:scale(1.04); box-shadow:0 0 18px var(--accent-glow); }
         #image-fullscreen { position:fixed; inset:0; background:#000; z-index:9700; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
         #image-fullscreen.active { opacity:1; pointer-events:all; }
@@ -1314,11 +1277,6 @@
                 <div id="search-dropdown"></div>
             </div>
             <div class="nav-right">
-                <a href="https://youtube.com/@reinblacks_music?si=6imR9nJCMDru0zrL" target="_blank" rel="noopener" class="yt-sub-btn" title="Watch on YouTube">
-                    <i class="fab fa-youtube"></i>
-                    <span class="yt-badge">YT</span>
-                    <span class="yt-label">Watch on YouTube</span>
-                </a>
                 <button id="auth-nav-btn" class="auth-nav-btn" onclick="openAuthModal()">
                     <i class="fas fa-user"></i>
                     <span id="auth-nav-label">Sign In</span>
@@ -2399,7 +2357,6 @@
             <div class="detail-title" id="detail-title"></div>
             <div class="detail-meta" id="detail-meta"></div>
             <button class="detail-btn detail-btn-play" id="detail-play-btn"><i class="fas fa-play"></i> Play</button>
-            <a class="detail-btn detail-btn-yt" id="detail-yt-btn" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> Watch on YouTube</a>
             <div class="detail-episode-row">
                 <div class="detail-episode-label" id="detail-episode-label"></div>
             </div>
@@ -2421,7 +2378,7 @@
     <div id="shorts-modal">
         <button id="shorts-modal-close">✕</button>
         <div class="shorts-phone-frame">
-            <div class="shorts-label"><i class="fab fa-youtube"></i> YouTube Short</div>
+            <div class="shorts-label">Short</div>
             <div id="shorts-modal-content"></div>
         </div>
     </div>
@@ -2876,7 +2833,6 @@ const topNav = document.getElementById('top-nav');
             const detailFsBtn = document.getElementById('detail-fs-btn');
             const detailFsBtn2 = document.getElementById('detail-fs-btn-2');
             const detailPlayBtn = document.getElementById('detail-play-btn');
-            const detailYtBtn = document.getElementById('detail-yt-btn');
             const detailTitle = document.getElementById('detail-title');
             const detailMeta = document.getElementById('detail-meta');
             const detailEpisodeLabel = document.getElementById('detail-episode-label');
@@ -2957,7 +2913,6 @@ const topNav = document.getElementById('top-nav');
                 detailEpisodeLabel.textContent = card.getAttribute('data-episode') || '';
                 detailDesc.textContent = card.getAttribute('data-desc') || '';
                 detailCredit.textContent = card.getAttribute('data-credit') || '';
-                detailYtBtn.href = `https://www.youtube.com/watch?v=${videoId}`;
 
                 detailHeroFrame.innerHTML = `<iframe src="${detailHeroSrc(card.getAttribute('data-preview-video') || videoId, true, false)}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
                 detailAspectMode = card.getAttribute('data-aspect');
@@ -3004,7 +2959,6 @@ const topNav = document.getElementById('top-nav');
                 detailVideoId = videoId;
                 detailEpisodeLabel.textContent = ep.label || '';
                 detailDesc.textContent = ep.desc || '';
-                detailYtBtn.href = `https://www.youtube.com/watch?v=${videoId}`;
                 detailEpisodesSection.querySelectorAll('.detail-episode-item').forEach(item => item.classList.toggle('active', item.getAttribute('data-video') === videoId));
                 detailHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 playDetailWithControls();
@@ -3065,7 +3019,7 @@ const topNav = document.getElementById('top-nav');
 
             detailShareBtn.addEventListener('click', async () => {
                 if (!detailVideoId) return;
-                const url = `https://www.youtube.com/watch?v=${detailVideoId}`;
+                const url = `${window.location.origin}${window.location.pathname}`;
                 const title = detailTitle.textContent || 'Reinblacks Creativz';
                 if (navigator.share) {
                     try { await navigator.share({ title, url }); } catch(e) {}
