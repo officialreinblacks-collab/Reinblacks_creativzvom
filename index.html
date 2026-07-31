@@ -15,7 +15,6 @@
     <meta name="twitter:image" content="https://res.cloudinary.com/datfuxotx/image/upload/v1783272804/file_00000000ff5071f48bbbefa7f0e4bb84_cxtasd.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://img.youtube.com" crossorigin>
 <link rel="dns-prefetch" href="https://img.youtube.com">
     <style>
@@ -25,147 +24,6 @@
             --accent-glow: rgba(229, 9, 20, 0.4);
             --white: #ffffff;
         }
-        .auth-nav-btn {
-            display:flex; align-items:center; justify-content:center; gap:7px; background:transparent; border:1px solid rgba(255,255,255,0.25);
-            color:#fff; padding:8px; width:38px; height:38px; border-radius:50%; font-family:'DM Sans',sans-serif; font-size:0.82rem;
-            font-weight:600; letter-spacing:0.03em; cursor:pointer; transition:all 0.2s ease; flex-shrink:0;
-        }
-        .auth-nav-btn:hover { border-color:var(--red); color:var(--red); background:rgba(229,9,20,0.08); }
-        .auth-nav-btn i { font-size:0.95rem; }
-        .auth-nav-btn span#auth-nav-label { display:none; }
-        @media (min-width:769px) {
-            .auth-nav-btn { width:auto; height:auto; border-radius:20px; padding:7px 14px; }
-            .auth-nav-btn span#auth-nav-label { display:inline; font-size:0.82rem; }
-        }
-        #auth-modal {
-            display:none; position:fixed; inset:0; z-index:110000; background:rgba(0,0,0,0.88);
-            align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);
-        }
-        #auth-modal.active { display:flex; }
-        .auth-box {
-            width:100%; max-width:380px; background:linear-gradient(160deg,#0d0d0d,#000); border:1px solid rgba(229,9,20,0.35);
-            border-radius:10px; padding:34px 28px 28px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.08);
-        }
-        .auth-close-btn {
-            position:absolute; top:14px; right:16px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer;
-        }
-        .auth-close-btn:hover { color:var(--red); }
-        .auth-support-note {
-            margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);
-            font-size:0.75rem; color:#999; text-align:center; font-family:'DM Sans',sans-serif; line-height:1.6;
-        }
-        .auth-support-note a { color:var(--red); font-weight:600; text-decoration:none; }
-        .auth-support-note a:hover { text-decoration:underline; }
-        .auth-title {
-            font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:0.04em; color:#fff; text-align:center; margin-bottom:4px;
-        }
-        .auth-title-red { color:var(--red); font-weight:800; }
-        .auth-title-white { color:#fff; font-weight:400; }
-        .auth-subtitle { text-align:center; color:#999; font-size:0.82rem; margin-bottom:22px; font-family:'DM Sans',sans-serif; }
-        .auth-field { margin-bottom:14px; }
-        .auth-field label { display:block; font-size:0.72rem; color:#ccc; letter-spacing:0.05em; margin-bottom:6px; font-family:'DM Sans',sans-serif; text-transform:uppercase; }
-        .auth-field input {
-            width:100%; background:#141414; border:1px solid rgba(255,255,255,0.15); color:#fff; padding:11px 13px;
-            border-radius:5px; font-family:'DM Sans',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.2s;
-        }
-        .auth-field input:focus { border-color:var(--red); }
-        .auth-submit-btn {
-            width:100%; background:var(--red); color:#fff; border:none; padding:12px; border-radius:5px; font-family:'DM Sans',sans-serif;
-            font-weight:700; font-size:0.92rem; letter-spacing:0.02em; cursor:pointer; margin-top:6px; transition:opacity 0.2s;
-        }
-        .auth-submit-btn:hover { opacity:0.88; }
-        .auth-submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
-        .auth-switch { text-align:center; margin-top:18px; font-size:0.82rem; color:#999; font-family:'DM Sans',sans-serif; }
-        .auth-switch a { color:var(--red); cursor:pointer; text-decoration:none; font-weight:600; }
-        .auth-switch a:hover { text-decoration:underline; }
-        .auth-msg { text-align:center; font-size:0.8rem; margin-bottom:14px; font-family:'DM Sans',sans-serif; min-height:1em; }
-        .auth-msg.error { color:#ff5c5c; }
-        .auth-msg.success { color:#4ade80; }
-        .auth-account-panel { text-align:center; }
-        .auth-account-email { color:#fff; font-family:'DM Sans',sans-serif; font-size:0.95rem; margin-bottom:20px; word-break:break-all; }
-        .auth-logout-btn {
-            width:100%; background:transparent; border:1px solid rgba(255,255,255,0.25); color:#fff; padding:11px; border-radius:5px;
-            font-family:'DM Sans',sans-serif; font-weight:600; font-size:0.88rem; cursor:pointer; transition:all 0.2s;
-        }
-        .auth-logout-btn:hover { border-color:var(--red); color:var(--red); }
-        .premium-badge {
-            position:absolute; top:8px; right:8px; z-index:3; background:linear-gradient(135deg,#E50914,#a3050d);
-            color:#fff; font-size:0.62rem; font-weight:700; padding:3px 8px; border-radius:4px; letter-spacing:0.05em;
-            text-transform:uppercase; display:flex; align-items:center; gap:4px; box-shadow:0 2px 8px rgba(0,0,0,0.5);
-            font-family:'DM Sans',sans-serif;
-        }
-        #unlock-modal {
-            display:none; position:fixed; inset:0; z-index:120000; background:rgba(0,0,0,0.9);
-            align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px);
-        }
-        #unlock-modal.active { display:flex; }
-        .unlock-box {
-            width:100%; max-width:380px; background:linear-gradient(160deg,#0d0d0d,#000); border:1px solid rgba(229,9,20,0.35);
-            border-radius:10px; padding:34px 28px 28px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.08);
-            text-align:center;
-        }
-        .unlock-close-btn { position:absolute; top:14px; right:16px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer; }
-        .unlock-close-btn:hover { color:var(--red); }
-        .unlock-lock-icon { font-size:2rem; color:var(--red); margin-bottom:10px; }
-        .unlock-title { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:0.03em; color:#fff; margin-bottom:4px; }
-        .unlock-subtitle { color:#999; font-size:0.85rem; margin-bottom:20px; font-family:'DM Sans',sans-serif; }
-        .unlock-msg { text-align:center; font-size:0.8rem; margin-bottom:12px; font-family:'DM Sans',sans-serif; min-height:1em; }
-        .unlock-msg.error { color:#ff5c5c; }
-        .unlock-msg.success { color:#4ade80; }
-        #unlock-code-input {
-            width:100%; background:#141414; border:1px solid rgba(255,255,255,0.15); color:#fff; padding:12px 13px;
-            border-radius:5px; font-family:'DM Sans',sans-serif; font-size:1rem; text-align:center; letter-spacing:0.08em;
-            text-transform:uppercase; outline:none; margin-bottom:14px; transition:border-color 0.2s;
-        }
-        #unlock-code-input:focus { border-color:var(--red); }
-        .unlock-submit-btn {
-            width:100%; background:var(--red); color:#fff; border:none; padding:12px; border-radius:5px; font-family:'DM Sans',sans-serif;
-            font-weight:700; font-size:0.92rem; cursor:pointer; transition:opacity 0.2s;
-        }
-        .unlock-submit-btn:hover { opacity:0.88; }
-        .unlock-submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
-        .unlock-buy-note { margin-top:14px; font-size:0.8rem; color:#999; font-family:'DM Sans',sans-serif; }
-        .unlock-buy-note a { color:var(--red); font-weight:600; text-decoration:none; }
-        .unlock-buy-note a:hover { text-decoration:underline; }
-        .unlock-payment-section { margin-top:22px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); text-align:left; }
-        .unlock-price-row {
-            display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:16px;
-            background:#141414; border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 14px;
-        }
-        .unlock-price-info { display:flex; flex-direction:column; }
-        .unlock-price-amount { font-size:1.05rem; font-weight:800; color:#fff; font-family:'DM Sans',sans-serif; }
-        .unlock-price-note { font-size:0.72rem; color:#999; font-family:'DM Sans',sans-serif; margin-top:2px; }
-        .unlock-cart-btn {
-            display:flex; align-items:center; gap:7px; background:#1DB954; border:2px solid var(--red); color:#fff;
-            font-weight:800; font-size:0.85rem; font-family:'DM Sans',sans-serif; padding:9px 16px; border-radius:6px;
-            cursor:pointer; transition:filter 0.2s; flex-shrink:0;
-        }
-        .unlock-cart-btn:hover { filter:brightness(1.1); }
-        .unlock-payment-label { font-size:0.72rem; font-weight:800; letter-spacing:0.08em; color:#999; text-transform:uppercase; margin-bottom:12px; text-align:center; font-family:'DM Sans',sans-serif; }
-        .unlock-payment-row {
-            display:flex; align-items:center; justify-content:space-between; gap:10px; background:#141414;
-            border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:10px 12px; margin-bottom:10px;
-        }
-        .unlock-payment-info { display:flex; align-items:center; gap:10px; min-width:0; }
-        .unlock-payment-info i { color:var(--red); font-size:1.1rem; flex-shrink:0; }
-        .unlock-payment-info i.fa-whatsapp { color:#25D366; }
-        .unlock-payment-text { display:flex; flex-direction:column; min-width:0; }
-        .unlock-payment-name { font-size:0.82rem; font-weight:700; color:#fff; font-family:'DM Sans',sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .unlock-payment-detail { font-size:0.78rem; color:#bbb; font-family:'DM Sans',sans-serif; letter-spacing:0.03em; }
-        .unlock-payment-actions { display:flex; gap:6px; flex-shrink:0; }
-        .unlock-copy-btn {
-            background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.15); padding:6px 12px;
-            border-radius:4px; font-size:0.72rem; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer;
-            transition:background 0.2s; white-space:nowrap; text-decoration:none; display:inline-flex; align-items:center;
-        }
-        .unlock-copy-btn:hover { background:rgba(255,255,255,0.18); }
-        .unlock-copy-btn.copied { background:#25D366; border-color:#25D366; color:#000; }
-        .unlock-payment-btn {
-            width:100%; display:flex; align-items:center; justify-content:center; gap:8px; background:#141414;
-            border:1px solid rgba(255,255,255,0.1); color:#666; padding:11px; border-radius:6px; font-family:'DM Sans',sans-serif;
-            font-weight:700; font-size:0.85rem; margin-bottom:10px; cursor:not-allowed;
-        }
-        .unlock-payment-btn .soon-tag { font-size:0.62rem; font-weight:800; letter-spacing:0.04em; background:rgba(255,255,255,0.1); color:#999; padding:2px 7px; border-radius:20px; text-transform:uppercase; }
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; background:#000; }
         body {
@@ -340,6 +198,53 @@
         .nav-search.expanded { width:100%; padding:8px 34px 8px 12px; border-color:var(--red); }
         .nav-search-icon { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#aaa; font-size:0.8rem; pointer-events:none; display:none; }
         .nav-search.expanded ~ .nav-search-icon { display:block; }
+        .nav-right { display:flex; align-items:center; flex-shrink:0; }
+        .top-account-btn {
+            background:none; border:1px solid rgba(255,255,255,0.25); border-radius:50%;
+            width:32px; height:32px; padding:0; cursor:pointer; overflow:hidden; flex-shrink:0;
+            transition:border-color 0.3s;
+        }
+        .top-account-btn:hover { border-color:var(--red); }
+        .top-account-btn img { width:100%; height:100%; object-fit:cover; display:block; }
+
+        /* ─────────────── Account Panel (display-only) ─────────────── */
+        #account-panel-overlay {
+            display:none; position:fixed; inset:0; z-index:130000; background:rgba(0,0,0,0.75);
+            align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+        }
+        #account-panel-overlay.active { display:flex; }
+        .account-panel-box {
+            width:100%; max-width:340px; background:linear-gradient(165deg,#111,#000); border:1px solid rgba(229,9,20,0.3);
+            border-radius:14px; padding:30px 26px 26px; position:relative; text-align:center;
+            box-shadow:0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(229,9,20,0.08);
+        }
+        .account-panel-close {
+            position:absolute; top:14px; right:16px; background:none; border:none; color:#999; font-size:1.2rem; cursor:pointer;
+        }
+        .account-panel-close:hover { color:var(--red); }
+        .account-panel-avatar {
+            width:78px; height:78px; border-radius:50%; object-fit:cover; border:2px solid var(--red);
+            margin:0 auto 14px; display:block; box-shadow:0 0 20px rgba(229,9,20,0.35);
+        }
+        .account-panel-status {
+            display:inline-flex; align-items:center; gap:6px; background:rgba(74,222,128,0.12); color:#4ade80;
+            border:1px solid rgba(74,222,128,0.35); font-size:0.72rem; font-weight:700; letter-spacing:0.04em;
+            text-transform:uppercase; padding:5px 12px; border-radius:20px; margin-bottom:16px; font-family:'DM Sans',sans-serif;
+        }
+        .account-panel-brand { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:0.03em; margin-bottom:6px; }
+        .account-panel-brand .brand-red { color:var(--red); font-weight:800; }
+        .account-panel-brand .brand-white { color:#fff; font-weight:400; }
+        .account-panel-tagline {
+            color:#999; font-size:0.85rem; font-family:'DM Sans',sans-serif; line-height:1.6; margin-bottom:20px;
+        }
+        .account-panel-tier {
+            background:#141414; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px 14px;
+            text-align:left; display:flex; align-items:center; gap:10px; margin-bottom:10px;
+        }
+        .account-panel-tier i { color:var(--red); font-size:1.1rem; flex-shrink:0; }
+        .account-panel-tier-text { font-family:'DM Sans',sans-serif; }
+        .account-panel-tier-label { font-size:0.68rem; color:#999; text-transform:uppercase; letter-spacing:0.05em; }
+        .account-panel-tier-value { font-size:0.88rem; color:#fff; font-weight:700; }
 
         .nav-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
   
@@ -365,15 +270,6 @@
             scrollbar-width:none;
         }
         #category-bar::-webkit-scrollbar { display:none; }
-        #premium-notice-banner {
-            margin-top:132px; background:linear-gradient(90deg, rgba(229,9,20,0.95), rgba(150,6,13,0.95));
-            color:#fff; text-align:center; padding:10px 16px; font-family:'DM Sans',sans-serif;
-            font-size:0.8rem; font-weight:600; line-height:1.5; display:flex; align-items:center;
-            justify-content:center; gap:8px; flex-wrap:wrap; box-shadow:0 2px 10px rgba(0,0,0,0.4); z-index:500; position:relative;
-        }
-        #premium-notice-banner strong { font-weight:800; }
-        #premium-notice-banner i { flex-shrink:0; }
-        @media (max-width:480px) { #premium-notice-banner { font-size:0.72rem; padding:9px 12px; margin-top:150px; } }
         .cat-btn {
             flex-shrink:0;
             padding:8px 20px;
@@ -1278,9 +1174,8 @@
                 <div id="search-dropdown"></div>
             </div>
             <div class="nav-right">
-                <button id="auth-nav-btn" class="auth-nav-btn" onclick="openAuthModal()">
-                    <i class="fas fa-user"></i>
-                    <span id="auth-nav-label">Sign In</span>
+                <button id="top-account-btn" class="top-account-btn" aria-label="Account">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Reinblacks&backgroundColor=E50914" alt="">
                 </button>
             </div>
         </nav>
@@ -1717,15 +1612,6 @@
         <div class="poster-episode-count">1 Episode</div>
     </div>
 </div>
-<div class="poster-card tall" data-video="6TNqWuYg1vM" data-premium data-premium-id="another-tomb-life" data-title="Another Tomb Life" data-aspect="9:16" data-meta="2026 · Horror Series · HD" data-episode="Episode 01" data-desc="A haunting mini film exploring what's left behind when the line between the living and the dead begins to blur." data-credit="An AI Film by Reinblacks Creativz">
-    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1783796678/file_00000000c7987243a24af92b385bedaa_zjmhbz.png" alt="Another Tomb Life Episode 1" loading="lazy" decoding="async">
-    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">
-        <div class="poster-overlay-title">ANOTHER TOMB LIFE — Ep. 01</div>
-        <div class="poster-episode-count">6 Episodes</div>
-    </div>
-</div>
-
           </div>    </div>
 
 
@@ -1743,15 +1629,6 @@
         <div class="poster-episode-count">1 Episode</div>
     </div>
 </div>
-<div class="poster-card tall" data-video="n2oL64ZiYNo" data-premium data-premium-id="abroad-karma" data-title="Abroad Karma" data-meta="2026 · Drama · HD" data-episode="Episode 01" data-desc="A story of ambition and consequence, following a journey abroad where the past has a way of catching up." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"n2oL64ZiYNo","label":"Episode 01","desc":"A story of ambition and consequence, following a journey abroad where the past has a way of catching up.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png"}]'>
-    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1784354584/d90c5920-826c-11f1-a71b-5beb7237fbec_tievbl.png" alt="Abroad Karma" loading="lazy" decoding="async">
-    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
-    <div class="poster-overlay">
-        <div class="poster-overlay-title">Abroad Karma</div>
-        <div class="poster-episode-count">3 Episodes</div>
-    </div>
-</div>
-
           </div>    </div>
 
 
@@ -2228,136 +2105,6 @@
         </footer>
 
         <!-- EXPANDED CARD PLAYER -->
-    <div id="unlock-modal">
-        <div class="unlock-box">
-            <button class="unlock-close-btn" onclick="closeUnlockModal()">✕</button>
-            <div class="unlock-lock-icon"><i class="fas fa-lock"></i></div>
-            <div class="unlock-title">Premium Title</div>
-            <div class="unlock-subtitle" id="unlock-video-title">Enter your access code to watch</div>
-            <div class="unlock-msg" id="unlock-msg"></div>
-            <input type="text" id="unlock-code-input" placeholder="XXXX-XXXX" autocapitalize="characters" autocomplete="off">
-            <button class="unlock-submit-btn" id="unlock-submit-btn" onclick="handleRedeemCode()">Unlock</button>
-
-            <div class="unlock-price-row">
-                <div class="unlock-price-info">
-                    <span class="unlock-price-amount">$1 USD</span>
-                    <span class="unlock-price-note">Go Premium — watch ALL premium movies for 30 days</span>
-                </div>
-                <button class="unlock-cart-btn" onclick="buyNowWhatsApp()">
-                    <i class="fas fa-cart-shopping"></i> Buy
-                </button>
-            </div>
-
-            <div class="unlock-payment-section">
-                <div class="unlock-payment-label">Don't have a code? Subscribe to Premium</div>
-
-                <div class="unlock-payment-row">
-                    <div class="unlock-payment-info">
-                        <i class="fas fa-mobile-screen-button"></i>
-                        <div class="unlock-payment-text">
-                            <span class="unlock-payment-name">M-Pesa — Pochi la Biashara</span>
-                            <span class="unlock-payment-detail">0794299237</span>
-                        </div>
-                    </div>
-                    <button class="unlock-copy-btn" id="mpesa-copy-btn" onclick="copyPaymentDetail('0794299237', 'mpesa-copy-btn')">Copy</button>
-                </div>
-
-                <button class="unlock-payment-btn" disabled>
-                    <i class="fab fa-paypal"></i> PayPal <span class="soon-tag">Coming Soon</span>
-                </button>
-
-                <button class="unlock-payment-btn" disabled>
-                    <i class="fab fa-cc-visa"></i> Visa Pay <span class="soon-tag">Coming Soon</span>
-                </button>
-
-                <div class="unlock-payment-row">
-                    <div class="unlock-payment-info">
-                        <i class="fab fa-whatsapp"></i>
-                        <div class="unlock-payment-text">
-                            <span class="unlock-payment-name">WhatsApp</span>
-                            <span class="unlock-payment-detail">0794299237</span>
-                        </div>
-                    </div>
-                    <div class="unlock-payment-actions">
-                        <a href="https://wa.me/254794299237" target="_blank" rel="noopener" class="unlock-copy-btn"><i class="fab fa-whatsapp" style="margin-right:5px;"></i>Chat</a>
-                        <button class="unlock-copy-btn" id="whatsapp-copy-btn" onclick="copyPaymentDetail('0794299237', 'whatsapp-copy-btn')">Copy</button>
-                    </div>
-                </div>
-
-                <div class="unlock-buy-note">
-                    Pay via M-Pesa or WhatsApp, then send your receipt — we'll reply with your access code.
-                </div>
-                <div class="unlock-buy-note" style="margin-top:10px;text-align:center;">
-                    Wrong account? <a href="#" onclick="event.preventDefault(); handleLogout();">Log out</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="auth-modal">
-        <div class="auth-box">
-            <button class="auth-close-btn" id="auth-close-btn" onclick="closeAuthModal()">✕</button>
-
-            <div id="auth-forms-view">
-                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
-                <div class="auth-subtitle" id="auth-mode-subtitle">Sign in to your account</div>
-                <div class="auth-msg" id="auth-msg"></div>
-                <div class="auth-field">
-                    <label>Email</label>
-                    <input type="email" id="auth-email" autocomplete="email" placeholder="you@example.com">
-                </div>
-                <div class="auth-field">
-                    <label>Password</label>
-                    <input type="password" id="auth-password" autocomplete="current-password" placeholder="••••••••">
-                </div>
-                <button class="auth-submit-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Sign In</button>
-                <div class="auth-switch" id="auth-forgot-link-wrap">
-                    <a onclick="setAuthMode('forgot')">Forgot password?</a>
-                </div>
-                <div class="auth-switch" id="auth-switch-text">
-                    New here? <a onclick="setAuthMode('signup')">Create an account</a>
-                </div>
-            </div>
-
-            <div id="auth-forgot-view" style="display:none;">
-                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
-                <div class="auth-subtitle">Reset your password</div>
-                <div class="auth-msg" id="auth-forgot-msg"></div>
-                <div class="auth-field">
-                    <label>Email</label>
-                    <input type="email" id="auth-forgot-email" autocomplete="email" placeholder="you@example.com">
-                </div>
-                <button class="auth-submit-btn" id="auth-forgot-btn" onclick="handleForgotPassword()">Send Reset Link</button>
-                <div class="auth-switch">
-                    <a onclick="setAuthMode('signin')">Back to Sign In</a>
-                </div>
-            </div>
-
-            <div id="auth-reset-view" style="display:none;">
-                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
-                <div class="auth-subtitle">Set a new password</div>
-                <div class="auth-msg" id="auth-reset-msg"></div>
-                <div class="auth-field">
-                    <label>New Password</label>
-                    <input type="password" id="auth-reset-password" autocomplete="new-password" placeholder="••••••••">
-                </div>
-                <button class="auth-submit-btn" id="auth-reset-btn" onclick="handleResetPassword()">Update Password</button>
-            </div>
-
-            <div class="auth-account-panel" id="auth-account-view" style="display:none;">
-                <div class="auth-title"><span class="auth-title-red">Reinblacks</span><span class="auth-title-white">Creativz</span></div>
-                <div class="auth-subtitle">You're signed in</div>
-                <div class="auth-account-email" id="auth-account-email"></div>
-                <button class="auth-logout-btn" onclick="handleLogout()">Log Out</button>
-            </div>
-
-            <div class="auth-support-note">
-                Trouble logging in? Contact us —
-                <a href="https://wa.me/254794299237" target="_blank" rel="noopener">WhatsApp +254 7942 99 237</a>
-                or <a href="mailto:officialreinblacks@gmail.com">officialreinblacks@gmail.com</a>
-            </div>
-        </div>
-    </div>
 
     <div class="card-player-overlay" id="card-player-overlay">
         <div class="card-player-container" id="card-player-container">
@@ -2426,9 +2173,26 @@
         <div class="bottom-nav-inner">
             <button id="bottom-home" class="active"><i class="fas fa-home"></i> Home</button>
             <button id="bottom-search"><i class="fas fa-search"></i> Search</button>
-            <button id="bottom-account"><i class="fas fa-user-circle"></i> Account</button>
+            <button id="bottom-account"><img class="bottom-nav-avatar" src="https://api.dicebear.com/7.x/notionists/svg?seed=Reinblacks&backgroundColor=E50914" alt="" loading="lazy"> Account</button>
         </div>
     </nav>
+
+    <div id="account-panel-overlay">
+        <div class="account-panel-box">
+            <button class="account-panel-close" id="account-panel-close">✕</button>
+            <img class="account-panel-avatar" src="https://api.dicebear.com/7.x/notionists/svg?seed=Reinblacks&backgroundColor=E50914" alt="Account">
+            <div class="account-panel-status"><i class="fas fa-circle-check"></i> Logged In</div>
+            <div class="account-panel-brand"><span class="brand-red">Reinblacks</span><span class="brand-white">Creativz</span></div>
+            <div class="account-panel-tagline">Every imagination and memory, brought to life — thanks for watching with us.</div>
+            <div class="account-panel-tier">
+                <i class="fas fa-crown"></i>
+                <div class="account-panel-tier-text">
+                    <div class="account-panel-tier-label">Membership</div>
+                    <div class="account-panel-tier-value">All-Access Circle</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </div><!-- /#main-site -->
 
@@ -2801,24 +2565,8 @@ const topNav = document.getElementById('top-nav');
             cardPlayerOverlay.addEventListener('click', e => { if (e.target === cardPlayerOverlay) closeCardPlayer(); });
 
             // Wire up all poster card clicks
-            document.querySelectorAll('.poster-card[data-premium]').forEach(card => {
-                if (card.querySelector('.premium-badge')) return;
-                const badge = document.createElement('span');
-                badge.className = 'premium-badge';
-                badge.innerHTML = '<i class="fas fa-lock"></i> Premium';
-                card.appendChild(badge);
-            });
             document.querySelectorAll('.poster-card[data-video]').forEach(card => {
                 card.addEventListener('click', () => {
-                    if (card.hasAttribute('data-premium')) {
-                        const premiumId = card.getAttribute('data-premium-id');
-                        const titleText = card.getAttribute('data-title') || '';
-                        const hasAccess = window.__unlockedPremiumIds && window.__unlockedPremiumIds.has(premiumId);
-                        if (!hasAccess) {
-                            if (typeof window.handlePremiumCardClick === 'function') window.handlePremiumCardClick(premiumId, titleText);
-                            return;
-                        }
-                    }
                     if (card.hasAttribute('data-title')) openDetailModal(card);
                     else openVideoModal(card.getAttribute('data-video'), card.getAttribute('data-title'));
                 });
@@ -2873,16 +2621,8 @@ const topNav = document.getElementById('top-nav');
             let detailPlayerInstance = null;
             let detailAspectMode = null;
             let detailEpisodesData = [];
-            let detailIsPremium = false;
-            let detailPremiumId = null;
-            window.__unlockedPremiumIds = new Set();
-
             function playDetailWithControls() {
                 if (!detailVideoId) return;
-                if (detailIsPremium && !window.__unlockedPremiumIds.has(detailPremiumId)) {
-                    if (typeof window.openUnlockModal === 'function') window.openUnlockModal(detailPremiumId, detailTitle.textContent);
-                    return;
-                }
                 detailMuted = false;
                 const isVertical = (detailAspectMode === '9:16-crop' || detailAspectMode === '9:16');
                 // crop-vertical is a preview-only framing trick; it must never persist into real playback.
@@ -2927,8 +2667,6 @@ const topNav = document.getElementById('top-nav');
             function openDetailModal(card) {
                 const videoId = card.getAttribute('data-video');
                 detailVideoId = videoId;
-                detailIsPremium = card.hasAttribute('data-premium');
-                detailPremiumId = card.getAttribute('data-premium-id') || null;
                 detailMuted = true;
                 detailHero.classList.remove('cplayer-active');
                 if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
@@ -3237,7 +2975,12 @@ const topNav = document.getElementById('top-nav');
             function setBottomNavActive(btn) { bottomNavBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
             document.getElementById('bottom-home').addEventListener('click', function() { setBottomNavActive(this); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             document.getElementById('bottom-search').addEventListener('click', function() { setBottomNavActive(this); navSearch.classList.add('expanded'); navSearch.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-            document.getElementById('bottom-account').addEventListener('click', function() { setBottomNavActive(this); openAuthModal(); });
+            document.getElementById('bottom-account').addEventListener('click', function() { setBottomNavActive(this); openAccountPanel(); });
+            document.getElementById('top-account-btn').addEventListener('click', openAccountPanel);
+            function openAccountPanel() { document.getElementById('account-panel-overlay').classList.add('active'); }
+            function closeAccountPanel() { document.getElementById('account-panel-overlay').classList.remove('active'); }
+            document.getElementById('account-panel-close').addEventListener('click', closeAccountPanel);
+            document.getElementById('account-panel-overlay').addEventListener('click', function(e) { if (e.target === this) closeAccountPanel(); });
 
             setTimeout(() => { document.querySelector('#hero .fade-up-section')?.classList.add('visible'); }, 2800);
             onPageScroll();
@@ -3346,339 +3089,6 @@ document.getElementById('game-modal').addEventListener('click', function(e) {
     if (e.target === this) closeGameModal();
 });
 
-// ── Premium unlock codes ──
-function openUnlockModal(premiumId, titleText) {
-    document.getElementById('unlock-video-title').textContent = titleText ? `Enter your code to watch "${titleText}" — unlocks ALL premium titles for 30 days` : 'Enter your code to unlock all premium titles for 30 days';
-    document.getElementById('unlock-modal').setAttribute('data-target-id', premiumId || '');
-    document.getElementById('unlock-modal').setAttribute('data-target-title', titleText || '');
-    document.getElementById('unlock-modal').classList.add('active');
-    document.getElementById('unlock-code-input').value = '';
-    document.getElementById('unlock-msg').textContent = '';
-    document.body.style.overflow = 'hidden';
-}
-window.openUnlockModal = openUnlockModal;
-
-function buyNowWhatsApp() {
-    const title = document.getElementById('unlock-modal').getAttribute('data-target-title') || '';
-    const msg = title
-        ? `Hi! I'd like to subscribe for full access (unlocks all titles incl. "${title}") — $1 USD, valid 30 days. Here's my payment receipt:`
-        : `Hi! I'd like to subscribe for full access to Reinblacks Creativz — $1 USD, valid 30 days. Here's my payment receipt:`;
-    window.open(`https://wa.me/254794299237?text=${encodeURIComponent(msg)}`, '_blank');
-}
-window.buyNowWhatsApp = buyNowWhatsApp;
-
-function closeUnlockModal() {
-    document.getElementById('unlock-modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-window.closeUnlockModal = closeUnlockModal;
-document.getElementById('unlock-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeUnlockModal();
-});
-
-async function handleRedeemCode() {
-    const codeInput = document.getElementById('unlock-code-input');
-    const code = codeInput.value.trim();
-    const msgEl = document.getElementById('unlock-msg');
-    const btn = document.getElementById('unlock-submit-btn');
-    if (!code) { msgEl.textContent = 'Please enter a code.'; msgEl.className = 'unlock-msg error'; return; }
-    if (!sb) { msgEl.textContent = 'Connection issue — please refresh and try again.'; msgEl.className = 'unlock-msg error'; return; }
-
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Checking...';
-
-    try {
-        const { data, error } = await sb.rpc('redeem_code', { code_input: code });
-        if (error) throw error;
-        if (data && data.success) {
-            window.__subscriptionExpiresAt = data.expires_at;
-            applySubscriptionAccess();
-            msgEl.textContent = 'Subscription active! Opening...';
-            msgEl.className = 'unlock-msg success';
-            const targetId = document.getElementById('unlock-modal').getAttribute('data-target-id');
-            setTimeout(() => {
-                closeUnlockModal();
-                const card = document.querySelector(`.poster-card[data-premium-id="${CSS.escape(targetId || '')}"]`);
-                if (card && typeof openDetailModal === 'function') {
-                    openDetailModal(card);
-                }
-            }, 700);
-        } else {
-            msgEl.textContent = (data && data.message) || 'Invalid or already-used code.';
-            msgEl.className = 'unlock-msg error';
-        }
-    } catch (err) {
-        msgEl.textContent = err.message || 'Something went wrong.';
-        msgEl.className = 'unlock-msg error';
-    } finally {
-        btn.disabled = false;
-        btn.textContent = originalText;
-    }
-}
-window.handleRedeemCode = handleRedeemCode;
-
-function copyPaymentDetail(value, btnId) {
-    const btn = document.getElementById(btnId);
-    const originalText = btn.textContent;
-    const showCopied = () => {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = originalText; btn.classList.remove('copied'); }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(value).then(showCopied).catch(() => fallbackCopy(value, showCopied));
-    } else {
-        fallbackCopy(value, showCopied);
-    }
-}
-function fallbackCopy(value, onDone) {
-    const temp = document.createElement('textarea');
-    temp.value = value;
-    temp.style.position = 'fixed';
-    temp.style.opacity = '0';
-    document.body.appendChild(temp);
-    temp.focus();
-    temp.select();
-    try { document.execCommand('copy'); onDone(); } catch (e) {}
-    document.body.removeChild(temp);
-}
-window.copyPaymentDetail = copyPaymentDetail;
-
-function applySubscriptionAccess() {
-    const active = window.__subscriptionExpiresAt && new Date(window.__subscriptionExpiresAt) > new Date();
-    window.__unlockedPremiumIds = new Set();
-    if (active) {
-        document.querySelectorAll('.poster-card[data-premium]').forEach(c => {
-            window.__unlockedPremiumIds.add(c.getAttribute('data-premium-id'));
-        });
-    }
-}
-window.applySubscriptionAccess = applySubscriptionAccess;
-
-// ── Supabase Auth (no forced gate — sign-in only required for premium content) ──
-const SUPABASE_URL = 'https://wjbfrtcfmxfgzafatqbm.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_Ii1EyhcaIVeDgiBHV7wQ7A_QJ5mRCB7';
-let sb = null;
-try {
-    if (typeof supabase !== 'undefined') {
-        sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
-} catch (e) {
-    console.error('Supabase failed to initialize:', e);
-}
-
-let authMode = 'signin'; // 'signin' | 'signup' | 'forgot' | 'reset'
-// If someone clicked a locked thumbnail while signed out, remember what to
-// unlock so we can jump straight to the code screen right after they sign in.
-let pendingPremiumUnlock = null; // { premiumId, titleText }
-
-function showAuthView(mode) {
-    document.getElementById('auth-forms-view').style.display = (mode === 'signin' || mode === 'signup') ? 'block' : 'none';
-    document.getElementById('auth-forgot-view').style.display = (mode === 'forgot') ? 'block' : 'none';
-    document.getElementById('auth-reset-view').style.display = (mode === 'reset') ? 'block' : 'none';
-    document.getElementById('auth-account-view').style.display = 'none';
-}
-
-function openAuthModal() {
-    document.getElementById('auth-modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeAuthModal() {
-    document.getElementById('auth-modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-document.getElementById('auth-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeAuthModal();
-});
-
-function setAuthMode(mode) {
-    authMode = mode;
-    document.getElementById('auth-msg').textContent = '';
-    if (mode === 'forgot') { showAuthView('forgot'); return; }
-    showAuthView(mode);
-    const submitBtn = document.getElementById('auth-submit-btn');
-    const subtitle = document.getElementById('auth-mode-subtitle');
-    const switchText = document.getElementById('auth-switch-text');
-    if (mode === 'signup') {
-        submitBtn.textContent = 'Create Account';
-        subtitle.textContent = 'Create your free account';
-        switchText.innerHTML = 'Already have an account? <a onclick="setAuthMode(\'signin\')">Sign in</a>';
-    } else {
-        submitBtn.textContent = 'Sign In';
-        subtitle.textContent = 'Sign in to your account';
-        switchText.innerHTML = 'New here? <a onclick="setAuthMode(\'signup\')">Create an account</a>';
-    }
-}
-
-function showAuthMsg(text, isError) {
-    const el = document.getElementById('auth-msg');
-    el.textContent = text;
-    el.className = 'auth-msg ' + (isError ? 'error' : 'success');
-}
-
-async function handleAuthSubmit() {
-    if (!sb) { showAuthMsg('Connection issue — please refresh and try again.', true); return; }
-    const email = document.getElementById('auth-email').value.trim();
-    const password = document.getElementById('auth-password').value;
-    const btn = document.getElementById('auth-submit-btn');
-    if (!email || !password) { showAuthMsg('Please fill in both fields.', true); return; }
-    if (password.length < 6) { showAuthMsg('Password must be at least 6 characters.', true); return; }
-
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Please wait...';
-
-    try {
-        if (authMode === 'signup') {
-            const { data, error } = await sb.auth.signUp({ email, password });
-            if (error) throw error;
-            if (data.session) {
-                showAuthMsg('Account created! You\'re signed in.', false);
-                setTimeout(() => { onLoginSuccess(); }, 900);
-            } else {
-                showAuthMsg('Check your email to confirm your account.', false);
-            }
-        } else {
-            const { data, error } = await sb.auth.signInWithPassword({ email, password });
-            if (error) throw error;
-            showAuthMsg('Signed in!', false);
-            setTimeout(() => { onLoginSuccess(); }, 500);
-        }
-    } catch (err) {
-        showAuthMsg(err.message || 'Something went wrong.', true);
-    } finally {
-        btn.disabled = false;
-        btn.textContent = originalText;
-    }
-}
-
-async function handleForgotPassword() {
-    if (!sb) { document.getElementById('auth-forgot-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
-    const email = document.getElementById('auth-forgot-email').value.trim();
-    const msgEl = document.getElementById('auth-forgot-msg');
-    const btn = document.getElementById('auth-forgot-btn');
-    if (!email) { msgEl.textContent = 'Please enter your email.'; msgEl.className = 'auth-msg error'; return; }
-
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-
-    try {
-        const { error } = await sb.auth.resetPasswordForEmail(email, {
-            redirectTo: window.location.origin + window.location.pathname
-        });
-        if (error) throw error;
-        msgEl.textContent = 'Reset link sent — check your email.';
-        msgEl.className = 'auth-msg success';
-    } catch (err) {
-        msgEl.textContent = err.message || 'Something went wrong.';
-        msgEl.className = 'auth-msg error';
-    } finally {
-        btn.disabled = false;
-        btn.textContent = originalText;
-    }
-}
-
-async function handleResetPassword() {
-    if (!sb) { document.getElementById('auth-reset-msg').textContent = 'Connection issue — please refresh and try again.'; return; }
-    const newPassword = document.getElementById('auth-reset-password').value;
-    const msgEl = document.getElementById('auth-reset-msg');
-    const btn = document.getElementById('auth-reset-btn');
-    if (!newPassword || newPassword.length < 6) { msgEl.textContent = 'Password must be at least 6 characters.'; msgEl.className = 'auth-msg error'; return; }
-
-    btn.disabled = true;
-    const originalText = btn.textContent;
-    btn.textContent = 'Updating...';
-
-    try {
-        const { error } = await sb.auth.updateUser({ password: newPassword });
-        if (error) throw error;
-        msgEl.textContent = 'Password updated! Signing you in...';
-        msgEl.className = 'auth-msg success';
-        setTimeout(() => { onLoginSuccess(); }, 900);
-    } catch (err) {
-        msgEl.textContent = err.message || 'Something went wrong.';
-        msgEl.className = 'auth-msg error';
-        btn.disabled = false;
-        btn.textContent = originalText;
-    }
-}
-
-async function handleLogout() {
-    if (sb) await sb.auth.signOut();
-    window.__unlockedPremiumIds = new Set();
-    updateAuthUI();
-    closeAuthModal();
-}
-
-function onLoginSuccess() {
-    updateAuthUI();
-    closeAuthModal();
-    // If they were trying to unlock a premium title before signing in, continue that flow now.
-    if (pendingPremiumUnlock) {
-        const { premiumId, titleText } = pendingPremiumUnlock;
-        pendingPremiumUnlock = null;
-        setTimeout(() => { openUnlockModal(premiumId, titleText); }, 250);
-    }
-}
-
-async function updateAuthUI() {
-    if (!sb) return;
-    const { data: { session } } = await sb.auth.getSession();
-    const navLabel = document.getElementById('auth-nav-label');
-
-    if (session && session.user) {
-        navLabel.textContent = session.user.email.split('@')[0];
-        showAuthView('account');
-        document.getElementById('auth-account-view').style.display = 'block';
-        document.getElementById('auth-account-email').textContent = session.user.email;
-        loadUnlockedContent();
-    } else {
-        navLabel.textContent = 'Sign In';
-        document.getElementById('auth-email').value = '';
-        document.getElementById('auth-password').value = '';
-        setAuthMode('signin');
-        window.__unlockedPremiumIds = new Set();
-    }
-}
-
-// Handle password-recovery links (person clicked "reset password" email)
-if (sb) {
-    sb.auth.onAuthStateChange((event, session) => {
-        if (event === 'PASSWORD_RECOVERY') {
-            openAuthModal();
-            setAuthMode('reset');
-        }
-        updateAuthUI();
-    });
-}
-
-// ── Premium thumbnail click: sign-in-or-code, only for locked titles. Everything else on the site is open to browse. ──
-async function handlePremiumCardClick(premiumId, titleText) {
-    if (!sb) { openAuthModal(); setAuthMode('signin'); return; }
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session || !session.user) {
-        pendingPremiumUnlock = { premiumId, titleText };
-        openAuthModal();
-        setAuthMode('signin');
-        return;
-    }
-    openUnlockModal(premiumId, titleText);
-}
-window.handlePremiumCardClick = handlePremiumCardClick;
-
-// Check subscription status quietly in the background (no forced gate) so returning subscribers see unlocked titles immediately.
-async function loadUnlockedContent() {
-    if (!sb) return;
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session || !session.user) { window.__subscriptionExpiresAt = null; window.__unlockedPremiumIds = new Set(); return; }
-    const { data } = await sb.from('subscriptions').select('expires_at').eq('user_id', session.user.id).maybeSingle();
-    window.__subscriptionExpiresAt = data ? data.expires_at : null;
-    applySubscriptionAccess();
-}
-
-updateAuthUI();
     </script>
 </html>    
 
