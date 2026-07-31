@@ -1110,12 +1110,14 @@
   /* ─────────────── CHAT BUTTON ─────────────── */
         
         /* ─────────────── BOTTOM MOBILE NAV ─────────────── */
-        #bottom-mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; z-index:9200; background:rgba(0,0,0,0.9); border-top:1px solid rgba(255,255,255,0.1); padding:8px 0; }
-        #bottom-mobile-nav .bottom-nav-inner { display:flex; justify-content:space-around; align-items:center; }
-        #bottom-mobile-nav button { background:none; border:none; color:#aaa; font-size:0.75rem; display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; transition:color 0.3s; }
+        #bottom-mobile-nav { display:none; position:fixed; bottom:14px; left:50%; transform:translateX(-50%); z-index:9200; background:rgba(255,255,255,0.08); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border:1px solid rgba(255,255,255,0.18); border-radius:40px; padding:8px 6px; box-shadow:0 4px 18px rgba(0,0,0,0.35); }
+        #bottom-mobile-nav .bottom-nav-inner { display:flex; justify-content:center; align-items:center; gap:4px; }
+        #bottom-mobile-nav button { background:none; border:none; color:#ccc; font-size:0.72rem; display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; transition:color 0.3s, background 0.3s; padding:8px 18px; border-radius:30px; font-weight:500; }
         #bottom-mobile-nav button:hover { color:#fff; }
-        #bottom-mobile-nav button i { font-size:1.2rem; }
-        @media (max-width:768px) { #bottom-mobile-nav { display:block; } #floating-chat-btn { bottom:70px; } }
+        #bottom-mobile-nav button.active { background:rgba(255,255,255,0.08); color:#fff; }
+        #bottom-mobile-nav button i { font-size:1.15rem; }
+        #bottom-mobile-nav button .bottom-nav-avatar { width:22px; height:22px; border-radius:50%; object-fit:cover; border:1.5px solid #fff; }
+        @media (max-width:768px) { #bottom-mobile-nav { display:block; } #floating-chat-btn { bottom:80px; } }
   
           /* ─────────────── BACK TO TOP ─────────────── */
         #back-to-top { display:none !important; }
@@ -2209,7 +2211,6 @@
         </style>
 
    <section class="content-section fade-up-section" id="find-us">
-            <div class="section-header"><span class="red-accent"></span></div>
             <div class="social-links">
                 <p style="max-width:520px;margin:14px auto 0;color:#999;font-size:0.82rem;line-height:1.7;">We're open to partnerships and collaborations. We believe AI is the future — let's bring every imagination and memory to life, together.</p>
                 <p style="margin-top:14px;color:#aaa;">📍 Africa · Kenya · Nairobi</p>
@@ -2423,9 +2424,9 @@
 
     <nav id="bottom-mobile-nav">
         <div class="bottom-nav-inner">
-            <button id="bottom-home"><i class="fas fa-home"></i> Home</button>
+            <button id="bottom-home" class="active"><i class="fas fa-home"></i> Home</button>
             <button id="bottom-search"><i class="fas fa-search"></i> Search</button>
-            <button id="bottom-top"><i class="fas fa-arrow-up"></i> Top</button>
+            <button id="bottom-account"><i class="fas fa-user-circle"></i> Account</button>
         </div>
     </nav>
 
@@ -3232,9 +3233,11 @@ const topNav = document.getElementById('top-nav');
             document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (imageFullscreen.classList.contains('active')) closeImageFullscreen(); else if (shortsModal.classList.contains('active')) closeShortsModal(); else if (galleryModal.classList.contains('active')) closeGalleryModal(); else if (videoModal.classList.contains('active')) closeVideoModal(); else if (cardPlayerOverlay.classList.contains('active')) closeCardPlayer(); else if (document.getElementById('game-modal').classList.contains('active')) closeGameModal(); else if (hamburgerPanel.classList.contains('active')) closeHamburger(); } if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement !== navSearch)) { e.preventDefault(); navSearch.focus(); } });
 
             backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            document.getElementById('bottom-home').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            document.getElementById('bottom-search').addEventListener('click', () => { navSearch.classList.add('expanded'); navSearch.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-            document.getElementById('bottom-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            const bottomNavBtns = document.querySelectorAll('#bottom-mobile-nav button');
+            function setBottomNavActive(btn) { bottomNavBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+            document.getElementById('bottom-home').addEventListener('click', function() { setBottomNavActive(this); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            document.getElementById('bottom-search').addEventListener('click', function() { setBottomNavActive(this); navSearch.classList.add('expanded'); navSearch.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            document.getElementById('bottom-account').addEventListener('click', function() { setBottomNavActive(this); openAuthModal(); });
 
             setTimeout(() => { document.querySelector('#hero .fade-up-section')?.classList.add('visible'); }, 2800);
             onPageScroll();
