@@ -1595,6 +1595,20 @@
 
 
 
+        <section class="content-section fade-up-section" id="section-face-swap">
+    <div class="section-header"><span class="red-accent"></span> Face Video Swap</div>
+    <div class="slider-container">        <div class="category-row" id="row-face-swap">
+
+<div class="poster-card tall faceswap-card" data-mp4="https://res.cloudinary.com/dmnwlnpr5/video/upload/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4" data-title="Squid Game" data-meta="2026 · Face Swap · HD" data-credit="An AI Film by Reinblacks Creativz">
+    <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1785615421/file_00000000dfe8820a9df454276d8715d3_uo2url.png" alt="Squid Game" loading="lazy" decoding="async">
+    <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
+    <div class="poster-overlay">Squid Game</div>
+</div>
+          </div>    </div>
+
+
+        </section>
+
         <section class="content-section fade-up-section" id="section-mini-films">
     <div class="section-header"><span class="red-accent"></span> Horror Movies</div>
     <div class="slider-container">        <div class="category-row" id="row-mini-films">
@@ -2596,6 +2610,19 @@ const topNav = document.getElementById('top-nav');
             }
             videoModalClose.addEventListener('click', closeVideoModal);
             videoModal.addEventListener('click', e => { if (e.target === videoModal) closeVideoModal(); });
+
+            /* ── FACE SWAP ROW — isolated direct-mp4 player (does not touch YouTube player code) ── */
+            function openDirectVideoModal(mp4Url, title) {
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                videoModalClose.style.display = '';
+                videoModalContent.innerHTML = `<video src="${mp4Url}" title="${title || ''}" controls autoplay playsinline style="width:100%;height:100%;background:#000;object-fit:contain;display:block;"></video>`;
+                // Plug into the existing close flow (already wired to videoModalClose / videoModal click) with no extra listeners.
+                currentVideoPlayerInstance = { destroy: () => { videoModalContent.innerHTML = ''; } };
+            }
+            document.querySelectorAll('.faceswap-card[data-mp4]').forEach(card => {
+                card.addEventListener('click', () => openDirectVideoModal(card.getAttribute('data-mp4'), card.getAttribute('data-title')));
+            });
 
             /* ─────────────── DETAIL PAGE (Netflix-style) ─────────────── */
             const detailModal = document.getElementById('detail-modal');
