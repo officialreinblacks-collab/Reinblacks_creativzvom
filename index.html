@@ -929,6 +929,16 @@
         .detail-action { display:flex; flex-direction:column; align-items:center; gap:6px; background:none; border:none; color:#ccc; font-size:0.7rem; cursor:pointer; transition:color 0.25s; }
         .detail-action i { font-size:1.15rem; }
         .detail-action:hover, .detail-action.active { color:var(--red); }
+        /* ── Season select box (isolated component) ── */
+        .detail-season-select-wrap { position:relative; margin:20px 0 10px; }
+        .detail-season-select-btn { display:flex; align-items:center; gap:10px; background:#1f1f1f; border:1px solid #333; color:#fff; font-weight:700; font-size:0.9rem; padding:10px 16px; border-radius:5px; cursor:pointer; }
+        .detail-season-select-btn i { font-size:0.75rem; color:#bbb; transition:transform 0.2s; }
+        .detail-season-select-wrap.open .detail-season-select-btn i { transform:rotate(180deg); }
+        .detail-season-select-menu { display:none; position:absolute; top:calc(100% + 4px); left:0; min-width:160px; background:#1f1f1f; border:1px solid #333; border-radius:5px; overflow:hidden; z-index:20; }
+        .detail-season-select-wrap.open .detail-season-select-menu { display:block; }
+        .detail-season-select-item { padding:11px 16px; font-size:0.88rem; color:#ddd; cursor:pointer; }
+        .detail-season-select-item:hover { background:#2a2a2a; }
+        .detail-season-select-item.active { color:var(--red); font-weight:700; }
         .detail-toast { position:fixed; left:50%; bottom:30px; transform:translateX(-50%) translateY(20px); background:rgba(25,25,25,0.95); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:10px 18px; border-radius:24px; font-size:0.82rem; opacity:0; pointer-events:none; transition:opacity 0.25s, transform 0.25s; z-index:9700; }
         .detail-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
@@ -1599,7 +1609,7 @@
     <div class="section-header"><span class="red-accent"></span> Face Video Swap</div>
     <div class="slider-container">        <div class="category-row" id="row-face-swap">
 
-<div class="poster-card tall" data-video="https://res.cloudinary.com/dmnwlnpr5/video/upload/f_auto/q_auto/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4" data-title="Squid Game" data-meta="2026 · Face Swap · HD" data-episode="Episode 01" data-desc="An AI face-swap creation reimagining an iconic scene with a fully transformed cast." data-credit="An AI Film by Reinblacks Creativz" data-episodes='[{"video":"https://res.cloudinary.com/dmnwlnpr5/video/upload/f_auto/q_auto/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4","label":"Episode 01","desc":"An AI face-swap creation reimagining an iconic scene with a fully transformed cast.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1785615421/file_00000000dfe8820a9df454276d8715d3_uo2url.png"}]'>
+<div class="poster-card tall" data-video="https://res.cloudinary.com/dmnwlnpr5/video/upload/f_auto/q_auto/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4" data-title="Squid Game" data-meta="2026 · Face Swap · HD" data-episode="Episode 01" data-desc="An AI face-swap creation reimagining an iconic scene with a fully transformed cast." data-credit="An AI Film by Reinblacks Creativz" data-download="https://res.cloudinary.com/dmnwlnpr5/video/upload/fl_attachment/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4" data-episodes='[{"video":"https://res.cloudinary.com/dmnwlnpr5/video/upload/f_auto/q_auto/v1785614665/lv_0_20260801143114_3_nz0t1a.mp4","label":"Episode 01","desc":"An AI face-swap creation reimagining an iconic scene with a fully transformed cast.","thumb":"https://res.cloudinary.com/datfuxotx/image/upload/v1785615421/file_00000000dfe8820a9df454276d8715d3_uo2url.png"}]'>
     <img src="https://res.cloudinary.com/datfuxotx/image/upload/v1785615421/file_00000000dfe8820a9df454276d8715d3_uo2url.png" alt="Squid Game" loading="lazy" decoding="async">
     <div class="play-icon-center"><i class="fas fa-play-circle"></i></div>
     <div class="poster-overlay">Squid Game</div>
@@ -2148,13 +2158,21 @@
             </div>
             <div class="detail-desc" id="detail-desc"></div>
             <div class="detail-credit" id="detail-credit"></div>
-            <div class="detail-episodes" id="detail-episodes"></div>
             <div class="detail-actions">
                 <button class="detail-action" id="detail-mylist-btn"><i class="fas fa-plus"></i><span>My List</span></button>
                 <button class="detail-action" id="detail-like-btn"><i class="fas fa-thumbs-up"></i><span>Like</span></button>
                 <button class="detail-action" id="detail-share-btn"><i class="fas fa-share"></i><span>Share</span></button>
                 <button class="detail-action" id="detail-fs-btn-2"><i class="fas fa-expand"></i><span>Fullscreen</span></button>
+                <button class="detail-action" id="detail-download-btn" style="display:none;"><i class="fas fa-download"></i><span>Download</span></button>
             </div>
+            <div class="detail-season-select-wrap" id="detail-season-select-wrap" style="display:none;">
+                <button class="detail-season-select-btn" id="detail-season-select-btn" type="button">
+                    <span id="detail-season-select-label">Season 1</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="detail-season-select-menu" id="detail-season-select-menu"></div>
+            </div>
+            <div class="detail-episodes" id="detail-episodes"></div>
         </div>
       </div>
     </div>
@@ -2669,6 +2687,11 @@ const topNav = document.getElementById('top-nav');
             const detailMyListBtn = document.getElementById('detail-mylist-btn');
             const detailLikeBtn = document.getElementById('detail-like-btn');
             const detailShareBtn = document.getElementById('detail-share-btn');
+            const detailDownloadBtn = document.getElementById('detail-download-btn');
+            const detailSeasonSelectWrap = document.getElementById('detail-season-select-wrap');
+            const detailSeasonSelectBtn = document.getElementById('detail-season-select-btn');
+            const detailSeasonSelectLabel = document.getElementById('detail-season-select-label');
+            const detailSeasonSelectMenu = document.getElementById('detail-season-select-menu');
             const detailToast = document.getElementById('detail-toast');
             let detailVideoId = null;
             let detailMuted = true;
@@ -2746,6 +2769,23 @@ const topNav = document.getElementById('top-nav');
                 try { episodes = JSON.parse(card.getAttribute('data-episodes') || '[]'); } catch(e) { episodes = []; }
                 detailEpisodesData = episodes;
                 renderDetailEpisodes(episodes, videoId);
+                renderDetailSeasonSelect(card, episodes);
+
+                const downloadUrl = card.getAttribute('data-download');
+                if (downloadUrl) {
+                    detailDownloadBtn.style.display = '';
+                    detailDownloadBtn.onclick = () => {
+                        const a = document.createElement('a');
+                        a.href = downloadUrl;
+                        a.download = '';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                    };
+                } else {
+                    detailDownloadBtn.style.display = 'none';
+                    detailDownloadBtn.onclick = null;
+                }
 
                 const inList = getMyList().includes(videoId);
                 detailMyListBtn.classList.toggle('active', inList);
@@ -2774,6 +2814,35 @@ const topNav = document.getElementById('top-nav');
                 });
             }
 
+            /* ── Season select box (isolated) — future-ready for multi-season titles ── */
+            function renderDetailSeasonSelect(card, episodes) {
+                let seasons = [];
+                try { seasons = JSON.parse(card.getAttribute('data-seasons') || '[]'); } catch(e) { seasons = []; }
+                if (!seasons.length && episodes.length) seasons = ['Season 1'];
+                if (!seasons.length) { detailSeasonSelectWrap.style.display = 'none'; return; }
+
+                detailSeasonSelectWrap.style.display = '';
+                detailSeasonSelectWrap.classList.remove('open');
+                detailSeasonSelectLabel.textContent = seasons[0];
+                detailSeasonSelectMenu.innerHTML = seasons.map((s, i) => `<div class="detail-season-select-item${i === 0 ? ' active' : ''}" data-season-index="${i}">${s}</div>`).join('');
+                detailSeasonSelectMenu.querySelectorAll('.detail-season-select-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        detailSeasonSelectMenu.querySelectorAll('.detail-season-select-item').forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+                        detailSeasonSelectLabel.textContent = item.textContent;
+                        detailSeasonSelectWrap.classList.remove('open');
+                        // Future: when multiple seasons' episodes are supplied per-card, re-render detailEpisodesSection here.
+                    });
+                });
+            }
+            detailSeasonSelectBtn.addEventListener('click', e => {
+                e.stopPropagation();
+                detailSeasonSelectWrap.classList.toggle('open');
+            });
+            document.addEventListener('click', e => {
+                if (!detailSeasonSelectWrap.contains(e.target)) detailSeasonSelectWrap.classList.remove('open');
+            });
+
             function switchDetailEpisode(videoId) {
                 const ep = detailEpisodesData.find(e => e.video === videoId);
                 if (!ep) return;
@@ -2790,6 +2859,7 @@ const topNav = document.getElementById('top-nav');
                 if (detailPlayerInstance) { detailPlayerInstance.destroy(); detailPlayerInstance = null; }
                 detailHero.classList.remove('cplayer-active');
                 detailHeroFrame.innerHTML = '';
+                detailSeasonSelectWrap.classList.remove('open');
                 document.body.style.overflow = '';
                 detailVideoId = null;
                 try { screen.orientation && screen.orientation.unlock && screen.orientation.unlock(); } catch(e) {}
