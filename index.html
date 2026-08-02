@@ -1023,7 +1023,7 @@
         #bottom-mobile-nav button.active { background:rgba(255,255,255,0.08); color:#fff; }
         #bottom-mobile-nav button i { font-size:1.15rem; }
         #bottom-mobile-nav button .bottom-nav-avatar { width:22px; height:22px; border-radius:50%; object-fit:cover; border:1.5px solid #fff; }
-        @media (max-width:768px) { #bottom-mobile-nav { display:block; } #floating-chat-btn { bottom:80px; } footer { padding-bottom:100px; } }
+        @media (max-width:768px) { #bottom-mobile-nav { display:block; } #floating-chat-btn { bottom:80px; } footer { padding-bottom:100px !important; } }
   
           /* ─────────────── BACK TO TOP ─────────────── */
         #back-to-top { display:none !important; }
@@ -1036,9 +1036,10 @@
         .fade-up-section { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
         .fade-up-section.visible { opacity:1; transform:translateY(0); }
 
-        .social-links { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:8px; }
-        .social-btn { display:inline-flex; align-items:center; gap:6px; padding:10px 20px; border-radius:24px; font-weight:700; text-decoration:none; letter-spacing:0.03em; transition:all 0.3s; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; }
+        .social-links { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
+        .social-btn { display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:24px; font-weight:700; font-size:0.82rem; text-decoration:none; letter-spacing:0.02em; transition:all 0.3s; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; white-space:nowrap; }
         .social-btn:hover { background:rgba(229,9,20,0.25); border-color:var(--red); }
+        @media (max-width:480px) { .social-btn { padding:8px 12px; font-size:0.74rem; gap:5px; } .social-btn i { font-size:0.95rem !important; } .social-links { gap:8px; } }
 
         footer { text-align:center; padding:30px 20px; color:#666; font-size:0.8rem; border-top:1px solid rgba(255,255,255,0.05); }
     
